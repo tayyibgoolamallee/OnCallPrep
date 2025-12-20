@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | OnCallPrep</title>
+    <meta name="description" content="Choose the right plan for your GP training journey. Free, Pro, and Premium options available.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pricing.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📞</span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="pricing.html" class="active">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-ghost">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="padding: 4rem 0; min-height: 80vh;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <span class="section-badge">Simple Pricing</span>
+                <h1>Choose Your Plan</h1>
+                <p>Start free, upgrade when you're ready</p>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p>Pricing page content coming soon...</p>
+                <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">📞</span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/subscription.js"></script>
+    <script src="scripts/pricing.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

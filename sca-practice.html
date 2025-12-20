@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCA Practice Tools | OnCallPrep</title>
+    <meta name="description" content="Interactive SCA practice tools - mock cases, diagnosis practice, priming exercises, and self-assessment.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="styles/practice.css">
+    <link rel="stylesheet" href="styles/sca.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📞</span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-ghost">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header page-header-sca">
+        <div class="container">
+            <nav style="margin-bottom: 1rem;">
+                <a href="sca.html" style="color: var(--color-secondary-600); text-decoration: none;">← Back to SCA Overview</a>
+            </nav>
+            <h1>SCA Practice Tools</h1>
+            <p>Interactive exercises to prepare for your SCA</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="container">
+            <!-- Practice Tools Navigation -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
+                <button onclick="showSection('mock-cases')" class="btn btn-primary" style="padding: 1.5rem;">Mock Cases</button>
+                <button onclick="showSection('diagnosis')" class="btn btn-outline" style="padding: 1.5rem;">2-Min Diagnosis</button>
+                <button onclick="showSection('priming')" class="btn btn-outline" style="padding: 1.5rem;">3-Min Priming</button>
+                <button onclick="showSection('assessment')" class="btn btn-outline" style="padding: 1.5rem;">Self-Assessment</button>
+            </div>
+
+            <!-- Mock Cases Section -->
+            <div id="mock-cases" class="practice-section">
+                <div class="content-card">
+                    <h2>Free Mock Cases</h2>
+                    <p>Practice with these 5 free mock cases. Each includes case notes and a self-assessment checklist.</p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <div class="case-card" style="padding: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem;">
+                            <h3>Case 1: Chest Pain</h3>
+                            <p><strong>Patient:</strong> 45-year-old man</p>
+                            <p><strong>Presenting complaint:</strong> Central chest pain for 2 hours</p>
+                            <button class="btn btn-primary" onclick="loadCase(1)">Start Case</button>
+                        </div>
+                        
+                        <div class="case-card" style="padding: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem;">
+                            <h3>Case 2: Shortness of Breath</h3>
+                            <p><strong>Patient:</strong> 68-year-old woman</p>
+                            <p><strong>Presenting complaint:</strong> Progressive breathlessness over 3 months</p>
+                            <button class="btn btn-primary" onclick="loadCase(2)">Start Case</button>
+                        </div>
+                        
+                        <div class="case-card" style="padding: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem;">
+                            <h3>Case 3: Abdominal Pain</h3>
+                            <p><strong>Patient:</strong> 32-year-old woman</p>
+                            <p><strong>Presenting complaint:</strong> Right lower quadrant pain</p>
+                            <button class="btn btn-primary" onclick="loadCase(3)">Start Case</button>
+                        </div>
+                        
+                        <div class="case-card" style="padding: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem;">
+                            <h3>Case 4: Headache</h3>
+                            <p><strong>Patient:</strong> 28-year-old woman</p>
+                            <p><strong>Presenting complaint:</strong> Recurrent headaches for 6 months</p>
+                            <button class="btn btn-primary" onclick="loadCase(4)">Start Case</button>
+                        </div>
+                        
+                        <div class="case-card" style="padding: 1.5rem; border: 2px solid #e5e7eb; border-radius: 8px; margin-bottom: 1rem;">
+                            <h3>Case 5: Fatigue</h3>
+                            <p><strong>Patient:</strong> 55-year-old man</p>
+                            <p><strong>Presenting complaint:</strong> Tiredness and low mood for 3 months</p>
+                            <button class="btn btn-primary" onclick="loadCase(5)">Start Case</button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: #fef3c7; border-radius: 8px;">
+                        <p><strong>Pro Feature:</strong> Access 50+ additional mock cases with full self-assessment tools. <a href="pricing.html">Upgrade to Pro</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-Minute Diagnosis Section -->
+            <div id="diagnosis" class="practice-section" style="display: none;">
+                <div class="content-card">
+                    <h2>2-Minute Diagnosis Practice</h2>
+                    <p>Practice explaining a diagnosis clearly and concisely in 2 minutes - a key skill for the SCA.</p>
+                    
+                    <div id="diagnosis-practice" style="margin-top: 2rem;">
+                        <div style="padding: 2rem; background: #f0f9ff; border-radius: 8px; text-align: center;">
+                            <h3 id="diagnosis-display" style="font-size: 1.5rem; margin-bottom: 1rem;">Click to generate a diagnosis</h3>
+                            <button class="btn btn-primary" onclick="generateDiagnosis()">Generate Random Diagnosis</button>
+                            <div style="margin-top: 2rem;">
+                                <button class="btn btn-outline" onclick="startDiagnosisTimer()">Start 2-Minute Timer</button>
+                                <div id="diagnosis-timer" style="font-size: 2rem; margin-top: 1rem; font-weight: bold;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: #f0fdf4; border-radius: 8px;">
+                            <h4>Practice Tips:</h4>
+                            <ul>
+                                <li>Start with the diagnosis clearly</li>
+                                <li>Explain key features that support it</li>
+                                <li>Briefly mention differentials</li>
+                                <li>Outline management plan</li>
+                                <li>Include safety netting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-Minute Priming Section -->
+            <div id="priming" class="practice-section" style="display: none;">
+                <div class="content-card">
+                    <h2>3-Minute Priming Exercises</h2>
+                    <p>Practice the priming phase - the first 3 minutes where you read notes and prepare for the consultation.</p>
+                    
+                    <div id="priming-practice" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="generatePrimingCase()">Generate Priming Case</button>
+                        <div id="priming-case" style="margin-top: 2rem; padding: 2rem; background: #f9fafb; border-radius: 8px; display: none;">
+                            <h3>Case Notes</h3>
+                            <div id="priming-content"></div>
+                            <button class="btn btn-outline" onclick="startPrimingTimer()" style="margin-top: 1rem;">Start 3-Minute Timer</button>
+                            <div id="priming-timer" style="font-size: 2rem; margin-top: 1rem; font-weight: bold;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Assessment Section -->
+            <div id="assessment" class="practice-section" style="display: none;">
+                <div class="content-card">
+                    <h2>Self-Assessment Scoring</h2>
+                    <p>Use this tool to assess your performance on practice cases. Remember: Domain 2 is weighted 1.5x.</p>
+                    
+                    <div style="margin-top: 2rem;">
+                        <p>Self-assessment tools are available in each mock case. The scoring system uses:</p>
+                        <ul>
+                            <li><strong>Domain 1:</strong> Data gathering & interpretation (standard weight)</li>
+                            <li><strong>Domain 2:</strong> Clinical management (weighted 1.5x)</li>
+                            <li><strong>Domain 3:</strong> Interpersonal skills (standard weight)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">Grading: Clear Pass (>9), Pass (>6), Minor Fail (3-6), Clear Fail (<3)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">📞</span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Scripts -->
+    <script src="scripts/practice-tools.js"></script>
+    <script src="scripts/case-assessment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/subscription.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.practice-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+        
+        function loadCase(caseNumber) {
+            alert('Case ' + caseNumber + ' loading... (Full case functionality requires JavaScript implementation)');
+        }
+        
+        function generateDiagnosis() {
+            const diagnoses = [
+                'Asthma', 'COPD', 'Hypertension', 'Type 2 Diabetes', 'Depression',
+                'Anxiety', 'Migraine', 'UTI', 'GORD', 'IBS', 'Osteoarthritis',
+                'Heart Failure', 'Atrial Fibrillation', 'Hypothyroidism', 'Eczema'
+            ];
+            const random = diagnoses[Math.floor(Math.random() * diagnoses.length)];
+            document.getElementById('diagnosis-display').textContent = random;
+        }
+        
+        function startDiagnosisTimer() {
+            let timeLeft = 120;
+            const timerEl = document.getElementById('diagnosis-timer');
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerEl.textContent = 'Time\'s up!';
+                }
+                timeLeft--;
+            }, 1000);
+        }
+        
+        function generatePrimingCase() {
+            document.getElementById('priming-case').style.display = 'block';
+            document.getElementById('priming-content').innerHTML = `
+                <p><strong>Patient:</strong> 45-year-old man</p>
+                <p><strong>Presenting complaint:</strong> Chest pain</p>
+                <p><strong>Past medical history:</strong> Hypertension, high cholesterol</p>
+                <p><strong>Medications:</strong> Ramipril, Atorvastatin</p>
+                <p><strong>Allergies:</strong> None known</p>
+                <p><strong>Social:</strong> Smoker, 20/day. Works as office manager.</p>
+            `;
+        }
+        
+        function startPrimingTimer() {
+            let timeLeft = 180;
+            const timerEl = document.getElementById('priming-timer');
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerEl.textContent = 'Time\'s up!';
+                }
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Show mock cases by default
+        showSection('mock-cases');
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPBA Checklist | OnCallPrep</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="styles/content.css">
+    <style>
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .checklist-item { page-break-inside: avoid; }
+        }
+        .checklist-print {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .checklist-section {
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .checklist-section h3 {
+            margin-top: 0;
+            color: #1f2937;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+        }
+        .checklist-item label {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .checklist-note {
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-left: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="checklist-print">
+        <div class="no-print" style="text-align: center; margin-bottom: 2rem; padding: 1rem; background: #f3f4f6; border-radius: 8px;">
+            <h1>GP Training Portfolio Checklist</h1>
+            <p>Based on RCGP WPBA Requirements</p>
+            <button onclick="window.print()" class="btn btn-primary">Print / Save as PDF</button>
+            <a href="portfolio.html" class="btn btn-secondary">Back to Portfolio</a>
+        </div>
+
+        <div style="margin-bottom: 2rem; padding: 1rem; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px;">
+            <p><strong>Trainee Name:</strong> _________________________</p>
+            <p><strong>Training Year:</strong> ☐ ST1  ☐ ST2  ☐ ST3</p>
+            <p><strong>ARCP Date:</strong> _________________________</p>
+        </div>
+
+        <!-- ST1 Section -->
+        <div class="checklist-section">
+            <h3>ST1 Requirements</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-cbd">
+                <label for="st1-cbd"><strong>Case-Based Discussions (CBDs):</strong> Minimum 4 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">At least 2 from hospital placements, 2 from GP if applicable</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-cot">
+                <label for="st1-cot"><strong>Consultation Observation Tools (COTs):</strong> Minimum 2 if in GP placement</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-msf">
+                <label for="st1-msf"><strong>Multi-Source Feedback (MSF):</strong> 1 per year (minimum 8 responses)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-psq">
+                <label for="st1-psq"><strong>Patient Satisfaction Questionnaire (PSQ):</strong> 1 if in GP placement</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-reflections">
+                <label for="st1-reflections"><strong>Reflective Entries:</strong> Minimum 4 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should cover different competencies and demonstrate learning</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-learning-log">
+                <label for="st1-learning-log"><strong>Learning Log:</strong> Regular entries documenting learning activities</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-pdp">
+                <label for="st1-pdp"><strong>Personal Development Plan (PDP):</strong> Created and reviewed with ES</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st1-csr">
+                <label for="st1-csr"><strong>Clinical Supervisor Report (CSR):</strong> From each placement</label>
+            </div>
+        </div>
+
+        <!-- ST2 Section -->
+        <div class="checklist-section">
+            <h3>ST2 Requirements</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-cbd">
+                <label for="st2-cbd"><strong>Case-Based Discussions (CBDs):</strong> Minimum 6 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should demonstrate increasing complexity and independent decision-making</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-cot">
+                <label for="st2-cot"><strong>Consultation Observation Tools (COTs):</strong> Minimum 4 per GP placement</label>
+            </div>
+            <div class="checklist-note">Should show progression in consultation skills</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-msf">
+                <label for="st2-msf"><strong>Multi-Source Feedback (MSF):</strong> 1 per year (minimum 8 responses)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-psq">
+                <label for="st2-psq"><strong>Patient Satisfaction Questionnaire (PSQ):</strong> 1 per GP placement</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-qip">
+                <label for="st2-qip"><strong>Quality Improvement Project (QIP):</strong> Started or completed</label>
+            </div>
+            <div class="checklist-note">Should demonstrate understanding of QI methodology</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-reflections">
+                <label for="st2-reflections"><strong>Reflective Entries:</strong> Minimum 6 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should demonstrate deeper reflection and integration of learning</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-learning-log">
+                <label for="st2-learning-log"><strong>Learning Log:</strong> Regular entries with evidence of self-directed learning</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-pdp">
+                <label for="st2-pdp"><strong>Personal Development Plan (PDP):</strong> Updated and reviewed with ES</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-csr">
+                <label for="st2-csr"><strong>Clinical Supervisor Report (CSR):</strong> From each placement</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st2-akt">
+                <label for="st2-akt"><strong>AKT Exam:</strong> Usually taken in ST2 (must be passed by end of ST3)</label>
+            </div>
+        </div>
+
+        <!-- ST3 Section -->
+        <div class="checklist-section">
+            <h3>ST3 Requirements</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-cbd">
+                <label for="st3-cbd"><strong>Case-Based Discussions (CBDs):</strong> Minimum 6 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should demonstrate management of complex cases and independent practice readiness</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-cot">
+                <label for="st3-cot"><strong>Consultation Observation Tools (COTs):</strong> Minimum 6 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should demonstrate safe, efficient, patient-centred consulting at independent practice level</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-msf">
+                <label for="st3-msf"><strong>Multi-Source Feedback (MSF):</strong> Final MSF (minimum 8 responses)</label>
+            </div>
+            <div class="checklist-note">Should demonstrate readiness for independent practice</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-psq">
+                <label for="st3-psq"><strong>Patient Satisfaction Questionnaire (PSQ):</strong> Minimum 1 (ideally 2)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-qip">
+                <label for="st3-qip"><strong>Quality Improvement Project (QIP):</strong> Completed with evidence of impact</label>
+            </div>
+            <div class="checklist-note">Should demonstrate understanding of QI methodology and ability to implement change</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-reflections">
+                <label for="st3-reflections"><strong>Reflective Entries:</strong> Minimum 6 per 6-month placement</label>
+            </div>
+            <div class="checklist-note">Should demonstrate critical reflection and integration of learning into practice</div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-learning-log">
+                <label for="st3-learning-log"><strong>Learning Log:</strong> Comprehensive entries demonstrating continuous learning</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-pdp">
+                <label for="st3-pdp"><strong>Personal Development Plan (PDP):</strong> Final review with ES, demonstrating readiness for CCT</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-csr">
+                <label for="st3-csr"><strong>Clinical Supervisor Report (CSR):</strong> From each placement</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-akt">
+                <label for="st3-akt"><strong>AKT Exam:</strong> Must be passed</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="st3-sca">
+                <label for="st3-sca"><strong>SCA Exam:</strong> Must be passed (mandatory for CCT)</label>
+            </div>
+        </div>
+
+        <!-- Additional Requirements -->
+        <div class="checklist-section">
+            <h3>Additional Evidence (All Stages)</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="add-teaching">
+                <label for="add-teaching"><strong>Teaching/Education:</strong> Evidence of teaching activities (if applicable)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="add-research">
+                <label for="add-research"><strong>Research/Audit:</strong> Evidence of research or audit activities (if applicable)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="add-leadership">
+                <label for="add-leadership"><strong>Leadership:</strong> Evidence of leadership activities (if applicable)</label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="add-dops">
+                <label for="add-dops"><strong>DOPS:</strong> Direct Observation of Procedural Skills (if applicable to placement)</label>
+            </div>
+        </div>
+
+        <!-- ARCP Preparation -->
+        <div class="checklist-section">
+            <h3>ARCP Preparation Checklist</h3>
+            
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-evidence">
+                <label for="arcp-evidence"><strong>All mandatory evidence uploaded and linked to competencies</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-complete">
+                <label for="arcp-complete"><strong>All assessments marked as "complete" by supervisor</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-pdp">
+                <label for="arcp-pdp"><strong>PDP reviewed and signed off by ES</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-csr">
+                <label for="arcp-csr"><strong>All CSRs completed and uploaded</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-formr">
+                <label for="arcp-formr"><strong>Form R completed and submitted</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-exams">
+                <label for="arcp-exams"><strong>Exam certificates uploaded (AKT/SCA if applicable)</strong></label>
+            </div>
+
+            <div class="checklist-item">
+                <input type="checkbox" id="arcp-review">
+                <label for="arcp-review"><strong>Portfolio reviewed for completeness and quality</strong></label>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 1.5rem; background: #f9fafb; border-radius: 8px; font-size: 0.9rem; color: #6b7280;">
+            <p><strong>Notes:</strong></p>
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>Minimum requirements may vary by training programme — check with your TPD</li>
+                <li>Quality of evidence is as important as quantity</li>
+                <li>Ensure evidence demonstrates progression across training</li>
+                <li>Link all evidence to relevant competencies</li>
+                <li>Keep regular entries — don't leave everything until ARCP</li>
+            </ul>
+            <p style="margin-top: 1rem;"><em>This checklist is based on RCGP WPBA requirements. For official guidance, refer to <a href="https://www.rcgp.org.uk/training-exams/training/portfolio/wpbp.aspx" target="_blank">RCGP WPBA guidance</a>.</em></p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

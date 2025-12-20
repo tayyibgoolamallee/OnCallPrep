@@ -1,0 +1,282 @@
+[
+    {
+      "id": "akt-011",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "endocrinology",
+      "difficulty": "medium",
+      "stem": "A patient with insulin-treated diabetes has recurrent hypoglycaemia. What advice regarding driving is correct?",
+      "options": [
+        "No action required",
+        "Advise to inform DVLA",
+        "Advise night driving only",
+        "Reduce insulin without review",
+        "Stop glucose monitoring"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Patients with insulin-treated diabetes experiencing recurrent hypoglycaemia must inform DVLA. They should not drive until hypoglycaemia is controlled. DVLA guidance requires reporting of any condition that may affect driving safety.",
+      "keyPoints": [
+        "Recurrent hypoglycaemia = must inform DVLA",
+        "Must not drive until controlled",
+        "DVLA guidance requires reporting",
+        "Review diabetes management urgently"
+      ],
+      "links": {
+        "internal": "akt.html#img-tips"
+      },
+      "tags": ["diabetes", "driving", "dvla", "hypoglycaemia"]
+    },
+    {
+      "id": "akt-012",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "urology",
+      "difficulty": "easy",
+      "stem": "A 25-year-old non-pregnant woman presents with uncomplicated cystitis. First-line antibiotic?",
+      "options": [
+        "Ciprofloxacin",
+        "Amoxicillin",
+        "Nitrofurantoin",
+        "Co-amoxiclav",
+        "Cefalexin"
+      ],
+      "correctAnswer": 2,
+      "explanation": "NICE recommends nitrofurantoin as first-line for uncomplicated UTI in non-pregnant women. It has good urinary concentration, low resistance rates, and is safe in pregnancy. Trimethoprim is alternative first-line. Ciprofloxacin should be reserved due to resistance concerns.",
+      "keyPoints": [
+        "Nitrofurantoin = first-line for uncomplicated UTI",
+        "Good urinary concentration, low resistance",
+        "Trimethoprim is alternative",
+        "Reserve ciprofloxacin for resistant cases"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/ng109",
+        "cks": "https://cks.nice.org.uk/topics/urinary-tract-infection-lower-women/",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["uti", "nitrofurantoin", "antibiotics", "nice"]
+    },
+    {
+      "id": "akt-013",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "urology",
+      "difficulty": "medium",
+      "stem": "Which feature suggests upper UTI requiring urgent assessment?",
+      "options": [
+        "Dysuria only",
+        "Frequency",
+        "Suprapubic discomfort",
+        "Flank pain and fever",
+        "Cloudy urine"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Flank pain and fever suggest pyelonephritis (upper UTI) requiring urgent assessment and likely hospital admission. Lower UTI symptoms (dysuria, frequency, suprapubic pain) can be managed in primary care. Cloudy urine is non-specific.",
+      "keyPoints": [
+        "Flank pain + fever = pyelonephritis",
+        "Requires urgent assessment",
+        "May need hospital admission",
+        "Lower UTI = dysuria, frequency, suprapubic pain"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/ng109",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["uti", "pyelonephritis", "red-flags", "urgent"]
+    },
+    {
+      "id": "akt-014",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "haematology",
+      "difficulty": "medium",
+      "stem": "A 62-year-old man has iron deficiency anaemia. What is the most appropriate next step?",
+      "options": [
+        "Oral iron only",
+        "Repeat FBC in 6 months",
+        "2WW referral for GI investigation",
+        "Check B12 only",
+        "Reassure"
+      ],
+      "correctAnswer": 2,
+      "explanation": "NICE recommends 2-week wait referral for suspected cancer in men >60 with iron deficiency anaemia (unless obvious cause). This is to exclude GI malignancy. Oral iron should be started but investigation is mandatory. B12/folate should also be checked.",
+      "keyPoints": [
+        "Men >60 with IDA = 2WW referral",
+        "Exclude GI malignancy",
+        "Start iron replacement",
+        "Check B12/folate also"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/ng12",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["anaemia", "iron-deficiency", "2ww", "cancer"]
+    },
+    {
+      "id": "akt-015",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "oncology",
+      "difficulty": "medium",
+      "stem": "Unintentional weight loss with which feature most strongly suggests malignancy?",
+      "options": [
+        "BMI 24",
+        "Recent bereavement",
+        "Iron deficiency anaemia",
+        "Mild depression",
+        "Smoking history alone"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Unintentional weight loss with iron deficiency anaemia strongly suggests GI malignancy and requires urgent investigation. Recent bereavement and depression are common causes but IDA adds red flag. Smoking alone is a risk factor but not diagnostic.",
+      "keyPoints": [
+        "Weight loss + IDA = red flag for malignancy",
+        "Requires urgent investigation",
+        "2WW referral if >60 years",
+        "Consider GI, renal, haematological causes"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/ng12",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["weight-loss", "anaemia", "cancer", "red-flags"]
+    },
+    {
+      "id": "akt-016",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "mental-health",
+      "difficulty": "easy",
+      "stem": "Which symptom indicates severe depression?",
+      "options": [
+        "Poor sleep",
+        "Low mood",
+        "Suicidal ideation",
+        "Reduced appetite",
+        "Fatigue"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Suicidal ideation indicates severe depression and requires urgent mental health assessment. Poor sleep, low mood, reduced appetite, and fatigue are common symptoms but don't necessarily indicate severity. Risk assessment is crucial.",
+      "keyPoints": [
+        "Suicidal ideation = severe depression",
+        "Requires urgent mental health assessment",
+        "Risk assessment essential",
+        "Consider crisis team referral"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/cg90",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["depression", "suicide", "mental-health", "red-flags"]
+    },
+    {
+      "id": "akt-017",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "mental-health",
+      "difficulty": "easy",
+      "stem": "First-line SSRI commonly recommended?",
+      "options": [
+        "Fluoxetine",
+        "Citalopram",
+        "Sertraline",
+        "Paroxetine",
+        "Venlafaxine"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Sertraline is commonly recommended as first-line SSRI due to good efficacy, tolerability, and safety profile. It's particularly useful in cardiac patients. Fluoxetine is also first-line. Paroxetine has more withdrawal effects. Venlafaxine is SNRI, not SSRI.",
+      "keyPoints": [
+        "Sertraline = commonly first-line SSRI",
+        "Good efficacy and tolerability",
+        "Safe in cardiac patients",
+        "Fluoxetine also first-line"
+      ],
+      "links": {
+        "nice": "https://www.nice.org.uk/guidance/cg90",
+        "internal": "clinical-topics.html"
+      },
+      "tags": ["depression", "ssri", "sertraline", "antidepressants"]
+    },
+    {
+      "id": "akt-018",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "ethics",
+      "difficulty": "medium",
+      "stem": "Which is required for a patient to have capacity?",
+      "options": [
+        "Agreement with doctor",
+        "Ability to retain, weigh, and communicate decision",
+        "Age over 18",
+        "Next-of-kin approval",
+        "Written consent only"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Mental Capacity Act 2005 defines capacity as ability to: understand information, retain it, weigh it up, and communicate decision. Agreement with doctor, age, or family approval are not required. Capacity is decision-specific and can fluctuate.",
+      "keyPoints": [
+        "Capacity = understand, retain, weigh, communicate",
+        "Decision-specific",
+        "Can fluctuate",
+        "Presume capacity unless proven otherwise"
+      ],
+      "links": {
+        "internal": "akt.html"
+      },
+      "tags": ["capacity", "mental-capacity-act", "ethics", "consent"]
+    },
+    {
+      "id": "akt-019",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "ethics",
+      "difficulty": "easy",
+      "stem": "Which statement about consent is correct?",
+      "options": [
+        "Verbal consent is invalid",
+        "Consent must always be written",
+        "Consent can be withdrawn at any time",
+        "Capacity is permanent",
+        "Implied consent is illegal"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Consent can be withdrawn at any time, even during a procedure. Verbal consent is valid for many procedures. Written consent is required for major procedures. Capacity is not permanent and can fluctuate. Implied consent is valid for routine examinations.",
+      "keyPoints": [
+        "Consent can be withdrawn at any time",
+        "Verbal consent is valid",
+        "Written consent for major procedures",
+        "Capacity can fluctuate"
+      ],
+      "links": {
+        "internal": "akt.html"
+      },
+      "tags": ["consent", "ethics", "capacity"]
+    },
+    {
+      "id": "akt-020",
+      "type": "sba",
+      "category": "clinical",
+      "subcategory": "ethics",
+      "difficulty": "medium",
+      "stem": "Which situation overrides patient confidentiality?",
+      "options": [
+        "Request from employer",
+        "Media enquiry",
+        "Risk of serious harm to others",
+        "Insurance request",
+        "Family curiosity"
+      ],
+      "correctAnswer": 2,
+      "explanation": "GMC guidance allows disclosure without consent when there is risk of serious harm to others (e.g., violent crime, serious communicable disease). This is a limited exception. Employer, media, insurance, and family requests do not override confidentiality without patient consent.",
+      "keyPoints": [
+        "Risk of serious harm = can override confidentiality",
+        "Limited exception",
+        "Must be serious harm",
+        "Document decision carefully"
+      ],
+      "links": {
+        "internal": "akt.html"
+      },
+      "tags": ["confidentiality", "ethics", "gmc", "safeguarding"]
+    }
+]
+
+
+

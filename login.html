@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | OnCallPrep</title>
+    <meta name="description" content="Log in to your OnCallPrep account to access your GP training resources.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+        }
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .auth-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary-600);
+        }
+        .auth-header p {
+            color: var(--color-gray-600);
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: var(--color-gray-700);
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            padding: 0.75rem;
+            border: 2px solid var(--color-gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary-500);
+        }
+        .error-message {
+            background: var(--color-error-50);
+            color: var(--color-error-700);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+        .success-message {
+            background: var(--color-success-50);
+            color: var(--color-success-700);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+        .auth-footer a {
+            color: var(--color-primary-600);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📞</span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-ghost">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Log in to access your GP training resources</p>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                    Log In
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html">Sign up for free</a></p>
+                <p style="margin-top: 0.5rem;"><a href="#forgot-password">Forgot your password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">📞</span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Wait for everything to load before setting up form handler
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle login form submission
+            const loginForm = document.getElementById('loginForm');
+            if (!loginForm) {
+                console.error('Login form not found');
+                return;
+            }
+            
+            loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Hide previous messages
+            errorMessage.classList.remove('show');
+            successMessage.classList.remove('show');
+            
+            // Get form values
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Validate
+            if (!email || !password) {
+                errorMessage.textContent = 'Please fill in all fields.';
+                errorMessage.classList.add('show');
+                return;
+            }
+            
+            // Show loading state
+            form.classList.add('loading');
+            submitButton.textContent = 'Logging in...';
+            
+            try {
+                const { data, error } = await signIn(email, password);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Success - redirect will happen in signIn function
+                successMessage.textContent = 'Login successful! Redirecting...';
+                successMessage.classList.add('show');
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                
+                // Show user-friendly error message
+                let errorText = 'An error occurred. Please try again.';
+                if (error.message.includes('Invalid login credentials')) {
+                    errorText = 'Invalid email or password. Please check your credentials and try again.';
+                } else if (error.message.includes('Email not confirmed')) {
+                    errorText = 'Please check your email and confirm your account before logging in.';
+                } else {
+                    errorText = error.message || errorText;
+                }
+                
+                errorMessage.textContent = errorText;
+                errorMessage.classList.add('show');
+                
+                form.classList.remove('loading');
+                submitButton.textContent = 'Log In';
+            }
+            });
+        });
+        
+        // Make signIn available globally for debugging
+        window.signIn = signIn;
+    </script>
+</body>
+</html>

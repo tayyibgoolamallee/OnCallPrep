@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKT Question Bank | OnCallPrep</title>
+    <meta name="description" content="Interactive AKT question bank with 275+ questions covering Clinical Medicine, EBP, and PCOM.">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="styles/content.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📞</span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-ghost">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header page-header-akt">
+        <div class="container">
+            <nav style="margin-bottom: 1rem;">
+                <a href="akt.html" style="color: var(--color-success-600); text-decoration: none;">← Back to AKT Overview</a>
+            </nav>
+            <h1>AKT Question Bank</h1>
+            <p>275+ Questions: Clinical Medicine, EBP & PCOM</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="container">
+            <!-- Question Bank Info -->
+            <div class="content-card" style="margin-bottom: 2rem;">
+                <h2>Question Bank Overview</h2>
+                <p>Our question bank includes:</p>
+                <ul>
+                    <li><strong>200 Clinical Medicine questions</strong> covering all major topics</li>
+                    <li><strong>75 EBP & PCOM questions</strong> focusing on evidence-based practice and patient-centred care</li>
+                    <li><strong>Detailed explanations</strong> with key points and guideline references</li>
+                    <li><strong>Progress tracking</strong> (Pro feature)</li>
+                </ul>
+            </div>
+
+            <!-- Study Modes -->
+            <div class="content-card" style="margin-bottom: 2rem;">
+                <h2>Choose Your Study Mode</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <button class="btn btn-outline" onclick="setStudyMode('untimed')">Untimed Practice</button>
+                    <button class="btn btn-outline" onclick="setStudyMode('timed')">Timed Practice</button>
+                    <button class="btn btn-outline" onclick="setStudyMode('exam')">Exam Conditions</button>
+                </div>
+            </div>
+
+            <!-- Question Interface -->
+            <div class="content-card" style="margin-bottom: 2rem;">
+                <div id="question-container">
+                    <div style="text-align: center; padding: 3rem;">
+                        <h3>Question Bank Interface</h3>
+                        <p>Loading questions...</p>
+                        <p style="margin-top: 1rem; color: #6b7280;">The full interactive question bank interface will load here.</p>
+                        <p style="margin-top: 1rem;">Questions are loaded from <code>data/akt-questions.json</code></p>
+                        <div style="margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="loadQuestion()">Load Sample Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="content-card" style="margin-bottom: 2rem;">
+                <h2>Filter Questions</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <select class="form-select" id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="clinical">Clinical Medicine</option>
+                        <option value="ebp">EBP</option>
+                        <option value="pcom">PCOM</option>
+                    </select>
+                    <select class="form-select" id="difficulty-filter">
+                        <option value="all">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <button class="btn btn-outline" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Pro Features Notice -->
+            <div class="content-card" style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 2rem;">
+                <h3>Pro Features</h3>
+                <p>Upgrade to Pro for:</p>
+                <ul>
+                    <li>Full access to all 275 questions</li>
+                    <li>Progress tracking and analytics</li>
+                    <li>Bookmark favorite questions</li>
+                    <li>Performance by topic analysis</li>
+                    <li>Mock exam mode (full 160 questions)</li>
+                </ul>
+                <a href="pricing.html" class="btn btn-primary" style="margin-top: 1rem;">Upgrade to Pro</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">📞</span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Scripts -->
+    <script>
+        function setStudyMode(mode) {
+            alert('Study mode: ' + mode + ' (Full implementation requires JavaScript integration with question bank)');
+        }
+        
+        function loadQuestion() {
+            document.getElementById('question-container').innerHTML = `
+                <div style="padding: 2rem;">
+                    <h3>Sample Question</h3>
+                    <p><strong>Question:</strong> What is the first-line treatment for uncomplicated hypertension in patients under 55?</p>
+                    <div style="margin: 1rem 0;">
+                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">A. ACE inhibitor</button>
+                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">B. Beta-blocker</button>
+                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">C. Calcium channel blocker</button>
+                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">D. Thiazide diuretic</button>
+                    </div>
+                    <p style="margin-top: 1rem; color: #059669;"><strong>Answer: A</strong> - ACE inhibitors are first-line for patients under 55 according to NICE guidelines.</p>
+                </div>
+            `;
+        }
+        
+        function applyFilters() {
+            alert('Filters applied (Full implementation requires JavaScript integration)');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/subscription.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
