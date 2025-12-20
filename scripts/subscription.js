@@ -5,6 +5,53 @@
 // Get Supabase client
 const supabase = window.supabaseClient;
 
+// Get user's subscription status
+async function getUserSubscription() {
+    try {
+        if (!supabaseClient) {
+            const supabase = window.supabaseClient;
+            if (!supabase) {
+                return { isPro: false, plan: 'free' };
+            }
+        }
+        
+        const supabase = window.supabaseClient || supabaseClient;
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            return { isPro: false, plan: 'free' };
+        }
+        
+        // Get user profile with subscription info
+        const { data: profile, error: profileError } = await supabase
+            .from('user_profiles')
+            .select('plan, subscription_status, subscription_expires_at')
+            .eq('id', user.id)
+            .single();
+        
+        if (profileError) {
+            // Profile doesn't exist yet, return free
+            return { isPro: false, plan: 'free' };
+        }
+        
+        // Check if plan is 'pro' and subscription is active
+        const isPro = profile.plan === 'pro' && 
+                      (profile.subscription_status === 'active' || 
+                       !profile.subscription_expires_at || 
+                       new Date(profile.subscription_expires_at) > new Date());
+        
+        return {
+            isPro: isPro,
+            plan: profile.plan || 'free',
+            subscriptionStatus: profile.subscription_status,
+            expiresAt: profile.subscription_expires_at
+        };
+    } catch (error) {
+        console.error('Error getting subscription:', error);
+        return { isPro: false, plan: 'free' };
+    }
+}
+
 // Check if user has access to pro/premium features
 async function checkProAccess() {
     try {
@@ -14,6 +61,21 @@ async function checkProAccess() {
         console.error('Error checking pro access:', error);
         return false;
     }
+}
+
+// Check if user has access to a specific feature
+async function hasFeatureAccess(featureName) {
+    const subscription = await getUserSubscription();
+    
+    // Pro users have access to all features
+    if (subscription.isPro) {
+        return true;
+    }
+    
+    // Free users have limited access
+    // You can customize this based on feature names
+    const freeFeatures = ['portfolio_overview', 'sca_overview', 'akt_overview'];
+    return freeFeatures.includes(featureName);
 }
 
 // Gate a feature - show upgrade message if user doesn't have access
