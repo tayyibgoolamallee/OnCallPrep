@@ -5,40 +5,87 @@
    Run this in browser console after logging in
 */
 
-// Grant current user pro access
+// Grant current user pro access (creates profile if it doesn't exist)
 async function grantProAccess() {
     try {
         const supabase = window.supabaseClient;
         if (!supabase) {
             console.error('Supabase not initialized');
+            alert('Supabase not initialized. Please refresh the page.');
             return;
         }
         
         const { data: { user }, error: authError } = await supabase.auth.getUser();
         if (authError || !user) {
             console.error('Not logged in');
+            alert('You must be logged in. Please log in first.');
             return;
         }
         
-        // Update user profile to pro
-        const { data, error } = await supabase
+        // Check if profile exists
+        const { data: existingProfile, error: checkError } = await supabase
             .from('user_profiles')
-            .update({
-                plan: 'pro',
-                subscription_status: 'active',
-                subscription_expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() // 1 year from now
-            })
+            .select('*')
             .eq('id', user.id)
-            .select()
             .single();
         
-        if (error) {
-            console.error('Error granting pro access:', error);
+        const expiresAt = new Date();
+        expiresAt.setFullYear(expiresAt.getFullYear() + 1); // 1 year from now
+        
+        if (checkError && checkError.code === 'PGRST116') {
+            // Profile doesn't exist, create it
+            const { data: newProfile, error: createError } = await supabase
+                .from('user_profiles')
+                .insert({
+                    id: user.id,
+                    email: user.email,
+                    full_name: user.user_metadata?.full_name || '',
+                    plan: 'pro',
+                    subscription_status: 'active',
+                    subscription_expires_at: expiresAt.toISOString()
+                })
+                .select()
+                .single();
+            
+            if (createError) {
+                if (createError.code === '42P01' || createError.message.includes('does not exist')) {
+                    alert('Database table not set up. Please run the SQL setup from SUPABASE_SETUP_GUIDE.md in your Supabase SQL Editor first.');
+                } else {
+                    console.error('Error creating profile:', createError);
+                    alert('Error: ' + createError.message);
+                }
+                return;
+            }
+            
+            console.log('✅ Pro access granted! Profile created.', newProfile);
+            alert('✅ Pro access granted! Refreshing page...');
+            
+        } else if (existingProfile) {
+            // Profile exists, update it
+            const { data: updatedProfile, error: updateError } = await supabase
+                .from('user_profiles')
+                .update({
+                    plan: 'pro',
+                    subscription_status: 'active',
+                    subscription_expires_at: expiresAt.toISOString()
+                })
+                .eq('id', user.id)
+                .select()
+                .single();
+            
+            if (updateError) {
+                console.error('Error updating profile:', updateError);
+                alert('Error: ' + updateError.message);
+                return;
+            }
+            
+            console.log('✅ Pro access granted! Profile updated.', updatedProfile);
+            alert('✅ Pro access granted! Refreshing page...');
+        } else {
+            console.error('Unexpected error');
+            alert('Unexpected error. Please check the console.');
             return;
         }
-        
-        console.log('✅ Pro access granted!', data);
-        console.log('Refresh the page to see pro features.');
         
         // Refresh page after 2 seconds
         setTimeout(() => {
@@ -47,6 +94,7 @@ async function grantProAccess() {
         
     } catch (error) {
         console.error('Error:', error);
+        alert('Error: ' + error.message);
     }
 }
 
