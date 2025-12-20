@@ -307,6 +307,16 @@
     color: var(--color-gray-500);
 }
 
+.option-card.selected {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
+    background: var(--color-primary-50);
+}
+
+.option-card {
+    cursor: pointer;
+}
+
 /* FAQ Section */
 .faq-section {
     padding: var(--space-4xl) 0;
@@ -378,6 +388,7 @@
         margin-top: var(--space-sm);
     }
 }
+
 
 
 

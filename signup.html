@@ -119,10 +119,13 @@
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html">SCA</a></li>
+                <li><a href="akt.html">AKT</a></li>
+                <li><a href="hidden-curriculum.html">Hidden Curriculum</a></li>
+                <li><a href="trainers.html">Trainers</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html">About & Contact</a></li>
             </ul>
             <div class="nav-auth">
                 <a href="login.html" class="btn btn-ghost">Log in</a>
@@ -205,7 +208,7 @@
 
     <!-- Load Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/main.js"></script>
     <script>
@@ -260,10 +263,10 @@
             submitButton.textContent = 'Creating account...';
             
             try {
-                const { data, error } = await signUp(email, password, fullName);
+                const result = await signUp(email, password, fullName);
                 
-                if (error) {
-                    throw error;
+                if (!result.success) {
+                    throw new Error(result.error || 'Signup failed');
                 }
                 
                 // Success
@@ -281,12 +284,13 @@
                 
                 // Show user-friendly error message
                 let errorText = 'An error occurred. Please try again.';
-                if (error.message.includes('User already registered')) {
+                const errorMsg = error.message || error.toString();
+                if (errorMsg.includes('User already registered') || errorMsg.includes('already registered')) {
                     errorText = 'An account with this email already exists. Please log in instead.';
-                } else if (error.message.includes('Password')) {
+                } else if (errorMsg.includes('Password')) {
                     errorText = 'Password does not meet requirements. Please use a stronger password.';
                 } else {
-                    errorText = error.message || errorText;
+                    errorText = errorMsg || errorText;
                 }
                 
                 errorMessage.textContent = errorText;

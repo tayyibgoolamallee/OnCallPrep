@@ -1,0 +1,110 @@
+{
+  "caseId": 1,
+  "title": "Case 1: Chest Pain",
+  "doctorStem": "You are a GP trainee in a busy practice. A 45-year-old man, Mr. James Mitchell, has been booked in for an urgent appointment. The receptionist notes he called this morning complaining of chest pain.",
+  "caseNotes": {
+    "patient": "Mr. James Mitchell",
+    "age": 45,
+    "gender": "Male",
+    "pastMedicalHistory": "Hypertension (diagnosed 2 years ago), High cholesterol",
+    "medications": "Ramipril 5mg once daily, Atorvastatin 20mg once daily",
+    "allergies": "None known",
+    "socialHistory": "Works as office manager. Smokes 20 cigarettes/day for 25 years. Drinks 15-20 units alcohol/week. Lives with wife and two children.",
+    "familyHistory": "Father had MI at age 55. Mother has type 2 diabetes."
+  },
+  "actorInformation": {
+    "openingStatement": "Doctor, I've been having this chest pain since this morning. It's really worrying me.",
+    "freelyGivenHistory": {
+      "presentingComplaint": "Central chest pain started 2 hours ago. Describes as 'tight' and 'heavy' feeling. Came on while sitting at his desk at work.",
+      "psychosocialImpact": "Very anxious about the pain. Worried it might be his heart. Says he can't concentrate at work.",
+      "ideasConcernsExpectations": "Thinks it might be a heart attack. Wants to know if he needs to go to hospital. Expects some tests to be done."
+    },
+    "historyOnDirectQuestioning": {
+      "presentingComplaint": {
+        "site": "Central chest, behind sternum",
+        "radiation": "Radiates to left arm and jaw",
+        "character": "Tight, heavy, crushing sensation",
+        "severity": "7/10 at worst, now 4/10",
+        "onset": "Started 2 hours ago, came on gradually over 5 minutes",
+        "duration": "Constant since onset, but severity varies",
+        "exacerbatingFactors": "Worse with deep breath, movement",
+        "relievingFactors": "Slightly better when sitting still",
+        "associatedSymptoms": "Mild shortness of breath, feeling nauseous, slight dizziness"
+      },
+      "pastMedicalHistory": {
+        "hypertension": "Diagnosed 2 years ago, well controlled on Ramipril. Last BP check 3 months ago was 138/85.",
+        "cholesterol": "High cholesterol diagnosed same time as hypertension. On Atorvastatin. Last check 6 months ago was 5.2.",
+        "otherConditions": "No diabetes, no known heart disease, no previous chest pain episodes"
+      },
+      "drugHistory": {
+        "currentMedications": "Ramipril 5mg OD, Atorvastatin 20mg OD",
+        "overTheCounter": "Takes occasional ibuprofen for headaches (maybe 2-3 times per month)",
+        "herbalSupplements": "None",
+        "compliance": "Takes medications regularly, last dose this morning",
+        "allergies": "No known drug allergies"
+      },
+      "socialHistory": {
+        "work": "Office manager, sedentary job, works 9-5 Monday to Friday",
+        "family": "Married with two children (ages 12 and 15). Wife works part-time.",
+        "livingSituation": "Lives in own house with family",
+        "smoking": "Smokes 20 cigarettes per day for 25 years (25 pack-years). Tried to quit twice but unsuccessful.",
+        "alcohol": "Drinks 15-20 units per week, mostly at weekends. No history of alcohol-related problems.",
+        "recreationalDrugs": "None",
+        "diet": "Eats mostly convenience food due to busy lifestyle",
+        "exercise": "Minimal exercise, walks to work (10 minutes) but otherwise sedentary"
+      },
+      "familyHistory": {
+        "cardiovascular": "Father had myocardial infarction at age 55. Mother has type 2 diabetes (diagnosed age 60).",
+        "other": "No other significant family history"
+      }
+    }
+  },
+  "markingCriteria": {
+    "domain1": {
+      "title": "Domain 1: Data Gathering & Interpretation",
+      "items": [
+        "Established presenting complaint (chest pain)",
+        "Explored site, radiation, character, severity of pain",
+        "Asked about onset, duration, exacerbating/relieving factors",
+        "Explored associated symptoms (SOB, nausea, dizziness)",
+        "Obtained past medical history (hypertension, cholesterol)",
+        "Obtained drug history including compliance",
+        "Obtained social history (smoking, alcohol, work)",
+        "Obtained family history (father's MI, mother's diabetes)",
+        "Explored ideas, concerns, expectations",
+        "Assessed cardiovascular risk factors",
+        "Performed relevant examination (if appropriate)",
+        "Interpreted findings appropriately"
+      ]
+    },
+    "domain2": {
+      "title": "Domain 2: Clinical Management (Weighted 1.5x)",
+      "items": [
+        "Considered cardiac causes (ACS, angina, pericarditis)",
+        "Considered non-cardiac causes (GORD, musculoskeletal, anxiety)",
+        "Assessed cardiovascular risk (smoking, FH, age, hypertension)",
+        "Made appropriate diagnosis or differential",
+        "Discussed management plan with patient",
+        "Considered need for urgent referral (if indicated)",
+        "Prescribed appropriate medication (if indicated)",
+        "Provided safety netting advice",
+        "Arranged appropriate follow-up",
+        "Documented appropriately"
+      ]
+    },
+    "domain3": {
+      "title": "Domain 3: Interpersonal Skills",
+      "items": [
+        "Demonstrated empathy and rapport",
+        "Used appropriate language and avoided jargon",
+        "Listened actively to patient concerns",
+        "Addressed patient's anxiety appropriately",
+        "Explained diagnosis/plan clearly",
+        "Involved patient in decision-making",
+        "Maintained professional boundaries",
+        "Demonstrated cultural sensitivity"
+      ]
+    }
+  }
+}
+

@@ -80,6 +80,7 @@
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
     --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
     --radius-full: 9999px;
 
     /* Shadows */
@@ -137,9 +138,14 @@ ul {
 /* Container */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-xl);
+}
+
+/* Ensure full width on content pages */
+.content-page .container {
+    max-width: 1400px;
 }
 
 /* ============================================
@@ -295,7 +301,7 @@ h3 {
     position: relative;
 }
 
-/* Pager/beeper icon design */
+/* Pager/beeper icon design (no phone) */
 .logo-icon::before {
     content: '';
     position: absolute;
@@ -935,6 +941,16 @@ h3 {
    ============================================ */
 
 @media (max-width: 1024px) {
+    .container {
+        padding: 0 var(--space-md);
+        max-width: 100%;
+    }
+    
+    .content-page .container {
+        max-width: 100%;
+        padding: 0 var(--space-md);
+    }
+    
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
@@ -975,6 +991,16 @@ h3 {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-md);
+        max-width: 100%;
+    }
+    
+    .content-page .container {
+        max-width: 100%;
+        padding: 0 var(--space-md);
+    }
+    
     .nav-links,
     .nav-auth {
         display: none;

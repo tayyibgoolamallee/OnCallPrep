@@ -17,11 +17,14 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <span class="logo-icon">📞</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html">SCA</a></li>
+                <li><a href="akt.html" class="active">AKT</a></li>
+                <li><a href="hidden-curriculum.html">Hidden Curriculum</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -75,31 +78,80 @@
                     <li><strong>PCOM (Patient-Centred Care):</strong> ~10% of questions (16 questions)</li>
                 </ul>
 
-                <h3>Topics Covered</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Cardiovascular</strong><br>
-                        Hypertension, heart failure, AF, angina
+                <h3>Clinical Medicine Topics (~80% - 128 questions)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg); margin-top: var(--space-lg);">
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">❤️</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-700);">Cardiovascular</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Hypertension, heart failure, AF, angina, MI</p>
                     </div>
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Respiratory</strong><br>
-                        Asthma, COPD, infections
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🫁</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Respiratory</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Asthma, COPD, infections, lung cancer</p>
                     </div>
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Endocrine</strong><br>
-                        Diabetes, thyroid, metabolic
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⚡</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Endocrine</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Diabetes, thyroid, metabolic disorders</p>
                     </div>
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Mental Health</strong><br>
-                        Depression, anxiety, dementia
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🧠</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Mental Health</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Depression, anxiety, dementia, psychosis</p>
                     </div>
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Women's Health</strong><br>
-                        Contraception, menopause, gynae
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">👩</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Women's Health</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Contraception, menopause, gynae conditions</p>
                     </div>
-                    <div style="padding: 1rem; background: #f0f9ff; border-radius: 4px;">
-                        <strong>Child Health</strong><br>
-                        Common paediatric presentations
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">👶</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Child Health</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Common paediatric presentations, development</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--space-2xl);">Evidence-Based Practice (EBP) (~10% - 16 questions)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg); margin-top: var(--space-lg);">
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-success-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📊</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Statistics</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">ARR, RRR, NNT, NNH, sensitivity, specificity</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-success-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🔬</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Study Design</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">RCTs, cohort, case-control, systematic reviews</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-success-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📈</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Critical Appraisal</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Bias, validity, applicability of evidence</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--space-2xl);">Patient-Centred Care & Organisation (PCOM) (~10% - 16 questions)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg); margin-top: var(--space-lg);">
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b;">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">💬</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Communication</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Shared decision-making, breaking bad news</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b;">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⚖️</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Ethics & Law</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Capacity, consent, confidentiality, GMC guidance</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b;">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🏥</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">NHS Structure</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Primary care organisation, QOF, contracts</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b;">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">👥</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs);">Team Working</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Multidisciplinary teams, referral pathways</p>
                     </div>
                 </div>
             </div>
@@ -155,60 +207,129 @@
                 </div>
             </div>
 
-            <!-- IMG Tips Section -->
-            <div class="content-card" style="margin-bottom: 2rem; background: #fef3c7; border-left: 4px solid #f59e0b; padding: 2rem;">
-                <h2>IMG Tips - Special Considerations</h2>
-                <p>If you're an International Medical Graduate, here are 13 key strategies to help you succeed:</p>
-                
-                <h3>1. Understand UK Guidelines</h3>
-                <p>UK practice differs significantly from many countries. Focus on NICE guidelines, CKS, and BNF. These are the gold standard for AKT.</p>
-                
-                <h3>2. Evidence-Based Practice</h3>
-                <p>EBP questions test statistics and study design. If this is new, dedicate extra time. Practice calculating NNT, NNH, ARR, RRR.</p>
-                
-                <h3>3. Patient-Centred Care</h3>
-                <p>PCOM questions test communication, shared decision-making, and UK healthcare values. Understand concepts like patient autonomy, capacity, and consent.</p>
-                
-                <h3>4. Common Pitfalls</h3>
-                <ul>
-                    <li><strong>Over-investigation:</strong> UK GPs investigate less than many countries</li>
-                    <li><strong>Prescribing:</strong> Know BNF well - UK has different drugs and protocols</li>
-                    <li><strong>Referral thresholds:</strong> UK GPs manage more in primary care</li>
-                    <li><strong>Terminology:</strong> Learn UK medical terms and abbreviations</li>
-                </ul>
-                
-                <h3>5. Study Resources</h3>
-                <ul>
-                    <li>NICE guidelines (free online)</li>
-                    <li>CKS (Clinical Knowledge Summaries)</li>
-                    <li>BNF (British National Formulary)</li>
-                    <li>RCGP AKT question banks</li>
-                    <li>GP training materials</li>
-                </ul>
-                
-                <h3>6. Language & Communication</h3>
-                <p>If English isn't your first language, practice reading medical English quickly. AKT is time-pressured. Consider medical English courses if needed.</p>
-                
-                <h3>7. Cultural Context</h3>
-                <p>Understand UK healthcare culture - patient expectations, NHS structure, primary care role. This helps with PCOM questions.</p>
-                
-                <h3>8. Time Management</h3>
-                <p>160 questions in 3 hours = 1.125 minutes per question. Practice speed reading and quick decision-making.</p>
-                
-                <h3>9. Question Bank Priority</h3>
-                <p>Use UK-specific question banks. International question banks may teach different approaches that won't work for AKT.</p>
-                
-                <h3>10. Study Groups</h3>
-                <p>Join IMG study groups. Share experiences, discuss questions, learn from others facing similar challenges.</p>
-                
-                <h3>11. Mock Exams</h3>
-                <p>Take multiple full mock exams. Get used to the format, timing, and question style. Identify patterns in your mistakes.</p>
-                
-                <h3>12. Weak Areas</h3>
-                <p>Be honest about weak areas. EBP statistics, UK guidelines, or PCOM concepts? Focus extra time there.</p>
-                
-                <h3>13. Exam Day</h3>
-                <p>Arrive early, bring ID, stay calm. Read questions carefully. Don't spend too long on one question - mark for review and move on.</p>
+            <!-- IMG Tips Section - Pro Feature -->
+            <div class="content-card" style="margin-bottom: 2rem; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 3px solid #f59e0b; padding: var(--space-3xl); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -20px; right: -20px; font-size: 8rem; opacity: 0.1;">🌍</div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="display: inline-block; padding: var(--space-sm) var(--space-md); background: #f59e0b; color: white; border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; margin-bottom: var(--space-lg);">
+                        ⭐ PRO FEATURE
+                    </div>
+                    <h2 style="color: #b45309; margin-bottom: var(--space-md); font-size: 2rem;">IMG AKT Success Guide: Master UK GP Thinking</h2>
+                    <p style="font-size: 1.125rem; color: var(--color-gray-800); margin-bottom: var(--space-xl); line-height: 1.8;">
+                        <strong>This is a very high-yield area.</strong> IMGs who understand these points often gain 10–15% extra marks without learning new medicine. The AKT isn't just testing medical knowledge—it's testing <em>UK GP thinking</em>. Here's how to bridge that gap:
+                    </p>
+                    
+                    <div style="display: grid; gap: var(--space-xl); margin-top: var(--space-2xl);">
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">🎯</span>
+                                <span>1. The UK GP Mindset: Less is More</span>
+                            </h3>
+                            <p style="color: var(--color-gray-800); line-height: 1.8; margin-bottom: var(--space-md);">
+                                <strong>The biggest mistake IMGs make:</strong> Over-investigating and over-referring. UK GPs manage more in primary care than many countries. If a question asks "next step" and you're thinking "refer to specialist" or "order expensive test"—<em>stop</em>. Think: "What can I manage here? What's the NICE guideline?"
+                            </p>
+                            <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); margin-top: var(--space-md);">
+                                <strong style="color: #b45309;">💡 Practice Tip:</strong> For every case, ask: "Would a UK GP manage this in primary care?" If yes, that's likely the answer.
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">📚</span>
+                                <span>2. NICE, CKS, BNF: Your Holy Trinity</span>
+                            </h3>
+                            <p style="color: var(--color-gray-800); line-height: 1.8; margin-bottom: var(--space-md);">
+                                These aren't just resources—they're <strong>the answers</strong>. Every AKT question is based on UK guidelines. If you're guessing between options, ask: "What does NICE say?" Memorize common pathways: hypertension (ABPM first), depression (watchful waiting for mild), diabetes (HbA1c targets).
+                            </p>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-md);">
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); text-align: center;">
+                                    <strong style="display: block; color: #b45309; margin-bottom: var(--space-xs);">NICE</strong>
+                                    <p style="margin: 0; font-size: 0.875rem;">Treatment pathways</p>
+                                </div>
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); text-align: center;">
+                                    <strong style="display: block; color: #b45309; margin-bottom: var(--space-xs);">CKS</strong>
+                                    <p style="margin: 0; font-size: 0.875rem;">Clinical summaries</p>
+                                </div>
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); text-align: center;">
+                                    <strong style="display: block; color: #b45309; margin-bottom: var(--space-xs);">BNF</strong>
+                                    <p style="margin: 0; font-size: 0.875rem;">Prescribing</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">📊</span>
+                                <span>3. EBP: Your Secret Weapon (If You Master It)</span>
+                            </h3>
+                            <p style="color: var(--color-gray-800); line-height: 1.8; margin-bottom: var(--space-md);">
+                                Many IMGs struggle with EBP—but if you master it, you'll gain easy marks. <strong>Memorize these formulas:</strong> ARR = Control rate - Treatment rate. NNT = 1/ARR. RRR = (Control - Treatment) / Control. Practice until you can calculate in your sleep.
+                            </p>
+                            <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); margin-top: var(--space-md);">
+                                <strong style="color: #b45309;">⚠️ Common Mistake:</strong> Confusing ARR (absolute) with RRR (relative). ARR is what matters clinically. NNT uses ARR, not RRR.
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">💬</span>
+                                <span>4. PCOM: Understanding UK Healthcare Values</span>
+                            </h3>
+                            <p style="color: var(--color-gray-800); line-height: 1.8; margin-bottom: var(--space-md);">
+                                PCOM questions test <strong>UK healthcare culture</strong>, not just medical knowledge. Key concepts: patient autonomy (patients decide), shared decision-making (not paternalistic), capacity (presume capacity unless proven otherwise), consent (informed and voluntary).
+                            </p>
+                            <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); margin-top: var(--space-md);">
+                                <strong style="color: #b45309;">🎯 Remember:</strong> In UK primary care, the patient is the expert in their life. Your job is to provide information and support their decision—not make it for them.
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">⚡</span>
+                                <span>5. Time Management: The 1.125-Minute Rule</span>
+                            </h3>
+                            <p style="color: var(--color-gray-800); line-height: 1.8; margin-bottom: var(--space-md);">
+                                160 questions in 3 hours = <strong>1.125 minutes per question</strong>. If English isn't your first language, this is brutal. Practice speed reading. Don't get stuck on one question—mark it, move on, come back if time allows.
+                            </p>
+                            <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg); margin-top: var(--space-md);">
+                                <strong style="color: #b45309;">⏱️ Strategy:</strong> First pass: answer all "easy" questions. Second pass: tackle harder ones. Don't leave any blank—guess if you must.
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-xl); background: rgba(255,255,255,0.7); border-radius: var(--radius-xl); border-left: 6px solid #f59e0b;">
+                            <h3 style="color: #b45309; margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="font-size: 2rem;">🚫</span>
+                                <span>6. Common Pitfalls to Avoid</span>
+                            </h3>
+                            <div style="display: grid; gap: var(--space-md); margin-top: var(--space-md);">
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg);">
+                                    <strong style="color: #dc2626;">❌ Over-investigation:</strong> UK GPs do fewer tests. Think "watchful waiting" first.
+                                </div>
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg);">
+                                    <strong style="color: #dc2626;">❌ Wrong drugs:</strong> BNF is different. Learn UK drug names and protocols.
+                                </div>
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg);">
+                                    <strong style="color: #dc2626;">❌ Over-referral:</strong> UK GPs manage more in primary care. Refer only when necessary.
+                                </div>
+                                <div style="padding: var(--space-md); background: white; border-radius: var(--radius-lg);">
+                                    <strong style="color: #dc2626;">❌ Terminology:</strong> Learn UK terms (e.g., "GP" not "family doctor", "consultant" not "attending").
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: var(--space-2xl); padding: var(--space-xl); background: rgba(255,255,255,0.9); border-radius: var(--radius-xl); text-align: center; border: 2px solid #f59e0b;">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-md);">🎓 Your Action Plan</h3>
+                        <ol style="text-align: left; max-width: 600px; margin: 0 auto; color: var(--color-gray-800); line-height: 2;">
+                            <li><strong>Month 1:</strong> Master NICE guidelines for top 20 conditions</li>
+                            <li><strong>Month 2:</strong> Practice EBP calculations daily. Join IMG study groups.</li>
+                            <li><strong>Month 3:</strong> Full mock exams. Focus on UK-specific question banks only.</li>
+                        </ol>
+                        <div style="margin-top: var(--space-lg);">
+                            <a href="pricing.html" class="btn btn-primary">Upgrade to Pro for Full IMG Guide</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Resources -->
@@ -228,7 +349,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="logo">
-                        <span class="logo-icon">📞</span>
+                        <span class="logo-icon"></span>
                         <span class="logo-text">OnCallPrep</span>
                     </a>
                     <p>Making GP training simpler, one trainee at a time.</p>

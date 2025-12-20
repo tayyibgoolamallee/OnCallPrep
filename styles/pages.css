@@ -1,1 +1,70 @@
+/* ============================================
+   OnCallPrep - Pages Styles
+   ============================================ */
 
+/* Page Header - More Rounded and Sleek */
+.page-header {
+    padding: calc(72px + var(--space-4xl)) 0 var(--space-3xl);
+    background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 50%, white 100%);
+    text-align: center;
+    border-radius: 0 0 var(--radius-3xl) var(--radius-3xl);
+    margin-bottom: var(--space-4xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.page-header h1 {
+    margin: var(--space-md) 0;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    position: relative;
+    z-index: 1;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: var(--color-gray-600);
+    position: relative;
+    z-index: 1;
+}
+
+/* Page Header Variants */
+.page-header-portfolio {
+    background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 50%, white 100%);
+}
+
+.page-header-sca {
+    background: linear-gradient(135deg, var(--color-secondary-50) 0%, var(--color-secondary-100) 50%, white 100%);
+}
+
+.page-header-akt {
+    background: linear-gradient(135deg, var(--color-success-50) 0%, var(--color-success-100) 50%, white 100%);
+}
+
+.page-header-clinical {
+    background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 50%, white 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+        padding: calc(72px + var(--space-2xl)) 0 var(--space-xl);
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}

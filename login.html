@@ -57,6 +57,8 @@
             border: 2px solid var(--color-gray-300);
             border-radius: 8px;
             font-size: 1rem;
+            color: var(--color-gray-900);
+            background-color: white;
             transition: border-color 0.2s;
         }
         .form-group input:focus {
@@ -114,10 +116,13 @@
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html">SCA</a></li>
+                <li><a href="akt.html">AKT</a></li>
+                <li><a href="hidden-curriculum.html">Hidden Curriculum</a></li>
+                <li><a href="trainers.html">Trainers</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html">About & Contact</a></li>
             </ul>
             <div class="nav-auth">
                 <a href="login.html" class="btn btn-ghost">Log in</a>
@@ -185,7 +190,7 @@
 
     <!-- Load Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/main.js"></script>
     <script>
@@ -226,27 +231,39 @@
             submitButton.textContent = 'Logging in...';
             
             try {
-                const { data, error } = await signIn(email, password);
+                const result = await logIn(email, password);
                 
-                if (error) {
-                    throw error;
+                if (!result.success) {
+                    throw new Error(result.error || 'Login failed');
                 }
                 
-                // Success - redirect will happen in signIn function
+                // Get user profile to set plan
+                const profileResult = await getCurrentUserProfile();
+                if (profileResult.success && profileResult.profile) {
+                    if (window.localStorage) {
+                        localStorage.setItem('oncallprep_plan', profileResult.profile.plan || 'free');
+                    }
+                }
+                
+                // Success - redirect after small delay to ensure session is established
                 successMessage.textContent = 'Login successful! Redirecting...';
                 successMessage.classList.add('show');
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+                window.location.href = 'index.html';
                 
             } catch (error) {
                 console.error('Login error:', error);
                 
                 // Show user-friendly error message
                 let errorText = 'An error occurred. Please try again.';
-                if (error.message.includes('Invalid login credentials')) {
+                const errorMsg = error.message || error.toString();
+                if (errorMsg.includes('Invalid login credentials') || errorMsg.includes('Invalid login')) {
                     errorText = 'Invalid email or password. Please check your credentials and try again.';
-                } else if (error.message.includes('Email not confirmed')) {
+                } else if (errorMsg.includes('Email not confirmed')) {
                     errorText = 'Please check your email and confirm your account before logging in.';
                 } else {
-                    errorText = error.message || errorText;
+                    errorText = errorMsg || errorText;
                 }
                 
                 errorMessage.textContent = errorText;
@@ -258,8 +275,8 @@
             });
         });
         
-        // Make signIn available globally for debugging
-        window.signIn = signIn;
+        // Make logIn available globally for debugging
+        window.logIn = logIn;
     </script>
 </body>
 </html>

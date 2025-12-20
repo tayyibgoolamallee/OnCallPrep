@@ -18,11 +18,14 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <span class="logo-icon">📞</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html">SCA</a></li>
+                <li><a href="akt.html">AKT</a></li>
+                <li><a href="hidden-curriculum.html">Hidden Curriculum</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -184,7 +187,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="logo">
-                        <span class="logo-icon">📞</span>
+                        <span class="logo-icon"></span>
                         <span class="logo-text">OnCallPrep</span>
                     </a>
                     <p>Making GP training simpler, one trainee at a time.</p>
@@ -213,7 +216,284 @@
         }
         
         function loadCase(caseNumber) {
-            alert('Case ' + caseNumber + ' loading... (Full case functionality requires JavaScript implementation)');
+            // For now, show Case 1 as example
+            if (caseNumber === 1) {
+                showCase1();
+            } else {
+                alert('Case ' + caseNumber + ' coming soon. Case 1 is available as a full example below.');
+            }
+        }
+        
+        function showCase1() {
+            const mockCasesSection = document.getElementById('mock-cases');
+            mockCasesSection.innerHTML = `
+                <div class="content-card">
+                    <div style="margin-bottom: var(--space-lg);">
+                        <button onclick="location.reload()" class="btn btn-outline" style="margin-bottom: var(--space-md);">← Back to Case List</button>
+                        <h2>Case 1: Chest Pain - Full Mock Case</h2>
+                    </div>
+                    
+                    <!-- Doctor's Stem -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-secondary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200); margin-bottom: var(--space-xl);">
+                        <h3 style="color: var(--color-secondary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span>👨‍⚕️</span>
+                            <span>Doctor's Stem</span>
+                        </h3>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-gray-800); margin: 0;">
+                            You are a GP trainee in a busy practice. A 45-year-old man, Mr. James Mitchell, has been booked in for an urgent appointment. The receptionist notes he called this morning complaining of chest pain.
+                        </p>
+                    </div>
+                    
+                    <!-- Case Notes -->
+                    <div style="padding: var(--space-xl); background: var(--color-gray-50); border-radius: var(--radius-xl); border: 2px solid var(--color-gray-200); margin-bottom: var(--space-xl);">
+                        <h3 style="margin-bottom: var(--space-lg);">📋 Case Notes (2-minute reading time)</h3>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div><strong>Patient:</strong> Mr. James Mitchell, 45 years old, Male</div>
+                            <div><strong>Past Medical History:</strong> Hypertension (diagnosed 2 years ago), High cholesterol</div>
+                            <div><strong>Medications:</strong> Ramipril 5mg once daily, Atorvastatin 20mg once daily</div>
+                            <div><strong>Allergies:</strong> None known</div>
+                            <div><strong>Social History:</strong> Works as office manager. Smokes 20 cigarettes/day for 25 years. Drinks 15-20 units alcohol/week. Lives with wife and two children.</div>
+                            <div><strong>Family History:</strong> Father had MI at age 55. Mother has type 2 diabetes.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actor Information -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; margin-bottom: var(--space-xl);">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-lg);">🎭 Actor Information</h3>
+                        
+                        <div style="margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-lg);">
+                            <h4 style="color: #b45309; margin-bottom: var(--space-sm);">Opening Statement (Freely Given)</h4>
+                            <p style="font-style: italic; color: var(--color-gray-800); line-height: 1.8; margin: 0;">
+                                "Doctor, I've been having this chest pain since this morning. It's really worrying me."
+                            </p>
+                        </div>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                Freely Given History (What patient volunteers)
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <p><strong>Presenting Complaint:</strong> Central chest pain started 2 hours ago. Describes as 'tight' and 'heavy' feeling. Came on while sitting at his desk at work.</p>
+                                <p><strong>Psycho-social Impact:</strong> Very anxious about the pain. Worried it might be his heart. Says he can't concentrate at work.</p>
+                                <p><strong>Ideas, Concerns, Expectations:</strong> Thinks it might be a heart attack. Wants to know if he needs to go to hospital. Expects some tests to be done.</p>
+                            </div>
+                        </details>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                History on Direct Questioning
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Presenting Complaint (Detailed)</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Site:</strong> Central chest, behind sternum</li>
+                                    <li><strong>Radiation:</strong> Radiates to left arm and jaw</li>
+                                    <li><strong>Character:</strong> Tight, heavy, crushing sensation</li>
+                                    <li><strong>Severity:</strong> 7/10 at worst, now 4/10</li>
+                                    <li><strong>Onset:</strong> Started 2 hours ago, came on gradually over 5 minutes</li>
+                                    <li><strong>Duration:</strong> Constant since onset, but severity varies</li>
+                                    <li><strong>Exacerbating Factors:</strong> Worse with deep breath, movement</li>
+                                    <li><strong>Relieving Factors:</strong> Slightly better when sitting still</li>
+                                    <li><strong>Associated Symptoms:</strong> Mild shortness of breath, feeling nauseous, slight dizziness</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Past Medical History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Hypertension:</strong> Diagnosed 2 years ago, well controlled on Ramipril. Last BP check 3 months ago was 138/85.</li>
+                                    <li><strong>Cholesterol:</strong> High cholesterol diagnosed same time as hypertension. On Atorvastatin. Last check 6 months ago was 5.2.</li>
+                                    <li><strong>Other Conditions:</strong> No diabetes, no known heart disease, no previous chest pain episodes</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Drug History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Current Medications:</strong> Ramipril 5mg OD, Atorvastatin 20mg OD</li>
+                                    <li><strong>Over-the-Counter:</strong> Takes occasional ibuprofen for headaches (maybe 2-3 times per month)</li>
+                                    <li><strong>Herbal Supplements:</strong> None</li>
+                                    <li><strong>Compliance:</strong> Takes medications regularly, last dose this morning</li>
+                                    <li><strong>Allergies:</strong> No known drug allergies</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Social History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Work/Employment:</strong> Office manager, sedentary job, works 9-5 Monday to Friday</li>
+                                    <li><strong>Family:</strong> Married with two children (ages 12 and 15). Wife works part-time.</li>
+                                    <li><strong>Living Situation:</strong> Lives in own house with family</li>
+                                    <li><strong>Smoking:</strong> Smokes 20 cigarettes per day for 25 years (25 pack-years). Tried to quit twice but unsuccessful.</li>
+                                    <li><strong>Alcohol:</strong> Drinks 15-20 units per week, mostly at weekends. No history of alcohol-related problems.</li>
+                                    <li><strong>Recreational Drugs:</strong> None</li>
+                                    <li><strong>Diet:</strong> Eats mostly convenience food due to busy lifestyle</li>
+                                    <li><strong>Exercise:</strong> Minimal exercise, walks to work (10 minutes) but otherwise sedentary</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Family History</h4>
+                                <ul>
+                                    <li><strong>Cardiovascular:</strong> Father had myocardial infarction at age 55. Mother has type 2 diabetes (diagnosed age 60).</li>
+                                    <li><strong>Other:</strong> No other significant family history</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Self-Assessment -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-lg);">✅ Self-Assessment</h3>
+                        <p style="margin-bottom: var(--space-lg);">Check off the items you addressed during your consultation. Domain 2 (Clinical Management) is weighted 1.5x.</p>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 1: Data Gathering & Interpretation
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Established presenting complaint (chest pain)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored site, radiation, character, severity of pain</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Asked about onset, duration, exacerbating/relieving factors</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored associated symptoms (SOB, nausea, dizziness)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained past medical history (hypertension, cholesterol)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained drug history including compliance</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained social history (smoking, alcohol, work)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained family history (father's MI, mother's diabetes)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored ideas, concerns, expectations</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Assessed cardiovascular risk factors</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Performed relevant examination (if appropriate)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Interpreted findings appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 2: Clinical Management (Weighted 1.5x)
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered cardiac causes (ACS, angina, pericarditis)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered non-cardiac causes (GORD, musculoskeletal, anxiety)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Assessed cardiovascular risk (smoking, FH, age, hypertension)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Made appropriate diagnosis or differential</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed management plan with patient</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered need for urgent referral (if indicated)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Prescribed appropriate medication (if indicated)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided safety netting advice</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Arranged appropriate follow-up</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Documented appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 3: Interpersonal Skills
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated empathy and rapport</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Used appropriate language and avoided jargon</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Listened actively to patient concerns</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Addressed patient's anxiety appropriately</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Explained diagnosis/plan clearly</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Involved patient in decision-making</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Maintained professional boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated cultural sensitivity</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button onclick="calculateScore(this)" class="btn btn-primary btn-lg">Calculate My Score</button>
+                        </div>
+                        
+                        <div class="score-result" style="display: none; margin-top: var(--space-xl);">
+                            <div class="score-breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mockCasesSection.scrollIntoView({ behavior: 'smooth' });
         }
         
         function generateDiagnosis() {

@@ -128,3 +128,4 @@ print(f"Clinical questions: {len([q for q in data['questions'] if q['id'].starts
 
 
 
+

@@ -4,8 +4,25 @@
  */
 
 function calculateScore(button) {
-    const details = button.closest('details');
-    const assessmentContent = details.querySelector('.assessment-content');
+    // Find the assessment content - could be in details or directly in parent
+    let assessmentContent = button.closest('.assessment-content');
+    if (!assessmentContent) {
+        const details = button.closest('details');
+        if (details) {
+            assessmentContent = details.querySelector('.assessment-content');
+        } else {
+            // Try finding it in a parent container
+            const parent = button.closest('div[style*="padding"]');
+            if (parent) {
+                assessmentContent = parent.querySelector('.assessment-content') || parent;
+            }
+        }
+    }
+    
+    if (!assessmentContent) {
+        console.error('Could not find assessment content');
+        return;
+    }
     
     // Get all checkboxes for each domain
     const domain1Checks = assessmentContent.querySelectorAll('.domain1-check:checked');
@@ -17,74 +34,84 @@ function calculateScore(button) {
     const domain2Total = assessmentContent.querySelectorAll('.domain2-check').length;
     const domain3Total = assessmentContent.querySelectorAll('.domain3-check').length;
     
-    // Calculate scores (Domain 2 is weighted 1.5x)
-    const domain1Score = (domain1Checks.length / domain1Total) * 3; // Max 3 points
-    const domain2Score = (domain2Checks.length / domain2Total) * 3 * 1.5; // Max 4.5 points (weighted)
-    const domain3Score = (domain3Checks.length / domain3Total) * 3; // Max 3 points
+    // Calculate domain scores based on percentage of items checked
+    // Each domain can score 0-4 points: 4=Clear Pass, 3=Pass, 2=Fail, 1=Clear Fail, 0=No items
+    function getDomainPoints(checked, total) {
+        const percentage = (checked / total) * 100;
+        if (percentage >= 90) return 4; // Clear Pass
+        if (percentage >= 70) return 3; // Pass
+        if (percentage >= 50) return 2; // Fail
+        if (percentage >= 30) return 1; // Clear Fail
+        return 0;
+    }
     
-    const totalScore = domain1Score + domain2Score + domain3Score;
-    const maxScore = 10.5; // 3 + 4.5 + 3
-    const percentage = (totalScore / maxScore) * 100;
+    const domain1Points = getDomainPoints(domain1Checks.length, domain1Total);
+    const domain2Points = getDomainPoints(domain2Checks.length, domain2Total);
+    const domain3Points = getDomainPoints(domain3Checks.length, domain3Total);
     
-    // Determine grade (updated boundaries)
-    // Clear Pass: >9/10.5, Pass: >6/10.5, Clear Fail: <3/10.5, Minor Fail: 3-6/10.5
-    let grade, gradeClass, feedback;
-    if (totalScore > 9.0) {
-        grade = "Clear Pass";
-        gradeClass = "score-clear-pass";
+    // Calculate weighted total (Domain 2 weighted 1.5x)
+    const weightedTotal = (domain1Points * 1.0) + (domain2Points * 1.5) + (domain3Points * 1.0);
+    const maxWeighted = 10.5; // (4 * 1.0) + (4 * 1.5) + (4 * 1.0) = 4 + 6 + 4 = 14, but we cap at 10.5 for grading
+    const overallPercentage = (weightedTotal / 10.5) * 100;
+    
+    // Determine overall grade: 4,3,2,1 system mapped to total 10.5
+    // Clear Pass: >9/10.5, Pass: 6-9/10.5, Fail: 3-6/10.5, Clear Fail: <3/10.5
+    let overallGrade, overallClass, feedback;
+    if (weightedTotal > 9.0) {
+        overallGrade = "Clear Pass (4)";
+        overallClass = "score-clear-pass";
         feedback = "Excellent performance. You demonstrated strong skills across all domains. Well done!";
-    } else if (totalScore > 6.0) {
-        grade = "Pass";
-        gradeClass = "score-pass";
+    } else if (weightedTotal >= 6.0) {
+        overallGrade = "Pass (3)";
+        overallClass = "score-pass";
         feedback = "Good performance. You met the requirements for safe independent practice. Consider reviewing any unchecked items.";
-    } else if (totalScore >= 3.0) {
-        grade = "Minor Fail";
-        gradeClass = "score-minor-fail";
+    } else if (weightedTotal >= 3.0) {
+        overallGrade = "Fail (2)";
+        overallClass = "score-minor-fail";
         feedback = "Some areas need improvement. Review the unchecked items and practice those skills before your exam.";
     } else {
-        grade = "Clear Fail";
-        gradeClass = "score-clear-fail";
+        overallGrade = "Clear Fail (1)";
+        overallClass = "score-clear-fail";
         feedback = "Significant improvement needed. Focus on the areas you missed. Consider additional practice and review of the marking criteria.";
     }
     
-    // Calculate individual domain grades (lenient boundaries)
-    function getDomainGrade(score, max) {
-        const percentage = (score / max) * 100;
-        // Clear Pass: >76%, Minor Pass: 52-76%, Minor Fail: 29-52%, Clear Fail: <29%
-        if (percentage > 76) return { grade: "Clear Pass (3)", class: "score-clear-pass", points: 3 };
-        if (percentage >= 52) return { grade: "Minor Pass (2)", class: "score-pass", points: 2 };
-        if (percentage >= 29) return { grade: "Minor Fail (1)", class: "score-minor-fail", points: 1 };
-        return { grade: "Clear Fail (0)", class: "score-clear-fail", points: 0 };
+    // Get domain grade labels
+    function getDomainGradeLabel(points) {
+        if (points === 4) return { grade: "Clear Pass (4)", class: "score-clear-pass" };
+        if (points === 3) return { grade: "Pass (3)", class: "score-pass" };
+        if (points === 2) return { grade: "Fail (2)", class: "score-minor-fail" };
+        if (points === 1) return { grade: "Clear Fail (1)", class: "score-clear-fail" };
+        return { grade: "Clear Fail (0)", class: "score-clear-fail" };
     }
     
-    const domain1Grade = getDomainGrade(domain1Score, 3);
-    const domain2Grade = getDomainGrade(domain2Score, 4.5);
-    const domain3Grade = getDomainGrade(domain3Score, 3);
+    const domain1Grade = getDomainGradeLabel(domain1Points);
+    const domain2Grade = getDomainGradeLabel(domain2Points);
+    const domain3Grade = getDomainGradeLabel(domain3Points);
     
-    // Calculate weighted total
-    const weightedTotal = (domain1Grade.points * 1.0) + (domain2Grade.points * 1.5) + (domain3Grade.points * 1.0);
-    const maxWeighted = 10.5; // (3 * 1.0) + (3 * 1.5) + (3 * 1.0)
-    const overallPercentage = (weightedTotal / maxWeighted) * 100;
-    
-    // Overall grade (updated boundaries)
-    let overallGrade, overallClass;
-    if (weightedTotal > 9.0) {
-        overallGrade = "Clear Pass";
-        overallClass = "score-clear-pass";
-    } else if (weightedTotal > 6.0) {
-        overallGrade = "Pass";
-        overallClass = "score-pass";
-    } else if (weightedTotal >= 3.0) {
-        overallGrade = "Minor Fail";
-        overallClass = "score-minor-fail";
-    } else {
-        overallGrade = "Clear Fail";
-        overallClass = "score-clear-fail";
+    // Display result - find result div in parent container
+    let resultDiv = assessmentContent.querySelector('.score-result');
+    if (!resultDiv) {
+        // Try finding it in a parent container
+        const parent = assessmentContent.closest('div[style*="padding"]') || assessmentContent.parentElement;
+        if (parent) {
+            resultDiv = parent.querySelector('.score-result');
+        }
     }
     
-    // Display result
-    const resultDiv = assessmentContent.querySelector('.score-result');
-    const scoreBreakdown = resultDiv.querySelector('.score-breakdown');
+    if (!resultDiv) {
+        // Create result div if it doesn't exist
+        resultDiv = document.createElement('div');
+        resultDiv.className = 'score-result';
+        resultDiv.style.display = 'none';
+        button.parentElement.appendChild(resultDiv);
+    }
+    
+    let scoreBreakdown = resultDiv.querySelector('.score-breakdown');
+    if (!scoreBreakdown) {
+        scoreBreakdown = document.createElement('div');
+        scoreBreakdown.className = 'score-breakdown';
+        resultDiv.appendChild(scoreBreakdown);
+    }
     
     scoreBreakdown.innerHTML = `
         <div class="domain-scores">
@@ -95,17 +122,19 @@ function calculateScore(button) {
                 </div>
                 <div class="domain-score-details">
                     <span>${domain1Checks.length}/${domain1Total} items checked</span>
+                    <span>Points: ${domain1Points}/4</span>
                     <span>Weight: 1.0x</span>
                 </div>
             </div>
             
             <div class="domain-score-card ${domain2Grade.class}">
                 <div class="domain-score-header">
-                    <span class="domain-name">Domain 2: Clinical Management</span>
+                    <span class="domain-name">Domain 2: Clinical Management (Weighted 1.5x)</span>
                     <span class="domain-grade">${domain2Grade.grade}</span>
                 </div>
                 <div class="domain-score-details">
                     <span>${domain2Checks.length}/${domain2Total} items checked</span>
+                    <span>Points: ${domain2Points}/4 (weighted: ${(domain2Points * 1.5).toFixed(1)})</span>
                     <span>Weight: 1.5x</span>
                 </div>
             </div>
@@ -117,6 +146,7 @@ function calculateScore(button) {
                 </div>
                 <div class="domain-score-details">
                     <span>${domain3Checks.length}/${domain3Total} items checked</span>
+                    <span>Points: ${domain3Points}/4</span>
                     <span>Weight: 1.0x</span>
                 </div>
             </div>
@@ -125,10 +155,11 @@ function calculateScore(button) {
         <div class="overall-score ${overallClass}">
             <div class="overall-score-header">
                 <span class="overall-label">Overall Case Score</span>
-                <span class="overall-value">${overallGrade} (${Math.round(overallPercentage)}%)</span>
+                <span class="overall-value">${overallGrade}</span>
             </div>
             <div class="overall-breakdown">
                 <span>Weighted Total: ${Math.round(weightedTotal * 10) / 10}/10.5 points</span>
+                <span>Calculation: (${domain1Points} × 1.0) + (${domain2Points} × 1.5) + (${domain3Points} × 1.0) = ${Math.round(weightedTotal * 10) / 10}</span>
             </div>
         </div>
         

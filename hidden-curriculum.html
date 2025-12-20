@@ -17,14 +17,17 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <span class="logo-icon">📞</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html">SCA</a></li>
+                <li><a href="akt.html">AKT</a></li>
+                <li><a href="hidden-curriculum.html" class="active">Hidden Curriculum</a></li>
+                <li><a href="trainers.html">Trainers</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html">About & Contact</a></li>
             </ul>
             <div class="nav-auth">
                 <a href="login.html" class="btn btn-ghost">Log in</a>
@@ -50,8 +53,20 @@
     <section class="content-page">
         <div class="container">
             <div class="content-intro">
-                <p>The "hidden curriculum" refers to the practical knowledge and skills you need to succeed in general practice that aren't formally taught. This guide covers GP setup, triage, reports, quality improvement, and leadership.</p>
+                <p>The "hidden curriculum" refers to the practical knowledge and skills you need to succeed in general practice that aren't formally taught. This guide covers GP setup, triage, reports, tax & finance, career paths, and extended roles.</p>
             </div>
+
+            <!-- Pro Teaser (shown to free users) -->
+            <div class="pro-teaser" style="background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); padding: var(--space-3xl); border-radius: var(--radius-2xl); margin-bottom: var(--space-4xl); text-align: center;">
+                <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md);">Unlock the Complete Hidden Curriculum Guide</h2>
+                <p style="font-size: 1.125rem; color: var(--color-gray-700); margin-bottom: var(--space-xl); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Learn about tax deductions, claimable expenses, different GP career paths (salaried, locum, partner), and how to pursue extended roles and special interests. Essential knowledge for any GP trainee or newly qualified GP.
+                </p>
+                <a href="pricing.html" class="btn btn-primary btn-lg">Upgrade to Pro to Access</a>
+            </div>
+
+            <!-- Pro Only Content -->
+            <div class="pro-only">
 
             <!-- GP Setup -->
             <div class="content-section">
@@ -137,82 +152,332 @@
                 </div>
             </div>
 
-            <!-- Quality Improvement -->
+            <!-- Tax & Finance -->
             <div class="content-section">
-                <h2>Quality Improvement (QI)</h2>
-                <div class="info-box success">
-                    <div class="info-box-title">QI Projects</div>
-                    <p>QI projects demonstrate leadership and commitment to improving patient care. Essential for portfolio and career development.</p>
+                <h2>Tax & Finance</h2>
+                <div class="info-box tip">
+                    <div class="info-box-title">💰 Claimable Expenses</div>
+                    <p>As a GP trainee or qualified GP, you can claim various expenses to reduce your tax bill. Keep receipts and records!</p>
                 </div>
 
-                <h3>QI Methodology</h3>
+                <h3>Common Claimable Expenses</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>What You Can Claim</h3>
+                    </div>
+                    <div class="model-body">
+                        <ul>
+                            <li><strong>Professional Subscriptions:</strong> GMC, RCGP, BMA, defence union memberships</li>
+                            <li><strong>Professional Development:</strong> Courses, conferences, exam fees (AKT, SCA), study materials</li>
+                            <li><strong>Equipment:</strong> Stethoscope, otoscope, medical books, professional clothing (uniforms)</li>
+                            <li><strong>Travel:</strong> Mileage to placements (not to base practice if salaried), conferences, courses</li>
+                            <li><strong>Home Office:</strong> If you work from home (proportionate to business use)</li>
+                            <li><strong>Phone/Internet:</strong> Business use proportion</li>
+                            <li><strong>Professional Indemnity:</strong> Insurance premiums</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>How to Claim</h3>
+                <ul>
+                    <li>Keep all receipts and invoices</li>
+                    <li>Use HMRC's online self-assessment system</li>
+                    <li>Consider using an accountant for complex situations (especially when locuming or in partnership)</li>
+                    <li>Keep a mileage log if claiming travel expenses</li>
+                    <li>File your self-assessment by January 31st each year</li>
+                </ul>
+
+                <h3>Your Tax Position</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>Understanding Your Tax</h3>
+                    </div>
+                    <div class="model-body">
+                        <ul>
+                            <li><strong>As a Trainee (Salaried):</strong> Usually PAYE, minimal self-assessment needed unless you have other income</li>
+                            <li><strong>As a Locum:</strong> You're self-employed - must register for self-assessment and pay Class 2 & 4 National Insurance</li>
+                            <li><strong>As a Partner:</strong> Self-employed, share profits, more complex tax situation</li>
+                            <li><strong>As a Salaried GP:</strong> PAYE, but still claim professional expenses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Example: Potential Savings</h3>
+                <p>If you earn £50,000 and claim £2,000 in legitimate expenses, you'd save approximately £800-900 in tax (depending on your tax bracket). That's money back in your pocket!</p>
+
+                <div class="info-box note" style="margin-top: 2rem;">
+                    <div class="info-box-title">⚠️ Important</div>
+                    <p>This is general guidance only. Tax rules can be complex and change. Consider consulting with an accountant familiar with medical professionals, especially if you're locuming, in partnership, or have multiple income sources.</p>
+                </div>
+            </div>
+
+            <!-- Career Paths -->
+            <div class="content-section">
+                <h2>Career Paths in General Practice</h2>
+                <div class="info-box tip">
+                    <div class="info-box-title">🎯 Your Career Options</div>
+                    <p>Understanding different career paths helps you make informed decisions about your future in general practice.</p>
+                </div>
+
+                <h3>1. Salaried GP</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>Salaried Position</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Structure:</strong> Employed by a practice with a fixed salary</p>
+                        <h4>Pros:</h4>
+                        <ul>
+                            <li>Stable, predictable income</li>
+                            <li>No business/financial responsibilities</li>
+                            <li>Employment rights (sick pay, maternity/paternity, holiday)</li>
+                            <li>Pension through NHS scheme</li>
+                            <li>Less administrative burden</li>
+                            <li>Can focus on clinical work</li>
+                        </ul>
+                        <h4>Cons:</h4>
+                        <ul>
+                            <li>Less control over practice decisions</li>
+                            <li>Lower earning potential than partners/locums</li>
+                            <li>May have less flexibility in working patterns</li>
+                            <li>Limited influence on practice direction</li>
+                        </ul>
+                        <p><strong>Salary Range:</strong> Typically £65,000-£95,000 (varies by region, experience, and contract)</p>
+                    </div>
+                </div>
+
+                <h3>2. Locum GP</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>Freelance/Temporary Work</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Structure:</strong> Self-employed, work sessions as needed</p>
+                        <h4>Pros:</h4>
+                        <ul>
+                            <li>High earning potential (£700-£1,000+ per day)</li>
+                            <li>Flexibility - choose when/where you work</li>
+                            <li>Variety - work across different practices</li>
+                            <li>Control over your schedule</li>
+                            <li>Can take extended breaks</li>
+                        </ul>
+                        <h4>Cons:</h4>
+                        <ul>
+                            <li>No job security or guaranteed income</li>
+                            <li>Must manage own tax (self-assessment)</li>
+                            <li>No sick pay, holiday pay, or pension</li>
+                            <li>More paperwork (invoicing, tax records)</li>
+                            <li>Less continuity with patients</li>
+                            <li>May need to set up as limited company for tax efficiency</li>
+                        </ul>
+                        <p><strong>Typical Rates:</strong> £700-£1,200 per day (varies by location and demand)</p>
+                    </div>
+                </div>
+
+                <h3>3. GP Partner</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>Practice Ownership</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Structure:</strong> Own shares in practice, share profits and losses</p>
+                        <h4>Pros:</h4>
+                        <ul>
+                            <li>Highest earning potential (varies significantly)</li>
+                            <li>Control over practice direction and decisions</li>
+                            <li>Can shape practice culture and values</li>
+                            <li>Build long-term equity in the business</li>
+                            <li>Influence over working environment</li>
+                            <li>Potential for significant financial returns</li>
+                        </ul>
+                        <h4>Cons:</h4>
+                        <ul>
+                            <li>Business and financial responsibilities</li>
+                            <li>Shared liability for practice debts</li>
+                            <li>More administrative work</li>
+                            <li>Less clinical time (often 60-70% clinical, rest admin/management)</li>
+                            <li>Stress of running a business</li>
+                            <li>Partnership disputes can be challenging</li>
+                            <li>May need capital investment to join</li>
+                        </ul>
+                        <p><strong>Earnings:</strong> Highly variable - £80,000-£150,000+ depending on practice performance, location, and share size</p>
+                    </div>
+                </div>
+
+                <h3>4. Hybrid/Portfolio Career</h3>
+                <div class="model-card">
+                    <div class="model-header">
+                        <h3>Mix of Roles</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Structure:</strong> Combine different roles - e.g., part-time salaried + locum sessions + special interest work</p>
+                        <h4>Pros:</h4>
+                        <ul>
+                            <li>Diversity in work</li>
+                            <li>Can balance stability with flexibility</li>
+                            <li>Pursue special interests alongside general practice</li>
+                            <li>Mitigate risks (not all eggs in one basket)</li>
+                            <li>Can adapt over time</li>
+                        </ul>
+                        <h4>Considerations:</h4>
+                        <ul>
+                            <li>More complex to manage (different contracts, tax implications)</li>
+                            <li>May need better organisation and planning</li>
+                            <li>Can be harder to maintain continuity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extended Roles & Special Interests -->
+            <div class="content-section">
+                <h2>Extended Roles & Special Interests</h2>
+                <div class="info-box tip">
+                    <div class="info-box-title">🌟 Developing Your Career</div>
+                    <p>Many GPs develop special interests or extended roles. This can enhance your career, increase earning potential, and bring variety to your work.</p>
+                </div>
+
+                <h3>Common Special Interest Areas</h3>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>1. Women's Health</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> DRCOG (Diploma of the Royal College of Obstetricians and Gynaecologists) often preferred</p>
+                        <p><strong>Typical Rates:</strong> £800-£1,200 per day when working in specialist clinics</p>
+                        <p><strong>What It Involves:</strong> Contraception, menopause, gynaecological conditions, sexual health, antenatal care</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>2. Dermatology</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Often experience-based, may consider PGDip/PGCert in Dermatology</p>
+                        <p><strong>Typical Rates:</strong> £800-£1,200 per day for specialist clinics</p>
+                        <p><strong>What It Involves:</strong> Skin cancer screening, minor surgery, complex dermatological conditions, dermatoscopy</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>3. Minor Surgery</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Usually requires accreditation course and supervised practice</p>
+                        <p><strong>Typical Rates:</strong> Can charge per procedure or session rates similar to specialist clinics</p>
+                        <p><strong>What It Involves:</strong> Excisions, joint injections, vasectomies, other minor procedures</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>4. Diabetes & Endocrinology</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Often experience-based, may consider relevant courses or diplomas</p>
+                        <p><strong>Typical Rates:</strong> £700-£1,000 per day</p>
+                        <p><strong>What It Involves:</strong> Diabetes management, thyroid disorders, other endocrine conditions</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>5. Mental Health</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> May include additional training in CBT, counselling, or psychiatry</p>
+                        <p><strong>Typical Rates:</strong> £700-£1,000 per day</p>
+                        <p><strong>What It Involves:</strong> Mental health assessments, psychological therapies, complex mental health management</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>6. Sports Medicine</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Often requires additional training/certification</p>
+                        <p><strong>Typical Rates:</strong> £800-£1,200 per day</p>
+                        <p><strong>What It Involves:</strong> Sports injuries, exercise medicine, musculoskeletal medicine</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>7. Paediatrics</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> DCH (Diploma in Child Health) or experience-based</p>
+                        <p><strong>Typical Rates:</strong> £700-£1,000 per day</p>
+                        <p><strong>What It Involves:</strong> Child health clinics, developmental assessments, complex paediatric cases</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>8. Care of the Elderly/Frailty</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Usually experience-based, may consider relevant courses</p>
+                        <p><strong>Typical Rates:</strong> £700-£950 per day</p>
+                        <p><strong>What It Involves:</strong> Complex multi-morbidity, care home medicine, frailty assessments</p>
+                    </div>
+                </div>
+
+                <div class="model-card" style="margin-bottom: 2rem;">
+                    <div class="model-header">
+                        <h3>9. Medical Education/Teaching</h3>
+                    </div>
+                    <div class="model-body">
+                        <p><strong>Required Qualifications:</strong> Often requires teaching qualifications (PGCert/PGDip in Medical Education)</p>
+                        <p><strong>Typical Rates:</strong> Varies - may be part of academic contracts or paid per session</p>
+                        <p><strong>What It Involves:</strong> Teaching medical students, GP trainees, course development, educational leadership</p>
+                    </div>
+                </div>
+
+                <h3>How to Pursue a Special Interest: 5-Step Guide</h3>
                 <div class="model-steps">
                     <div class="model-step">
                         <div class="step-number">1</div>
                         <div class="step-content">
-                            <strong>Identify Problem</strong>
-                            <p>What needs improving? Use data to identify issues.</p>
+                            <strong>Identify Your Interest</strong>
+                            <p>What areas of medicine do you enjoy most? What do you want to learn more about?</p>
                         </div>
                     </div>
                     <div class="model-step">
                         <div class="step-number">2</div>
                         <div class="step-content">
-                            <strong>Plan</strong>
-                            <p>Set SMART goals, plan interventions</p>
+                            <strong>Research Requirements</strong>
+                            <p>What qualifications or training are needed? What's the typical career path? Talk to GPs already working in that area.</p>
                         </div>
                     </div>
                     <div class="model-step">
                         <div class="step-number">3</div>
                         <div class="step-content">
-                            <strong>Do</strong>
-                            <p>Implement changes, collect data</p>
+                            <strong>Gain Experience</strong>
+                            <p>Take on more cases in your chosen area. Consider shadowing specialists. Build your portfolio.</p>
                         </div>
                     </div>
                     <div class="model-step">
                         <div class="step-number">4</div>
                         <div class="step-content">
-                            <strong>Study</strong>
-                            <p>Analyze results, what worked?</p>
+                            <strong>Get Qualified</strong>
+                            <p>Complete necessary courses, exams, or certifications. This might be during or after GP training.</p>
                         </div>
                     </div>
                     <div class="model-step">
                         <div class="step-number">5</div>
                         <div class="step-content">
-                            <strong>Act</strong>
-                            <p>Embed changes or try again</p>
+                            <strong>Find Opportunities</strong>
+                            <p>Look for practices with special interest clinics, locum opportunities in specialist areas, or create your own opportunities.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Leadership -->
-            <div class="content-section">
-                <h2>Leadership in General Practice</h2>
-                <div class="model-card">
-                    <div class="model-header">
-                        <h3>Leadership Skills</h3>
-                    </div>
-                    <div class="model-body">
-                        <h4>Key Areas</h4>
-                        <ul>
-                            <li><strong>Clinical Leadership:</strong> Leading on clinical pathways, guidelines</li>
-                            <li><strong>Team Leadership:</strong> Supporting colleagues, managing teams</li>
-                            <li><strong>Service Development:</strong> Improving services, innovation</li>
-                            <li><strong>Teaching:</strong> Training medical students, junior doctors</li>
-                            <li><strong>Change Management:</strong> Leading organizational change</li>
-                        </ul>
-
-                        <h4>Developing Leadership</h4>
-                        <ul>
-                            <li>Take on responsibilities gradually</li>
-                            <li>Seek feedback and mentorship</li>
-                            <li>Attend leadership courses</li>
-                            <li>Learn from good leaders</li>
-                            <li>Reflect on leadership experiences</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            </div> <!-- End pro-only -->
         </div>
     </section>
 
@@ -222,7 +487,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="logo">
-                        <span class="logo-icon">📞</span>
+                        <span class="logo-icon"></span>
                         <span class="logo-text">OnCallPrep</span>
                     </a>
                     <p>Making GP training simpler, one trainee at a time.</p>
@@ -236,9 +501,8 @@
 
     <!-- Load Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
-    <script src="scripts/subscription.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 </html>

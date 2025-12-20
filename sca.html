@@ -18,11 +18,14 @@
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <span class="logo-icon">📞</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">OnCallPrep</span>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="sca.html" class="active">SCA</a></li>
+                <li><a href="akt.html">AKT</a></li>
+                <li><a href="hidden-curriculum.html">Hidden Curriculum</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -51,31 +54,57 @@
     <section class="content-section">
         <div class="container">
             <!-- Overview -->
-            <div class="content-card" style="margin-bottom: 2rem;">
-                <h2>What is the SCA?</h2>
-                <p>The Simulated Consultation Assessment (SCA) is a practical exam that tests your ability to manage consultations in a realistic GP setting. You'll be presented with simulated patients and have 12 minutes per case to demonstrate your clinical reasoning, communication skills, and management abilities.</p>
+            <div class="content-card" style="margin-bottom: 2rem; background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border: 2px solid var(--color-primary-200);">
+                <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md);">🎯 What is the SCA?</h2>
+                <p style="font-size: 1.125rem; color: var(--color-gray-700); line-height: 1.8; margin: 0;">
+                    The Simulated Consultation Assessment (SCA) is a practical exam that tests your ability to manage consultations in a realistic GP setting. You'll be presented with simulated patients and have 12 minutes per case to demonstrate your clinical reasoning, communication skills, and management abilities.
+                </p>
             </div>
 
             <!-- Exam Structure -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>Exam Structure</h2>
                 
-                <h3>Format</h3>
-                <ul>
-                    <li><strong>Duration:</strong> 12 minutes per case</li>
-                    <li><strong>Number of cases:</strong> Typically 13 cases</li>
-                    <li><strong>Total time:</strong> Approximately 3 hours (including breaks)</li>
-                    <li><strong>Setting:</strong> Simulated GP consultation room</li>
-                    <li><strong>Actors:</strong> Trained simulated patients</li>
-                </ul>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); margin: var(--space-xl) 0;">
+                    <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⏱️</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-700);">Duration</strong>
+                        <p style="margin: 0; color: var(--color-gray-700);">12 minutes per case</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📋</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-700);">Cases</strong>
+                        <p style="margin: 0; color: var(--color-gray-700);">12 cases</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🕐</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-700);">Total Time</strong>
+                        <p style="margin: 0; color: var(--color-gray-700);">~3 hours (with breaks)</p>
+                    </div>
+                    <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🎭</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-700);">Actors</strong>
+                        <p style="margin: 0; color: var(--color-gray-700);">Trained simulated patients</p>
+                    </div>
+                </div>
 
-                <h3>The 12-Minute Framework</h3>
-                <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
-                    <ol style="margin: 0; padding-left: 1.5rem;">
-                        <li><strong>0-2 minutes:</strong> Read case notes and prepare</li>
-                        <li><strong>2-10 minutes:</strong> Consultation with patient</li>
-                        <li><strong>10-12 minutes:</strong> Explain diagnosis and management plan</li>
-                    </ol>
+                <h3 style="margin-top: var(--space-2xl);">The 12-Minute Framework</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-top: var(--space-lg);">
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-50) 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-300); text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-primary-700); margin-bottom: var(--space-sm);">0-2</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-primary-800);">Preparation</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Read case notes and prepare</p>
+                    </div>
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-success-300); text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--color-success-700); margin-bottom: var(--space-sm);">2-10</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: var(--color-success-800);">Consultation</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Consultation with patient</p>
+                    </div>
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 700; color: #d97706; margin-bottom: var(--space-sm);">10-12</div>
+                        <strong style="display: block; margin-bottom: var(--space-xs); color: #b45309;">Explanation</strong>
+                        <p style="margin: 0; color: var(--color-gray-700); font-size: 0.9375rem;">Explain diagnosis and management</p>
+                    </div>
                 </div>
             </div>
 
@@ -85,8 +114,8 @@
                 <p>The SCA is marked across three domains. <strong>Domain 2 (Clinical Management) is weighted 1.5x</strong> in the final score.</p>
                 
                 <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
-                    <div style="padding: 1.5rem; background: #f0f9ff; border-left: 4px solid #3b82f6; border-radius: 4px;">
-                        <h3>Domain 1: Data Gathering & Interpretation</h3>
+                    <div style="padding: 1.5rem; background: var(--color-primary-50); border-left: 4px solid var(--color-primary-600); border-radius: 4px;">
+                        <h3 style="color: var(--color-primary-700);">Domain 1: Data Gathering & Interpretation</h3>
                         <ul>
                             <li>History taking</li>
                             <li>Physical examination (where appropriate)</li>
@@ -96,7 +125,7 @@
                     </div>
                     
                     <div style="padding: 1.5rem; background: #f0fdf4; border-left: 4px solid #10b981; border-radius: 4px;">
-                        <h3>Domain 2: Clinical Management (Weighted 1.5x)</h3>
+                        <h3 style="color: var(--color-success-700);">Domain 2: Clinical Management (Weighted 1.5x)</h3>
                         <ul>
                             <li>Diagnosis and differentials</li>
                             <li>Management plan</li>
@@ -108,7 +137,7 @@
                     </div>
                     
                     <div style="padding: 1.5rem; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
-                        <h3>Domain 3: Interpersonal Skills</h3>
+                        <h3 style="color: #b45309;">Domain 3: Interpersonal Skills</h3>
                         <ul>
                             <li>Communication</li>
                             <li>Empathy</li>
@@ -120,24 +149,33 @@
             </div>
 
             <!-- Grading System -->
-            <div class="content-card" style="margin-bottom: 2rem;">
-                <h2>Grading System</h2>
-                <p>Each case is graded on a scale. Your overall performance determines your result:</p>
+            <div class="content-card" style="margin-bottom: 2rem; background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border: 2px solid var(--color-primary-200);">
+                <h2 style="color: var(--color-primary-700);">Grading System</h2>
+                <p style="font-size: 1.125rem; margin-bottom: var(--space-lg);">Each domain is scored 0-4 points. Domain 2 (Clinical Management) is weighted 1.5x. Total possible: 10.5 points.</p>
                 
-                <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
-                    <div style="padding: 1rem; background: #dcfce7; border-left: 4px solid #16a34a; border-radius: 4px;">
-                        <strong>Clear Pass:</strong> Score >9 - Excellent performance across all domains
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg); margin-top: var(--space-xl);">
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-left: 6px solid #16a34a; border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #16a34a; margin-bottom: var(--space-sm);">4</div>
+                        <strong style="font-size: 1.125rem; color: #15803d;">Clear Pass</strong>
+                        <p style="margin-top: var(--space-sm); color: var(--color-gray-700);">Score >9/10.5 - Excellent performance across all domains</p>
                     </div>
-                    <div style="padding: 1rem; background: #dbeafe; border-left: 4px solid #2563eb; border-radius: 4px;">
-                        <strong>Pass:</strong> Score >6 - Good performance, meets standard
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-50) 100%); border-left: 6px solid var(--color-primary-600); border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary-700); margin-bottom: var(--space-sm);">3</div>
+                        <strong style="font-size: 1.125rem; color: var(--color-primary-800);">Pass</strong>
+                        <p style="margin-top: var(--space-sm); color: var(--color-gray-700);">Score 6-9/10.5 - Good performance, meets standard</p>
                     </div>
-                    <div style="padding: 1rem; background: #fef3c7; border-left: 4px solid #d97706; border-radius: 4px;">
-                        <strong>Minor Fail:</strong> Score 3-6 - Below standard but close
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 6px solid #d97706; border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #d97706; margin-bottom: var(--space-sm);">2</div>
+                        <strong style="font-size: 1.125rem; color: #b45309;">Fail</strong>
+                        <p style="margin-top: var(--space-sm); color: var(--color-gray-700);">Score 3-6/10.5 - Below standard, needs improvement</p>
                     </div>
-                    <div style="padding: 1rem; background: #fee2e2; border-left: 4px solid #dc2626; border-radius: 4px;">
-                        <strong>Clear Fail:</strong> Score <3 - Significant concerns
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-left: 6px solid #dc2626; border-radius: var(--radius-xl); box-shadow: var(--shadow-md);">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #dc2626; margin-bottom: var(--space-sm);">1</div>
+                        <strong style="font-size: 1.125rem; color: #b91c1c;">Clear Fail</strong>
+                        <p style="margin-top: var(--space-sm); color: var(--color-gray-700);">Score <3/10.5 - Significant concerns, requires focused practice</p>
                     </div>
                 </div>
+                
             </div>
 
             <!-- Preparation Strategy -->
@@ -209,7 +247,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="logo">
-                        <span class="logo-icon">📞</span>
+                        <span class="logo-icon"></span>
                         <span class="logo-text">OnCallPrep</span>
                     </a>
                     <p>Making GP training simpler, one trainee at a time.</p>

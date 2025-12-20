@@ -2,55 +2,41 @@
    OnCallPrep - Authentication Utilities
    ============================================ */
 
-// Get Supabase client - use a function to ensure it's available
-function getSupabaseClient() {
-    if (!window.supabaseClient) {
-        console.error('Supabase client not initialized. Make sure supabase-config.js is loaded first.');
-        return null;
-    }
-    return window.supabaseClient;
-}
+let supabaseClient = null;
 
-// Check if user is authenticated
-async function checkAuth() {
-    try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            return null;
-        }
-        const { data: { session }, error } = await supabase.auth.getSession();
-        if (error) throw error;
-        return session;
-    } catch (error) {
-        console.error('Error checking auth:', error);
-        return null;
+// Initialize Supabase client
+function initSupabase() {
+    if (typeof supabase === 'undefined') {
+        console.error('Supabase library not loaded');
+        return false;
     }
-}
-
-// Get current user
-async function getCurrentUser() {
+    
+    if (!SUPABASE_CONFIG || !SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
+        console.error('Supabase configuration not found. Please check scripts/config.js');
+        return false;
+    }
+    
     try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            return null;
-        }
-        const { data: { user }, error } = await supabase.auth.getUser();
-        if (error) throw error;
-        return user;
+        supabaseClient = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+        window.supabaseClient = supabaseClient;
+        console.log('Supabase client initialized');
+        return true;
     } catch (error) {
-        console.error('Error getting user:', error);
-        return null;
+        console.error('Error initializing Supabase:', error);
+        return false;
     }
 }
 
 // Sign up new user
 async function signUp(email, password, fullName) {
     try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            return { data: null, error: new Error('Supabase client not initialized') };
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
         }
-        const { data, error } = await supabase.auth.signUp({
+        
+        const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
             options: {
@@ -61,183 +47,167 @@ async function signUp(email, password, fullName) {
         });
         
         if (error) throw error;
-        
-        // Create user profile in database
-        if (data.user) {
-            const { error: profileError } = await supabase
-                .from('profiles')
-                .insert([
-                    {
-                        id: data.user.id,
-                        email: email,
-                        full_name: fullName,
-                        subscription_tier: 'free', // Default to free tier
-                        created_at: new Date().toISOString()
-                    }
-                ]);
-            
-            if (profileError && profileError.code !== '23505') { // Ignore duplicate key errors
-                console.error('Error creating profile:', profileError);
-            }
-        }
-        
-        return { data, error: null };
+        return { success: true, data };
     } catch (error) {
         console.error('Sign up error:', error);
-        return { data: null, error };
+        return { success: false, error: error.message };
     }
 }
 
-// Sign in existing user
-async function signIn(email, password) {
+// Log in existing user
+async function logIn(email, password) {
     try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            return { data: null, error: new Error('Supabase client not initialized') };
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
         }
-        const { data, error } = await supabase.auth.signInWithPassword({
+        
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
         
         if (error) throw error;
-        
-        // Redirect to dashboard/home after successful login
-        if (data.user) {
-            window.location.href = 'index.html';
-        }
-        
-        return { data, error: null };
+        return { success: true, data };
     } catch (error) {
-        console.error('Sign in error:', error);
-        return { data: null, error };
+        console.error('Login error:', error);
+        return { success: false, error: error.message };
     }
 }
 
-// Sign out user
-async function signOut() {
+// Log out user
+async function logOut() {
     try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            console.error('Supabase client not initialized');
-            return;
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
         }
-        const { error } = await supabase.auth.signOut();
+        
+        const { error } = await supabaseClient.auth.signOut();
         if (error) throw error;
         
-        // Redirect to home page
-        window.location.href = 'index.html';
+        // Clear localStorage
+        if (window.localStorage) {
+            localStorage.removeItem('oncallprep_plan');
+        }
+        
+        return { success: true };
     } catch (error) {
-        console.error('Sign out error:', error);
+        console.error('Logout error:', error);
+        return { success: false, error: error.message };
     }
 }
 
-// Check user subscription tier
-async function getUserSubscription() {
+// Get current user profile (including plan)
+async function getCurrentUserProfile() {
     try {
-        const supabase = getSupabaseClient();
-        if (!supabase) {
-            return { tier: 'free', isPro: false, isPremium: false };
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
         }
-        const user = await getCurrentUser();
-        if (!user) return { tier: 'free', isPro: false, isPremium: false };
         
-        const { data, error } = await supabase
-            .from('profiles')
-            .select('subscription_tier, subscription_status, subscription_expires_at')
+        const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+        if (authError || !user) {
+            return { success: false, error: 'Not authenticated' };
+        }
+        
+        const { data: profile, error: profileError } = await supabaseClient
+            .from('user_profiles')
+            .select('*')
             .eq('id', user.id)
             .single();
         
-        if (error) throw error;
+        if (profileError) {
+            // Profile might not exist yet, return default
+            return { success: true, profile: { plan: 'free', role: 'user' } };
+        }
         
-        const tier = data?.subscription_tier || 'free';
-        const isActive = data?.subscription_status === 'active' || 
-                        (data?.subscription_expires_at && new Date(data.subscription_expires_at) > new Date());
-        
-        return {
-            tier: tier,
-            isPro: (tier === 'pro' || tier === 'premium') && isActive,
-            isPremium: tier === 'premium' && isActive,
-            status: data?.subscription_status || 'inactive',
-            expiresAt: data?.subscription_expires_at
-        };
+        return { success: true, profile };
     } catch (error) {
-        console.error('Error getting subscription:', error);
-        return { tier: 'free', isPro: false, isPremium: false };
+        console.error('Error getting user profile:', error);
+        return { success: false, error: error.message };
     }
 }
 
-// Check if user has access to a feature
-async function hasFeatureAccess(featureName) {
-    const subscription = await getUserSubscription();
-    
-    // Define feature access rules
-    const featureAccess = {
-        'free': ['portfolio_basic', 'sca_overview', 'akt_demo'],
-        'pro': ['portfolio_basic', 'sca_overview', 'akt_demo', 'portfolio_ai', 'sca_practice', 'akt_full', 'clinical_topics'],
-        'premium': ['portfolio_basic', 'sca_overview', 'akt_demo', 'portfolio_ai', 'sca_practice', 'akt_full', 'clinical_topics', 'ai_consultation', 'progress_tracking']
-    };
-    
-    const allowedFeatures = featureAccess[subscription.tier] || featureAccess['free'];
-    return allowedFeatures.includes(featureName) && subscription.isPro;
+// Check if current user is admin
+async function isAdmin() {
+    try {
+        const profileResult = await getCurrentUserProfile();
+        if (!profileResult.success || !profileResult.profile) {
+            return false;
+        }
+        return profileResult.profile.role === 'admin';
+    } catch (error) {
+        console.error('Error checking admin status:', error);
+        return false;
+    }
 }
 
-// Update navigation based on auth state
-async function updateNavigation() {
-    const session = await checkAuth();
-    const navAuth = document.querySelector('.nav-auth');
-    
-    if (!navAuth) return;
-    
-    if (session) {
-        const user = await getCurrentUser();
-        const subscription = await getUserSubscription();
+// Get all users (admin only)
+async function getAllUsers() {
+    try {
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
+        }
         
-        navAuth.innerHTML = `
-            <div class="user-menu">
-                <span class="user-name">${user?.user_metadata?.full_name || user?.email || 'User'}</span>
-                ${subscription.isPro ? '<span class="badge badge-pro">Pro</span>' : ''}
-                <button class="btn btn-ghost" onclick="signOut()">Log out</button>
-            </div>
-        `;
-    } else {
-        navAuth.innerHTML = `
-            <a href="login.html" class="btn btn-ghost">Log in</a>
-            <a href="signup.html" class="btn btn-primary">Start Free Trial</a>
-        `;
+        const { data, error } = await supabaseClient
+            .from('user_profiles')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        return { success: true, users: data };
+    } catch (error) {
+        console.error('Error getting users:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// Update user plan (admin only)
+async function updateUserPlan(userId, newPlan) {
+    try {
+        if (!supabaseClient) {
+            if (!initSupabase()) {
+                return { success: false, error: 'Supabase not initialized' };
+            }
+        }
+        
+        const { data, error } = await supabaseClient
+            .from('user_profiles')
+            .update({ plan: newPlan })
+            .eq('id', userId)
+            .select()
+            .single();
+        
+        if (error) throw error;
+        return { success: true, profile: data };
+    } catch (error) {
+        console.error('Error updating user plan:', error);
+        return { success: false, error: error.message };
     }
 }
 
 // Listen for auth state changes
-function setupAuthListener() {
-    const supabase = getSupabaseClient();
-    if (supabase) {
-        supabase.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
-                updateNavigation();
-            }
-        });
-    }
-}
-
-// Setup listener when Supabase is ready
-if (window.supabaseClient) {
-    setupAuthListener();
-} else {
-    // Wait for Supabase to initialize
-    const checkSupabase = setInterval(() => {
-        if (window.supabaseClient) {
-            setupAuthListener();
-            clearInterval(checkSupabase);
+function onAuthStateChange(callback) {
+    if (!supabaseClient) {
+        if (!initSupabase()) {
+            return;
         }
-    }, 100);
+    }
     
-    // Stop checking after 5 seconds
-    setTimeout(() => clearInterval(checkSupabase), 5000);
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+        if (callback) callback(event, session);
+    });
 }
 
-// Initialize navigation on page load
-document.addEventListener('DOMContentLoaded', () => {
-    updateNavigation();
-});
-
+// Initialize on load
+if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+        initSupabase();
+    });
+}
