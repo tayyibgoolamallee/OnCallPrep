@@ -8,14 +8,12 @@ const supabase = window.supabaseClient;
 // Get user's subscription status
 async function getUserSubscription() {
     try {
-        if (!supabaseClient) {
-            const supabase = window.supabaseClient;
-            if (!supabase) {
-                return { isPro: false, plan: 'free' };
-            }
+        // Get Supabase client from window (set by auth.js)
+        const supabase = window.supabaseClient;
+        if (!supabase) {
+            console.warn('Supabase client not found');
+            return { isPro: false, plan: 'free' };
         }
-        
-        const supabase = window.supabaseClient || supabaseClient;
         const { data: { user }, error: authError } = await supabase.auth.getUser();
         
         if (authError || !user) {
