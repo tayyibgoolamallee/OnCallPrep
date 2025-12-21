@@ -60,43 +60,50 @@
             <!-- Free Topics -->
             <div class="content-section">
                 <h2>Free Sample Topics</h2>
-                <div class="resources-grid">
-                    <div class="resource-card">
+                <p style="font-size: 1.125rem; color: var(--color-gray-700); margin-bottom: var(--space-xl);">Click on any topic below to view detailed information. These are free samples to help you understand our approach—clear, practical, and easy to understand.</p>
+                
+                <div class="resources-grid" style="margin-bottom: var(--space-2xl);">
+                    <div class="resource-card" onclick="toggleTopic('asthma')" style="cursor: pointer;">
                         <div class="resource-icon">🫁</div>
                         <h3>Asthma</h3>
                         <p>Diagnosis, management, and monitoring</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="toggleTopic('copd')" style="cursor: pointer;">
                         <div class="resource-icon">💨</div>
                         <h3>COPD</h3>
                         <p>Assessment and management</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="toggleTopic('hypertension')" style="cursor: pointer;">
                         <div class="resource-icon">🩺</div>
                         <h3>Hypertension</h3>
                         <p>Diagnosis and treatment</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="toggleTopic('heart-failure')" style="cursor: pointer;">
                         <div class="resource-icon">❤️</div>
                         <h3>Heart Failure</h3>
                         <p>Assessment and management</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="toggleTopic('ibs')" style="cursor: pointer;">
                         <div class="resource-icon">🫀</div>
                         <h3>IBS</h3>
                         <p>Irritable bowel syndrome</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="toggleTopic('eczema')" style="cursor: pointer;">
                         <div class="resource-icon">🧴</div>
                         <h3>Eczema</h3>
                         <p>Atopic dermatitis management</p>
                         <span class="resource-tag tag-free">Free</span>
                     </div>
+                </div>
+
+                <!-- Topic Content Areas -->
+                <div id="topic-content" style="display: none; margin-top: var(--space-2xl);">
+                    <!-- Content will be inserted here by JavaScript -->
                 </div>
             </div>
 

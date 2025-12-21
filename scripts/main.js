@@ -8,7 +8,27 @@ const VALID_PLANS = ['free', 'pro', 'trainer'];
 
 // Get current user's plan
 async function getCurrentPlan() {
-    // Try to get from Supabase first (if user is logged in)
+    // Try to get from subscription check first (most reliable)
+    if (typeof getUserSubscription === 'function') {
+        try {
+            const subscription = await getUserSubscription();
+            if (subscription && subscription.plan) {
+                const plan = subscription.plan;
+                if (VALID_PLANS.includes(plan)) {
+                    // Cache in localStorage for faster access
+                    if (window.localStorage) {
+                        localStorage.setItem(PLAN_STORAGE_KEY, plan);
+                    }
+                    console.log('Plan retrieved from subscription:', plan);
+                    return plan;
+                }
+            }
+        } catch (error) {
+            console.error('Error getting subscription, trying profile:', error);
+        }
+    }
+    
+    // Try to get from Supabase profile (if user is logged in)
     if (typeof getCurrentUserProfile === 'function') {
         try {
             const profileResult = await getCurrentUserProfile();
@@ -19,23 +39,23 @@ async function getCurrentPlan() {
                     if (window.localStorage) {
                         localStorage.setItem(PLAN_STORAGE_KEY, plan);
                     }
-                    console.log('Plan retrieved from Supabase:', plan); // Debugging
+                    console.log('Plan retrieved from Supabase:', plan);
                     return plan;
                 }
             }
         } catch (error) {
-            console.error('Error getting profile from Supabase, falling back to localStorage:', error); // Debugging
+            console.error('Error getting profile from Supabase, falling back to localStorage:', error);
         }
     }
     
     // Fallback to localStorage (for development or when not logged in)
     const stored = window.localStorage ? localStorage.getItem(PLAN_STORAGE_KEY) : null;
     if (stored && VALID_PLANS.includes(stored)) {
-        console.log('Plan retrieved from localStorage:', stored); // Debugging
+        console.log('Plan retrieved from localStorage:', stored);
         return stored;
     }
     
-    console.log('Defaulting plan to free.'); // Debugging
+    console.log('Defaulting plan to free.');
     return 'free';
 }
 
