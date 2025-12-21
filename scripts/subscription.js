@@ -2,9 +2,6 @@
    OnCallPrep - Subscription & Feature Access Utilities
    ============================================ */
 
-// Get Supabase client
-const supabase = window.supabaseClient;
-
 // Get user's subscription status
 async function getUserSubscription() {
     try {
@@ -150,7 +147,18 @@ async function lockProContent() {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    lockProContent();
-});
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        lockProContent();
+    });
+}
+
+// Make functions available globally (after they're defined)
+if (typeof window !== 'undefined') {
+    window.getUserSubscription = getUserSubscription;
+    window.checkProAccess = checkProAccess;
+    window.hasFeatureAccess = hasFeatureAccess;
+    window.gateFeature = gateFeature;
+    window.lockProContent = lockProContent;
+}
 
