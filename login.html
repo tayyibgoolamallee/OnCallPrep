@@ -231,17 +231,37 @@
             submitButton.textContent = 'Logging in...';
             
             try {
+                // Ensure Supabase is initialized
+                if (typeof initSupabase === 'function' && !window.supabaseClient) {
+                    initSupabase();
+                }
+                
+                // Wait a moment for initialization
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Check if logIn function is available
+                if (typeof logIn !== 'function') {
+                    throw new Error('Login function not available. Please refresh the page.');
+                }
+                
                 const result = await logIn(email, password);
                 
-                if (!result.success) {
-                    throw new Error(result.error || 'Login failed');
+                if (!result || !result.success) {
+                    throw new Error(result?.error || 'Login failed');
                 }
                 
                 // Get user profile to set plan
-                const profileResult = await getCurrentUserProfile();
-                if (profileResult.success && profileResult.profile) {
-                    if (window.localStorage) {
-                        localStorage.setItem('oncallprep_plan', profileResult.profile.plan || 'free');
+                if (typeof getCurrentUserProfile === 'function') {
+                    try {
+                        const profileResult = await getCurrentUserProfile();
+                        if (profileResult && profileResult.success && profileResult.profile) {
+                            if (window.localStorage) {
+                                localStorage.setItem('oncallprep_plan', profileResult.profile.plan || 'free');
+                            }
+                        }
+                    } catch (profileError) {
+                        console.warn('Could not get profile:', profileError);
+                        // Continue anyway - login was successful
                     }
                 }
                 
