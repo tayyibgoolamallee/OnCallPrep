@@ -205,9 +205,25 @@ function onAuthStateChange(callback) {
     });
 }
 
-// Initialize on load
+// Initialize on load if Supabase is available
 if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        initSupabase();
-    });
+    // Wait for both supabase library and config to be loaded
+    function tryInit() {
+        if (typeof supabase !== 'undefined' && typeof SUPABASE_CONFIG !== 'undefined') {
+            const result = initSupabase();
+            if (result) {
+                console.log('Supabase initialized successfully');
+            }
+        } else {
+            // Retry after a short delay if not ready
+            setTimeout(tryInit, 50);
+        }
+    }
+    
+    // Try immediately, then on DOM ready, then on window load
+    tryInit();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryInit);
+    }
+    window.addEventListener('load', tryInit);
 }
