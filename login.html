@@ -194,7 +194,21 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/main.js"></script>
     <script>
-        // Wait for everything to load before setting up form handler
+        // Initialize Supabase immediately when page loads
+        let supabaseReady = false;
+        
+        // Wait for all scripts to load
+        window.addEventListener('load', function() {
+            // Initialize Supabase
+            if (typeof initSupabase === 'function') {
+                supabaseReady = initSupabase();
+                console.log('Supabase initialized:', supabaseReady);
+            } else {
+                console.error('initSupabase function not found');
+            }
+        });
+        
+        // Wait for DOM and scripts to be ready
         document.addEventListener('DOMContentLoaded', function() {
             // Handle login form submission
             const loginForm = document.getElementById('loginForm');
@@ -203,100 +217,116 @@
                 return;
             }
             
-            loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const form = e.target;
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Hide previous messages
-            errorMessage.classList.remove('show');
-            successMessage.classList.remove('show');
-            
-            // Get form values
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            
-            // Validate
-            if (!email || !password) {
-                errorMessage.textContent = 'Please fill in all fields.';
-                errorMessage.classList.add('show');
-                return;
-            }
-            
-            // Show loading state
-            form.classList.add('loading');
-            submitButton.textContent = 'Logging in...';
-            
-            try {
-                // Ensure Supabase is initialized
-                if (typeof initSupabase === 'function' && !window.supabaseClient) {
-                    initSupabase();
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const form = e.target;
+                const errorMessage = document.getElementById('errorMessage');
+                const successMessage = document.getElementById('successMessage');
+                const submitButton = form.querySelector('button[type="submit"]');
+                
+                // Hide previous messages
+                errorMessage.classList.remove('show');
+                successMessage.classList.remove('show');
+                errorMessage.textContent = '';
+                
+                // Get form values
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                // Validate
+                if (!email || !password) {
+                    errorMessage.textContent = 'Please fill in all fields.';
+                    errorMessage.classList.add('show');
+                    return;
                 }
                 
-                // Wait a moment for initialization
-                await new Promise(resolve => setTimeout(resolve, 100));
+                // Show loading state
+                form.classList.add('loading');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Logging in...';
                 
-                // Check if logIn function is available
-                if (typeof logIn !== 'function') {
-                    throw new Error('Login function not available. Please refresh the page.');
-                }
-                
-                const result = await logIn(email, password);
-                
-                if (!result || !result.success) {
-                    throw new Error(result?.error || 'Login failed');
-                }
-                
-                // Get user profile to set plan
-                if (typeof getCurrentUserProfile === 'function') {
-                    try {
-                        const profileResult = await getCurrentUserProfile();
-                        if (profileResult && profileResult.success && profileResult.profile) {
-                            if (window.localStorage) {
-                                localStorage.setItem('oncallprep_plan', profileResult.profile.plan || 'free');
+                try {
+                    // Ensure Supabase is initialized
+                    if (!window.supabaseClient) {
+                        if (typeof initSupabase === 'function') {
+                            const initialized = initSupabase();
+                            if (!initialized) {
+                                throw new Error('Failed to initialize Supabase. Please refresh the page.');
                             }
+                        } else {
+                            throw new Error('Supabase not available. Please refresh the page.');
                         }
-                    } catch (profileError) {
-                        console.warn('Could not get profile:', profileError);
-                        // Continue anyway - login was successful
                     }
+                    
+                    // Check if logIn function is available
+                    if (typeof logIn !== 'function') {
+                        throw new Error('Login function not available. Please refresh the page.');
+                    }
+                    
+                    console.log('Attempting login for:', email);
+                    const result = await logIn(email, password);
+                    console.log('Login result:', result);
+                    
+                    if (!result) {
+                        throw new Error('No response from login. Please try again.');
+                    }
+                    
+                    if (!result.success) {
+                        throw new Error(result.error || 'Login failed');
+                    }
+                    
+                    // Get user profile to set plan (non-blocking)
+                    if (typeof getCurrentUserProfile === 'function') {
+                        getCurrentUserProfile().then(profileResult => {
+                            if (profileResult && profileResult.success && profileResult.profile) {
+                                if (window.localStorage) {
+                                    localStorage.setItem('oncallprep_plan', profileResult.profile.plan || 'free');
+                                }
+                            }
+                        }).catch(err => {
+                            console.warn('Could not get profile:', err);
+                        });
+                    }
+                    
+                    // Success - redirect after small delay
+                    successMessage.textContent = 'Login successful! Redirecting...';
+                    successMessage.classList.add('show');
+                    
+                    setTimeout(function() {
+                        window.location.href = 'index.html';
+                    }, 500);
+                    
+                } catch (error) {
+                    console.error('Login error:', error);
+                    
+                    // Show user-friendly error message
+                    let errorText = 'An error occurred. Please try again.';
+                    const errorMsg = error.message || error.toString();
+                    
+                    if (errorMsg.includes('Invalid login credentials') || 
+                        errorMsg.includes('Invalid login') ||
+                        errorMsg.includes('Email not found') ||
+                        errorMsg.includes('Wrong password')) {
+                        errorText = 'Invalid email or password. Please check your credentials and try again.';
+                    } else if (errorMsg.includes('Email not confirmed')) {
+                        errorText = 'Please check your email and confirm your account before logging in.';
+                    } else if (errorMsg.includes('Failed to initialize') || errorMsg.includes('not available')) {
+                        errorText = 'System error. Please refresh the page and try again.';
+                    } else {
+                        errorText = errorMsg || errorText;
+                    }
+                    
+                    errorMessage.textContent = errorText;
+                    errorMessage.classList.add('show');
+                    
+                    form.classList.remove('loading');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Log In';
                 }
-                
-                // Success - redirect after small delay to ensure session is established
-                successMessage.textContent = 'Login successful! Redirecting...';
-                successMessage.classList.add('show');
-                
-                await new Promise(resolve => setTimeout(resolve, 500));
-                window.location.href = 'index.html';
-                
-            } catch (error) {
-                console.error('Login error:', error);
-                
-                // Show user-friendly error message
-                let errorText = 'An error occurred. Please try again.';
-                const errorMsg = error.message || error.toString();
-                if (errorMsg.includes('Invalid login credentials') || errorMsg.includes('Invalid login')) {
-                    errorText = 'Invalid email or password. Please check your credentials and try again.';
-                } else if (errorMsg.includes('Email not confirmed')) {
-                    errorText = 'Please check your email and confirm your account before logging in.';
-                } else {
-                    errorText = errorMsg || errorText;
-                }
-                
-                errorMessage.textContent = errorText;
-                errorMessage.classList.add('show');
-                
-                form.classList.remove('loading');
-                submitButton.textContent = 'Log In';
-            }
             });
         });
-        
-        // Make logIn available globally for debugging
-        window.logIn = logIn;
     </script>
 </body>
 </html>
