@@ -710,6 +710,11 @@ function startDiagnosisTimer() {
             if (timerProgress) {
                 timerProgress.style.width = '0%';
             }
+            // Automatically show the answer when time is up
+            showDiagnosisAnswer();
+            if (diagnosisAnswer) {
+                diagnosisAnswer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
     }, 1000);
 }
@@ -928,6 +933,11 @@ function startPrimingTimer() {
             if (showApproachBtn) showApproachBtn.disabled = false;
             if (primingTimerProgress) {
                 primingTimerProgress.style.width = '0%';
+            }
+            // Automatically show the answer when time is up
+            if (primingApproach && currentCase) {
+                primingApproach.style.display = 'block';
+                primingApproach.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
     }, 1000);

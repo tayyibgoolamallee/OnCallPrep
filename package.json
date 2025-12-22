@@ -1,0 +1,17 @@
+{
+  "name": "oncallprep",
+  "version": "1.0.0",
+  "description": "OnCallPrep - GP Training Resources",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.x"
+  }
+}
+
