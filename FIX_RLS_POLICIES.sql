@@ -69,3 +69,4 @@ ORDER BY policyname;
 -- with the privileges of the function creator (usually postgres), bypassing RLS
 -- This prevents the infinite recursion issue
 
+

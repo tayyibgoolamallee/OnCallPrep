@@ -8,10 +8,22 @@ const VALID_PLANS = ['free', 'pro', 'trainer'];
 
 // Get current user's plan
 async function getCurrentPlan() {
+    console.log('getCurrentPlan: Starting...');
+    
+    // Ensure Supabase is initialized
+    if (typeof window.supabaseClient === 'undefined' && typeof initSupabase === 'function') {
+        console.log('getCurrentPlan: Initializing Supabase...');
+        initSupabase();
+        // Wait a bit for initialization
+        await new Promise(resolve => setTimeout(resolve, 200));
+    }
+    
     // Try to get from subscription check first (most reliable)
     if (typeof getUserSubscription === 'function') {
         try {
+            console.log('getCurrentPlan: Trying getUserSubscription...');
             const subscription = await getUserSubscription();
+            console.log('getCurrentPlan: Subscription result:', subscription);
             if (subscription && subscription.plan) {
                 const plan = subscription.plan;
                 if (VALID_PLANS.includes(plan)) {
@@ -19,19 +31,23 @@ async function getCurrentPlan() {
                     if (window.localStorage) {
                         localStorage.setItem(PLAN_STORAGE_KEY, plan);
                     }
-                    console.log('Plan retrieved from subscription:', plan);
+                    console.log('getCurrentPlan: Plan retrieved from subscription:', plan);
                     return plan;
                 }
             }
         } catch (error) {
-            console.error('Error getting subscription, trying profile:', error);
+            console.error('getCurrentPlan: Error getting subscription, trying profile:', error);
         }
+    } else {
+        console.warn('getCurrentPlan: getUserSubscription function not available');
     }
     
     // Try to get from Supabase profile (if user is logged in)
     if (typeof getCurrentUserProfile === 'function') {
         try {
+            console.log('getCurrentPlan: Trying getCurrentUserProfile...');
             const profileResult = await getCurrentUserProfile();
+            console.log('getCurrentPlan: Profile result:', profileResult);
             if (profileResult.success && profileResult.profile?.plan) {
                 const plan = profileResult.profile.plan;
                 if (VALID_PLANS.includes(plan)) {
@@ -39,23 +55,25 @@ async function getCurrentPlan() {
                     if (window.localStorage) {
                         localStorage.setItem(PLAN_STORAGE_KEY, plan);
                     }
-                    console.log('Plan retrieved from Supabase:', plan);
+                    console.log('getCurrentPlan: Plan retrieved from Supabase:', plan);
                     return plan;
                 }
             }
         } catch (error) {
-            console.error('Error getting profile from Supabase, falling back to localStorage:', error);
+            console.error('getCurrentPlan: Error getting profile from Supabase, falling back to localStorage:', error);
         }
+    } else {
+        console.warn('getCurrentPlan: getCurrentUserProfile function not available');
     }
     
     // Fallback to localStorage (for development or when not logged in)
     const stored = window.localStorage ? localStorage.getItem(PLAN_STORAGE_KEY) : null;
     if (stored && VALID_PLANS.includes(stored)) {
-        console.log('Plan retrieved from localStorage:', stored);
+        console.log('getCurrentPlan: Plan retrieved from localStorage:', stored);
         return stored;
     }
     
-    console.log('Defaulting plan to free.');
+    console.log('getCurrentPlan: Defaulting plan to free.');
     return 'free';
 }
 

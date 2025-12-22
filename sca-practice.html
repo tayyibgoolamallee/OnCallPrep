@@ -7,6 +7,7 @@
     <meta name="description" content="Interactive SCA practice tools - mock cases, diagnosis practice, priming exercises, and self-assessment.">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="styles/content.css">
     <link rel="stylesheet" href="styles/practice.css">
     <link rel="stylesheet" href="styles/sca.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +62,7 @@
                 <button onclick="showSection('mock-cases')" class="btn btn-primary" style="padding: 1.5rem;">Mock Cases</button>
                 <button onclick="showSection('diagnosis')" class="btn btn-outline" style="padding: 1.5rem;">2-Min Diagnosis</button>
                 <button onclick="showSection('priming')" class="btn btn-outline" style="padding: 1.5rem;">3-Min Priming</button>
-                <button onclick="showSection('assessment')" class="btn btn-outline" style="padding: 1.5rem;">Self-Assessment</button>
+                <button onclick="showSection('clinical-topics')" class="btn btn-outline" style="padding: 1.5rem;">Clinical Topics</button>
             </div>
 
             <!-- Mock Cases Section -->
@@ -117,28 +118,48 @@
             <div id="diagnosis" class="practice-section" style="display: none;">
                 <div class="content-card">
                     <h2>2-Minute Diagnosis Practice</h2>
-                    <p>Practice explaining a diagnosis clearly and concisely in 2 minutes - a key skill for the SCA.</p>
+                    <p>Practice explaining a diagnosis clearly and concisely in 2 minutes – a key SCA skill.</p>
+
+                    <div style="margin-top: 1.25rem; padding: 1rem 1.25rem; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <h4 style="margin-top:0;margin-bottom:0.5rem;">How to use this</h4>
+                        <ul style="margin:0; padding-left:1.2rem; color:#4b5563; line-height:1.6;">
+                            <li>Click <strong>New Diagnosis</strong>, take 5–10 seconds to plan your structure.</li>
+                            <li>Start the timer and explain out loud for 2 minutes.</li>
+                            <li>Click <strong>View Answer</strong> to compare with a model structure.</li>
+                        </ul>
+                    </div>
                     
                     <div id="diagnosis-practice" style="margin-top: 2rem;">
-                        <div style="padding: 2rem; background: #f0f9ff; border-radius: 8px; text-align: center;">
-                            <h3 id="diagnosis-display" style="font-size: 1.5rem; margin-bottom: 1rem;">Click to generate a diagnosis</h3>
-                            <button class="btn btn-primary" onclick="generateDiagnosis()">Generate Random Diagnosis</button>
-                            <div style="margin-top: 2rem;">
-                                <button class="btn btn-outline" onclick="startDiagnosisTimer()">Start 2-Minute Timer</button>
-                                <div id="diagnosis-timer" style="font-size: 2rem; margin-top: 1rem; font-weight: bold;"></div>
+                        <div class="generator-card">
+                            <div class="generator-display">
+                                <div class="diagnosis-card">
+                                    <span class="diagnosis-label">Your diagnosis</span>
+                                    <div id="diagnosis-name" class="diagnosis-name">
+                                        Click “New Diagnosis” to begin
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <div class="timer-section">
+                                <div id="timer-display" class="timer-display" style="font-feature-settings:'tnum';font-variant-numeric:tabular-nums;font-weight:700;">2:00</div>
+                                <div class="timer-bar">
+                                    <div id="timer-progress" class="timer-progress"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="timer-controls" style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-top:1.5rem;">
+                                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;flex:1 1 100%;">
+                                    <button id="new-diagnosis-btn" class="btn btn-primary">New Diagnosis</button>
+                                    <button id="view-answer-btn" class="btn btn-outline">View Answer</button>
+                                </div>
+                                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;flex:1 1 100%;">
+                                    <button id="start-timer-btn" class="btn btn-outline" disabled>Start 2‑Minute Timer</button>
+                                    <button id="reset-timer-btn" class="btn btn-ghost" style="background:#f3f4f6;border:1px solid #e5e7eb;color:#374151;">Reset</button>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div style="margin-top: 2rem; padding: 1.5rem; background: #f0fdf4; border-radius: 8px;">
-                            <h4>Practice Tips:</h4>
-                            <ul>
-                                <li>Start with the diagnosis clearly</li>
-                                <li>Explain key features that support it</li>
-                                <li>Briefly mention differentials</li>
-                                <li>Outline management plan</li>
-                                <li>Include safety netting</li>
-                            </ul>
-                        </div>
+
+                        <div id="diagnosis-answer" style="max-width:900px;margin-left:auto;margin-right:auto;"></div>
                     </div>
                 </div>
             </div>
@@ -147,34 +168,111 @@
             <div id="priming" class="practice-section" style="display: none;">
                 <div class="content-card">
                     <h2>3-Minute Priming Exercises</h2>
-                    <p>Practice the priming phase - the first 3 minutes where you read notes and prepare for the consultation.</p>
+                    <p>Use 3 minutes to read the case notes, plan your structure, and get into the examiner's mindset.</p>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: #f0fdf4; border-radius: 12px; border: 1px solid #bbf7d0;">
+                        <h4>How to use this:</h4>
+                        <ul>
+                            <li>Click <strong>New Priming Case</strong> to generate a patient scenario with case notes.</li>
+                            <li>Start the 3-minute timer and use this time to read the notes, identify key issues, plan your consultation structure, and think about what the examiner might be looking for.</li>
+                            <li>After the timer ends (or anytime), click <strong>View Model Answer</strong> to see the priming focus and examiner's lens - this shows what you should have considered and what the examiner wants to see.</li>
+                        </ul>
+                    </div>
                     
                     <div id="priming-practice" style="margin-top: 2rem;">
-                        <button class="btn btn-primary" onclick="generatePrimingCase()">Generate Priming Case</button>
-                        <div id="priming-case" style="margin-top: 2rem; padding: 2rem; background: #f9fafb; border-radius: 8px; display: none;">
-                            <h3>Case Notes</h3>
-                            <div id="priming-content"></div>
-                            <button class="btn btn-outline" onclick="startPrimingTimer()" style="margin-top: 1rem;">Start 3-Minute Timer</button>
-                            <div id="priming-timer" style="font-size: 2rem; margin-top: 1rem; font-weight: bold;"></div>
+                        <div class="generator-card">
+                            <div class="generator-display">
+                                <div id="priming-info"></div>
+                            </div>
+
+                            <div class="timer-section" style="margin-top:1.5rem;">
+                                <div id="priming-timer-display" class="timer-display" style="font-feature-settings:'tnum';font-variant-numeric:tabular-nums;font-weight:700;">3:00</div>
+                                <div class="timer-bar">
+                                    <div id="priming-timer-progress" class="timer-progress"></div>
+                                </div>
+                            </div>
+
+                            <div class="timer-controls" style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-top:1.5rem;">
+                                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;flex:1 1 100%;">
+                                    <button id="generate-case-btn" class="btn btn-primary">New Priming Case</button>
+                                    <button id="show-approach-btn" class="btn btn-outline" disabled>View Model Answer</button>
+                                </div>
+                                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;flex:1 1 100%;">
+                                    <button id="start-priming-btn" class="btn btn-outline" disabled>Start 3‑Minute Timer</button>
+                                    <button class="btn btn-ghost" type="button" onclick="resetPrimingTimer()" style="background:#f3f4f6;border:1px solid #e5e7eb;color:#374151;">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="priming-approach" style="display:none;margin-top:2rem;padding:1.5rem;background:#f9fafb;border-radius:12px;border:1px solid #e5e7eb;">
+                            <h3 style="margin-top:0;margin-bottom:0.75rem;color:#111827;">Model Priming Focus & Examiner Lens</h3>
+                            <div id="approach-content"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Self-Assessment Section -->
-            <div id="assessment" class="practice-section" style="display: none;">
+            <!-- Clinical Topics Section -->
+            <div id="clinical-topics" class="practice-section" style="display: none;">
                 <div class="content-card">
-                    <h2>Self-Assessment Scoring</h2>
-                    <p>Use this tool to assess your performance on practice cases. Remember: Domain 2 is weighted 1.5x.</p>
+                    <h2>Clinical Topics Reference</h2>
+                    <p>Quick reference guide to common clinical topics for SCA preparation. Click on any topic to view detailed information.</p>
                     
                     <div style="margin-top: 2rem;">
-                        <p>Self-assessment tools are available in each mock case. The scoring system uses:</p>
-                        <ul>
-                            <li><strong>Domain 1:</strong> Data gathering & interpretation (standard weight)</li>
-                            <li><strong>Domain 2:</strong> Clinical management (weighted 1.5x)</li>
-                            <li><strong>Domain 3:</strong> Interpersonal skills (standard weight)</li>
-                        </ul>
-                        <p style="margin-top: 1rem;">Grading: Clear Pass (>9), Pass (>6), Minor Fail (3-6), Clear Fail (<3)</p>
+                        <p style="font-size: 1.125rem; color: var(--color-gray-700); margin-bottom: var(--space-lg);">Essential clinical knowledge for your SCA. These topics cover common presentations, differentials, management, and safety netting.</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-lg); margin-top: var(--space-xl);">
+                            <a href="clinical-topics.html#asthma" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">🫁</div>
+                                <h3>Asthma</h3>
+                                <p>Diagnosis, management, and monitoring</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                            <a href="clinical-topics.html#copd" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">💨</div>
+                                <h3>COPD</h3>
+                                <p>Assessment and management</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                            <a href="clinical-topics.html#hypertension" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">🩺</div>
+                                <h3>Hypertension</h3>
+                                <p>Diagnosis and treatment</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                            <a href="clinical-topics.html#heart-failure" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">❤️</div>
+                                <h3>Heart Failure</h3>
+                                <p>Assessment and management</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                            <a href="clinical-topics.html#ibs" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">🫀</div>
+                                <h3>IBS</h3>
+                                <p>Irritable bowel syndrome</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                            <a href="clinical-topics.html#eczema" class="resource-card" style="text-decoration: none; display: block;">
+                                <div class="resource-icon">🧴</div>
+                                <h3>Eczema</h3>
+                                <p>Atopic dermatitis management</p>
+                                <span class="resource-tag tag-free">Free</span>
+                            </a>
+                        </div>
+                        
+                        <div style="margin-top: var(--space-2xl); padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-md);">📚 Full Clinical Topics Library</h3>
+                            <p style="color: var(--color-gray-700); margin-bottom: var(--space-md);">Access 50+ comprehensive clinical topic guides covering all major systems and presentations. Each topic includes:</p>
+                            <ul style="color: var(--color-gray-700); margin-left: var(--space-lg); margin-bottom: var(--space-md);">
+                                <li>Key symptoms and presentations</li>
+                                <li>Differential diagnoses</li>
+                                <li>Evidence-based management</li>
+                                <li>Safety netting and red flags</li>
+                                <li>NICE guideline summaries</li>
+                            </ul>
+                            <a href="clinical-topics.html" class="btn btn-primary">View All Clinical Topics</a>
+                            <p style="color: var(--color-gray-600); font-size: 0.875rem; margin-top: var(--space-md); margin-bottom: 0;"><strong>Pro Feature:</strong> Full access to all clinical topics is available with Pro membership. <a href="pricing.html">Upgrade to Pro</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -203,7 +301,7 @@
     <script src="scripts/practice-tools.js"></script>
     <script src="scripts/case-assessment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/subscription.js"></script>
     <script src="scripts/main.js"></script>
@@ -216,11 +314,16 @@
         }
         
         function loadCase(caseNumber) {
-            // For now, show Case 1 as example
             if (caseNumber === 1) {
                 showCase1();
-            } else {
-                alert('Case ' + caseNumber + ' coming soon. Case 1 is available as a full example below.');
+            } else if (caseNumber === 2) {
+                showCase2();
+            } else if (caseNumber === 3) {
+                showCase3();
+            } else if (caseNumber === 4) {
+                showCase4();
+            } else if (caseNumber === 5) {
+                showCase5();
             }
         }
         
@@ -496,56 +599,1088 @@
             mockCasesSection.scrollIntoView({ behavior: 'smooth' });
         }
         
-        function generateDiagnosis() {
-            const diagnoses = [
-                'Asthma', 'COPD', 'Hypertension', 'Type 2 Diabetes', 'Depression',
-                'Anxiety', 'Migraine', 'UTI', 'GORD', 'IBS', 'Osteoarthritis',
-                'Heart Failure', 'Atrial Fibrillation', 'Hypothyroidism', 'Eczema'
-            ];
-            const random = diagnoses[Math.floor(Math.random() * diagnoses.length)];
-            document.getElementById('diagnosis-display').textContent = random;
-        }
-        
-        function startDiagnosisTimer() {
-            let timeLeft = 120;
-            const timerEl = document.getElementById('diagnosis-timer');
-            const interval = setInterval(() => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    timerEl.textContent = 'Time\'s up!';
-                }
-                timeLeft--;
-            }, 1000);
-        }
-        
-        function generatePrimingCase() {
-            document.getElementById('priming-case').style.display = 'block';
-            document.getElementById('priming-content').innerHTML = `
-                <p><strong>Patient:</strong> 45-year-old man</p>
-                <p><strong>Presenting complaint:</strong> Chest pain</p>
-                <p><strong>Past medical history:</strong> Hypertension, high cholesterol</p>
-                <p><strong>Medications:</strong> Ramipril, Atorvastatin</p>
-                <p><strong>Allergies:</strong> None known</p>
-                <p><strong>Social:</strong> Smoker, 20/day. Works as office manager.</p>
+        function showCase2() {
+            const mockCasesSection = document.getElementById('mock-cases');
+            mockCasesSection.innerHTML = `
+                <div class="content-card">
+                    <div style="margin-bottom: var(--space-lg);">
+                        <button onclick="location.reload()" class="btn btn-outline" style="margin-bottom: var(--space-md);">← Back to Case List</button>
+                        <h2>Case 2: Shortness of Breath - Full Mock Case</h2>
+                    </div>
+                    
+                    <!-- Doctor's Stem -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-secondary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200); margin-bottom: var(--space-xl);">
+                        <h3 style="color: var(--color-secondary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span>👨‍⚕️</span>
+                            <span>Doctor's Stem</span>
+                        </h3>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-gray-800); margin: 0;">
+                            You are a GP trainee in a busy practice. A 68-year-old woman, Mrs. Margaret Thompson, has been booked in for a routine appointment. The receptionist notes she mentioned progressive breathlessness over the last 3 months when booking.
+                        </p>
+                    </div>
+                    
+                    <!-- Case Notes -->
+                    <div style="padding: var(--space-xl); background: var(--color-gray-50); border-radius: var(--radius-xl); border: 2px solid var(--color-gray-200); margin-bottom: var(--space-xl);">
+                        <h3 style="margin-bottom: var(--space-lg);">📋 Case Notes (2-minute reading time)</h3>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div><strong>Patient:</strong> Mrs. Margaret Thompson, 68 years old, Female</div>
+                            <div><strong>Past Medical History:</strong> Osteoarthritis (knees and hips), Hypertension (well controlled), Ex-smoker (stopped 10 years ago)</div>
+                            <div><strong>Medications:</strong> Amlodipine 5mg once daily, Paracetamol 1g QDS PRN for joint pain</div>
+                            <div><strong>Allergies:</strong> Penicillin (rash)</div>
+                            <div><strong>Social History:</strong> Retired teacher. Lives alone in a bungalow. Ex-smoker (30 pack-years, stopped 10 years ago). Drinks 2-3 units alcohol/week. Has a cleaner who visits weekly.</div>
+                            <div><strong>Family History:</strong> Mother had COPD. Father died of lung cancer at age 72.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actor Information -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; margin-bottom: var(--space-xl);">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-lg);">🎭 Actor Information</h3>
+                        
+                        <div style="margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-lg);">
+                            <h4 style="color: #b45309; margin-bottom: var(--space-sm);">Opening Statement (Freely Given)</h4>
+                            <p style="font-style: italic; color: var(--color-gray-800); line-height: 1.8; margin: 0;">
+                                "Doctor, I've been getting more and more breathless over the last few months. I used to be able to walk to the shops, but now I have to stop and catch my breath."
+                            </p>
+                        </div>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                Freely Given History (What patient volunteers)
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <p><strong>Presenting Complaint:</strong> Progressive breathlessness over 3 months. Initially noticed when walking up hills, now occurs on flat ground. Getting worse over time.</p>
+                                <p><strong>Impact on Function:</strong> Can no longer walk to local shops (5 minutes away) without stopping. Has to rest when doing housework. Sleeps with 2 pillows now (used to sleep flat).</p>
+                                <p><strong>Ideas, Concerns, Expectations:</strong> Worried it might be her lungs like her mother. Concerned it could be serious. Wants to know what's causing it and if it can be treated.</p>
+                            </div>
+                        </details>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                History on Direct Questioning
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Presenting Complaint (Detailed)</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Onset:</strong> Gradual over 3 months, progressively worsening</li>
+                                    <li><strong>Triggers:</strong> Exertion (walking, stairs, housework), worse in cold weather</li>
+                                    <li><strong>At Rest:</strong> No breathlessness at rest currently, but needs 2 pillows to sleep</li>
+                                    <li><strong>Orthopnoea:</strong> Needs to prop up with pillows to sleep comfortably</li>
+                                    <li><strong>Paroxysmal Nocturnal Dyspnoea:</strong> Has woken up breathless 2-3 times in last month</li>
+                                    <li><strong>Associated Symptoms:</strong> Dry cough (worse in morning), occasional wheeze, ankle swelling (noticed in last 2 weeks), fatigue</li>
+                                    <li><strong>No:</strong> Chest pain, haemoptysis, fever, weight loss</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Past Medical History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Osteoarthritis:</strong> Diagnosed 5 years ago, affects knees and hips. Managed with paracetamol. No regular NSAIDs due to history of indigestion.</li>
+                                    <li><strong>Hypertension:</strong> Diagnosed 8 years ago, well controlled on amlodipine. Last BP check 6 months ago was 142/88.</li>
+                                    <li><strong>Other:</strong> No known heart disease, no diabetes, no asthma/COPD diagnosis</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Drug History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Current Medications:</strong> Amlodipine 5mg OD, Paracetamol 1g QDS PRN</li>
+                                    <li><strong>Over-the-Counter:</strong> Occasional Gaviscon for indigestion</li>
+                                    <li><strong>Compliance:</strong> Takes medications regularly</li>
+                                    <li><strong>Allergies:</strong> Penicillin - causes rash</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Social History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Occupation:</strong> Retired teacher (retired 3 years ago)</li>
+                                    <li><strong>Living Situation:</strong> Lives alone in a bungalow. Has a cleaner who visits weekly. Son lives nearby and visits weekly.</li>
+                                    <li><strong>Smoking:</strong> Ex-smoker, smoked 20 cigarettes/day for 30 years (30 pack-years). Stopped 10 years ago.</li>
+                                    <li><strong>Alcohol:</strong> Drinks 2-3 units per week (glass of wine with dinner)</li>
+                                    <li><strong>Exercise:</strong> Previously walked daily, now limited by breathlessness</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Family History</h4>
+                                <ul>
+                                    <li><strong>Respiratory:</strong> Mother had COPD (diagnosed age 65, died age 78)</li>
+                                    <li><strong>Cardiovascular:</strong> Father died of lung cancer at age 72 (smoker)</li>
+                                    <li><strong>Other:</strong> No other significant family history</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Self-Assessment -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-lg);">✅ Self-Assessment</h3>
+                        <p style="margin-bottom: var(--space-lg);">Check off the items you addressed during your consultation. Domain 2 (Clinical Management) is weighted 1.5x.</p>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 1: Data Gathering & Interpretation
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Established presenting complaint (progressive breathlessness)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored timeline, triggers, and progression of breathlessness</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Asked about orthopnoea and paroxysmal nocturnal dyspnoea</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored associated symptoms (cough, wheeze, ankle swelling, fatigue)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Excluded red flags (chest pain, haemoptysis, weight loss)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained past medical history (OA, hypertension)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained smoking history (30 pack-years, ex-smoker)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained family history (mother's COPD, father's lung cancer)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored functional impact and activities of daily living</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored ideas, concerns, expectations</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Performed relevant examination (respiratory, cardiovascular, assessment for oedema)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Interpreted findings appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 2: Clinical Management (Weighted 1.5x)
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered cardiac causes (heart failure, IHD, arrhythmia)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered respiratory causes (COPD, asthma, ILD, PE)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Assessed cardiovascular risk factors and smoking history</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Made appropriate diagnosis or differential (likely COPD vs heart failure)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered appropriate investigations (spirometry, CXR, BNP, ECG)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed management plan with patient</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered need for referral (respiratory/cardiology) if indicated</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided safety netting advice</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Arranged appropriate follow-up</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Documented appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 3: Interpersonal Skills
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated empathy and rapport</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Used appropriate language and avoided jargon</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Listened actively to patient concerns</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Addressed patient's anxiety about family history</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Explained diagnosis/plan clearly</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Involved patient in decision-making</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Maintained professional boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated cultural sensitivity</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button onclick="calculateScore(this)" class="btn btn-primary btn-lg">Calculate My Score</button>
+                        </div>
+                        
+                        <div class="score-result" style="display: none; margin-top: var(--space-xl);">
+                            <div class="score-breakdown"></div>
+                        </div>
+                    </div>
+                </div>
             `;
+            mockCasesSection.scrollIntoView({ behavior: 'smooth' });
         }
         
-        function startPrimingTimer() {
-            let timeLeft = 180;
-            const timerEl = document.getElementById('priming-timer');
-            const interval = setInterval(() => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    timerEl.textContent = 'Time\'s up!';
-                }
-                timeLeft--;
-            }, 1000);
+        function showCase3() {
+            const mockCasesSection = document.getElementById('mock-cases');
+            mockCasesSection.innerHTML = `
+                <div class="content-card">
+                    <div style="margin-bottom: var(--space-lg);">
+                        <button onclick="location.reload()" class="btn btn-outline" style="margin-bottom: var(--space-md);">← Back to Case List</button>
+                        <h2>Case 3: Abdominal Pain - Full Mock Case</h2>
+                    </div>
+                    
+                    <!-- Doctor's Stem -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-secondary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200); margin-bottom: var(--space-xl);">
+                        <h3 style="color: var(--color-secondary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span>👨‍⚕️</span>
+                            <span>Doctor's Stem</span>
+                        </h3>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-gray-800); margin: 0;">
+                            You are a GP trainee in a busy practice. A 32-year-old woman, Ms. Rachel Green, has been booked in for an urgent appointment. The receptionist notes she called complaining of right lower quadrant abdominal pain.
+                        </p>
+                    </div>
+                    
+                    <!-- Case Notes -->
+                    <div style="padding: var(--space-xl); background: var(--color-gray-50); border-radius: var(--radius-xl); border: 2px solid var(--color-gray-200); margin-bottom: var(--space-xl);">
+                        <h3 style="margin-bottom: var(--space-lg);">📋 Case Notes (2-minute reading time)</h3>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div><strong>Patient:</strong> Ms. Rachel Green, 32 years old, Female</div>
+                            <div><strong>Past Medical History:</strong> None significant</div>
+                            <div><strong>Medications:</strong> Combined oral contraceptive pill (Microgynon)</div>
+                            <div><strong>Allergies:</strong> None known</div>
+                            <div><strong>Social History:</strong> Works as a marketing executive. Lives with partner. Non-smoker. Drinks 10-12 units alcohol/week. Regular exercise.</div>
+                            <div><strong>Family History:</strong> Mother had appendicitis in her 20s. No other significant family history.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actor Information -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; margin-bottom: var(--space-xl);">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-lg);">🎭 Actor Information</h3>
+                        
+                        <div style="margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-lg);">
+                            <h4 style="color: #b45309; margin-bottom: var(--space-sm);">Opening Statement (Freely Given)</h4>
+                            <p style="font-style: italic; color: var(--color-gray-800); line-height: 1.8; margin: 0;">
+                                "Doctor, I've got this pain in my lower right side. It started yesterday evening and it's getting worse. I'm worried it might be my appendix."
+                            </p>
+                        </div>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                Freely Given History (What patient volunteers)
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <p><strong>Presenting Complaint:</strong> Right lower quadrant pain started yesterday evening. Initially mild, now more severe. Constant pain with sharp stabs.</p>
+                                <p><strong>Impact:</strong> Can't sleep properly. Feels nauseous. Hasn't eaten much today.</p>
+                                <p><strong>Ideas, Concerns, Expectations:</strong> Worried it might be appendicitis like her mother had. Wants to know if she needs to go to hospital. Expects an examination.</p>
+                            </div>
+                        </details>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                History on Direct Questioning
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Presenting Complaint (Detailed)</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Site:</strong> Right lower quadrant, initially around umbilicus, now localised to RLQ</li>
+                                    <li><strong>Character:</strong> Initially dull, now sharp and stabbing. Constant with waves of worse pain</li>
+                                    <li><strong>Severity:</strong> Started 3/10, now 7/10</li>
+                                    <li><strong>Onset:</strong> Started yesterday evening (about 18 hours ago), came on gradually</li>
+                                    <li><strong>Radiation:</strong> No radiation</li>
+                                    <li><strong>Exacerbating Factors:</strong> Worse with movement, coughing, jarring movements</li>
+                                    <li><strong>Relieving Factors:</strong> Slightly better when lying still, curled up</li>
+                                    <li><strong>Associated Symptoms:</strong> Nausea (no vomiting), loss of appetite, feels feverish but hasn't checked temperature</li>
+                                    <li><strong>Bowel:</strong> Last bowel movement yesterday morning (normal). No diarrhoea, no blood in stool</li>
+                                    <li><strong>Urinary:</strong> Passing urine normally, no dysuria, no frequency</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Gynaecological History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Last Menstrual Period:</strong> 2 weeks ago (regular 28-day cycle)</li>
+                                    <li><strong>Contraception:</strong> Combined oral contraceptive pill (Microgynon) - takes regularly, no missed pills</li>
+                                    <li><strong>Pregnancy:</strong> Not currently pregnant, no chance of pregnancy (on COCP)</li>
+                                    <li><strong>Sexual History:</strong> In a stable relationship, no recent new partners</li>
+                                    <li><strong>STI History:</strong> No previous STIs</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Past Medical History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>No significant past medical history:</strong> Generally fit and well</li>
+                                    <li><strong>Previous Surgery:</strong> None</li>
+                                    <li><strong>No:</strong> Previous similar episodes, known gynaecological conditions</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Drug History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Current Medications:</strong> Combined oral contraceptive pill (Microgynon)</li>
+                                    <li><strong>Over-the-Counter:</strong> Took paracetamol last night (helped slightly)</li>
+                                    <li><strong>Allergies:</strong> No known drug allergies</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Social History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Occupation:</strong> Marketing executive, office-based job</li>
+                                    <li><strong>Living Situation:</strong> Lives with partner</li>
+                                    <li><strong>Smoking:</strong> Non-smoker</li>
+                                    <li><strong>Alcohol:</strong> Drinks 10-12 units per week (social drinking)</li>
+                                    <li><strong>Travel:</strong> No recent travel</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Family History</h4>
+                                <ul>
+                                    <li><strong>Mother:</strong> Had appendicitis in her 20s (required surgery)</li>
+                                    <li><strong>Other:</strong> No other significant family history</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Self-Assessment -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-lg);">✅ Self-Assessment</h3>
+                        <p style="margin-bottom: var(--space-lg);">Check off the items you addressed during your consultation. Domain 2 (Clinical Management) is weighted 1.5x.</p>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 1: Data Gathering & Interpretation
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Established presenting complaint (RLQ abdominal pain)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored site, character, severity, onset, progression</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Asked about exacerbating/relieving factors</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored associated symptoms (nausea, fever, appetite)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained gynaecological history (LMP, contraception, pregnancy risk)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored bowel and urinary symptoms</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained past medical history</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained family history (mother's appendicitis)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored ideas, concerns, expectations</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Performed relevant examination (abdominal, including Rovsing's sign, McBurney's point)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Interpreted findings appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 2: Clinical Management (Weighted 1.5x)
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered surgical causes (appendicitis, ovarian cyst, ectopic pregnancy)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered gynaecological causes (ovarian cyst, PID, ectopic pregnancy)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Assessed for red flags (peritonism, systemic upset, pregnancy risk)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Made appropriate diagnosis or differential</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered need for urgent referral (surgical assessment if appendicitis suspected)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed management plan with patient</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided appropriate pain relief if indicated</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided safety netting advice</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Arranged appropriate follow-up or urgent care</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Documented appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 3: Interpersonal Skills
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated empathy and rapport</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Used appropriate language and avoided jargon</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Listened actively to patient concerns</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Addressed patient's anxiety about appendicitis</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Explained diagnosis/plan clearly</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Involved patient in decision-making</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Maintained professional boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated cultural sensitivity</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button onclick="calculateScore(this)" class="btn btn-primary btn-lg">Calculate My Score</button>
+                        </div>
+                        
+                        <div class="score-result" style="display: none; margin-top: var(--space-xl);">
+                            <div class="score-breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mockCasesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showCase4() {
+            const mockCasesSection = document.getElementById('mock-cases');
+            mockCasesSection.innerHTML = `
+                <div class="content-card">
+                    <div style="margin-bottom: var(--space-lg);">
+                        <button onclick="location.reload()" class="btn btn-outline" style="margin-bottom: var(--space-md);">← Back to Case List</button>
+                        <h2>Case 4: Headache - Full Mock Case</h2>
+                    </div>
+                    
+                    <!-- Doctor's Stem -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-secondary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200); margin-bottom: var(--space-xl);">
+                        <h3 style="color: var(--color-secondary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span>👨‍⚕️</span>
+                            <span>Doctor's Stem</span>
+                        </h3>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-gray-800); margin: 0;">
+                            You are a GP trainee in a busy practice. A 28-year-old woman, Ms. Lucy Anderson, has been booked in for a routine appointment. The receptionist notes this is her third appointment in 2 months for headaches.
+                        </p>
+                    </div>
+                    
+                    <!-- Case Notes -->
+                    <div style="padding: var(--space-xl); background: var(--color-gray-50); border-radius: var(--radius-xl); border: 2px solid var(--color-gray-200); margin-bottom: var(--space-xl);">
+                        <h3 style="margin-bottom: var(--space-lg);">📋 Case Notes (2-minute reading time)</h3>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div><strong>Patient:</strong> Ms. Lucy Anderson, 28 years old, Female</div>
+                            <div><strong>Past Medical History:</strong> Migraines since age 16</div>
+                            <div><strong>Medications:</strong> Combined oral contraceptive pill (Microgynon), Sumatriptan 50mg PRN for migraines</div>
+                            <div><strong>Allergies:</strong> None known</div>
+                            <div><strong>Social History:</strong> Works as a graphic designer. Lives with partner. Non-smoker. Drinks 8-10 units alcohol/week. Regular exercise.</div>
+                            <div><strong>Family History:</strong> Mother has migraines. No other significant family history.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actor Information -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; margin-bottom: var(--space-xl);">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-lg);">🎭 Actor Information</h3>
+                        
+                        <div style="margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-lg);">
+                            <h4 style="color: #b45309; margin-bottom: var(--space-sm);">Opening Statement (Freely Given)</h4>
+                            <p style="font-style: italic; color: var(--color-gray-800); line-height: 1.8; margin: 0;">
+                                "Doctor, my headaches are getting worse. I've had migraines for years, but these feel different. They're happening more often and the sumatriptan isn't working as well."
+                            </p>
+                        </div>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                Freely Given History (What patient volunteers)
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <p><strong>Presenting Complaint:</strong> Recurrent headaches for 6 months. Getting more frequent and severe. Used to have 2-3 migraines per month, now having 8-10 headaches per month.</p>
+                                <p><strong>Impact:</strong> Missing work more often. Can't function when headaches are bad. Partner is worried about her.</p>
+                                <p><strong>Ideas, Concerns, Expectations:</strong> Worried something serious is wrong. Wondering if it's related to the pill. Wants stronger medication or different treatment.</p>
+                            </div>
+                        </details>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                History on Direct Questioning
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Presenting Complaint (Detailed)</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Pattern:</strong> Headaches 8-10 times per month for last 6 months (previously 2-3 per month)</li>
+                                    <li><strong>Character:</strong> Mix of throbbing migraines (like before) and dull pressure headaches</li>
+                                    <li><strong>Site:</strong> Migraines: unilateral, often right side. New headaches: bilateral, frontal/temporal</li>
+                                    <li><strong>Severity:</strong> Migraines 7-8/10, new headaches 5-6/10</li>
+                                    <li><strong>Duration:</strong> Migraines last 4-6 hours if treated, 12-24 hours if not. New headaches last 2-4 hours</li>
+                                    <li><strong>Triggers:</strong> Stress, lack of sleep, hormonal (around period), some foods (chocolate, cheese)</li>
+                                    <li><strong>Associated Symptoms:</strong> Migraines: nausea, photophobia, phonophobia, sometimes aura (flashing lights). New headaches: no aura, mild nausea</li>
+                                    <li><strong>Red Flags:</strong> No thunderclap onset, no neurological symptoms, no worse lying down, no early morning, no fever, no neck stiffness</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Medication History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Acute Treatment:</strong> Sumatriptan 50mg - used to work well, now needs 2-3 tablets per headache, sometimes doesn't work</li>
+                                    <li><strong>Analgesia:</strong> Takes paracetamol and ibuprofen frequently (almost daily) for headaches</li>
+                                    <li><strong>Frequency:</strong> Taking sumatriptan 8-10 times per month, paracetamol/ibuprofen 15-20 days per month</li>
+                                    <li><strong>Contraception:</strong> Combined oral contraceptive pill (Microgynon) - takes regularly</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Past Medical History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Migraines:</strong> Since age 16, previously well controlled. Family history of migraines (mother)</li>
+                                    <li><strong>No:</strong> Other neurological conditions, head injury, previous similar episodes</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Social History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Occupation:</strong> Graphic designer, works on computer all day</li>
+                                    <li><strong>Stress:</strong> Work has been more stressful recently (deadlines, client demands)</li>
+                                    <li><strong>Sleep:</strong> Often goes to bed late (11pm-12am), wakes up early (6am), feels tired</li>
+                                    <li><strong>Exercise:</strong> Used to exercise regularly, now less due to headaches</li>
+                                    <li><strong>Smoking:</strong> Non-smoker</li>
+                                    <li><strong>Alcohol:</strong> Drinks 8-10 units per week (social drinking)</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Self-Assessment -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-lg);">✅ Self-Assessment</h3>
+                        <p style="margin-bottom: var(--space-lg);">Check off the items you addressed during your consultation. Domain 2 (Clinical Management) is weighted 1.5x.</p>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 1: Data Gathering & Interpretation
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Established presenting complaint (recurrent headaches, change in pattern)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored pattern, frequency, character, site, severity, duration</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Asked about triggers and associated symptoms</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Excluded red flags (SNOOP framework)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained detailed medication history (frequency, effectiveness)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored lifestyle factors (stress, sleep, work)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained past medical history (migraines since teens)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored ideas, concerns, expectations</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Performed relevant examination (if indicated - neurological, BP)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Interpreted findings appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 2: Clinical Management (Weighted 1.5x)
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Recognised medication overuse headache (analgesia 15-20 days/month)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered change in migraine pattern vs new headache type</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Assessed COC and migraine risk (stroke risk with aura)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Made appropriate diagnosis (medication overuse headache + migraines)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed medication withdrawal plan</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered preventive treatment if appropriate</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed lifestyle modifications (stress, sleep, triggers)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Addressed COC safety if aura present</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided safety netting advice</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Arranged appropriate follow-up</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Documented appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 3: Interpersonal Skills
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated empathy and rapport</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Used appropriate language and avoided jargon</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Listened actively to patient concerns</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Addressed patient's anxiety about serious cause</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Explained diagnosis/plan clearly</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Involved patient in decision-making</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Maintained professional boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated cultural sensitivity</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button onclick="calculateScore(this)" class="btn btn-primary btn-lg">Calculate My Score</button>
+                        </div>
+                        
+                        <div class="score-result" style="display: none; margin-top: var(--space-xl);">
+                            <div class="score-breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mockCasesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showCase5() {
+            const mockCasesSection = document.getElementById('mock-cases');
+            mockCasesSection.innerHTML = `
+                <div class="content-card">
+                    <div style="margin-bottom: var(--space-lg);">
+                        <button onclick="location.reload()" class="btn btn-outline" style="margin-bottom: var(--space-md);">← Back to Case List</button>
+                        <h2>Case 5: Fatigue - Full Mock Case</h2>
+                    </div>
+                    
+                    <!-- Doctor's Stem -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-secondary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-secondary-200); margin-bottom: var(--space-xl);">
+                        <h3 style="color: var(--color-secondary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span>👨‍⚕️</span>
+                            <span>Doctor's Stem</span>
+                        </h3>
+                        <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-gray-800); margin: 0;">
+                            You are a GP trainee in a busy practice. A 55-year-old man, Mr. Peter Davies, has been booked in for a routine appointment. The receptionist notes he mentioned tiredness and low mood when booking.
+                        </p>
+                    </div>
+                    
+                    <!-- Case Notes -->
+                    <div style="padding: var(--space-xl); background: var(--color-gray-50); border-radius: var(--radius-xl); border: 2px solid var(--color-gray-200); margin-bottom: var(--space-xl);">
+                        <h3 style="margin-bottom: var(--space-lg);">📋 Case Notes (2-minute reading time)</h3>
+                        <div style="display: grid; gap: var(--space-md);">
+                            <div><strong>Patient:</strong> Mr. Peter Davies, 55 years old, Male</div>
+                            <div><strong>Past Medical History:</strong> Hypertension (well controlled), High cholesterol</div>
+                            <div><strong>Medications:</strong> Ramipril 5mg once daily, Atorvastatin 20mg once daily</div>
+                            <div><strong>Allergies:</strong> None known</div>
+                            <div><strong>Social History:</strong> Works as a project manager. Recently made redundant (3 months ago). Lives with wife. Ex-smoker (stopped 5 years ago). Drinks 15-20 units alcohol/week.</div>
+                            <div><strong>Family History:</strong> Father had depression. Mother has type 2 diabetes.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actor Information -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: var(--radius-xl); border: 2px solid #f59e0b; margin-bottom: var(--space-xl);">
+                        <h3 style="color: #b45309; margin-bottom: var(--space-lg);">🎭 Actor Information</h3>
+                        
+                        <div style="margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-lg);">
+                            <h4 style="color: #b45309; margin-bottom: var(--space-sm);">Opening Statement (Freely Given)</h4>
+                            <p style="font-style: italic; color: var(--color-gray-800); line-height: 1.8; margin: 0;">
+                                "Doctor, I've been feeling really tired and down for the last few months. I just don't have any energy, and I'm not sleeping well. My wife is worried about me."
+                            </p>
+                        </div>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                Freely Given History (What patient volunteers)
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <p><strong>Presenting Complaint:</strong> Tiredness and low mood for 3 months. Started around the time he lost his job. Getting worse over time.</p>
+                                <p><strong>Impact:</strong> Can't be bothered to do things he used to enjoy. Not looking for work. Wife is concerned. Sleep is poor.</p>
+                                <p><strong>Ideas, Concerns, Expectations:</strong> Thinks it might be depression. Worried about his future. Wants to know if medication will help. Expects blood tests.</p>
+                            </div>
+                        </details>
+                        
+                        <details style="margin-bottom: var(--space-md);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: #b45309;">
+                                History on Direct Questioning
+                            </summary>
+                            <div style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Presenting Complaint (Detailed)</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Tiredness:</strong> Constant fatigue, worse in morning. No energy for activities. Feels exhausted even after rest</li>
+                                    <li><strong>Mood:</strong> Low mood most days. Feels sad, hopeless, worthless. Cries sometimes</li>
+                                    <li><strong>Sleep:</strong> Difficulty falling asleep (takes 1-2 hours), wakes early (4-5am), feels unrefreshed</li>
+                                    <li><strong>Appetite:</strong> Reduced appetite, lost 3kg in last 3 months</li>
+                                    <li><strong>Concentration:</strong> Poor concentration, can't focus on tasks, forgetful</li>
+                                    <li><strong>Interest:</strong> Lost interest in hobbies (golf, reading), doesn't enjoy things anymore</li>
+                                    <li><strong>Anxiety:</strong> Worries about future, finances, finding work</li>
+                                    <li><strong>Physical Symptoms:</strong> Headaches, muscle aches, no energy</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Depression Screening</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>PHQ-9 Score:</strong> Would score highly (most symptoms present)</li>
+                                    <li><strong>Suicidal Ideation:</strong> Has had thoughts that life isn't worth living, but no active plans or intent</li>
+                                    <li><strong>Self-Harm:</strong> No history of self-harm</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Context</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Redundancy:</strong> Made redundant 3 months ago after 20 years with same company. Felt shocked and betrayed</li>
+                                    <li><strong>Job Search:</strong> Hasn't been actively looking for work. Feels too old, not qualified, hopeless about prospects</li>
+                                    <li><strong>Financial:</strong> Worried about money. Has savings but concerned about future</li>
+                                    <li><strong>Relationship:</strong> Wife is supportive but relationship strained. He's withdrawn, irritable</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Past Medical History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Hypertension:</strong> Diagnosed 5 years ago, well controlled on Ramipril</li>
+                                    <li><strong>Cholesterol:</strong> High cholesterol, on Atorvastatin</li>
+                                    <li><strong>Previous Mental Health:</strong> No previous depression diagnosis, but father had depression</li>
+                                    <li><strong>No:</strong> Diabetes, thyroid problems, known anaemia</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Drug History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Current Medications:</strong> Ramipril 5mg OD, Atorvastatin 20mg OD</li>
+                                    <li><strong>Over-the-Counter:</strong> Occasional paracetamol for headaches</li>
+                                    <li><strong>Alcohol:</strong> Drinks 15-20 units per week (more since redundancy - uses it to help sleep)</li>
+                                    <li><strong>Allergies:</strong> No known drug allergies</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Social History</h4>
+                                <ul style="margin-bottom: var(--space-md);">
+                                    <li><strong>Occupation:</strong> Was project manager, made redundant 3 months ago</li>
+                                    <li><strong>Living Situation:</strong> Lives with wife, two adult children (moved out)</li>
+                                    <li><strong>Smoking:</strong> Ex-smoker (stopped 5 years ago, smoked for 25 years)</li>
+                                    <li><strong>Alcohol:</strong> 15-20 units per week, increased since redundancy</li>
+                                    <li><strong>Exercise:</strong> Previously played golf weekly, now no exercise</li>
+                                </ul>
+                                
+                                <h4 style="color: #b45309; margin-top: var(--space-md);">Family History</h4>
+                                <ul>
+                                    <li><strong>Mental Health:</strong> Father had depression (treated with medication)</li>
+                                    <li><strong>Other:</strong> Mother has type 2 diabetes</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                    
+                    <!-- Self-Assessment -->
+                    <div style="padding: var(--space-xl); background: linear-gradient(135deg, var(--color-primary-50) 0%, white 100%); border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-lg);">✅ Self-Assessment</h3>
+                        <p style="margin-bottom: var(--space-lg);">Check off the items you addressed during your consultation. Domain 2 (Clinical Management) is weighted 1.5x.</p>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 1: Data Gathering & Interpretation
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Established presenting complaint (tiredness and low mood)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored timeline and context (redundancy, 3 months)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Assessed depression symptoms (PHQ-9 or equivalent)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored sleep pattern, appetite, concentration, interest</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Assessed suicide risk (ideation, plans, intent)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored physical causes (anaemia, thyroid, diabetes)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained alcohol history (increased use)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored social context (redundancy, finances, relationships)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Obtained family history (father's depression)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Explored ideas, concerns, expectations</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Performed relevant examination (if indicated - BP, basic systems)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain1-check">
+                                    <span>Interpreted findings appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 2: Clinical Management (Weighted 1.5x)
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Made appropriate diagnosis (depression, likely reactive to redundancy)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered physical causes (arranged blood tests if indicated)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Assessed suicide risk appropriately</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed treatment options (CBT, medication, self-help)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Addressed alcohol use (increased consumption)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Discussed lifestyle factors (sleep, exercise, routine)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Considered referral to IAPT/talking therapies</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Prescribed appropriate medication if indicated (SSRI)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Provided safety netting advice (suicide risk, crisis contacts)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Arranged appropriate follow-up</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain2-check">
+                                    <span>Documented appropriately</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <details class="assessment-details" style="margin-bottom: var(--space-lg);">
+                            <summary style="cursor: pointer; padding: var(--space-md); background: white; border-radius: var(--radius-lg); font-weight: 600; color: var(--color-primary-700);">
+                                Domain 3: Interpersonal Skills
+                            </summary>
+                            <div class="assessment-content" style="padding: var(--space-lg); background: white; border-radius: var(--radius-lg); margin-top: var(--space-sm);">
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated empathy and rapport</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Used appropriate language and avoided jargon</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Listened actively to patient concerns</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Addressed patient's concerns about depression and future</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Explained diagnosis/plan clearly</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Involved patient in decision-making</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Maintained professional boundaries</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) 0; cursor: pointer;">
+                                    <input type="checkbox" class="domain3-check">
+                                    <span>Demonstrated cultural sensitivity</span>
+                                </label>
+                            </div>
+                        </details>
+                        
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button onclick="calculateScore(this)" class="btn btn-primary btn-lg">Calculate My Score</button>
+                        </div>
+                        
+                        <div class="score-result" style="display: none; margin-top: var(--space-xl);">
+                            <div class="score-breakdown"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            mockCasesSection.scrollIntoView({ behavior: 'smooth' });
         }
         
         // Show mock cases by default

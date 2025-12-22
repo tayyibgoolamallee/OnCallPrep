@@ -508,9 +508,81 @@
 
     <!-- Load Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/subscription.js"></script>
     <script src="scripts/main.js"></script>
+    <script>
+        // Initialize auth state and access control on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('SCA page: Starting initialization...');
+            
+            // Wait for scripts to load
+            let retries = 0;
+            const maxRetries = 10;
+            
+            while (retries < maxRetries) {
+                if (typeof SUPABASE_CONFIG !== 'undefined' && 
+                    typeof initSupabase === 'function' && 
+                    typeof getUserSubscription === 'function') {
+                    console.log('SCA page: All scripts loaded');
+                    break;
+                }
+                await new Promise(resolve => setTimeout(resolve, 100));
+                retries++;
+            }
+            
+            // Initialize Supabase if needed
+            if (typeof initSupabase === 'function') {
+                const initResult = initSupabase();
+                console.log('SCA page: Supabase init result:', initResult);
+            }
+            
+            // Wait a bit more for Supabase to be ready
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            // Check current plan
+            if (typeof getCurrentPlan === 'function') {
+                const plan = await getCurrentPlan();
+                console.log('SCA page: Current plan:', plan);
+            }
+            
+            // Initialize access control
+            if (typeof initAccessControl === 'function') {
+                console.log('SCA page: Initializing access control...');
+                await initAccessControl();
+            } else {
+                console.error('SCA page: initAccessControl function not found!');
+            }
+            
+            // Update navigation auth state
+            if (typeof updateNavAuth === 'function') {
+                console.log('SCA page: Updating navigation...');
+                await updateNavAuth();
+            } else {
+                console.error('SCA page: updateNavAuth function not found!');
+            }
+            
+            // Lock pro content if needed
+            if (typeof lockProContent === 'function') {
+                console.log('SCA page: Locking pro content...');
+                await lockProContent();
+            }
+            
+            // Force toggle plan content one more time
+            if (typeof getCurrentPlan === 'function' && typeof togglePlanContent === 'function') {
+                const plan = await getCurrentPlan();
+                console.log('SCA page: Final plan check:', plan);
+                togglePlanContent(plan);
+                
+                // Also update navigation one more time
+                if (typeof updateNavAuth === 'function') {
+                    await updateNavAuth();
+                }
+            }
+            
+            console.log('SCA page: Initialization complete');
+        });
+    </script>
 </body>
 </html>

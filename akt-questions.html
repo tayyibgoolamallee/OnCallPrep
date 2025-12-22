@@ -77,17 +77,19 @@
                 </div>
             </div>
 
+            <!-- Question Count -->
+            <div class="content-card" style="margin-bottom: 1rem; padding: 1rem;">
+                <p style="margin: 0; color: #6b7280;">
+                    <span id="question-count">Loading questions...</span>
+                </p>
+            </div>
+
             <!-- Question Interface -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <div id="question-container">
                     <div style="text-align: center; padding: 3rem;">
-                        <h3>Question Bank Interface</h3>
-                        <p>Loading questions...</p>
-                        <p style="margin-top: 1rem; color: #6b7280;">The full interactive question bank interface will load here.</p>
-                        <p style="margin-top: 1rem;">Questions are loaded from <code>data/akt-questions.json</code></p>
-                        <div style="margin-top: 2rem;">
-                            <button class="btn btn-primary" onclick="loadQuestion()">Load Sample Question</button>
-                        </div>
+                        <h3>Loading Questions...</h3>
+                        <p style="margin-top: 1rem; color: #6b7280;">Please wait while we load the question bank.</p>
                     </div>
                 </div>
             </div>
@@ -96,26 +98,26 @@
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>Filter Questions</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                    <select class="form-select" id="category-filter">
+                    <select class="form-select" id="category-filter" onchange="applyFilters()">
                         <option value="all">All Categories</option>
                         <option value="clinical">Clinical Medicine</option>
                         <option value="ebp">EBP</option>
                         <option value="pcom">PCOM</option>
                     </select>
-                    <select class="form-select" id="difficulty-filter">
+                    <select class="form-select" id="difficulty-filter" onchange="applyFilters()">
                         <option value="all">All Difficulties</option>
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                     </select>
-                    <button class="btn btn-outline" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-outline" onclick="applyFilters()">Reset Filters</button>
                 </div>
             </div>
 
-            <!-- Pro Features Notice -->
-            <div class="content-card" style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 2rem;">
+            <!-- Pro Features Notice (shown to free users) -->
+            <div id="pro-notice" class="content-card" style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 2rem; display: none;">
                 <h3>Pro Features</h3>
-                <p>Upgrade to Pro for:</p>
+                <p>You're currently viewing 20 free sample questions. Upgrade to Pro for:</p>
                 <ul>
                     <li>Full access to all 275 questions</li>
                     <li>Progress tracking and analytics</li>
@@ -124,6 +126,12 @@
                     <li>Mock exam mode (full 160 questions)</li>
                 </ul>
                 <a href="pricing.html" class="btn btn-primary" style="margin-top: 1rem;">Upgrade to Pro</a>
+            </div>
+            
+            <!-- Pro User Notice (shown to pro users) -->
+            <div id="pro-user-notice" class="content-card" style="background: #d1fae5; border-left: 4px solid #10b981; padding: 2rem; display: none;">
+                <h3>✅ Pro Access Active</h3>
+                <p>You have full access to all 275 questions! Use the filters above to find questions by category or difficulty.</p>
             </div>
         </div>
     </section>
@@ -147,35 +155,23 @@
     </footer>
 
     <!-- Load Scripts -->
-    <script>
-        function setStudyMode(mode) {
-            alert('Study mode: ' + mode + ' (Full implementation requires JavaScript integration with question bank)');
-        }
-        
-        function loadQuestion() {
-            document.getElementById('question-container').innerHTML = `
-                <div style="padding: 2rem;">
-                    <h3>Sample Question</h3>
-                    <p><strong>Question:</strong> What is the first-line treatment for uncomplicated hypertension in patients under 55?</p>
-                    <div style="margin: 1rem 0;">
-                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">A. ACE inhibitor</button>
-                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">B. Beta-blocker</button>
-                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">C. Calcium channel blocker</button>
-                        <button class="btn btn-outline" style="display: block; width: 100%; margin: 0.5rem 0; text-align: left;">D. Thiazide diuretic</button>
-                    </div>
-                    <p style="margin-top: 1rem; color: #059669;"><strong>Answer: A</strong> - ACE inhibitors are first-line for patients under 55 according to NICE guidelines.</p>
-                </div>
-            `;
-        }
-        
-        function applyFilters() {
-            alert('Filters applied (Full implementation requires JavaScript integration)');
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/subscription.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/akt-questions.js"></script>
+    <script>
+        // Initialize auth state on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for scripts to load
+            await new Promise(resolve => setTimeout(resolve, 200));
+            
+            // Update navigation auth state
+            if (typeof updateNavAuth === 'function') {
+                await updateNavAuth();
+            }
+        });
+    </script>
 </body>
 </html>

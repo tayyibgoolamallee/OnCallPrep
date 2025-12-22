@@ -104,3 +104,4 @@ WHERE email = 'YOUR_EMAIL_HERE';
 
 The code checks: `plan === 'pro' AND (subscription_status === 'active' OR subscription_expires_at is in the future)`
 
+

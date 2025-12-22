@@ -2,10 +2,18 @@
    OnCallPrep - Authentication Utilities
    ============================================ */
 
-let supabaseClient = null;
+// Use window.supabaseClient if it exists, otherwise create a variable
+let supabaseClient = window.supabaseClient || null;
 
 // Initialize Supabase client
 function initSupabase() {
+    // If client already exists, return it
+    if (window.supabaseClient) {
+        supabaseClient = window.supabaseClient;
+        console.log('Supabase client already initialized');
+        return true;
+    }
+    
     if (typeof supabase === 'undefined') {
         console.error('Supabase library not loaded');
         return false;

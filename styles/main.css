@@ -1010,6 +1010,36 @@ h3 {
         display: flex;
     }
 
+    /* Mobile nav open state */
+    .nav-container.mobile-menu-open .nav-links,
+    .nav-container.mobile-menu-open .nav-auth {
+        display: flex;
+    }
+
+    .nav-container.mobile-menu-open .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: var(--space-md);
+        background: rgba(255, 255, 255, 0.98);
+        padding: var(--space-lg) var(--space-md) var(--space-xl);
+        border-bottom: 1px solid var(--color-gray-100);
+        z-index: 999;
+    }
+
+    .nav-container.mobile-menu-open .nav-auth {
+        position: absolute;
+        top: auto;
+        bottom: var(--space-lg);
+        left: 0;
+        right: 0;
+        justify-content: center;
+        gap: var(--space-md);
+        padding: 0 var(--space-md);
+    }
+
     .steps {
         flex-direction: column;
         align-items: center;

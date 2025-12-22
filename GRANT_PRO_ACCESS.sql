@@ -49,3 +49,4 @@ WHERE email = 'your-email@example.com';
 --     subscription_expires_at = NOW() + INTERVAL '1 year'
 -- WHERE id = 'your-user-id-here';
 
+

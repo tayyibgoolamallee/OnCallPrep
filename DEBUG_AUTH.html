@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Debug - OnCallPrep</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .status {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .success { background: #d1fae5; border: 2px solid #10b981; }
+        .error { background: #fee2e2; border: 2px solid #ef4444; }
+        .warning { background: #fef3c7; border: 2px solid #f59e0b; }
+        .info { background: #dbeafe; border: 2px solid #3b82f6; }
+        pre {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        button:hover { background: #2563eb; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Auth Debug Tool</h1>
+    <p>This page helps diagnose authentication and subscription issues.</p>
+    
+    <button onclick="runDiagnostics()">Run Diagnostics</button>
+    <button onclick="clearCache()">Clear Cache</button>
+    
+    <div id="results"></div>
+    
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/subscription.js"></script>
+    <script src="scripts/main.js"></script>
+    
+    <script>
+        async function runDiagnostics() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>Running diagnostics...</p>';
+            
+            try {
+                let html = '<h2>Diagnostic Results</h2>';
+                
+                // 1. Check scripts loaded
+                html += '<div class="status info"><h3>1. Script Loading</h3>';
+                html += '<p>SUPABASE_CONFIG: ' + (typeof SUPABASE_CONFIG !== 'undefined' ? '✅ Loaded' : '❌ Missing') + '</p>';
+                html += '<p>initSupabase: ' + (typeof initSupabase === 'function' ? '✅ Loaded' : '❌ Missing') + '</p>';
+                html += '<p>getUserSubscription: ' + (typeof getUserSubscription === 'function' ? '✅ Loaded' : '❌ Missing') + '</p>';
+                html += '<p>getCurrentUserProfile: ' + (typeof getCurrentUserProfile === 'function' ? '✅ Loaded' : '❌ Missing') + '</p>';
+                html += '<p>getCurrentPlan: ' + (typeof getCurrentPlan === 'function' ? '✅ Loaded' : '❌ Missing') + '</p>';
+                html += '</div>';
+                
+                // 2. Check Supabase client
+                html += '<div class="status info"><h3>2. Supabase Client</h3>';
+                if (typeof window.supabaseClient !== 'undefined' && window.supabaseClient !== null) {
+                    html += '<p>✅ Supabase client exists</p>';
+                    try {
+                        const { data: { user }, error } = await window.supabaseClient.auth.getUser();
+                        if (user) {
+                            html += '<p>✅ User session found</p>';
+                            html += '<pre>User ID: ' + user.id + '\nEmail: ' + (user.email || 'no email') + '</pre>';
+                        } else {
+                            html += '<p>❌ No user session</p>';
+                            if (error) html += '<pre>Error: ' + JSON.stringify(error, null, 2) + '</pre>';
+                        }
+                    } catch (e) {
+                        html += '<p>❌ Error checking user: ' + e.message + '</p>';
+                    }
+                } else {
+                    html += '<p>❌ Supabase client not initialized</p>';
+                    html += '<p>Attempting to initialize...</p>';
+                    if (typeof initSupabase === 'function') {
+                        const result = initSupabase();
+                        html += '<p>Init result: ' + (result ? '✅ Success' : '❌ Failed') + '</p>';
+                        if (result && window.supabaseClient) {
+                            try {
+                                const { data: { user }, error } = await window.supabaseClient.auth.getUser();
+                                if (user) {
+                                    html += '<p>✅ User session found after init</p>';
+                                    html += '<pre>User ID: ' + user.id + '\nEmail: ' + (user.email || 'no email') + '</pre>';
+                                } else {
+                                    html += '<p>❌ Still no user session</p>';
+                                }
+                            } catch (e) {
+                                html += '<p>❌ Error: ' + e.message + '</p>';
+                            }
+                        }
+                    } else {
+                        html += '<p>❌ initSupabase function not available</p>';
+                    }
+                }
+                html += '</div>';
+                
+                // 3. Check user profile
+                html += '<div class="status info"><h3>3. User Profile</h3>';
+                if (typeof getCurrentUserProfile === 'function') {
+                    try {
+                        const profileResult = await getCurrentUserProfile();
+                        html += '<pre>' + JSON.stringify(profileResult, null, 2) + '</pre>';
+                        if (profileResult.success && profileResult.profile) {
+                            html += '<p>✅ Profile retrieved</p>';
+                            html += '<p>Plan: <strong>' + (profileResult.profile.plan || 'not set') + '</strong></p>';
+                            html += '<p>Role: ' + (profileResult.profile.role || 'not set') + '</p>';
+                            html += '<p>Subscription Status: ' + (profileResult.profile.subscription_status || 'not set') + '</p>';
+                        } else {
+                            html += '<p>❌ Profile not found or error</p>';
+                            if (profileResult.error) {
+                                html += '<p>Error: ' + profileResult.error + '</p>';
+                            }
+                        }
+                    } catch (e) {
+                        html += '<p>❌ Error: ' + e.message + '</p>';
+                        html += '<pre>' + e.stack + '</pre>';
+                    }
+                } else {
+                    html += '<p>❌ getCurrentUserProfile function not available</p>';
+                }
+                html += '</div>';
+                
+                // 4. Check subscription
+                html += '<div class="status info"><h3>4. Subscription Status</h3>';
+                if (typeof getUserSubscription === 'function') {
+                    try {
+                        const subscription = await getUserSubscription();
+                        html += '<pre>' + JSON.stringify(subscription, null, 2) + '</pre>';
+                        if (subscription.isPro) {
+                            html += '<p>✅ Pro subscription active</p>';
+                        } else {
+                            html += '<p>❌ Not a pro user</p>';
+                            html += '<p>Plan: ' + (subscription.plan || 'not set') + '</p>';
+                            html += '<p>Subscription Status: ' + (subscription.subscriptionStatus || 'not set') + '</p>';
+                        }
+                    } catch (e) {
+                        html += '<p>❌ Error: ' + e.message + '</p>';
+                        html += '<pre>' + e.stack + '</pre>';
+                    }
+                } else {
+                    html += '<p>❌ getUserSubscription function not available</p>';
+                }
+                html += '</div>';
+                
+                // 5. Check current plan
+                html += '<div class="status info"><h3>5. Current Plan (from getCurrentPlan)</h3>';
+                let detectedPlan = 'unknown';
+                if (typeof getCurrentPlan === 'function') {
+                    try {
+                        detectedPlan = await getCurrentPlan();
+                        html += '<p>Plan: <strong>' + detectedPlan + '</strong></p>';
+                        if (detectedPlan === 'pro') {
+                            html += '<p>✅ Pro plan detected</p>';
+                        } else {
+                            html += '<p>❌ Not pro plan</p>';
+                        }
+                    } catch (e) {
+                        html += '<p>❌ Error: ' + e.message + '</p>';
+                        html += '<pre>' + e.stack + '</pre>';
+                    }
+                } else {
+                    html += '<p>❌ getCurrentPlan function not available</p>';
+                }
+                html += '</div>';
+                
+                // 6. Check localStorage
+                html += '<div class="status info"><h3>6. LocalStorage</h3>';
+                if (window.localStorage) {
+                    const storedPlan = localStorage.getItem('oncallprep_plan');
+                    html += '<p>Stored plan: ' + (storedPlan || 'none') + '</p>';
+                    
+                    // Check Supabase session keys
+                    let supabaseKeys = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key && key.startsWith('sb-')) {
+                            supabaseKeys.push(key);
+                        }
+                    }
+                    html += '<p>Supabase session keys found: ' + supabaseKeys.length + '</p>';
+                    if (supabaseKeys.length > 0) {
+                        html += '<pre>' + supabaseKeys.join('\n') + '</pre>';
+                    }
+                } else {
+                    html += '<p>❌ localStorage not available</p>';
+                }
+                html += '</div>';
+                
+                // Summary
+                const summaryClass = detectedPlan === 'pro' ? 'success' : 'warning';
+                html += '<div class="status ' + summaryClass + '"><h3>Summary</h3>';
+                html += '<p>Detected Plan: <strong>' + detectedPlan + '</strong></p>';
+                html += '<p>Based on the diagnostics above, check:</p>';
+                html += '<ul>';
+                html += '<li>Is Supabase client initialized? (Section 2)</li>';
+                html += '<li>Is user logged in? (Section 2)</li>';
+                html += '<li>Does profile have plan="pro"? (Section 3)</li>';
+                html += '<li>Does getUserSubscription return isPro=true? (Section 4)</li>';
+                html += '<li>Does getCurrentPlan return "pro"? (Section 5)</li>';
+                html += '</ul>';
+                html += '</div>';
+                
+                results.innerHTML = html;
+            } catch (error) {
+                results.innerHTML = '<div class="status error"><h3>Error Running Diagnostics</h3><p>' + error.message + '</p><pre>' + error.stack + '</pre></div>';
+            }
+        }
+        
+        function clearCache() {
+            if (window.localStorage) {
+                localStorage.removeItem('oncallprep_plan');
+                // Clear Supabase session
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith('sb-')) {
+                        keysToRemove.push(key);
+                    }
+                }
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+                alert('Cache cleared! Removed ' + (keysToRemove.length + 1) + ' items. Please refresh the page.');
+            }
+        }
+        
+        // Wait for scripts to load, then run diagnostics
+        function waitForScripts() {
+            let attempts = 0;
+            const maxAttempts = 20;
+            
+            const checkScripts = setInterval(() => {
+                attempts++;
+                if (typeof SUPABASE_CONFIG !== 'undefined' || attempts >= maxAttempts) {
+                    clearInterval(checkScripts);
+                    if (attempts >= maxAttempts) {
+                        document.getElementById('results').innerHTML = '<div class="status error"><p>Scripts did not load in time. Please check the browser console for errors.</p></div>';
+                    } else {
+                        setTimeout(runDiagnostics, 500);
+                    }
+                }
+            }, 200);
+        }
+        
+        // Start when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', waitForScripts);
+        } else {
+            waitForScripts();
+        }
+    </script>
+</body>
+</html>
+

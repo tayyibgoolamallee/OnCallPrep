@@ -4,35 +4,39 @@
  */
 
 function calculateScore(button) {
-    // Find the assessment content - could be in details or directly in parent
-    let assessmentContent = button.closest('.assessment-content');
-    if (!assessmentContent) {
-        const details = button.closest('details');
-        if (details) {
-            assessmentContent = details.querySelector('.assessment-content');
-        } else {
-            // Try finding it in a parent container
-            const parent = button.closest('div[style*="padding"]');
-            if (parent) {
-                assessmentContent = parent.querySelector('.assessment-content') || parent;
-            }
+    // Find the parent container that holds all assessment domains
+    // The button is inside the self-assessment section, find the parent div that contains all domains
+    let assessmentContainer = null;
+    
+    // First, try to find a parent that contains assessment-details elements
+    let parent = button.parentElement;
+    while (parent && parent !== document.body) {
+        if (parent.querySelector('.assessment-details')) {
+            assessmentContainer = parent;
+            break;
         }
+        parent = parent.parentElement;
     }
     
-    if (!assessmentContent) {
-        console.error('Could not find assessment content');
+    // Fallback: look for div with padding that contains assessment content
+    if (!assessmentContainer) {
+        assessmentContainer = button.closest('div[style*="padding"]');
+    }
+    
+    if (!assessmentContainer) {
+        console.error('Could not find assessment container');
         return;
     }
     
-    // Get all checkboxes for each domain
-    const domain1Checks = assessmentContent.querySelectorAll('.domain1-check:checked');
-    const domain2Checks = assessmentContent.querySelectorAll('.domain2-check:checked');
-    const domain3Checks = assessmentContent.querySelectorAll('.domain3-check:checked');
+    // Get all checkboxes for each domain across ALL assessment-content divs in the container
+    const domain1Checks = assessmentContainer.querySelectorAll('.domain1-check:checked');
+    const domain2Checks = assessmentContainer.querySelectorAll('.domain2-check:checked');
+    const domain3Checks = assessmentContainer.querySelectorAll('.domain3-check:checked');
     
-    // Count total items per domain
-    const domain1Total = assessmentContent.querySelectorAll('.domain1-check').length;
-    const domain2Total = assessmentContent.querySelectorAll('.domain2-check').length;
-    const domain3Total = assessmentContent.querySelectorAll('.domain3-check').length;
+    // Count total items per domain across all domains
+    const domain1Total = assessmentContainer.querySelectorAll('.domain1-check').length;
+    const domain2Total = assessmentContainer.querySelectorAll('.domain2-check').length;
+    const domain3Total = assessmentContainer.querySelectorAll('.domain3-check').length;
     
     // Calculate domain scores based on percentage of items checked
     // Each domain can score 0-4 points: 4=Clear Pass, 3=Pass, 2=Fail, 1=Clear Fail, 0=No items
@@ -89,21 +93,15 @@ function calculateScore(button) {
     const domain3Grade = getDomainGradeLabel(domain3Points);
     
     // Display result - find result div in parent container
-    let resultDiv = assessmentContent.querySelector('.score-result');
-    if (!resultDiv) {
-        // Try finding it in a parent container
-        const parent = assessmentContent.closest('div[style*="padding"]') || assessmentContent.parentElement;
-        if (parent) {
-            resultDiv = parent.querySelector('.score-result');
-        }
-    }
+    let resultDiv = assessmentContainer.querySelector('.score-result');
     
     if (!resultDiv) {
-        // Create result div if it doesn't exist
+        // Create result div if it doesn't exist - place it after the last details element or before the button
         resultDiv = document.createElement('div');
         resultDiv.className = 'score-result';
         resultDiv.style.display = 'none';
-        button.parentElement.appendChild(resultDiv);
+        // Insert before the button's parent (which contains the button)
+        button.parentElement.insertBefore(resultDiv, button.nextSibling);
     }
     
     let scoreBreakdown = resultDiv.querySelector('.score-breakdown');
