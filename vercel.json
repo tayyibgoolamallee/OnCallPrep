@@ -1,0 +1,10 @@
+{
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "functions": {
+    "api/reflect/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
+
