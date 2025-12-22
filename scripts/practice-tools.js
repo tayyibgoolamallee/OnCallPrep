@@ -99,204 +99,69 @@ const diagnoses = [
 ];
 
 // ============================================
-// PRIMING CASES DATA
+// PRIMING CASES DATA (EMBEDDED)
 // ============================================
 
-const primingCases = [
-    {
-        name: "Sarah Mitchell",
-        age: 45,
-        gender: "Female",
-        presenting: "Tiredness for 3 months",
-        pmh: "None significant",
-        medications: "None",
-        notes: "Receptionist noted patient looked tearful when booking",
-        primingFocus: `
-            Use the 3 minutes to decide whether this is likely to be physical, psychological, or mixed tiredness.
-            Map out how you will screen for red flags (weight loss, bleeding, infection), common physical causes (anaemia, thyroid, diabetes, sleep apnoea),
-            and depression/anxiety while still keeping the consultation kind and validating.
-        `,
-        examinerLens: `
-            The examiner wants to see that you do not jump straight to “it’s stress” and that you cover a safe physical screen while still picking up
-            the emotional cues (tearful, 3‑month history). They are looking for a structured tired-all-the-time approach (timeline, impact, red flags,
-            sleep, mood, PMH, drug/social) and that you create space for a psychological agenda without over‑medicalising.
-        `,
-        approach: [
-            "Consider: depression screen, anaemia, thyroid, diabetes, sleep issues",
-            "Explore: work/home stress, sleep pattern, mood, appetite",
-            "ICE: What does she think is causing it? What's her biggest concern?",
-            "Be alert: tearful → may have psychosocial agenda"
-        ]
-    },
-    {
-        name: "James Cooper",
-        age: 67,
-        gender: "Male",
-        presenting: "Chest pain - wants to discuss",
-        pmh: "Hypertension, Type 2 DM, Ex-smoker",
-        medications: "Amlodipine 5mg, Metformin 500mg BD",
-        notes: "Last BP 148/92, HbA1c 58 three months ago",
-        primingFocus: `
-            Decide in advance how you will rapidly risk‑stratify chest pain in primary care: character, time course, red flags and immediate disposition.
-            Plan the order of questions so that in the first 2–3 minutes you know whether this is likely ACS, stable angina, MSK, or reflux,
-            and whether you need 999, same‑day admission, or routine follow‑up.
-        `,
-        examinerLens: `
-            The examiner is testing whether you recognise high cardiovascular risk and prioritise safety.
-            They are looking for clear, calm early screening for ACS, an explanation that matches the level of risk,
-            and a plan that is proportionate (safety over reassurance). Poor marks if you offer routine outpatient workup when urgent assessment is required.
-        `,
-        approach: [
-            "Red flags: Clarify nature of chest pain urgently - cardiac vs MSK vs GI",
-            "Risk factors: Known CV risk (HTN, DM, ex-smoker, age, male)",
-            "Key questions: Exertional? Radiation? Associated symptoms? Duration?",
-            "Be ready: May need same-day referral if concerning features"
-        ]
-    },
-    {
-        name: "Emma Watson",
-        age: 28,
-        gender: "Female",
-        presenting: "Headaches - getting worse",
-        pmh: "Migraines since teens",
-        medications: "Combined oral contraceptive",
-        notes: "3 appointments in last 2 months for headaches",
-        primingFocus: `
-            Use this time to separate primary headache (migraine/tension) from red‑flag secondary causes.
-            Plan how you will explore “change in pattern”, medication overuse, impact on function, and how you will review the safety of the combined pill if aura is present.
-        `,
-        examinerLens: `
-            The examiner wants to see that you take new or changing headache seriously and know the red flag framework (SNOOP).
-            They are checking that you link migraines and oestrogen to stroke risk, and that you can sensitively negotiate contraception change if needed.
-            Marks are lost if you accept “worse headaches” at face value without exploring what “worse” means.
-        `,
-        approach: [
-            "Red flags: Thunderclap, neurological symptoms, worse lying down, early morning",
-            "Key issue: Change in pattern - why worse? New features?",
-            "Important: Migraines + COC = check for aura (stroke risk)",
-            "Consider: Medication overuse headache, stress, vision changes"
-        ]
-    },
-    {
-        name: "David Patel",
-        age: 52,
-        gender: "Male",
-        presenting: "Wants to discuss blood test results",
-        pmh: "Obesity (BMI 34), Fatty liver",
-        medications: "None",
-        notes: "Recent bloods: HbA1c 48, LFTs mildly elevated, lipids raised",
-        primingFocus: `
-            Plan how you will break the news of a new diabetes diagnosis in a clear, hopeful, and structured way.
-            Think through how you will explain what HbA1c means, link it to his weight and liver, and build a collaborative lifestyle and medication plan without shaming.
-        `,
-        examinerLens: `
-            The examiner is looking for safe, calm breaking of metabolic news and good cardiovascular risk thinking.
-            They want to see you check understanding, use simple language around “blood sugar over time” and involve the patient in choosing first steps (diet, activity, tablets).
-            Marks drop if you are didactic, focus only on numbers or skip safety‑netting around hyperglycaemia.
-        `,
-        approach: [
-            "Breaking news: Pre-diabetes diagnosis (HbA1c 42-47 = prediabetes, but 48 = diabetes)",
-            "Check: Actually this IS diabetes (HbA1c ≥48)",
-            "Agenda: Lifestyle discussion, CV risk assessment, need for treatment",
-            "Explore: Understanding, readiness to change, concerns about diagnosis"
-        ]
-    },
-    {
-        name: "Linda Chen",
-        age: 35,
-        gender: "Female",
-        presenting: "Skin rash on hands",
-        pmh: "Hay fever, childhood eczema",
-        medications: "Cetirizine PRN",
-        notes: "Works as a hairdresser",
-        primingFocus: `
-            Prime yourself to think “occupational dermatology”.
-            Plan how you will link distribution of the rash with wet work, products and gloves, while balancing short‑term symptom relief with longer‑term prevention and
-            potential need for an occupational health referral.
-        `,
-        examinerLens: `
-            The examiner is assessing whether you spot the occupational clue and think beyond “another flare of eczema”.
-            They are looking for you to ask about work pattern, glove use, irritants and to safety‑net around worsening, infection and impact on employment.
-            Marks are lost if you miss the opportunity to discuss modification of work exposures.
-        `,
-        approach: [
-            "Occupational: Hairdresser = contact dermatitis highly likely",
-            "Pattern: Distribution, triggers, relationship to work",
-            "History: Atopic background increases risk",
-            "Management: Emollients, avoidance, gloves, may need referral if occupational"
-        ]
-    },
-    {
-        name: "Michael Brown",
-        age: 72,
-        gender: "Male",
-        presenting: "Falls - daughter concerned",
-        pmh: "Hypertension, BPH, Cataracts",
-        medications: "Doxazosin 4mg, Tamsulosin 400mcg, Ramipril 5mg",
-        notes: "Daughter called to request appointment",
-        primingFocus: `
-            Use the priming time to structure a multifactorial falls assessment.
-            Think drugs, vision, environment, cognition and strength/balance, and how you will bring the daughter in as a collaborative historian while maintaining the patient’s autonomy.
-        `,
-        examinerLens: `
-            The examiner wants to see that you recognise postural hypotension risk (doxazosin), polypharmacy and frailty.
-            They are looking for prioritisation of safety (injury risk, head trauma, safeguarding) and a plan that includes medication review, simple tests, and signposting to falls services.
-        `,
-        approach: [
-            "Multifactorial: Vision, medications (doxazosin!), environment, cognition",
-            "Key: Doxazosin causes postural hypotension - common falls cause",
-            "Assess: Lying/standing BP, gait, vision, cognition screen",
-            "Involve: Patient AND daughter - collateral history important"
-        ]
-    },
-    {
-        name: "Sophie Taylor",
-        age: 16,
-        gender: "Female",
-        presenting: "Abdominal pain",
-        pmh: "None",
-        medications: "None",
-        notes: "Mum in waiting room, patient asked to be seen alone",
-        primingFocus: `
-            Prime yourself around confidentiality, safeguarding and adolescent consultation skills.
-            Plan how you will explain confidentiality limits, explore sexual health and pregnancy sensitively, and still cover an appropriate physical screen for abdominal pain.
-        `,
-        examinerLens: `
-            The examiner is testing your ability to balance autonomy and safeguarding.
-            They want to see you create a safe space, ask about sex, relationships and home in a non‑judgemental way, and know when to involve a parent or senior if you are worried.
-        `,
-        approach: [
-            "Confidentiality: Under 18 but Gillick competent - respect request",
-            "Consider: Sexual health, pregnancy, safeguarding",
-            "Approach: Non-judgmental, explain confidentiality limits",
-            "Safety: Ask about home situation, relationships sensitively"
-        ]
-    },
-    {
-        name: "Robert Williams",
-        age: 58,
-        gender: "Male",
-        presenting: "Difficulty sleeping",
-        pmh: "Depression (10 years ago), Alcohol excess (historical)",
-        medications: "None current",
-        notes: "Recently made redundant per previous notes",
-        primingFocus: `
-            Use these 3 minutes to decide how you will separate primary insomnia from relapse of depression or harmful coping strategies.
-            Plan a structure that explores sleep pattern, daytime function, alcohol, mood and risk, while avoiding the trap of quick hypnotic prescribing.
-        `,
-        examinerLens: `
-            The examiner wants to see that you pick up the context of job loss and previous depression and alcohol excess.
-            They are assessing whether you screen for suicidal ideation, explore alcohol use carefully, and offer evidence‑based options (CBT‑I principles, sleep hygiene, mood support)
-            instead of simply prescribing sedatives.
-        `,
-        approach: [
-            "Mental health: Depression relapse risk - job loss is major trigger",
-            "Alcohol: Historical excess - check current use, coping mechanism",
-            "Sleep: Pattern, early morning waking (depression), alcohol use",
-            "Risk: Assess mood, suicidal ideation given circumstances"
-        ]
+// Embedded priming cases - works with both file:// and http:// protocols
+// This allows the tool to work locally without a web server
+let primingCases = [];
+let primingCasesLoaded = false;
+
+// Load embedded cases from JSON file (will be injected here)
+async function loadPrimingCases() {
+    // First try to load from JSON file (works on web servers like Vercel)
+    if (window.location.protocol !== 'file:') {
+        try {
+            const paths = [
+                'data/priming-cases.json',
+                './data/priming-cases.json',
+                '/data/priming-cases.json'
+            ];
+            
+            for (const path of paths) {
+                try {
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data && data.cases && Array.isArray(data.cases)) {
+                            primingCases = data.cases;
+                            primingCasesLoaded = true;
+                            console.log(`✓ Loaded ${primingCases.length} cases from JSON file: ${path}`);
+                            return true;
+                        }
+                    }
+                } catch (e) {
+                    continue;
+                }
+            }
+        } catch (error) {
+            console.log('Could not load from JSON, using embedded cases');
+        }
     }
-];
+    
+    // Fallback to embedded cases (works everywhere, including file://)
+    // Embedded cases will be loaded from external file
+    try {
+        // Try to load embedded cases script
+        if (typeof EMBEDDED_PRIMING_CASES !== 'undefined') {
+            primingCases = EMBEDDED_PRIMING_CASES;
+            primingCasesLoaded = true;
+            console.log(`✓ Loaded ${primingCases.length} embedded priming cases`);
+            return true;
+        }
+    } catch (e) {
+        console.warn('Embedded cases not available');
+    }
+    
+    // If we get here, something went wrong
+    console.error('❌ Could not load priming cases');
+    primingCases = [];
+    primingCasesLoaded = false;
+    return false;
+}
+
+// Load cases when script loads
+loadPrimingCases();
 
 // ============================================
 // 2-MINUTE DIAGNOSIS GENERATOR
@@ -836,7 +701,40 @@ let primingApproach = null;
 let approachContent = null;
 let primingTimerRunning = false;
 
-function getRandomCase() {
+async function getRandomCase() {
+    // Wait for cases to load if not loaded yet
+    if (!primingCasesLoaded && !primingCasesLoading) {
+        await loadPrimingCases();
+    }
+    
+    // If still not loaded, wait a bit and try again
+    let attempts = 0;
+    while (!primingCasesLoaded && attempts < 10) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+    }
+    
+    if (!primingCases || primingCases.length === 0) {
+        console.warn('Priming cases not loaded. Attempting to reload...');
+        await loadPrimingCases();
+        
+        if (!primingCases || primingCases.length === 0) {
+            // Return a placeholder case if data still hasn't loaded
+            return {
+                name: "Error Loading Cases",
+                age: 0,
+                gender: "",
+                presenting: "Unable to load cases from repository",
+                pmh: "",
+                medications: "",
+                notes: "Please refresh the page. If the problem persists, check the browser console for errors.",
+                primingFocus: "The priming cases repository could not be loaded. Please check that data/priming-cases.json exists and refresh the page.",
+                examinerLens: "",
+                approach: []
+            };
+        }
+    }
+    
     const randomIndex = Math.floor(Math.random() * primingCases.length);
     return primingCases[randomIndex];
 }
@@ -967,7 +865,7 @@ function resetPrimingTimer() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     primingInfo = document.getElementById('priming-info');
     primingTimerDisplay = document.getElementById('priming-timer-display');
     primingTimerProgress = document.getElementById('priming-timer-progress');
@@ -976,22 +874,111 @@ document.addEventListener('DOMContentLoaded', () => {
     showApproachBtn = document.getElementById('show-approach-btn');
     primingApproach = document.getElementById('priming-approach');
     approachContent = document.getElementById('approach-content');
+    
+    // Wait for cases to load before enabling button
+    if (generateCaseBtn) {
+        generateCaseBtn.disabled = true;
+        generateCaseBtn.textContent = 'Loading cases...';
+    }
+    
+    // Load cases and enable button when ready
+    const loaded = await loadPrimingCases();
+    
+    if (generateCaseBtn) {
+        if (loaded && primingCasesLoaded && primingCases.length > 0) {
+            generateCaseBtn.disabled = false;
+            generateCaseBtn.textContent = `New Priming Case (${primingCases.length} available)`;
+            console.log(`✓ Priming tool ready with ${primingCases.length} cases`);
+        } else {
+            generateCaseBtn.disabled = false; // Allow clicking to see error
+            generateCaseBtn.textContent = 'Error Loading - Click to Retry';
+            console.error('Failed to load priming cases. Button will attempt reload on click.');
+            
+            // Show error message in priming info area
+            if (primingInfo) {
+                primingInfo.innerHTML = `
+                    <div class="case-info-display" style="color: #dc2626; padding: 1rem;">
+                        <h4>⚠️ Error Loading Cases</h4>
+                        <p>Could not load priming cases from repository. Please:</p>
+                        <ul style="text-align: left; margin: 1rem 0;">
+                            <li>Check your browser console (F12) for details</li>
+                            <li>Ensure you're running from a web server (not file://)</li>
+                            <li>Verify data/priming-cases.json exists</li>
+                            <li>Try refreshing the page</li>
+                        </ul>
+                        <p><strong>Click "New Priming Case" to retry loading.</strong></p>
+                    </div>
+                `;
+            }
+        }
+    }
 
     if (generateCaseBtn) {
-        generateCaseBtn.addEventListener('click', () => {
-            currentCase = getRandomCase();
-            displayCase(currentCase);
-            displayApproach(currentCase);
-            resetPrimingTimer();
-            if (startPrimingBtn) {
-                startPrimingBtn.disabled = false;
-                startPrimingBtn.textContent = 'Start 3‑Minute Timer';
+        generateCaseBtn.addEventListener('click', async () => {
+            // If cases aren't loaded, try loading first
+            if (!primingCasesLoaded || primingCases.length === 0) {
+                console.log('Cases not loaded, attempting to load...');
+                generateCaseBtn.disabled = true;
+                generateCaseBtn.textContent = 'Loading cases...';
+                
+                const loaded = await loadPrimingCases();
+                if (!loaded || primingCases.length === 0) {
+                    generateCaseBtn.disabled = false;
+                    generateCaseBtn.textContent = 'Error - Click to Retry';
+                    if (primingInfo) {
+                        primingInfo.innerHTML = `
+                            <div class="case-info-display" style="color: #dc2626; padding: 1rem;">
+                                <h4>⚠️ Failed to Load Cases</h4>
+                                <p>Please check the browser console (F12) for error details.</p>
+                                <p>Make sure you're running from a web server, not opening the file directly.</p>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
             }
-            if (showApproachBtn) {
-                showApproachBtn.disabled = false; // allow immediate viewing
-            }
-            if (primingApproach) {
-                primingApproach.style.display = 'none';
+            
+            // Show loading state
+            const originalText = generateCaseBtn.textContent;
+            generateCaseBtn.disabled = true;
+            generateCaseBtn.textContent = 'Loading case...';
+            
+            try {
+                currentCase = await getRandomCase();
+                
+                if (!currentCase || currentCase.name === "Error Loading Cases") {
+                    throw new Error('Failed to get valid case');
+                }
+                
+                displayCase(currentCase);
+                displayApproach(currentCase);
+                resetPrimingTimer();
+                if (startPrimingBtn) {
+                    startPrimingBtn.disabled = false;
+                    startPrimingBtn.textContent = 'Start 3‑Minute Timer';
+                }
+                if (showApproachBtn) {
+                    showApproachBtn.disabled = false; // allow immediate viewing
+                }
+                if (primingApproach) {
+                    primingApproach.style.display = 'none';
+                }
+                
+                console.log(`✓ Generated case: ${currentCase.name} (${currentCase.presenting})`);
+            } catch (error) {
+                console.error('Error generating case:', error);
+                if (primingInfo) {
+                    primingInfo.innerHTML = `
+                        <div class="case-info-display" style="color: #dc2626; padding: 1rem;">
+                            <h4>Error Loading Case</h4>
+                            <p>${error.message}</p>
+                            <p>Please try again or refresh the page.</p>
+                        </div>
+                    `;
+                }
+            } finally {
+                generateCaseBtn.disabled = false;
+                generateCaseBtn.textContent = originalText || `New Priming Case (${primingCases.length} available)`;
             }
         });
     }
