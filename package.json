@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "OnCallPrep - GP Training Resources",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'No build step required'"
+    "dev": "vercel dev"
   },
   "dependencies": {
     "openai": "^4.20.0"
