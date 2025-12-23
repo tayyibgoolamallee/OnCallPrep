@@ -3,14 +3,17 @@
 Static front‑end site with Vercel serverless support for the AI Reflection Assistant.
 
 ## Structure (current)
-- Root HTML pages (e.g. `index.html`, `sca.html`, `akt.html`, `portfolio.html`, etc.)
-- Styles: `styles/` (page styles, layout, components)
-- Scripts: `scripts/` (auth, config, practice tools, main)
-- Data: `data/` (priming cases, AKT questions)
-- API: `api/reflect/index.js` (Vercel serverless function for AI reflections)
-- Config: `vercel.json`, `package.json`
-- Docs: `docs/` (deployment, troubleshooting, stripe)
-- Meta: `meta/` (planning notes)
+- `public/` — deploy output (per `vercel.json`)
+  - `index.html` — homepage
+  - `pages/` — all other site pages (SCA, AKT, portfolio, pricing, etc.)
+  - `styles/` — CSS
+  - `scripts/` — browser JS
+  - `data/` — JSON / embedded data
+- `api/` — serverless functions (e.g., `api/reflect/index.js`)
+- `scripts-tools/` — helper Python scripts
+- `sql/` — Supabase SQL helpers
+- `docs/` — deployment, auth/Supabase, Stripe, checklists, git help
+- `meta/` — planning notes
 
 ## Local run
 This is a static site. Any simple server works:
@@ -21,7 +24,7 @@ python3 -m http.server 8000
 
 ## Deployment
 - Vercel auto‑deploys on push to `main`.
-- `vercel.json` is configured for static output from root; serverless lives in `api/`.
+- `vercel.json` points to `public/` as the output directory; serverless lives in `api/`.
 
 ## AI Reflection Assistant
 - Serverless function: `api/reflect/index.js`
@@ -51,20 +54,20 @@ OnCallPrep is a web application designed to help GP (General Practice) trainees 
 
 ```
 oncallprep-project/
-├── index.html          # Landing page (homepage)
-├── pricing.html        # Pricing plans and subscription options
-├── about.html          # About us page
-├── contact.html        # Contact form and information
-├── login.html          # User login page
-├── signup.html         # User registration page
-├── styles/
-│   ├── main.css        # Main stylesheet with brand colors
-│   ├── pricing.css     # Pricing page specific styles
-│   └── pages.css       # Shared styles for inner pages
-├── scripts/
-│   ├── main.js         # Main JavaScript (navigation, animations)
-│   └── pricing.js      # Pricing page interactions
-└── README.md           # This file!
+├── public/
+│   ├── index.html              # Homepage
+│   ├── pages/                  # All site pages (SCA, AKT, portfolio, etc.)
+│   ├── scripts/                # Browser JS
+│   ├── styles/                 # CSS
+│   └── data/                   # JSON / embedded data
+├── api/                        # Vercel serverless functions
+├── scripts-tools/              # Helper Python scripts
+├── sql/                        # Supabase SQL helpers
+├── docs/                       # Deployment/auth/Stripe/checklists/git docs
+├── meta/                       # Planning notes
+├── vercel.json                 # Output directory config
+├── package.json                # Dependencies (OpenAI client)
+└── README.md
 ```
 
 ## 🚀 How to View Your Website

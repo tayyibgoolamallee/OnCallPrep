@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Topics | OnCallPrep</title>
+    <meta name="description" content="Comprehensive clinical topics guide covering common GP presentations with symptoms, differentials, management, and safety netting.">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/pages.css">
+    <link rel="stylesheet" href="/styles/content.css">
+    <link rel="stylesheet" href="/styles/clinical.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/index.html" class="logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/pages/portfolio.html">Portfolio</a></li>
+                <li><a href="/pages/sca.html">SCA</a></li>
+                <li><a href="/pages/akt.html">AKT</a></li>
+                <li><a href="/pages/hidden-curriculum.html">Hidden Curriculum</a></li>
+                <li><a href="/pages/trainers.html">Trainers</a></li>
+                <li><a href="/pages/pricing.html">Pricing</a></li>
+                <li><a href="/pages/contact.html">About &amp; Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="/pages/login.html" class="btn btn-ghost">Log in</a>
+                <a href="/pages/signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header page-header-clinical">
+        <div class="container">
+            <h1>Clinical Topics</h1>
+            <p>Comprehensive guides to common GP presentations</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-page">
+        <div class="container">
+            <div class="content-intro">
+                <p>Detailed clinical topic guides covering symptoms, differential diagnoses, management, and safety netting. Essential knowledge for AKT and clinical practice.</p>
+            </div>
+
+            <!-- Free Topics -->
+            <div class="content-section">
+                <h2>Free Sample Topics</h2>
+                <p style="font-size: 1.125rem; color: var(--color-gray-700); margin-bottom: var(--space-xl);">Click on any topic below to view detailed information. These are free samples to help you understand our approach—clear, practical, and easy to understand.</p>
+                
+                <div class="resources-grid" style="margin-bottom: var(--space-2xl);">
+                    <div class="resource-card" onclick="toggleTopic('asthma')" style="cursor: pointer;">
+                        <div class="resource-icon">🫁</div>
+                        <h3>Asthma</h3>
+                        <p>Diagnosis, management, and monitoring</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                    <div class="resource-card" onclick="toggleTopic('copd')" style="cursor: pointer;">
+                        <div class="resource-icon">💨</div>
+                        <h3>COPD</h3>
+                        <p>Assessment and management</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                    <div class="resource-card" onclick="toggleTopic('hypertension')" style="cursor: pointer;">
+                        <div class="resource-icon">🩺</div>
+                        <h3>Hypertension</h3>
+                        <p>Diagnosis and treatment</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                    <div class="resource-card" onclick="toggleTopic('heart-failure')" style="cursor: pointer;">
+                        <div class="resource-icon">❤️</div>
+                        <h3>Heart Failure</h3>
+                        <p>Assessment and management</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                    <div class="resource-card" onclick="toggleTopic('ibs')" style="cursor: pointer;">
+                        <div class="resource-icon">🫀</div>
+                        <h3>IBS</h3>
+                        <p>Irritable bowel syndrome</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                    <div class="resource-card" onclick="toggleTopic('eczema')" style="cursor: pointer;">
+                        <div class="resource-icon">🧴</div>
+                        <h3>Eczema</h3>
+                        <p>Atopic dermatitis management</p>
+                        <span class="resource-tag tag-free">Free</span>
+                    </div>
+                </div>
+
+                <!-- Topic Content Areas -->
+                <div id="topic-content" style="display: none; margin-top: var(--space-2xl);">
+                    <!-- Content will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Pro Topics -->
+            <div class="content-section">
+                <h2>Pro Topics Library (50+ Topics)</h2>
+                <div class="info-box tip">
+                    <div class="info-box-title">Upgrade to Pro</div>
+                    <p>Access 50+ additional clinical topics organized by system:</p>
+                    <ul>
+                        <li>Cardiovascular (10+ topics)</li>
+                        <li>Respiratory (8+ topics)</li>
+                        <li>Gastroenterology (8+ topics)</li>
+                        <li>Endocrine (6+ topics)</li>
+                        <li>Mental Health (6+ topics)</li>
+                        <li>Women's Health (5+ topics)</li>
+                        <li>Paediatrics (5+ topics)</li>
+                        <li>Dermatology (4+ topics)</li>
+                        <li>And more...</li>
+                    </ul>
+                    <a href="/pages/pricing.html" class="btn btn-primary" style="margin-top: var(--space-md);">Upgrade to Pro</a>
+                </div>
+            </div>
+
+            <!-- Topic Structure -->
+            <div class="content-section">
+                <h2>What's Included in Each Topic</h2>
+                <div class="checklist">
+                    <ul>
+                        <li><span class="check-icon">✓</span><strong>Key Symptoms:</strong> Common presenting complaints</li>
+                        <li><span class="check-icon">✓</span><strong>Differential Diagnoses:</strong> What else could it be?</li>
+                        <li><span class="check-icon">✓</span><strong>Assessment:</strong> History, examination, investigations</li>
+                        <li><span class="check-icon">✓</span><strong>Management:</strong> NICE/CKS guidelines</li>
+                        <li><span class="check-icon">✓</span><strong>Safety Netting:</strong> When to worry, when to refer</li>
+                        <li><span class="check-icon">✓</span><strong>Follow-up:</strong> Monitoring and review</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/index.html" class="logo">
+                        <span class="logo-icon"></span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/scripts/supabase-config.js"></script>
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/subscription.js"></script>
+    <script src="/scripts/main.js"></script>
+    
+    <script>
+        // Clinical topics content
+        const topicsContent = {
+            'asthma': {
+                title: 'Asthma',
+                icon: '🫁',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">🫁</span>
+                            <span>Asthma</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is Asthma?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                Think of asthma like a sensitive airway that overreacts. When triggered, the airways narrow, making it harder to breathe out. It's like trying to breathe through a narrow straw that keeps getting tighter.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Key Symptoms</h3>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li><strong>Wheeze:</strong> A whistling sound when breathing out (like air through a narrow tube)</li>
+                                <li><strong>Breathlessness:</strong> Feeling like you can't get enough air, especially on exertion</li>
+                                <li><strong>Chest tightness:</strong> Like a band around the chest</li>
+                                <li><strong>Cough:</strong> Often worse at night or early morning</li>
+                                <li><strong>Variable symptoms:</strong> Better with treatment, worse with triggers</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Differential Diagnoses</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-sm);">When someone presents with breathlessness or wheeze, consider:</p>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li><strong>COPD:</strong> Usually older, smokers, symptoms don't vary much</li>
+                                <li><strong>Heart failure:</strong> Older, cardiac risk factors, ankle swelling</li>
+                                <li><strong>Anxiety:</strong> Hyperventilation, no wheeze, normal examination</li>
+                                <li><strong>Vocal cord dysfunction:</strong> Difficulty breathing IN, not out</li>
+                                <li><strong>GORD:</strong> Acid reflux can trigger asthma-like symptoms</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Assessment</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
+                                <div style="padding: var(--space-md); background: var(--color-primary-50); border-radius: var(--radius-md);">
+                                    <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-xs);">History</strong>
+                                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9375rem; color: var(--color-gray-700); line-height: 1.6;">
+                                        <li>Pattern of symptoms</li>
+                                        <li>Triggers (pollen, dust, exercise)</li>
+                                        <li>Family history</li>
+                                        <li>Atopy (eczema, hayfever)</li>
+                                    </ul>
+                                </div>
+                                <div style="padding: var(--space-md); background: var(--color-primary-50); border-radius: var(--radius-md);">
+                                    <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-xs);">Examination</strong>
+                                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9375rem; color: var(--color-gray-700); line-height: 1.6;">
+                                        <li>Wheeze on auscultation</li>
+                                        <li>Hyperinflated chest</li>
+                                        <li>Peak flow (if available)</li>
+                                    </ul>
+                                </div>
+                                <div style="padding: var(--space-md); background: var(--color-primary-50); border-radius: var(--radius-md);">
+                                    <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-xs);">Investigations</strong>
+                                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9375rem; color: var(--color-gray-700); line-height: 1.6;">
+                                        <li>Spirometry (FEV1/FVC < 70%)</li>
+                                        <li>Reversibility test</li>
+                                        <li>FeNO (if available)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-success-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-success-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Step 1:</strong> SABA (salbutamol) as needed - the "reliever" inhaler
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Step 2:</strong> Add low-dose ICS (beclomethasone) - the "preventer" inhaler
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Step 3:</strong> Increase ICS or add LABA (long-acting beta-agonist)
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Step 4-5:</strong> Further escalation (higher doses, add-on therapies)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Safety Netting</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-warning-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-warning-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8; font-weight: 600;">
+                                    Refer urgently if:
+                                </p>
+                                <ul style="margin: var(--space-sm) 0 0 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                    <li>Life-threatening asthma (silent chest, exhaustion, confusion)</li>
+                                    <li>Severe asthma attack not responding to treatment</li>
+                                    <li>Peak flow < 50% of best or predicted</li>
+                                </ul>
+                                <p style="margin: var(--space-md) 0 0 0; color: var(--color-gray-700); line-height: 1.8; font-weight: 600;">
+                                    Review if:
+                                </p>
+                                <ul style="margin: var(--space-sm) 0 0 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                    <li>Using SABA more than 3x/week</li>
+                                    <li>Waking at night with symptoms</li>
+                                    <li>Symptoms affecting daily activities</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                Asthma is variable - symptoms come and go. If symptoms are constant, think COPD. If they're triggered by specific things and respond to treatment, think asthma. Always check inhaler technique - many patients aren't using them correctly!
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            'hypertension': {
+                title: 'Hypertension',
+                icon: '🩺',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">🩺</span>
+                            <span>Hypertension</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is Hypertension?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                High blood pressure is like a garden hose with too much pressure - it damages the pipes (blood vessels) over time. Most people have no symptoms, which is why it's called the "silent killer."
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Diagnosis (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Clinic BP ≥ 140/90:</strong> Offer ABPM (ambulatory blood pressure monitoring) or HBPM (home BP monitoring)
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>ABPM average ≥ 135/85:</strong> Diagnose hypertension. Think of ABPM as the "gold standard" - it measures BP over 24 hours, avoiding white coat hypertension.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                <strong>Under 55 or non-black:</strong> Start with ACE inhibitor (or ARB if intolerant)
+                            </p>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                <strong>Over 55 or black:</strong> Start with calcium channel blocker (or thiazide if intolerant)
+                            </p>
+                            <p style="color: var(--color-gray-700); line-height: 1.8;">
+                                Target: < 140/90 (or < 135/85 if under 80 and no complications)
+                            </p>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                Always check for target organ damage (eyes, heart, kidneys) and secondary causes (especially in young people). Most hypertension is "essential" (no cause found), but don't miss treatable causes like renal artery stenosis or phaeochromocytoma.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            'copd': {
+                title: 'COPD',
+                icon: '💨',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">💨</span>
+                            <span>COPD (Chronic Obstructive Pulmonary Disease)</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is COPD?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                COPD is like having damaged lungs that can't fully empty. Imagine trying to blow up a balloon with a small hole in it - you can't get all the air out. This is what happens in COPD: the airways are damaged (usually from smoking), making it hard to breathe out.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Key Symptoms</h3>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li><strong>Breathlessness:</strong> Progressive, worse on exertion, doesn't vary much day-to-day</li>
+                                <li><strong>Chronic cough:</strong> Often productive (brings up phlegm), especially in the morning</li>
+                                <li><strong>Wheeze:</strong> Less common than in asthma, but can occur</li>
+                                <li><strong>Frequent chest infections:</strong> Damaged lungs are more prone to infections</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Diagnosis</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                <strong>Spirometry is essential:</strong> FEV1/FVC < 70% confirms airflow obstruction. Unlike asthma, this doesn't fully reverse with treatment.
+                            </p>
+                            <p style="color: var(--color-gray-700); line-height: 1.8;">
+                                <strong>Key difference from asthma:</strong> COPD symptoms are constant, not variable. Usually older patients with smoking history.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-success-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-success-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Stop smoking:</strong> Most important intervention - refer to smoking cessation
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Bronchodilators:</strong> SABA (salbutamol) or LABA (salmeterol) for breathlessness
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>ICS:</strong> Add if FEV1 < 50% and frequent exacerbations
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Pulmonary rehabilitation:</strong> Exercise program - very effective for improving quality of life
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                COPD is progressive and irreversible, but treatment can slow progression and improve symptoms. The single most important thing is stopping smoking. Always offer smoking cessation support.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            'heart-failure': {
+                title: 'Heart Failure',
+                icon: '❤️',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">❤️</span>
+                            <span>Heart Failure</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is Heart Failure?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                Think of the heart as a pump. In heart failure, the pump is weak and can't push blood around the body effectively. This causes fluid to back up - like a blocked drain - leading to breathlessness and swelling.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Key Symptoms</h3>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li><strong>Breathlessness:</strong> On exertion, lying flat (orthopnoea), or waking at night (paroxysmal nocturnal dyspnoea)</li>
+                                <li><strong>Ankle swelling:</strong> Fluid accumulation (oedema)</li>
+                                <li><strong>Fatigue:</strong> Heart can't pump enough oxygen to muscles</li>
+                                <li><strong>Reduced exercise tolerance:</strong> Can't do activities they used to</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Diagnosis</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                <strong>BNP or NT-proBNP:</strong> Blood test - if raised, suggests heart failure. Think of it as a "heart stress test."
+                            </p>
+                            <p style="color: var(--color-gray-700); line-height: 1.8;">
+                                <strong>Echocardiogram:</strong> Confirms diagnosis and shows ejection fraction (how well the heart pumps)
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-success-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-success-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>ACE inhibitor (or ARB):</strong> First-line - protects the heart and reduces symptoms
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Beta-blocker:</strong> Add once stable - slows heart rate, reduces workload
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Diuretic:</strong> For fluid overload - helps remove excess fluid
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Monitor weight:</strong> Daily weighing helps detect fluid retention early
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                Heart failure is serious but manageable. The key is early diagnosis and proper medication. Patients should monitor their weight daily - a sudden increase of 2-3kg in a few days means fluid retention and needs review.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            'ibs': {
+                title: 'IBS',
+                icon: '🫀',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">🫀</span>
+                            <span>IBS (Irritable Bowel Syndrome)</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is IBS?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                IBS is like having a sensitive gut that overreacts to normal things. The bowel is more sensitive than usual, causing pain and changes in bowel habit. It's a functional condition - the bowel looks normal but doesn't work normally.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Key Symptoms (Rome IV Criteria)</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                Recurrent abdominal pain at least 1 day/week for 3 months, associated with 2+ of:
+                            </p>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li>Related to defecation (better or worse after going)</li>
+                                <li>Associated with change in stool frequency</li>
+                                <li>Associated with change in stool form (consistency)</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Red Flags (Worrying Features)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-warning-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-warning-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8; font-weight: 600;">
+                                    Refer urgently if:
+                                </p>
+                                <ul style="margin: var(--space-sm) 0 0 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                    <li>Age over 50 with new symptoms</li>
+                                    <li>Rectal bleeding</li>
+                                    <li>Weight loss</li>
+                                    <li>Family history of bowel cancer</li>
+                                    <li>Anaemia</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-success-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-success-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Dietary advice:</strong> Low FODMAP diet can help - refer to dietitian if available
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Antispasmodics:</strong> Mebeverine, hyoscine - help with pain and cramping
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Laxatives:</strong> For constipation-predominant IBS
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Psychological support:</strong> Stress management, CBT can be very effective
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                IBS is a diagnosis of exclusion - but you don't need to do lots of tests if red flags are absent. Reassurance is important - many patients worry about cancer. Explain it's a real condition that can be managed, not "all in their head."
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            'eczema': {
+                title: 'Eczema',
+                icon: '🧴',
+                content: `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200);">
+                        <h2 style="color: var(--color-primary-700); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-size: 2rem;">🧴</span>
+                            <span>Eczema (Atopic Dermatitis)</span>
+                        </h2>
+                        
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">What is Eczema?</h3>
+                            <p style="color: var(--color-gray-700); line-height: 1.8; margin-bottom: var(--space-md);">
+                                Eczema is like having skin that's lost its protective barrier. Normal skin acts like a wall keeping moisture in and irritants out. In eczema, the wall is broken, so the skin gets dry, itchy, and inflamed. It's often linked to allergies (atopy) - think of it as "allergic skin."
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Key Features</h3>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: var(--color-gray-700); line-height: 1.8;">
+                                <li><strong>Itchy skin:</strong> The main symptom - often worse at night</li>
+                                <li><strong>Dry, scaly patches:</strong> Usually in flexures (elbows, knees, neck)</li>
+                                <li><strong>Red, inflamed areas:</strong> Especially when scratched</li>
+                                <li><strong>Variable:</strong> Flares up and settles down</li>
+                                <li><strong>Family history:</strong> Often runs in families with asthma/hayfever</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-bottom: var(--space-xl);">
+                            <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-sm);">Management (NICE Guidelines)</h3>
+                            <div style="padding: var(--space-lg); background: var(--color-success-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-success-500);">
+                                <p style="margin: 0 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Emollients:</strong> The foundation - use liberally and frequently, even when skin looks good. Think of it as "moisturizing the wall."
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Topical steroids:</strong> For flares - use appropriate strength (mild for face, stronger for body). Don't be afraid to use them - they're safe when used correctly.
+                                </p>
+                                <p style="margin: var(--space-sm) 0 var(--space-sm) 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Avoid triggers:</strong> Soaps, detergents, wool, stress can all trigger flares
+                                </p>
+                                <p style="margin: var(--space-sm) 0 0 0; color: var(--color-gray-700); line-height: 1.8;">
+                                    <strong>Antihistamines:</strong> Can help with itching, especially at night
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="padding: var(--space-lg); background: var(--color-primary-50); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary-500);">
+                            <strong style="color: var(--color-primary-700); display: block; margin-bottom: var(--space-sm);">💡 Key Learning Point</strong>
+                            <p style="margin: 0; color: var(--color-gray-700); line-height: 1.8;">
+                                The most common mistake is not using enough emollient. Patients need to use it like "buttering bread" - thickly and frequently. Topical steroids are safe when used correctly - the fear of "steroid addiction" is a myth. Use them until the flare settles, then step down to emollients.
+                            </p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function toggleTopic(topicId) {
+            const contentDiv = document.getElementById('topic-content');
+            const topic = topicsContent[topicId];
+            
+            if (!topic) {
+                // For topics not yet implemented, show a message
+                contentDiv.innerHTML = `
+                    <div style="padding: var(--space-xl); background: white; border-radius: var(--radius-xl); border: 2px solid var(--color-primary-200); text-align: center;">
+                        <h3 style="color: var(--color-primary-700); margin-bottom: var(--space-md);">Topic Content Coming Soon</h3>
+                        <p style="color: var(--color-gray-700); line-height: 1.8;">
+                            This topic is being developed. Pro members will have access to all 50+ clinical topics with detailed, practical guidance.
+                        </p>
+                        <a href="/pages/pricing.html" class="btn btn-primary" style="margin-top: var(--space-md);">Upgrade to Pro</a>
+                    </div>
+                `;
+                contentDiv.style.display = 'block';
+                contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            
+            if (contentDiv.style.display === 'none' || contentDiv.innerHTML === '') {
+                contentDiv.innerHTML = topic.content;
+                contentDiv.style.display = 'block';
+                contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // Toggle off if same topic clicked
+                contentDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
