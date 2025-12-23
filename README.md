@@ -1,3 +1,40 @@
+# OnCallPrep Website
+
+Static front‑end site with Vercel serverless support for the AI Reflection Assistant.
+
+## Structure (current)
+- Root HTML pages (e.g. `index.html`, `sca.html`, `akt.html`, `portfolio.html`, etc.)
+- Styles: `styles/` (page styles, layout, components)
+- Scripts: `scripts/` (auth, config, practice tools, main)
+- Data: `data/` (priming cases, AKT questions)
+- API: `api/reflect/index.js` (Vercel serverless function for AI reflections)
+- Config: `vercel.json`, `package.json`
+- Docs: `docs/` (deployment, troubleshooting, stripe)
+- Meta: `meta/` (planning notes)
+
+## Local run
+This is a static site. Any simple server works:
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000
+```
+
+## Deployment
+- Vercel auto‑deploys on push to `main`.
+- `vercel.json` is configured for static output from root; serverless lives in `api/`.
+
+## AI Reflection Assistant
+- Serverless function: `api/reflect/index.js`
+- Requires environment variable `OPENAI_API_KEY`
+- Set this in Vercel → Project Settings → Environment Variables.
+
+## Formatting / tooling
+- `.editorconfig` and `.prettierrc.json` added for consistent spacing/indentation.
+- No build step required (static HTML/CSS/JS).
+
+## Notes
+- Keep paths relative to root for static hosting.
+- If you add environment variables locally, create a `.env` (not committed) with `OPENAI_API_KEY=...`.
 # OnCallPrep 📞
 
 **GP Training Made Simple** — Your complete companion for GP training success.
