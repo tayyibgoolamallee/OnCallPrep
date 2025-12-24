@@ -94,10 +94,6 @@ async function initAccessControl() {
 
 // Toggle pro content visibility
 function togglePlanContent(plan) {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'main.js:togglePlanContent',message:'togglePlanContent called',data:{plan:plan,proOnlyCount:document.querySelectorAll('.pro-only').length,proTeaserCount:document.querySelectorAll('.pro-teaser').length},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
-    // #endregion
-    
     // Hide/show pro-only content
     const proOnlyElements = document.querySelectorAll('.pro-only');
     proOnlyElements.forEach(el => {
