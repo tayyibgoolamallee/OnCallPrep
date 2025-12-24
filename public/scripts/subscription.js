@@ -5,13 +5,23 @@
 // Get user's subscription status
 async function getUserSubscription() {
     try {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:start',message:'getUserSubscription called',data:{hasSupabaseClient:!!window.supabaseClient},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         // Get Supabase client from window (set by auth.js)
         const supabase = window.supabaseClient;
         if (!supabase) {
             console.warn('Supabase client not found');
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:noClient',message:'No Supabase client',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+            // #endregion
             return { isPro: false, plan: 'free' };
         }
         const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:afterAuth',message:'Auth result',data:{hasUser:!!user,userId:user?.id,authError:authError?.message||null},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         
         if (authError || !user) {
             return { isPro: false, plan: 'free' };
@@ -24,6 +34,10 @@ async function getUserSubscription() {
             .eq('id', user.id)
             .single();
         
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:profileResult',message:'Profile query result',data:{profile:profile,profileError:profileError?.message||null},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        
         if (profileError) {
             // Profile doesn't exist yet, return free
             return { isPro: false, plan: 'free' };
@@ -35,6 +49,10 @@ async function getUserSubscription() {
                        !profile.subscription_expires_at || 
                        new Date(profile.subscription_expires_at) > new Date());
         
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:isProCalc',message:'isPro calculation',data:{plan:profile.plan,subscriptionStatus:profile.subscription_status,expiresAt:profile.subscription_expires_at,isPro:isPro,expiresAtValid:profile.subscription_expires_at?new Date(profile.subscription_expires_at)>new Date():null},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+        // #endregion
+        
         return {
             isPro: isPro,
             plan: profile.plan || 'free',
@@ -43,6 +61,9 @@ async function getUserSubscription() {
         };
     } catch (error) {
         console.error('Error getting subscription:', error);
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'subscription.js:getUserSubscription:error',message:'Exception thrown',data:{error:error?.message||String(error)},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+        // #endregion
         return { isPro: false, plan: 'free' };
     }
 }
