@@ -1,0 +1,144 @@
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+
+const caseTypes = [
+  { id: 'diagnosis', name: '2-Min Diagnosis', time: '120s', description: 'Quick diagnosis and differential thinking' },
+  { id: 'priming', name: '3-Min Priming', time: '180s', description: 'Prepare your consultation approach' },
+  { id: 'full', name: 'Full Cases', time: 'Varies', description: 'Complete consultation scenarios' },
+]
+
+export default async function SCAPage() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const { data: cases } = await supabase
+    .from('sca_cases')
+    .select('*')
+    .eq('published', true)
+    .order('created_at', { ascending: false })
+
+  const { data: progress } = await supabase
+    .from('user_progress')
+    .select('*')
+    .eq('user_id', user!.id)
+    .eq('content_type', 'sca')
+
+  const { data: profile } = await supabase
+    .from('user_profiles')
+    .select('subscription_tier')
+    .eq('id', user!.id)
+    .single()
+
+  const isPro = profile?.subscription_tier === 'pro'
+  const attemptedIds = new Set(progress?.map(p => p.content_id))
+
+  const getCasesByType = (type: string) => cases?.filter(c => c.case_type === type) || []
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold">SCA Preparation</h1>
+        <p className="text-muted-foreground mt-1">
+          Practice timed consultation exercises and mock cases
+        </p>
+      </div>
+
+      {/* Stats */}
+      <div className="grid md:grid-cols-3 gap-4">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>Cases Attempted</CardDescription>
+            <CardTitle className="text-2xl">{progress?.length || 0}</CardTitle>
+          </CardHeader>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>Available Cases</CardDescription>
+            <CardTitle className="text-2xl">{cases?.filter(c => !c.is_pro || isPro).length || 0}</CardTitle>
+          </CardHeader>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>Your Plan</CardDescription>
+            <CardTitle className="text-2xl">{isPro ? 'Pro' : 'Free'}</CardTitle>
+          </CardHeader>
+        </Card>
+      </div>
+
+      {/* Case Types */}
+      {caseTypes.map((type) => {
+        const typeCases = getCasesByType(type.id)
+        const accessibleCases = typeCases.filter(c => !c.is_pro || isPro)
+        const lockedCount = typeCases.length - accessibleCases.length
+
+        return (
+          <div key={type.id}>
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-xl font-semibold">{type.name}</h2>
+                <p className="text-sm text-muted-foreground">{type.description}</p>
+              </div>
+              <Badge variant="outline">{type.time}</Badge>
+            </div>
+
+            {accessibleCases.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {accessibleCases.map((c) => (
+                  <Link key={c.id} href={`/sca/${c.id}`}>
+                    <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <CardTitle className="text-base">{c.title}</CardTitle>
+                          <div className="flex gap-1">
+                            <Badge variant={
+                              c.difficulty === 'easy' ? 'secondary' :
+                              c.difficulty === 'hard' ? 'destructive' : 'default'
+                            }>
+                              {c.difficulty}
+                            </Badge>
+                            {attemptedIds.has(c.id) && (
+                              <Badge variant="outline">Attempted</Badge>
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {c.scenario.substring(0, 100)}...
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <Card>
+                <CardContent className="py-6 text-center text-muted-foreground">
+                  No cases available in this category yet.
+                </CardContent>
+              </Card>
+            )}
+
+            {lockedCount > 0 && (
+              <div className="mt-4">
+                <Card className="bg-muted/50">
+                  <CardContent className="py-4 flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">
+                      +{lockedCount} more {type.name.toLowerCase()} cases available with Pro
+                    </p>
+                    <Link href="/pricing">
+                      <Button size="sm" variant="outline">Upgrade</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
