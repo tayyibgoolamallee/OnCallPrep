@@ -17,6 +17,7 @@ const navItems = [
   { name: 'Portfolio', href: '/portfolio', icon: '📁' },
   { name: 'AKT Bank', href: '/akt', icon: '📝' },
   { name: 'SCA Prep', href: '/sca', icon: '🩺' },
+  { name: 'Resources', href: '/resources', icon: '📚' },
 ]
 
 export default async function DashboardLayout({
