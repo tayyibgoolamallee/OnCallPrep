@@ -32,13 +32,15 @@ export default async function AKTPage() {
 
   const isPro = profile?.subscription_tier === 'pro'
 
-  const accessibleQuestions = questions?.filter(q => !q.is_pro || isPro) || []
+  // Ensure all questions have valid id and filter by access
+  const accessibleQuestions = questions?.filter(q => q && q.id && (!q.is_pro || isPro)) || []
   const answeredIds = new Set(progress?.map(p => p.content_id))
   const correctAnswers = progress?.filter(p => p.score === 1).length || 0
   const totalAnswered = progress?.length || 0
   const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0
 
-  const topics = [...new Set(questions?.map(q => q.topic) || [])]
+  // Filter out undefined/null topics to prevent runtime errors
+  const topics = [...new Set(questions?.map(q => q.topic).filter((t): t is string => !!t) || [])]
   const getTopicStats = (topic: string) => {
     const topicQuestions = accessibleQuestions.filter(q => q.topic === topic)
     const answered = progress?.filter(p =>
