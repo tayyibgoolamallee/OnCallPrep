@@ -20,17 +20,20 @@ export default async function SCAPage() {
     .eq('published', true)
     .order('created_at', { ascending: false })
 
-  const { data: progress } = await supabase
+  // Handle case where user might be null
+  const userId = user?.id
+  
+  const { data: progress } = userId ? await supabase
     .from('user_progress')
     .select('*')
-    .eq('user_id', user!.id)
-    .eq('content_type', 'sca')
+    .eq('user_id', userId)
+    .eq('content_type', 'sca') : { data: null }
 
-  const { data: profile } = await supabase
+  const { data: profile } = userId ? await supabase
     .from('user_profiles')
     .select('subscription_tier')
-    .eq('id', user!.id)
-    .single()
+    .eq('id', userId)
+    .single() : { data: null }
 
   const isPro = profile?.subscription_tier === 'pro'
   const attemptedIds = new Set(progress?.map(p => p.content_id))
