@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { SCAExamOverview } from './exam-overview'
 
 const caseTypes = [
   { id: 'priming', name: '3-Min Priming', time: '180s', description: 'Prepare your consultation approach' },
@@ -44,6 +45,9 @@ export default async function SCAPage() {
           Practice timed consultation exercises and mock cases
         </p>
       </div>
+
+      {/* Exam Overview */}
+      <SCAExamOverview />
 
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-4">

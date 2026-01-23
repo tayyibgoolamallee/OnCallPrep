@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { AKTExamOverview } from './exam-overview'
 
 export default async function AKTPage() {
   const supabase = await createClient()
@@ -57,6 +58,9 @@ export default async function AKTPage() {
           Practice with guideline-referenced questions
         </p>
       </div>
+
+      {/* Exam Overview */}
+      <AKTExamOverview />
 
       {/* Stats */}
       <div className="grid md:grid-cols-4 gap-4">
