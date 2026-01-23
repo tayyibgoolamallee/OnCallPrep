@@ -6,17 +6,17 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container max-w-4xl">
-          <h1 className="text-4xl font-bold text-center mb-4">About OnCallPrep</h1>
-          <p className="text-xl text-foreground/70 text-center">
+      <section className="py-16 bg-secondary">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <h1 className="text-4xl font-bold mb-4">About OnCallPrep</h1>
+          <p className="text-xl text-foreground/70">
             Supporting GP trainees through their training journey
           </p>
         </div>
       </section>
 
-      <section className="py-12">
-        <div className="container max-w-4xl space-y-12">
+      <section className="py-12 bg-white">
+        <div className="mx-auto max-w-4xl px-6 space-y-12">
           {/* Mission */}
           <Card>
             <CardHeader>
@@ -127,17 +127,20 @@ export default function AboutPage() {
             </CardContent>
           </Card>
 
-          {/* CTA */}
-          <div className="text-center py-8">
-            <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
-            <div className="flex gap-4 justify-center">
-              <Link href="/signup">
-                <Button size="lg">Start Free Trial</Button>
-              </Link>
-              <Link href="/pricing">
-                <Button variant="outline" size="lg">View Pricing</Button>
-              </Link>
-            </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 bg-primary text-white">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
+          <div className="flex gap-4 justify-center">
+            <Link href="/signup">
+              <Button size="lg" variant="secondary">Start Free Trial</Button>
+            </Link>
+            <Link href="/pricing">
+              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">View Pricing</Button>
+            </Link>
           </div>
         </div>
       </section>
