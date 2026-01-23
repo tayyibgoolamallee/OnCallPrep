@@ -3,6 +3,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+const examFormat = [
+  { label: 'Total Questions', value: '200' },
+  { label: 'Duration', value: '3 hours 10 mins' },
+  { label: 'Sittings per Year', value: '3 (Jan, Apr, Oct)' },
+  { label: 'Pass Mark', value: '~71-74%' },
+]
+
+const examContent = [
+  { section: 'Clinical Medicine', percentage: 80, description: 'Diagnosis, management, therapeutics across all clinical areas' },
+  { section: 'Evidence & Guidelines', percentage: 10, description: 'Statistics, research methods, critical appraisal, NICE guidelines' },
+  { section: 'Admin & Ethics', percentage: 10, description: 'Practice management, law, ethics, NHS structure' },
+]
+
 const sampleQuestions = [
   {
     id: 1,
@@ -35,56 +48,70 @@ const sampleQuestions = [
 ]
 
 const topics = [
-  { name: 'Evidence-Based Practice', count: 45, color: 'bg-blue-100 text-blue-800' },
-  { name: 'Cardiovascular', count: 52, color: 'bg-red-100 text-red-800' },
-  { name: 'Respiratory', count: 38, color: 'bg-teal-100 text-teal-800' },
-  { name: 'Mental Health', count: 41, color: 'bg-purple-100 text-purple-800' },
-  { name: 'Endocrine', count: 35, color: 'bg-amber-100 text-amber-800' },
-  { name: 'Gastroenterology', count: 32, color: 'bg-green-100 text-green-800' },
-  { name: 'Musculoskeletal', count: 29, color: 'bg-orange-100 text-orange-800' },
-  { name: 'Dermatology', count: 24, color: 'bg-pink-100 text-pink-800' },
+  { name: 'Evidence-Based Practice', count: 45, color: 'bg-teal-50 text-teal-700 border-teal-200' },
+  { name: 'Cardiovascular', count: 52, color: 'bg-rose-50 text-rose-700 border-rose-200' },
+  { name: 'Respiratory', count: 38, color: 'bg-sky-50 text-sky-700 border-sky-200' },
+  { name: 'Mental Health', count: 41, color: 'bg-violet-50 text-violet-700 border-violet-200' },
+  { name: 'Endocrine', count: 35, color: 'bg-amber-50 text-amber-700 border-amber-200' },
+  { name: 'Gastroenterology', count: 32, color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+  { name: 'Musculoskeletal', count: 29, color: 'bg-orange-50 text-orange-700 border-orange-200' },
+  { name: 'Dermatology', count: 24, color: 'bg-pink-50 text-pink-700 border-pink-200' },
 ]
 
 export default function AKTPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-purple-50 to-background">
+      <section className="py-16 bg-gradient-to-br from-teal-50 via-white to-orange-50">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4">AKT Question Bank</Badge>
+            <Badge className="mb-4 bg-primary">AKT Question Bank</Badge>
             <h1 className="text-4xl font-bold mb-4">Master the Applied Knowledge Test</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               500+ guideline-referenced questions covering all AKT topics. Practice smarter with detailed explanations linked to NICE and RCGP guidance.
             </p>
           </div>
 
+          {/* Exam Format Overview */}
           <div className="grid md:grid-cols-4 gap-4 mb-12">
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">500+</div>
-                <p className="text-sm text-foreground/70">Questions</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">20</div>
-                <p className="text-sm text-foreground/70">Free Demo Questions</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">15+</div>
-                <p className="text-sm text-foreground/70">Topic Areas</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">100%</div>
-                <p className="text-sm text-foreground/70">NICE Referenced</p>
-              </CardContent>
-            </Card>
+            {examFormat.map((item) => (
+              <Card key={item.label} className="text-center border-2 border-primary/10 bg-white/80 backdrop-blur">
+                <CardContent className="pt-6">
+                  <div className="text-2xl font-bold text-primary">{item.value}</div>
+                  <p className="text-sm text-foreground/70">{item.label}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* What is the AKT */}
+      <section className="py-16 bg-white">
+        <div className="container max-w-4xl">
+          <h2 className="text-2xl font-bold text-center mb-8">Understanding the AKT</h2>
+          <Card className="border-2 border-primary/20 rounded-2xl overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+              <CardTitle>What is the Applied Knowledge Test?</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
+              <p className="text-foreground/80">
+                The AKT is a computer-based assessment testing the knowledge base that underpins independent general practice in the UK. 
+                It&apos;s typically taken during ST2 and is one of three components of the MRCGP examination.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 mt-6">
+                {examContent.map((section) => (
+                  <div key={section.section} className="p-4 rounded-xl bg-muted/50 border">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-semibold text-sm">{section.section}</span>
+                      <Badge variant="outline" className="text-primary">{section.percentage}%</Badge>
+                    </div>
+                    <p className="text-xs text-foreground/60">{section.description}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

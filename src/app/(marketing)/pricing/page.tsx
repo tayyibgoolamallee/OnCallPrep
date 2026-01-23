@@ -22,37 +22,54 @@ const plans = [
     popular: false,
   },
   {
-    name: 'Pro Monthly',
-    price: '12.99',
-    period: '/month',
-    description: 'Full access to all training resources',
+    name: '3 Months',
+    price: '29.99',
+    period: '/3 months',
+    pricePerMonth: '£10/mo',
+    description: 'Perfect for focused exam prep',
     features: [
       'Everything in Free, plus:',
-      'Detailed competency guides',
       'Full mock case library (50+)',
       '2-min diagnosis practice',
       '3-min priming exercises',
       'Full AKT question bank (500+)',
       'Detailed explanations',
-      'Guideline references',
       'Progress tracking',
     ],
-    cta: 'Start Pro Trial',
-    href: '/signup?plan=pro-monthly',
-    popular: true,
+    cta: 'Get 3 Months',
+    href: '/signup?plan=pro-3month',
+    popular: false,
   },
   {
-    name: 'Pro Annual',
-    price: '99',
-    period: '/year',
-    description: 'Best value — save over 2 months',
+    name: '6 Months',
+    price: '49.99',
+    period: '/6 months',
+    pricePerMonth: '£8.33/mo',
+    description: 'Most popular for trainees',
     features: [
-      'Everything in Pro Monthly',
-      'Save £56.88/year',
+      'Everything in 3 Months',
+      'Save 17% vs monthly',
+      'Guideline references',
       'Priority support',
-      'Early access to new features',
     ],
-    cta: 'Start Pro Trial',
+    cta: 'Get 6 Months',
+    href: '/signup?plan=pro-6month',
+    popular: true,
+    badge: 'Most Popular',
+  },
+  {
+    name: '12 Months',
+    price: '79.99',
+    period: '/year',
+    pricePerMonth: '£6.67/mo',
+    description: 'Best value for your training',
+    features: [
+      'Everything in 6 Months',
+      'Save 33% vs monthly',
+      'Early access to new features',
+      'Full training year coverage',
+    ],
+    cta: 'Get Annual',
     href: '/signup?plan=pro-annual',
     popular: false,
     badge: 'Best Value',
@@ -97,44 +114,44 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {plans.map((plan) => (
               <Card
                 key={plan.name}
                 className={`relative overflow-hidden border-2 transition-all ${
                   plan.popular
-                    ? 'scale-105 border-primary shadow-xl'
-                    : 'hover:shadow-lg'
+                    ? 'scale-[1.02] border-primary shadow-xl ring-2 ring-primary/20'
+                    : 'hover:shadow-lg hover:border-primary/30'
                 }`}
               >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <Badge className="px-4 py-1">Most Popular</Badge>
-                  </div>
-                )}
                 {plan.badge && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <Badge variant="secondary" className="px-4 py-1">{plan.badge}</Badge>
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <Badge className={`px-3 py-1 text-xs ${plan.popular ? 'bg-primary' : 'bg-accent text-white'}`}>
+                      {plan.badge}
+                    </Badge>
                   </div>
                 )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <CardDescription className="mt-2 text-sm">
+                <CardHeader className="text-center pt-8">
+                  <CardTitle className="text-xl">{plan.name}</CardTitle>
+                  <CardDescription className="mt-2 text-xs min-h-[2.5rem]">
                     {plan.description}
                   </CardDescription>
-                  <div className="mt-6">
-                    <span className="text-5xl font-bold text-foreground">£{plan.price}</span>
+                  <div className="mt-4">
+                    <span className="text-4xl font-bold text-foreground">£{plan.price}</span>
                     {plan.period && (
-                      <span className="text-base text-muted-foreground">{plan.period}</span>
+                      <span className="text-sm text-muted-foreground block mt-1">{plan.period}</span>
+                    )}
+                    {plan.pricePerMonth && (
+                      <span className="text-xs text-primary font-medium mt-1 block">({plan.pricePerMonth})</span>
                     )}
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <ul className="mb-8 space-y-3">
+                <CardContent className="pt-4">
+                  <ul className="mb-6 space-y-2">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3 text-sm">
-                        <span className="text-green-600">✓</span>
-                        <span>{feature}</span>
+                      <li key={feature} className="flex items-start gap-2 text-xs">
+                        <span className="text-primary mt-0.5">✓</span>
+                        <span className="text-foreground/80">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -142,6 +159,7 @@ export default function PricingPage() {
                     <Button
                       className="w-full"
                       variant={plan.popular ? 'default' : 'outline'}
+                      size="sm"
                     >
                       {plan.cta}
                     </Button>

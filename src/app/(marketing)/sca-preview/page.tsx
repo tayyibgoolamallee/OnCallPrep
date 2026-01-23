@@ -3,6 +3,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+const examFormat = [
+  { label: 'Total Cases', value: '12' },
+  { label: 'Per Case', value: '10 mins + 2 prep' },
+  { label: 'Format', value: 'Video consultation' },
+  { label: 'Pass Mark', value: '~71%' },
+]
+
+const markingDomains = [
+  { domain: 'Data Gathering', description: 'History taking, identifying red flags, systematic questioning', weight: 'High' },
+  { domain: 'Clinical Management', description: 'Diagnosis, investigation, treatment planning, safety netting', weight: 'High' },
+  { domain: 'Interpersonal Skills', description: 'Communication, empathy, shared decision-making, ICE', weight: 'High' },
+]
+
 const sampleCase = {
   title: 'Mrs. Thompson - Headache',
   scenario: 'A 45-year-old woman presents with a 2-week history of headaches. She is worried because her mother died of a brain tumour.',
@@ -35,53 +48,77 @@ const sampleCase = {
 }
 
 const caseTypes = [
-  { name: 'Communication Skills', count: 15, icon: '💬' },
-  { name: 'Clinical Management', count: 20, icon: '🩺' },
-  { name: 'Mental Health', count: 12, icon: '🧠' },
-  { name: 'Ethics & Professionalism', count: 10, icon: '⚖️' },
-  { name: 'Breaking Bad News', count: 8, icon: '💔' },
-  { name: 'Safeguarding', count: 6, icon: '🛡️' },
+  { name: 'Communication Skills', count: 15 },
+  { name: 'Clinical Management', count: 20 },
+  { name: 'Mental Health', count: 12 },
+  { name: 'Ethics & Professionalism', count: 10 },
+  { name: 'Breaking Bad News', count: 8 },
+  { name: 'Safeguarding', count: 6 },
 ]
 
 export default function SCAPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-teal-50 to-background">
+      <section className="py-16 bg-gradient-to-br from-primary/5 via-white to-accent/5">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4">SCA Preparation</Badge>
+            <Badge className="mb-4 bg-primary">SCA Preparation</Badge>
             <h1 className="text-4xl font-bold mb-4">Conquer the Simulated Consultation Assessment</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               Practice with realistic mock cases, timed exercises, and structured feedback. Build the consultation skills you need to pass with confidence.
             </p>
           </div>
 
+          {/* Exam Format */}
           <div className="grid md:grid-cols-4 gap-4 mb-12">
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">50+</div>
-                <p className="text-sm text-foreground/70">Mock Cases</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">35</div>
-                <p className="text-sm text-foreground/70">Priming Cases</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">12 min</div>
-                <p className="text-sm text-foreground/70">Timed Practice</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">6</div>
-                <p className="text-sm text-foreground/70">Case Categories</p>
-              </CardContent>
-            </Card>
+            {examFormat.map((item) => (
+              <Card key={item.label} className="text-center border-2 border-primary/10 bg-white/80 backdrop-blur">
+                <CardContent className="pt-6">
+                  <div className="text-2xl font-bold text-primary">{item.value}</div>
+                  <p className="text-sm text-foreground/70">{item.label}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What is the SCA */}
+      <section className="py-16 bg-white">
+        <div className="container max-w-4xl">
+          <h2 className="text-2xl font-bold text-center mb-8">Understanding the SCA</h2>
+          <Card className="border-2 border-primary/20 rounded-2xl overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+              <CardTitle>What is the Simulated Consultation Assessment?</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
+              <p className="text-foreground/80">
+                The SCA is a video-based clinical assessment where you conduct 12 simulated consultations with trained role players. 
+                It assesses your ability to gather information, make clinical decisions, and communicate effectively with patients.
+              </p>
+              <p className="text-foreground/80">
+                Each case is a unique clinical scenario you might encounter in general practice. There is no physical examination - 
+                you must reason through history and communication alone.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Marking Domains */}
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-4 text-center">Marking Domains</h3>
+            <div className="grid md:grid-cols-3 gap-4">
+              {markingDomains.map((item) => (
+                <Card key={item.domain} className="border border-primary/20 rounded-xl">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-primary">{item.domain}</h4>
+                    </div>
+                    <p className="text-sm text-foreground/70">{item.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>

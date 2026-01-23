@@ -46,52 +46,57 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  /* LiveSchool-inspired professional color system */
+  /* Healthcare-inspired two-tone color system */
+  /* Primary: Deep Teal #0F766E - trust, calm, medical */
+  /* Accent: Warm Coral #F97316 - energy, approachable */
   --background: 0 0% 100%;
-  --foreground: 228 80% 20%;
+  --foreground: 220 25% 20%;
 
   --card: 0 0% 100%;
-  --card-foreground: 228 80% 20%;
+  --card-foreground: 220 25% 20%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 228 80% 20%;
+  --popover-foreground: 220 25% 20%;
 
-  /* Primary: #3B6FC8 - LiveSchool Blue */
-  --primary: 220 64% 51%;
+  /* Primary: Deep Teal */
+  --primary: 173 80% 26%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 20% 96%;
-  --secondary-foreground: 228 80% 20%;
+  /* Secondary: Light sage */
+  --secondary: 160 20% 96%;
+  --secondary-foreground: 220 25% 20%;
 
-  --muted: 210 20% 96%;
-  --muted-foreground: 228 40% 35%;
+  --muted: 210 15% 96%;
+  --muted-foreground: 220 15% 45%;
 
-  --accent: 174 64% 56%;
-  --accent-foreground: 228 80% 20%;
+  /* Accent: Warm coral for CTAs and highlights */
+  --accent: 25 95% 53%;
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 214 20% 90%;
-  --input: 214 20% 90%;
-  --ring: 220 64% 51%;
+  --border: 210 15% 90%;
+  --input: 210 15% 90%;
+  --ring: 173 80% 26%;
 
-  --chart-1: 220 64% 51%;
-  --chart-2: 174 64% 56%;
-  --chart-3: 142 71% 45%;
-  --chart-4: 271 81% 56%;
-  --chart-5: 48 96% 53%;
+  /* Chart colors - varied and professional */
+  --chart-1: 173 80% 26%;
+  --chart-2: 25 95% 53%;
+  --chart-3: 199 89% 48%;
+  --chart-4: 262 83% 58%;
+  --chart-5: 142 71% 45%;
 
-  --sidebar: 0 0% 98%;
-  --sidebar-foreground: 228 80% 20%;
-  --sidebar-primary: 220 64% 51%;
+  --sidebar: 173 15% 98%;
+  --sidebar-foreground: 220 25% 20%;
+  --sidebar-primary: 173 80% 26%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 210 20% 94%;
-  --sidebar-accent-foreground: 228 80% 20%;
-  --sidebar-border: 214 20% 90%;
-  --sidebar-ring: 220 64% 51%;
+  --sidebar-accent: 173 15% 94%;
+  --sidebar-accent-foreground: 220 25% 20%;
+  --sidebar-border: 210 15% 90%;
+  --sidebar-ring: 173 80% 26%;
 }
 
 .dark {

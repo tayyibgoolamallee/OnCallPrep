@@ -3,38 +3,51 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+const portfolioComponents = [
+  { name: 'Learning Log Entries', count: '36/year', description: 'Reflections on clinical encounters' },
+  { name: 'WPBAs', count: '12+/year', description: 'CBD, Mini-CEX, COT, PSQ, MSF' },
+  { name: 'Curriculum Coverage', count: '13 caps', description: 'Professional capabilities' },
+  { name: 'Out of Hours', count: '72 hrs/yr', description: 'Emergency and OOH experience' },
+]
+
 const stages = [
   {
     name: 'ST1',
     title: 'Foundation Year',
     description: 'Your first year of GP training - building foundations',
+    color: 'border-teal-200 bg-teal-50/50',
     items: [
       'Getting started guide',
       'WPBA requirements',
       'Reflection writing basics',
       'First ARCP preparation',
+      'Hospital post integration',
     ],
   },
   {
     name: 'ST2',
     title: 'Development Year',
     description: 'Building independence and preparing for exams',
+    color: 'border-orange-200 bg-orange-50/50',
     items: [
       'Clinical competencies',
       'AKT/SCA preparation',
       'Complex case management',
       'Portfolio building',
+      'GP placement focus',
     ],
   },
   {
     name: 'ST3',
     title: 'Completion Year',
     description: 'Final stretch to CCT',
+    color: 'border-violet-200 bg-violet-50/50',
     items: [
       'CCT requirements',
       'Final ARCP checklist',
       'Career planning',
       'Post-CCT options',
+      'Independent practice readiness',
     ],
   },
 ]
@@ -52,57 +65,70 @@ export default function PortfolioPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-blue-50 to-background">
+      <section className="py-16 bg-gradient-to-br from-teal-50 via-white to-orange-50">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4">Portfolio Helper</Badge>
+            <Badge className="mb-4 bg-primary">Portfolio Helper</Badge>
             <h1 className="text-4xl font-bold mb-4">Navigate GP Training with Confidence</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               Clear, structured guidance through ST1, ST2, and ST3 requirements. Never feel lost in your training journey again.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">3</div>
-                <p className="text-sm text-foreground/70">Training Stages</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">20+</div>
-                <p className="text-sm text-foreground/70">Detailed Guides</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="text-3xl font-bold text-primary">13</div>
-                <p className="text-sm text-foreground/70">Capabilities Covered</p>
-              </CardContent>
-            </Card>
+          {/* Portfolio Components Overview */}
+          <div className="grid md:grid-cols-4 gap-4 mb-12">
+            {portfolioComponents.map((item) => (
+              <Card key={item.name} className="text-center border-2 border-primary/10 bg-white/80 backdrop-blur">
+                <CardContent className="pt-6">
+                  <div className="text-2xl font-bold text-primary">{item.count}</div>
+                  <p className="text-sm font-medium text-foreground">{item.name}</p>
+                  <p className="text-xs text-foreground/60 mt-1">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* What is the Portfolio */}
+      <section className="py-12 bg-white">
+        <div className="container max-w-4xl">
+          <Card className="border-2 border-primary/20 rounded-2xl overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+              <CardTitle>Understanding the GP Portfolio</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-4">
+              <p className="text-foreground/80">
+                The ePortfolio is the central repository of evidence demonstrating your competence and development throughout GP training. 
+                It&apos;s reviewed at your Annual Review of Competence Progression (ARCP) to determine if you&apos;re ready to progress.
+              </p>
+              <p className="text-foreground/80">
+                A well-maintained portfolio isn&apos;t just about ticking boxes - it&apos;s about demonstrating reflective practice, 
+                professional development, and readiness for independent general practice.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Stages */}
-      <section className="py-16">
+      <section className="py-16 bg-muted/30">
         <div className="container max-w-5xl">
           <h2 className="text-2xl font-bold text-center mb-8">Stage-by-Stage Guidance</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
             {stages.map((stage) => (
-              <Card key={stage.name} className="h-full">
+              <Card key={stage.name} className={`h-full border-2 ${stage.color}`}>
                 <CardHeader>
-                  <Badge variant="outline" className="w-fit mb-2">{stage.name}</Badge>
+                  <Badge variant="outline" className="w-fit mb-2 border-primary text-primary">{stage.name}</Badge>
                   <CardTitle>{stage.title}</CardTitle>
-                  <CardDescription>{stage.description}</CardDescription>
+                  <CardDescription className="text-foreground/70">{stage.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {stage.items.map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
-                        <span className="text-blue-500">•</span>
+                      <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
+                        <span className="text-primary">•</span>
                         {item}
                       </li>
                     ))}

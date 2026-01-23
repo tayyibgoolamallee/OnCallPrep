@@ -14,7 +14,8 @@ const features = [
       { name: 'Progress tracking', free: false },
     ],
     href: '/akt-preview',
-    color: 'bg-purple-50 text-purple-700 border-purple-200',
+    color: 'bg-teal-50 text-primary border-teal-200',
+    accent: 'from-teal-500 to-teal-600',
   },
   {
     title: 'SCA Preparation',
@@ -26,7 +27,8 @@ const features = [
       { name: 'Full mock case library (50+)', free: false },
     ],
     href: '/sca-preview',
-    color: 'bg-teal-50 text-teal-700 border-teal-200',
+    color: 'bg-orange-50 text-orange-700 border-orange-200',
+    accent: 'from-orange-500 to-orange-600',
   },
   {
     title: 'Portfolio Helper',
@@ -38,7 +40,8 @@ const features = [
       { name: 'Detailed competency guides', free: false },
     ],
     href: '/portfolio-preview',
-    color: 'bg-blue-50 text-blue-700 border-blue-200',
+    color: 'bg-violet-50 text-violet-700 border-violet-200',
+    accent: 'from-violet-500 to-violet-600',
   },
 ]
 
@@ -64,16 +67,20 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 py-24 sm:py-32 lg:py-40">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-orange-50 py-24 sm:py-32 lg:py-40">
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
           <div className="mx-auto max-w-4xl text-center">
-            <Badge variant="secondary" className="mb-8 inline-flex px-4 py-2 text-sm font-semibold">
+            <Badge className="mb-8 inline-flex px-4 py-2 text-sm font-semibold bg-primary/10 text-primary border-primary/20">
               Built by trainees, for trainees
             </Badge>
             <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Simplify GP Training.
               <br />
-              <span className="text-primary">Say Goodbye to Overwhelm.</span>
+              <span className="bg-gradient-to-r from-primary to-teal-600 bg-clip-text text-transparent">Say Goodbye to Overwhelm.</span>
             </h1>
             <p className="mt-8 text-lg leading-8 text-foreground/80 sm:text-xl lg:text-2xl">
               Master your portfolio, ace the AKT, and conquer the SCA with confidence.
@@ -81,12 +88,12 @@ export default function HomePage() {
             </p>
             <div className="mt-12 flex items-center justify-center gap-x-6">
               <Link href="/signup">
-                <Button size="lg" className="h-12 px-8 text-base font-semibold">
+                <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                   Get Started Free
                 </Button>
               </Link>
               <Link href="/pricing">
-                <Button size="lg" variant="outline" className="h-12 px-8 text-base font-semibold">
+                <Button size="lg" variant="outline" className="h-12 px-8 text-base font-semibold border-2 hover:bg-primary/5">
                   See Pricing
                 </Button>
               </Link>
@@ -144,7 +151,7 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-gradient-to-br from-purple-50 via-blue-50 to-white py-24 sm:py-32">
+      <section className="bg-gradient-to-br from-teal-50 via-white to-orange-50 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -160,7 +167,7 @@ export default function HomePage() {
                 step: '1',
                 title: 'Create Your Account',
                 desc: 'Sign up for free and explore our resources. No credit card required.',
-                color: 'bg-blue-600'
+                color: 'bg-primary'
               },
               {
                 step: '2',
@@ -172,13 +179,13 @@ export default function HomePage() {
                 step: '3',
                 title: 'Learn & Practice',
                 desc: 'Work through structured content and timed exercises.',
-                color: 'bg-purple-600'
+                color: 'bg-accent'
               },
               {
                 step: '4',
                 title: 'Succeed',
                 desc: 'Pass your exams with confidence and complete your portfolio.',
-                color: 'bg-green-600'
+                color: 'bg-emerald-600'
               },
             ].map((item) => (
               <div key={item.step} className="text-center">
