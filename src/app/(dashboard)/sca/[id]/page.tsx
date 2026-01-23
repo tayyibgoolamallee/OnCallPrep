@@ -127,8 +127,8 @@ export default function SCACasePage({
   const [caseData, setCaseData] = useState<SCACase | null>(null)
   const [loading, setLoading] = useState(true)
   const [phase, setPhase] = useState<'info' | 'practice' | 'review'>('info')
+  const [showActorScript, setShowActorScript] = useState(true)
   const [timeLeft, setTimeLeft] = useState(0)
-  const [response, setResponse] = useState('')
   const [showAnswer, setShowAnswer] = useState(false)
   const [showAssessment, setShowAssessment] = useState(false)
   const [domain1Checks, setDomain1Checks] = useState<boolean[]>([])
@@ -197,7 +197,7 @@ export default function SCACasePage({
     return () => clearInterval(timer)
   }, [phase, timeLeft])
 
-  async function handleSubmit() {
+  async function handleComplete() {
     if (!caseData) return
 
     const supabase = createClient()
@@ -210,7 +210,6 @@ export default function SCACasePage({
         content_id: caseData.id,
         completed: true,
         time_taken: caseData.time_limit - timeLeft,
-        user_response: response,
       }, {
         onConflict: 'user_id,content_type,content_id'
       })
@@ -508,55 +507,156 @@ export default function SCACasePage({
           )}
 
           {phase === 'practice' && (
-            <div className="space-y-4">
-              {/* Timer */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>Time remaining</span>
-                  <span className={timeLeft < 30 ? 'text-destructive font-bold' : ''}>
+            <div className="space-y-6">
+              {/* Timer - Fixed at top */}
+              <div className="sticky top-0 z-10 bg-background/95 backdrop-blur py-3 border-b space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="font-medium">Time Remaining</span>
+                  <span className={`text-2xl font-bold font-mono ${timeLeft < 60 ? 'text-destructive' : timeLeft < 120 ? 'text-amber-600' : 'text-primary'}`}>
                     {formatTime(timeLeft)}
                   </span>
                 </div>
                 <Progress
                   value={timeProgress}
-                  className={`h-2 ${timeProgress < 25 ? '[&>div]:bg-destructive' : ''}`}
+                  className={`h-3 ${timeProgress < 25 ? '[&>div]:bg-destructive' : timeProgress < 50 ? '[&>div]:bg-amber-500' : ''}`}
                 />
               </div>
 
-              {/* Response area */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Your response
-                </label>
-                <textarea
-                  value={response}
-                  onChange={(e) => setResponse(e.target.value)}
-                  className="w-full h-48 p-3 border rounded-md bg-background resize-none focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="Type your response here..."
-                />
+              {/* Toggle Actor Script */}
+              <div className="flex justify-between items-center">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowActorScript(!showActorScript)}
+                >
+                  {showActorScript ? 'Hide' : 'Show'} Actor Script
+                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" onClick={() => setPhase('review')}>
+                    End Consultation
+                  </Button>
+                </div>
               </div>
 
-              <div className="flex justify-end gap-2">
-                <Button variant="outline" onClick={() => setPhase('review')}>
-                  Skip to Review
-                </Button>
-                <Button onClick={handleSubmit}>
-                  Submit Response
-                </Button>
+              {/* Actor Script visible during practice */}
+              {showActorScript && caseData.actor_info && (
+                <div className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 rounded-lg p-4">
+                  <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-3">
+                    🎭 Actor Script
+                  </h3>
+                  
+                  {/* Opening Statement */}
+                  {caseData.actor_info.opening_statement && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Opening Statement:</h4>
+                      <p className="bg-white dark:bg-gray-900 p-3 rounded border italic">
+                        &quot;{caseData.actor_info.opening_statement}&quot;
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Freely Given History */}
+                  {caseData.actor_info.freely_given_history && (
+                    <details className="mb-4">
+                      <summary className="cursor-pointer font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">
+                        Freely Given History (click to expand)
+                      </summary>
+                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm space-y-2 mt-2">
+                        {caseData.actor_info.freely_given_history.presenting_complaint && (
+                          <p><strong>Presenting Complaint:</strong> {caseData.actor_info.freely_given_history.presenting_complaint}</p>
+                        )}
+                        {caseData.actor_info.freely_given_history.psychosocial_impact && (
+                          <p><strong>Psychosocial Impact:</strong> {caseData.actor_info.freely_given_history.psychosocial_impact}</p>
+                        )}
+                        {caseData.actor_info.freely_given_history.ice && (
+                          <div className="pt-2 border-t">
+                            <strong>ICE:</strong>
+                            <ul className="list-disc list-inside ml-2 mt-1">
+                              {caseData.actor_info.freely_given_history.ice.ideas && (
+                                <li><span className="text-muted-foreground">Ideas:</span> {caseData.actor_info.freely_given_history.ice.ideas}</li>
+                              )}
+                              {caseData.actor_info.freely_given_history.ice.concerns && (
+                                <li><span className="text-muted-foreground">Concerns:</span> {caseData.actor_info.freely_given_history.ice.concerns}</li>
+                              )}
+                              {caseData.actor_info.freely_given_history.ice.expectations && (
+                                <li><span className="text-muted-foreground">Expectations:</span> {caseData.actor_info.freely_given_history.ice.expectations}</li>
+                              )}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </details>
+                  )}
+
+                  {/* History on Direct Questioning */}
+                  {caseData.actor_info.history_on_direct_questioning && (
+                    <details className="mb-4">
+                      <summary className="cursor-pointer font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">
+                        History on Direct Questioning (click to expand)
+                      </summary>
+                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm max-h-64 overflow-y-auto mt-2">
+                        {Object.entries(caseData.actor_info.history_on_direct_questioning).map(([key, value]) => (
+                          <div key={key} className="mb-3">
+                            <h5 className="font-medium text-primary capitalize">{key.replace(/_/g, ' ')}</h5>
+                            {typeof value === 'object' && value !== null ? (
+                              <ul className="list-disc list-inside ml-2 text-muted-foreground">
+                                {Object.entries(value as Record<string, unknown>).map(([subKey, subValue]) => (
+                                  <li key={subKey}>
+                                    <span className="font-medium capitalize">{subKey.replace(/_/g, ' ')}:</span>{' '}
+                                    {typeof subValue === 'string' ? subValue : JSON.stringify(subValue)}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-muted-foreground ml-2">{String(value)}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )}
+
+                  {/* Actor Behaviour */}
+                  {caseData.actor_behaviour && (
+                    <div>
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Actor Behaviour:</h4>
+                      <p className="bg-amber-100 dark:bg-amber-900/30 p-3 rounded text-sm font-medium">
+                        {caseData.actor_behaviour}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Basic case info if no actor script */}
+              {showActorScript && !caseData.actor_info && (
+                <div className="bg-muted p-4 rounded-lg">
+                  <h3 className="font-semibold mb-2">Scenario</h3>
+                  <div className="prose prose-sm dark:prose-invert">
+                    <ReactMarkdown>{caseData.scenario}</ReactMarkdown>
+                  </div>
+                </div>
+              )}
+
+              {/* Patient Info Summary */}
+              <div className="bg-muted/50 p-3 rounded-lg text-sm">
+                <div className="flex flex-wrap gap-4">
+                  {caseData.patient_info.name && <span><strong>Patient:</strong> {caseData.patient_info.name}</span>}
+                  <span><strong>Age:</strong> {caseData.patient_info.age}</span>
+                  <span><strong>Gender:</strong> {caseData.patient_info.gender}</span>
+                </div>
               </div>
             </div>
           )}
 
           {phase === 'review' && (
             <div className="space-y-6">
-              {response && (
-                <div>
-                  <h3 className="font-semibold mb-2">Your Response</h3>
-                  <div className="bg-muted p-4 rounded-lg text-sm whitespace-pre-wrap">
-                    {response}
-                  </div>
-                </div>
-              )}
+              {/* Time Summary */}
+              <div className="bg-muted p-4 rounded-lg text-center">
+                <p className="text-sm text-muted-foreground">Consultation Time</p>
+                <p className="text-2xl font-bold">{formatTime(caseData.time_limit - timeLeft)}</p>
+                <p className="text-xs text-muted-foreground">of {formatTime(caseData.time_limit)} allowed</p>
+              </div>
 
               <div>
                 <h3 className="font-semibold mb-2">Key Points to Cover</h3>
