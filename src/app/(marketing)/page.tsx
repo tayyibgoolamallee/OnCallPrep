@@ -17,18 +17,6 @@ const features = [
     color: 'bg-blue-50 text-blue-700 border-blue-200',
   },
   {
-    title: 'SCA Preparation',
-    description: 'Master the Simulated Consultation Assessment with structured practice, timed exercises, and realistic mock cases.',
-    items: [
-      { name: 'Exam overview & guidance', free: true },
-      { name: 'Sample mock cases', free: true },
-      { name: '2-min diagnosis practice', free: false },
-      { name: 'Full mock case library (50+)', free: false },
-    ],
-    href: '/sca',
-    color: 'bg-teal-50 text-teal-700 border-teal-200',
-  },
-  {
     title: 'AKT Question Bank',
     description: 'Comprehensive question bank with guideline-driven explanations. Practice smarter with high-yield content.',
     items: [
@@ -39,6 +27,18 @@ const features = [
     ],
     href: '/akt',
     color: 'bg-purple-50 text-purple-700 border-purple-200',
+  },
+  {
+    title: 'SCA Preparation',
+    description: 'Master the Simulated Consultation Assessment with structured practice, timed exercises, and realistic mock cases.',
+    items: [
+      { name: 'Exam overview & guidance', free: true },
+      { name: 'Sample mock cases', free: true },
+      { name: '2-min diagnosis practice', free: false },
+      { name: 'Full mock case library (50+)', free: false },
+    ],
+    href: '/sca',
+    color: 'bg-teal-50 text-teal-700 border-teal-200',
   },
 ]
 
@@ -75,8 +75,8 @@ export default function HomePage() {
               <br />
               <span className="text-primary">Say Goodbye to Overwhelm.</span>
             </h1>
-            <p className="mt-8 text-lg leading-8 text-muted-foreground sm:text-xl lg:text-2xl">
-              Master your portfolio, ace the SCA, and conquer the AKT with confidence.
+            <p className="mt-8 text-lg leading-8 text-foreground/80 sm:text-xl lg:text-2xl">
+              Master your portfolio, ace the AKT, and conquer the SCA with confidence.
               Everything you need for GP training success in one place.
             </p>
             <div className="mt-12 flex items-center justify-center gap-x-6">
@@ -102,7 +102,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               Master Every Aspect of GP Training
             </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+            <p className="mt-6 text-lg leading-8 text-foreground/80">
               Three powerful tools working together to make your training journey easier
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function HomePage() {
                   <div className={`mb-4 inline-flex w-fit rounded-lg border px-4 py-2 text-sm font-semibold ${feature.color}`}>
                     {feature.title}
                   </div>
-                  <CardDescription className="text-base leading-7 text-foreground/70">
+                  <CardDescription className="text-base leading-7 text-foreground/90">
                     {feature.description}
                   </CardDescription>
                 </CardHeader>
@@ -150,7 +150,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               How OnCallPrep Works
             </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+            <p className="mt-6 text-lg leading-8 text-foreground/80">
               Get started in minutes, see results in weeks
             </p>
           </div>
@@ -186,7 +186,7 @@ export default function HomePage() {
                   {item.step}
                 </div>
                 <h3 className="mt-6 text-lg font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.desc}</p>
+                <p className="mt-2 text-sm leading-6 text-foreground/75">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -200,7 +200,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               What Trainees Are Saying
             </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+            <p className="mt-6 text-lg leading-8 text-foreground/80">
               Join hundreds of successful GP trainees
             </p>
           </div>
@@ -208,12 +208,12 @@ export default function HomePage() {
             {testimonials.map((testimonial) => (
               <Card key={testimonial.author} className="border-2 transition-shadow hover:shadow-lg">
                 <CardContent className="pt-8">
-                  <p className="text-base italic leading-7 text-muted-foreground">
+                  <p className="text-base italic leading-7 text-foreground/80">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <div className="mt-6">
                     <p className="font-semibold text-foreground">{testimonial.author}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-sm text-foreground/70">{testimonial.role}</p>
                   </div>
                 </CardContent>
               </Card>

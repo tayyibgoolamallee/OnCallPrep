@@ -15,8 +15,8 @@ import { signOut } from '@/actions/auth'
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: '📊' },
   { name: 'Portfolio', href: '/portfolio', icon: '📁' },
-  { name: 'SCA Prep', href: '/sca', icon: '🩺' },
   { name: 'AKT Bank', href: '/akt', icon: '📝' },
+  { name: 'SCA Prep', href: '/sca', icon: '🩺' },
 ]
 
 export default async function DashboardLayout({

@@ -21,13 +21,13 @@ export default function MarketingLayout({
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/#features"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
               Features
             </Link>
             <Link
               href="/pricing"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
               Pricing
             </Link>
@@ -65,7 +65,7 @@ export default function MarketingLayout({
                 </div>
                 <span className="text-xl font-bold text-foreground">OnCallPrep</span>
               </div>
-              <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
+              <p className="mt-4 max-w-sm text-sm leading-6 text-foreground/70">
                 Your complete companion for GP training success. Built by trainees, for trainees.
               </p>
             </div>
@@ -75,18 +75,18 @@ export default function MarketingLayout({
               <h3 className="text-sm font-semibold text-foreground">Features</h3>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <Link href="/portfolio" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  <Link href="/portfolio" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
                     Portfolio Helper
                   </Link>
                 </li>
                 <li>
-                  <Link href="/sca" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    SCA Preparation
+                  <Link href="/akt" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
+                    AKT Question Bank
                   </Link>
                 </li>
                 <li>
-                  <Link href="/akt" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    AKT Question Bank
+                  <Link href="/sca" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
+                    SCA Preparation
                   </Link>
                 </li>
               </ul>
@@ -97,12 +97,12 @@ export default function MarketingLayout({
               <h3 className="text-sm font-semibold text-foreground">Company</h3>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <Link href="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  <Link href="/pricing" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/login" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  <Link href="/login" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
                     Sign In
                   </Link>
                 </li>
@@ -111,7 +111,7 @@ export default function MarketingLayout({
           </div>
 
           <div className="mt-8 border-t pt-8">
-            <p className="text-center text-xs text-muted-foreground">
+            <p className="text-center text-xs text-foreground/60">
               © 2025 OnCallPrep. All rights reserved.
             </p>
           </div>
