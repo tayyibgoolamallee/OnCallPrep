@@ -62,10 +62,10 @@ export default function AKTPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 via-white to-orange-50">
+      <section className="py-16 bg-gradient-to-b from-primary/5 to-white">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary">AKT Question Bank</Badge>
+            <Badge className="mb-4 bg-primary text-white">AKT Question Bank</Badge>
             <h1 className="text-4xl font-bold mb-4">Master the Applied Knowledge Test</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               500+ guideline-referenced questions covering all AKT topics. Practice smarter with detailed explanations linked to NICE and RCGP guidance.

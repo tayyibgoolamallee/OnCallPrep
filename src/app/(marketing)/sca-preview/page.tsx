@@ -60,10 +60,10 @@ export default function SCAPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-br from-primary/5 via-white to-accent/5">
+      <section className="py-16 bg-gradient-to-b from-primary/5 to-white">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary">SCA Preparation</Badge>
+            <Badge className="mb-4 bg-primary text-white">SCA Preparation</Badge>
             <h1 className="text-4xl font-bold mb-4">Conquer the Simulated Consultation Assessment</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               Practice with realistic mock cases, timed exercises, and structured feedback. Build the consultation skills you need to pass with confidence.

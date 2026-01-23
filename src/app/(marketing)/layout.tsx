@@ -20,25 +20,7 @@ export default function MarketingLayout({
 
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/akt-preview"
-              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-            >
-              AKT
-            </Link>
-            <Link
-              href="/sca-preview"
-              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-            >
-              SCA
-            </Link>
-            <Link
-              href="/portfolio-preview"
-              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-            >
-              Portfolio
-            </Link>
-            <Link
-              href="/resources-preview"
+              href="/resources"
               className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
               Resources
@@ -48,6 +30,12 @@ export default function MarketingLayout({
               className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
               Pricing
+            </Link>
+            <Link
+              href="/about"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            >
+              About
             </Link>
           </nav>
 
@@ -90,11 +78,16 @@ export default function MarketingLayout({
 
             {/* Features Links */}
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Features</h3>
+              <h3 className="text-sm font-semibold text-foreground">Resources</h3>
               <ul className="mt-4 space-y-3">
                 <li>
+                  <Link href="/resources" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
+                    All Resources
+                  </Link>
+                </li>
+                <li>
                   <Link href="/akt-preview" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
-                    AKT Question Bank
+                    AKT Preparation
                   </Link>
                 </li>
                 <li>
@@ -104,12 +97,7 @@ export default function MarketingLayout({
                 </li>
                 <li>
                   <Link href="/portfolio-preview" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
-                    Portfolio Helper
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/resources-preview" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
-                    Learning Resources
+                    Portfolio Guidance
                   </Link>
                 </li>
               </ul>

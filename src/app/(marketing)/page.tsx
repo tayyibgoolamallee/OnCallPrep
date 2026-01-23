@@ -14,8 +14,8 @@ const features = [
       { name: 'Progress tracking', free: false },
     ],
     href: '/akt-preview',
-    color: 'bg-teal-50 text-primary border-teal-200',
-    accent: 'from-teal-500 to-teal-600',
+    borderColor: 'border-l-primary',
+    bgColor: 'bg-primary/5',
   },
   {
     title: 'SCA Preparation',
@@ -27,8 +27,8 @@ const features = [
       { name: 'Full mock case library (50+)', free: false },
     ],
     href: '/sca-preview',
-    color: 'bg-orange-50 text-orange-700 border-orange-200',
-    accent: 'from-orange-500 to-orange-600',
+    borderColor: 'border-l-accent',
+    bgColor: 'bg-accent/5',
   },
   {
     title: 'Portfolio Helper',
@@ -40,8 +40,8 @@ const features = [
       { name: 'Detailed competency guides', free: false },
     ],
     href: '/portfolio-preview',
-    color: 'bg-violet-50 text-violet-700 border-violet-200',
-    accent: 'from-violet-500 to-violet-600',
+    borderColor: 'border-l-violet-600',
+    bgColor: 'bg-violet-50',
   },
 ]
 
@@ -67,11 +67,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-orange-50 py-24 sm:py-32 lg:py-40">
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-white to-accent/5 py-24 sm:py-32 lg:py-40">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
           <div className="mx-auto max-w-4xl text-center">
             <Badge className="mb-8 inline-flex px-4 py-2 text-sm font-semibold bg-primary/10 text-primary border-primary/20">
@@ -80,7 +76,7 @@ export default function HomePage() {
             <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Simplify GP Training.
               <br />
-              <span className="bg-gradient-to-r from-primary to-teal-600 bg-clip-text text-transparent">Say Goodbye to Overwhelm.</span>
+              <span className="text-primary">Say Goodbye to Overwhelm.</span>
             </h1>
             <p className="mt-8 text-lg leading-8 text-foreground/80 sm:text-xl lg:text-2xl">
               Master your portfolio, ace the AKT, and conquer the SCA with confidence.
@@ -88,13 +84,13 @@ export default function HomePage() {
             </p>
             <div className="mt-12 flex items-center justify-center gap-x-6">
               <Link href="/signup">
-                <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                <Button size="lg" className="h-12 px-8 text-base font-semibold">
                   Get Started Free
                 </Button>
               </Link>
-              <Link href="/pricing">
+              <Link href="/resources">
                 <Button size="lg" variant="outline" className="h-12 px-8 text-base font-semibold border-2 hover:bg-primary/5">
-                  See Pricing
+                  Explore Resources
                 </Button>
               </Link>
             </div>
@@ -115,12 +111,10 @@ export default function HomePage() {
           </div>
           <div className="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.title} className="relative overflow-hidden border-2 transition-shadow hover:shadow-lg">
+              <Card key={feature.title} className={`relative overflow-hidden border-l-4 ${feature.borderColor} ${feature.bgColor} transition-shadow hover:shadow-lg`}>
                 <CardHeader>
-                  <div className={`mb-4 inline-flex w-fit rounded-lg border px-4 py-2 text-sm font-semibold ${feature.color}`}>
-                    {feature.title}
-                  </div>
-                  <CardDescription className="text-base leading-7 text-foreground/90">
+                  <CardTitle className="text-xl text-foreground">{feature.title}</CardTitle>
+                  <CardDescription className="text-base leading-7 text-foreground/80">
                     {feature.description}
                   </CardDescription>
                 </CardHeader>
@@ -128,10 +122,10 @@ export default function HomePage() {
                   <ul className="mb-8 space-y-3">
                     {feature.items.map((item) => (
                       <li key={item.name} className="flex items-center gap-3">
-                        <span className={`text-lg ${item.free ? 'text-green-600' : 'text-primary'}`}>
+                        <span className={`text-lg ${item.free ? 'text-primary' : 'text-accent'}`}>
                           {item.free ? '✓' : '★'}
                         </span>
-                        <span className="flex-1 text-sm">{item.name}</span>
+                        <span className="flex-1 text-sm text-foreground">{item.name}</span>
                         <Badge variant={item.free ? 'secondary' : 'default'} className="text-xs">
                           {item.free ? 'Free' : 'Pro'}
                         </Badge>

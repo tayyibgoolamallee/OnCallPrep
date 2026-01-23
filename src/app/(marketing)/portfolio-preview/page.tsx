@@ -65,10 +65,10 @@ export default function PortfolioPreviewPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 via-white to-orange-50">
+      <section className="py-16 bg-gradient-to-b from-primary/5 to-white">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary">Portfolio Helper</Badge>
+            <Badge className="mb-4 bg-primary text-white">Portfolio Helper</Badge>
             <h1 className="text-4xl font-bold mb-4">Navigate GP Training with Confidence</h1>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
               Clear, structured guidance through ST1, ST2, and ST3 requirements. Never feel lost in your training journey again.

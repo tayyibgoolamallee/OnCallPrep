@@ -15,10 +15,25 @@ const plans = [
       'SCA exam overview',
       '5 sample mock cases',
       '20 demo AKT questions',
-      'Study topic overview',
     ],
     cta: 'Get Started',
     href: '/signup',
+    popular: false,
+  },
+  {
+    name: '1 Month',
+    price: '12.99',
+    period: '/month',
+    description: 'Try Pro features',
+    features: [
+      'Everything in Free, plus:',
+      'Full AKT question bank (500+)',
+      'Full mock case library (50+)',
+      'Detailed explanations',
+      'Progress tracking',
+    ],
+    cta: 'Get 1 Month',
+    href: '/signup?plan=pro-monthly',
     popular: false,
   },
   {
@@ -26,15 +41,12 @@ const plans = [
     price: '29.99',
     period: '/3 months',
     pricePerMonth: '£10/mo',
-    description: 'Perfect for focused exam prep',
+    description: 'Focused exam prep',
     features: [
-      'Everything in Free, plus:',
-      'Full mock case library (50+)',
+      'Everything in 1 Month',
+      'Save 23% vs monthly',
       '2-min diagnosis practice',
       '3-min priming exercises',
-      'Full AKT question bank (500+)',
-      'Detailed explanations',
-      'Progress tracking',
     ],
     cta: 'Get 3 Months',
     href: '/signup?plan=pro-3month',
@@ -48,7 +60,7 @@ const plans = [
     description: 'Most popular for trainees',
     features: [
       'Everything in 3 Months',
-      'Save 17% vs monthly',
+      'Save 36% vs monthly',
       'Guideline references',
       'Priority support',
     ],
@@ -62,12 +74,11 @@ const plans = [
     price: '79.99',
     period: '/year',
     pricePerMonth: '£6.67/mo',
-    description: 'Best value for your training',
+    description: 'Best value for training',
     features: [
       'Everything in 6 Months',
-      'Save 33% vs monthly',
-      'Early access to new features',
-      'Full training year coverage',
+      'Save 49% vs monthly',
+      'Early access to features',
     ],
     cta: 'Get Annual',
     href: '/signup?plan=pro-annual',
@@ -95,7 +106,7 @@ export default function PricingPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="secondary" className="mb-8 inline-flex px-4 py-2 text-sm font-semibold">
@@ -114,7 +125,7 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5">
             {plans.map((plan) => (
               <Card
                 key={plan.name}
@@ -172,7 +183,7 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="bg-gradient-to-br from-purple-50 via-blue-50 to-white py-24 sm:py-32">
+      <section className="bg-muted/30 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
