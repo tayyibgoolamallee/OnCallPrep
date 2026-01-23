@@ -5,18 +5,6 @@ import { Badge } from '@/components/ui/badge'
 
 const features = [
   {
-    title: 'Portfolio Helper',
-    description: 'Clear, structured guidance through ST1, ST2, and ST3 requirements. Never feel lost in your training journey again.',
-    items: [
-      { name: 'Stage-by-stage checklists', free: true },
-      { name: 'Reflective writing guides', free: true },
-      { name: 'Consultation models explained', free: true },
-      { name: 'Detailed competency guides', free: false },
-    ],
-    href: '/portfolio',
-    color: 'bg-blue-50 text-blue-700 border-blue-200',
-  },
-  {
     title: 'AKT Question Bank',
     description: 'Comprehensive question bank with guideline-driven explanations. Practice smarter with high-yield content.',
     items: [
@@ -25,7 +13,7 @@ const features = [
       { name: 'Full question bank (500+)', free: false },
       { name: 'Progress tracking', free: false },
     ],
-    href: '/akt',
+    href: '/akt-preview',
     color: 'bg-purple-50 text-purple-700 border-purple-200',
   },
   {
@@ -37,8 +25,20 @@ const features = [
       { name: '2-min diagnosis practice', free: false },
       { name: 'Full mock case library (50+)', free: false },
     ],
-    href: '/sca',
+    href: '/sca-preview',
     color: 'bg-teal-50 text-teal-700 border-teal-200',
+  },
+  {
+    title: 'Portfolio Helper',
+    description: 'Clear, structured guidance through ST1, ST2, and ST3 requirements. Never feel lost in your training journey again.',
+    items: [
+      { name: 'Stage-by-stage checklists', free: true },
+      { name: 'Reflective writing guides', free: true },
+      { name: 'Consultation models explained', free: true },
+      { name: 'Detailed competency guides', free: false },
+    ],
+    href: '/portfolio-preview',
+    color: 'bg-blue-50 text-blue-700 border-blue-200',
   },
 ]
 
