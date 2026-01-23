@@ -12,8 +12,38 @@ import ReactMarkdown from 'react-markdown'
 interface PatientInfo {
   age: number
   gender: string
-  presenting_complaint: string
+  name?: string
+  presenting_complaint?: string
   [key: string]: unknown
+}
+
+interface CaseNotes {
+  patient?: string
+  age?: number
+  gender?: string
+  pmh?: string
+  medications?: string
+  allergies?: string
+  social_summary?: string
+  family_summary?: string
+  [key: string]: unknown
+}
+
+interface ActorInfo {
+  opening_statement?: string
+  freely_given_history?: {
+    presenting_complaint?: string
+    psychosocial_impact?: string
+    ice?: {
+      ideas?: string
+      concerns?: string
+      expectations?: string
+    }
+    [key: string]: unknown
+  }
+  history_on_direct_questioning?: {
+    [key: string]: unknown
+  }
 }
 
 interface MarkingCriteria {
@@ -34,6 +64,11 @@ interface SCACase {
   model_answer: string
   is_pro: boolean | null
   marking_criteria?: MarkingCriteria
+  category?: string
+  category_code?: string
+  case_notes?: CaseNotes
+  actor_info?: ActorInfo
+  actor_behaviour?: string
 }
 
 // Default marking criteria if not provided in case data
@@ -112,18 +147,30 @@ export default function SCACasePage({
         .single()
 
       if (data) {
-        // Cast data to allow access to optional marking_criteria field
-        const rawData = data as typeof data & { marking_criteria?: unknown }
-        const caseWithMarkingData = {
+        // Cast data to allow access to all optional fields
+        const rawData = data as typeof data & { 
+          marking_criteria?: unknown
+          category?: string
+          category_code?: string
+          case_notes?: unknown
+          actor_info?: unknown
+          actor_behaviour?: string
+        }
+        const caseWithAllData: SCACase = {
           ...data,
           patient_info: data.patient_info as unknown as PatientInfo,
-          marking_criteria: (rawData.marking_criteria as MarkingCriteria) || defaultMarkingCriteria
+          marking_criteria: (rawData.marking_criteria as MarkingCriteria) || defaultMarkingCriteria,
+          category: rawData.category,
+          category_code: rawData.category_code,
+          case_notes: rawData.case_notes as CaseNotes | undefined,
+          actor_info: rawData.actor_info as ActorInfo | undefined,
+          actor_behaviour: rawData.actor_behaviour
         }
-        setCaseData(caseWithMarkingData)
+        setCaseData(caseWithAllData)
         setTimeLeft(data.time_limit)
         
         // Initialize checkbox arrays
-        const criteria = caseWithMarkingData.marking_criteria || defaultMarkingCriteria
+        const criteria = caseWithAllData.marking_criteria || defaultMarkingCriteria
         setDomain1Checks(new Array(criteria.domain1?.items.length || 0).fill(false))
         setDomain2Checks(new Array(criteria.domain2?.items.length || 0).fill(false))
         setDomain3Checks(new Array(criteria.domain3?.items.length || 0).fill(false))
@@ -248,10 +295,15 @@ export default function SCACasePage({
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Badge>{caseData.case_type}</Badge>
+          {caseData.category_code && (
+            <Badge variant="outline" className="font-mono">{caseData.category_code}</Badge>
+          )}
+          {caseData.category && (
+            <Badge className="bg-primary">{caseData.category}</Badge>
+          )}
           <Badge variant={
             caseData.difficulty === 'easy' ? 'secondary' :
-            caseData.difficulty === 'hard' ? 'destructive' : 'default'
+            caseData.difficulty === 'advanced' || caseData.difficulty === 'hard' ? 'destructive' : 'default'
           }>
             {caseData.difficulty}
           </Badge>
@@ -264,29 +316,193 @@ export default function SCACasePage({
           <CardDescription>Time limit: {formatTime(caseData.time_limit)}</CardDescription>
         </CardHeader>
         <CardContent>
-          {/* Patient Info */}
-          <div className="bg-muted p-4 rounded-lg mb-6">
-            <h3 className="font-semibold mb-2">Patient Information</h3>
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <div><span className="text-muted-foreground">Age:</span> {caseData.patient_info.age}</div>
-              <div><span className="text-muted-foreground">Gender:</span> {caseData.patient_info.gender}</div>
-              <div className="col-span-2">
-                <span className="text-muted-foreground">Presenting complaint:</span>{' '}
-                {caseData.patient_info.presenting_complaint}
-              </div>
-            </div>
-          </div>
-
           {phase === 'info' && (
-            <div className="space-y-4">
-              <div className="prose prose-sm dark:prose-invert">
-                <h3>Scenario</h3>
-                <ReactMarkdown>{caseData.scenario}</ReactMarkdown>
+            <div className="space-y-6">
+              {/* Doctor's Brief / Scenario */}
+              <div className="bg-primary/5 border border-primary/20 p-4 rounded-lg">
+                <h3 className="font-semibold text-primary mb-2">Doctor&apos;s Brief</h3>
+                <div className="prose prose-sm dark:prose-invert">
+                  <ReactMarkdown>{caseData.scenario}</ReactMarkdown>
+                </div>
               </div>
+
+              {/* Patient Information Card */}
+              <div className="bg-muted p-4 rounded-lg">
+                <h3 className="font-semibold mb-3">Patient Information</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                  {caseData.patient_info.name && (
+                    <div className="col-span-2 md:col-span-1">
+                      <span className="text-muted-foreground">Name:</span>{' '}
+                      <span className="font-medium">{caseData.patient_info.name}</span>
+                    </div>
+                  )}
+                  <div>
+                    <span className="text-muted-foreground">Age:</span>{' '}
+                    <span className="font-medium">{caseData.patient_info.age}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Gender:</span>{' '}
+                    <span className="font-medium">{caseData.patient_info.gender}</span>
+                  </div>
+                  {caseData.patient_info.presenting_complaint && (
+                    <div className="col-span-2 md:col-span-3">
+                      <span className="text-muted-foreground">Presenting:</span>{' '}
+                      <span className="font-medium">{caseData.patient_info.presenting_complaint}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Case Notes - Expanded Medical Details */}
+              {caseData.case_notes && (
+                <div className="border rounded-lg p-4">
+                  <h3 className="font-semibold mb-3">Case Notes</h3>
+                  <div className="grid md:grid-cols-2 gap-3 text-sm">
+                    {caseData.case_notes.pmh && (
+                      <div>
+                        <span className="text-muted-foreground font-medium">PMH:</span>{' '}
+                        {caseData.case_notes.pmh}
+                      </div>
+                    )}
+                    {caseData.case_notes.medications && (
+                      <div>
+                        <span className="text-muted-foreground font-medium">Medications:</span>{' '}
+                        {caseData.case_notes.medications}
+                      </div>
+                    )}
+                    {caseData.case_notes.allergies && (
+                      <div>
+                        <span className="text-muted-foreground font-medium">Allergies:</span>{' '}
+                        {caseData.case_notes.allergies}
+                      </div>
+                    )}
+                    {caseData.case_notes.social_summary && (
+                      <div>
+                        <span className="text-muted-foreground font-medium">Social:</span>{' '}
+                        {caseData.case_notes.social_summary}
+                      </div>
+                    )}
+                    {caseData.case_notes.family_summary && (
+                      <div>
+                        <span className="text-muted-foreground font-medium">Family:</span>{' '}
+                        {caseData.case_notes.family_summary}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Actor Information - For Roleplay */}
+              {caseData.actor_info && (
+                <div className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 rounded-lg p-4">
+                  <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-3">
+                    🎭 Actor Script (For Roleplay Partner)
+                  </h3>
+                  
+                  {/* Opening Statement */}
+                  {caseData.actor_info.opening_statement && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Opening Statement:</h4>
+                      <p className="bg-white dark:bg-gray-900 p-3 rounded border italic">
+                        &quot;{caseData.actor_info.opening_statement}&quot;
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Freely Given History */}
+                  {caseData.actor_info.freely_given_history && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">Freely Given History:</h4>
+                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm space-y-2">
+                        {caseData.actor_info.freely_given_history.presenting_complaint && (
+                          <p><strong>Presenting Complaint:</strong> {caseData.actor_info.freely_given_history.presenting_complaint}</p>
+                        )}
+                        {caseData.actor_info.freely_given_history.psychosocial_impact && (
+                          <p><strong>Psychosocial Impact:</strong> {caseData.actor_info.freely_given_history.psychosocial_impact}</p>
+                        )}
+                        {caseData.actor_info.freely_given_history.ice && (
+                          <div className="pt-2 border-t">
+                            <strong>ICE:</strong>
+                            <ul className="list-disc list-inside ml-2 mt-1">
+                              {caseData.actor_info.freely_given_history.ice.ideas && (
+                                <li><span className="text-muted-foreground">Ideas:</span> {caseData.actor_info.freely_given_history.ice.ideas}</li>
+                              )}
+                              {caseData.actor_info.freely_given_history.ice.concerns && (
+                                <li><span className="text-muted-foreground">Concerns:</span> {caseData.actor_info.freely_given_history.ice.concerns}</li>
+                              )}
+                              {caseData.actor_info.freely_given_history.ice.expectations && (
+                                <li><span className="text-muted-foreground">Expectations:</span> {caseData.actor_info.freely_given_history.ice.expectations}</li>
+                              )}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* History on Direct Questioning */}
+                  {caseData.actor_info.history_on_direct_questioning && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">History on Direct Questioning:</h4>
+                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm max-h-64 overflow-y-auto">
+                        {Object.entries(caseData.actor_info.history_on_direct_questioning).map(([key, value]) => (
+                          <div key={key} className="mb-3">
+                            <h5 className="font-medium text-primary capitalize">{key.replace(/_/g, ' ')}</h5>
+                            {typeof value === 'object' && value !== null ? (
+                              <ul className="list-disc list-inside ml-2 text-muted-foreground">
+                                {Object.entries(value as Record<string, unknown>).map(([subKey, subValue]) => (
+                                  <li key={subKey}>
+                                    <span className="font-medium capitalize">{subKey.replace(/_/g, ' ')}:</span>{' '}
+                                    {typeof subValue === 'string' ? subValue : JSON.stringify(subValue)}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-muted-foreground ml-2">{String(value)}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Actor Behaviour Prompts */}
+                  {caseData.actor_behaviour && (
+                    <div>
+                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Actor Behaviour:</h4>
+                      <p className="bg-amber-100 dark:bg-amber-900/30 p-3 rounded text-sm font-medium">
+                        {caseData.actor_behaviour}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Start Practice Button */}
               <div className="flex justify-center pt-4">
                 <Button size="lg" onClick={() => setPhase('practice')}>
                   Start Timed Practice
                 </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Minimal Patient Info for Practice/Review phases */}
+          {phase !== 'info' && (
+            <div className="bg-muted p-4 rounded-lg mb-6">
+              <h3 className="font-semibold mb-2">Patient Information</h3>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                {caseData.patient_info.name && (
+                  <div className="col-span-2"><span className="text-muted-foreground">Name:</span> {caseData.patient_info.name}</div>
+                )}
+                <div><span className="text-muted-foreground">Age:</span> {caseData.patient_info.age}</div>
+                <div><span className="text-muted-foreground">Gender:</span> {caseData.patient_info.gender}</div>
+                {caseData.patient_info.presenting_complaint && (
+                  <div className="col-span-2">
+                    <span className="text-muted-foreground">Presenting complaint:</span>{' '}
+                    {caseData.patient_info.presenting_complaint}
+                  </div>
+                )}
               </div>
             </div>
           )}
