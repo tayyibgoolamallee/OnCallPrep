@@ -14,18 +14,18 @@ const sections = [
     color: 'bg-blue-500/10 border-blue-500/20',
   },
   {
-    title: 'SCA Preparation',
-    description: 'Practice timed cases and build consultation skills',
-    href: '/sca',
-    icon: '🩺',
-    color: 'bg-teal-500/10 border-teal-500/20',
-  },
-  {
     title: 'AKT Question Bank',
     description: 'Test your knowledge with guideline-referenced questions',
     href: '/akt',
     icon: '📝',
     color: 'bg-purple-500/10 border-purple-500/20',
+  },
+  {
+    title: 'SCA Preparation',
+    description: 'Practice timed cases and build consultation skills',
+    href: '/sca',
+    icon: '🩺',
+    color: 'bg-teal-500/10 border-teal-500/20',
   },
 ]
 
@@ -93,20 +93,20 @@ export default async function DashboardPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardDescription>SCA Cases</CardDescription>
-            <CardTitle className="text-2xl">{scaProgress.length}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-xs text-muted-foreground">attempted</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
             <CardDescription>AKT Score</CardDescription>
             <CardTitle className="text-2xl">{aktScore}%</CardTitle>
           </CardHeader>
           <CardContent>
             <Progress value={aktScore} className="h-2" />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>SCA Cases</CardDescription>
+            <CardTitle className="text-2xl">{scaProgress.length}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-xs text-muted-foreground">attempted</p>
           </CardContent>
         </Card>
       </div>
