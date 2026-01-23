@@ -123,7 +123,7 @@ export default function AKTPracticePage() {
     )
   }
 
-  if (questions.length === 0) {
+  if (questions.length === 0 || !currentQuestion) {
     return (
       <div className="text-center py-12">
         <p className="text-muted-foreground mb-4">No questions available</p>
@@ -176,7 +176,7 @@ export default function AKTPracticePage() {
 
             {/* Options */}
             <div className="space-y-3">
-              {currentQuestion.options.map((option) => {
+              {currentQuestion.options?.filter(opt => opt && opt.id).map((option) => {
                 const isSelected = selectedOption === option.id
                 const isCorrect = option.id === currentQuestion.correct_option
                 let className = 'w-full p-4 text-left border rounded-lg transition-colors '
@@ -200,7 +200,7 @@ export default function AKTPracticePage() {
                     onClick={() => handleAnswer(option.id)}
                     disabled={showAnswer}
                   >
-                    <span className="font-medium mr-2">{option.id.toUpperCase()}.</span>
+                    <span className="font-medium mr-2">{option.id?.toUpperCase?.() || '?'}.</span>
                     {option.text}
                   </button>
                 )
