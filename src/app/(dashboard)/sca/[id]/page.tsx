@@ -669,193 +669,227 @@ export default function SCACasePage({
             <div className="space-y-6">
               {/* Time Summary */}
               <div className="bg-muted p-4 rounded-lg text-center">
-                <p className="text-sm text-muted-foreground">Consultation Time</p>
+                <p className="text-sm text-muted-foreground">Time Used</p>
                 <p className="text-2xl font-bold">{formatTime(caseData.time_limit - timeLeft)}</p>
                 <p className="text-xs text-muted-foreground">of {formatTime(caseData.time_limit)} allowed</p>
               </div>
 
-              {/* Show notes from priming exercise */}
-              {caseData.case_type === 'priming' && notes && (
-                <div>
-                  <h3 className="font-semibold mb-2">Your Notes</h3>
-                  <div className="bg-muted p-4 rounded-lg text-sm whitespace-pre-wrap">
-                    {notes}
+              {/* PRIMING CASE REVIEW - Streamlined */}
+              {caseData.case_type === 'priming' && (
+                <>
+                  {/* Show notes from priming exercise */}
+                  {notes && (
+                    <div>
+                      <h3 className="font-semibold mb-2">Your Notes</h3>
+                      <div className="bg-muted p-4 rounded-lg text-sm whitespace-pre-wrap">
+                        {notes}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Integrated Priming Focus & Examiner's Lens */}
+                  <div className="space-y-4">
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-5">
+                      <h3 className="font-semibold text-primary mb-3">Priming Focus</h3>
+                      <p className="text-sm text-muted-foreground mb-3">What you should have been thinking about during your 3 minutes:</p>
+                      <ul className="space-y-2">
+                        {caseData.key_points.map((point, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm">
+                            <span className="text-primary font-bold">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-5">
+                      <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-3">Examiner&apos;s Lens</h3>
+                      <p className="text-sm text-muted-foreground mb-3">What the examiner is looking for in this case:</p>
+                      <div className="prose prose-sm dark:prose-invert">
+                        <ReactMarkdown>{caseData.model_answer}</ReactMarkdown>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
 
-              <div>
-                <h3 className="font-semibold mb-2">Key Points to Cover</h3>
-                <ul className="list-disc list-inside space-y-1 text-sm">
-                  {caseData.key_points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <Button
-                  variant="outline"
-                  onClick={() => setShowAnswer(!showAnswer)}
-                  className="mb-2"
-                >
-                  {showAnswer ? 'Hide' : 'Show'} Model Answer
-                </Button>
-                {showAnswer && (
-                  <div className="prose prose-sm dark:prose-invert bg-muted p-4 rounded-lg">
-                    <ReactMarkdown>{caseData.model_answer}</ReactMarkdown>
+              {/* FULL CASE REVIEW - With self-assessment */}
+              {caseData.case_type === 'full' && (
+                <>
+                  <div>
+                    <h3 className="font-semibold mb-2">Key Points to Cover</h3>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                      {caseData.key_points.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
                   </div>
-                )}
-              </div>
 
-              {/* Self-Assessment Section */}
-              <div className="border-t pt-6">
-                <Button
-                  variant={showAssessment ? 'default' : 'outline'}
-                  onClick={() => setShowAssessment(!showAssessment)}
-                  className="mb-4"
-                >
-                  {showAssessment ? 'Hide' : 'Show'} Self-Assessment Marking
-                </Button>
-
-                {showAssessment && (
-                  <div className="space-y-6">
-                    <p className="text-sm text-muted-foreground">
-                      Tick the items you covered during your consultation. This uses the official SCA marking domains.
-                    </p>
-
-                    {/* Domain 1 */}
-                    {criteria.domain1 && (
-                      <div className="border rounded-lg p-4">
-                        <h4 className="font-semibold text-primary mb-3">{criteria.domain1.title}</h4>
-                        <div className="space-y-2">
-                          {criteria.domain1.items.map((item, i) => (
-                            <label key={i} className="flex items-start gap-3 cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={domain1Checks[i] || false}
-                                onChange={(e) => {
-                                  const newChecks = [...domain1Checks]
-                                  newChecks[i] = e.target.checked
-                                  setDomain1Checks(newChecks)
-                                  setScoreCalculated(false)
-                                }}
-                                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                              />
-                              <span className="text-sm">{item}</span>
-                            </label>
-                          ))}
-                        </div>
-                        <div className="mt-3 text-sm text-muted-foreground">
-                          {d1Checked}/{d1Total} items checked
-                        </div>
+                  <div>
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowAnswer(!showAnswer)}
+                      className="mb-2"
+                    >
+                      {showAnswer ? 'Hide' : 'Show'} Model Answer
+                    </Button>
+                    {showAnswer && (
+                      <div className="prose prose-sm dark:prose-invert bg-muted p-4 rounded-lg">
+                        <ReactMarkdown>{caseData.model_answer}</ReactMarkdown>
                       </div>
                     )}
+                  </div>
 
-                    {/* Domain 2 */}
-                    {criteria.domain2 && (
-                      <div className="border rounded-lg p-4">
-                        <h4 className="font-semibold text-primary mb-3">{criteria.domain2.title}</h4>
-                        <div className="space-y-2">
-                          {criteria.domain2.items.map((item, i) => (
-                            <label key={i} className="flex items-start gap-3 cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={domain2Checks[i] || false}
-                                onChange={(e) => {
-                                  const newChecks = [...domain2Checks]
-                                  newChecks[i] = e.target.checked
-                                  setDomain2Checks(newChecks)
-                                  setScoreCalculated(false)
-                                }}
-                                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                              />
-                              <span className="text-sm">{item}</span>
-                            </label>
-                          ))}
-                        </div>
-                        <div className="mt-3 text-sm text-muted-foreground">
-                          {d2Checked}/{d2Total} items checked (weighted 1.5x)
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Domain 3 */}
-                    {criteria.domain3 && (
-                      <div className="border rounded-lg p-4">
-                        <h4 className="font-semibold text-primary mb-3">{criteria.domain3.title}</h4>
-                        <div className="space-y-2">
-                          {criteria.domain3.items.map((item, i) => (
-                            <label key={i} className="flex items-start gap-3 cursor-pointer">
-                              <input
-                                type="checkbox"
-                                checked={domain3Checks[i] || false}
-                                onChange={(e) => {
-                                  const newChecks = [...domain3Checks]
-                                  newChecks[i] = e.target.checked
-                                  setDomain3Checks(newChecks)
-                                  setScoreCalculated(false)
-                                }}
-                                className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                              />
-                              <span className="text-sm">{item}</span>
-                            </label>
-                          ))}
-                        </div>
-                        <div className="mt-3 text-sm text-muted-foreground">
-                          {d3Checked}/{d3Total} items checked
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Calculate Score Button */}
-                    <Button onClick={() => setScoreCalculated(true)} className="w-full">
-                      Calculate My Score
+                  {/* Self-Assessment Section - Only for full cases */}
+                  <div className="border-t pt-6">
+                    <Button
+                      variant={showAssessment ? 'default' : 'outline'}
+                      onClick={() => setShowAssessment(!showAssessment)}
+                      className="mb-4"
+                    >
+                      {showAssessment ? 'Hide' : 'Show'} Self-Assessment Marking
                     </Button>
 
-                    {/* Score Results */}
-                    {scoreCalculated && (
-                      <div className="space-y-4 border-t pt-4">
-                        <h4 className="font-semibold text-lg">Your Results</h4>
-                        
-                        {/* Domain Scores */}
-                        <div className="grid md:grid-cols-3 gap-3">
-                          <div className={`p-3 rounded-lg border ${getGradeInfo(d1Points).class}`}>
-                            <div className="text-xs font-medium opacity-80">Domain 1</div>
-                            <div className="font-bold">{getGradeInfo(d1Points).grade}</div>
-                            <div className="text-xs mt-1">{d1Points}/4 points</div>
-                          </div>
-                          <div className={`p-3 rounded-lg border ${getGradeInfo(d2Points).class}`}>
-                            <div className="text-xs font-medium opacity-80">Domain 2 (1.5x)</div>
-                            <div className="font-bold">{getGradeInfo(d2Points).grade}</div>
-                            <div className="text-xs mt-1">{d2Points}/4 → {(d2Points * 1.5).toFixed(1)} pts</div>
-                          </div>
-                          <div className={`p-3 rounded-lg border ${getGradeInfo(d3Points).class}`}>
-                            <div className="text-xs font-medium opacity-80">Domain 3</div>
-                            <div className="font-bold">{getGradeInfo(d3Points).grade}</div>
-                            <div className="text-xs mt-1">{d3Points}/4 points</div>
-                          </div>
-                        </div>
+                    {showAssessment && (
+                      <div className="space-y-6">
+                        <p className="text-sm text-muted-foreground">
+                          Tick the items you covered during your consultation. This uses the official SCA marking domains.
+                        </p>
 
-                        {/* Overall Score */}
-                        <div className={`p-4 rounded-lg ${getOverallGrade().class}`}>
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <div className="text-sm opacity-80">Overall Case Score</div>
-                              <div className="text-xl font-bold">{getOverallGrade().grade}</div>
+                        {/* Domain 1 */}
+                        {criteria.domain1 && (
+                          <div className="border rounded-lg p-4">
+                            <h4 className="font-semibold text-primary mb-3">{criteria.domain1.title}</h4>
+                            <div className="space-y-2">
+                              {criteria.domain1.items.map((item, i) => (
+                                <label key={i} className="flex items-start gap-3 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={domain1Checks[i] || false}
+                                    onChange={(e) => {
+                                      const newChecks = [...domain1Checks]
+                                      newChecks[i] = e.target.checked
+                                      setDomain1Checks(newChecks)
+                                      setScoreCalculated(false)
+                                    }}
+                                    className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                  />
+                                  <span className="text-sm">{item}</span>
+                                </label>
+                              ))}
                             </div>
-                            <div className="text-right">
-                              <div className="text-2xl font-bold">{weightedTotal.toFixed(1)}/{maxWeighted}</div>
-                              <div className="text-xs opacity-80">weighted points</div>
+                            <div className="mt-3 text-sm text-muted-foreground">
+                              {d1Checked}/{d1Total} items checked
                             </div>
                           </div>
-                          <p className="text-sm mt-3 opacity-90">{getOverallGrade().feedback}</p>
-                        </div>
+                        )}
+
+                        {/* Domain 2 */}
+                        {criteria.domain2 && (
+                          <div className="border rounded-lg p-4">
+                            <h4 className="font-semibold text-primary mb-3">{criteria.domain2.title}</h4>
+                            <div className="space-y-2">
+                              {criteria.domain2.items.map((item, i) => (
+                                <label key={i} className="flex items-start gap-3 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={domain2Checks[i] || false}
+                                    onChange={(e) => {
+                                      const newChecks = [...domain2Checks]
+                                      newChecks[i] = e.target.checked
+                                      setDomain2Checks(newChecks)
+                                      setScoreCalculated(false)
+                                    }}
+                                    className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                  />
+                                  <span className="text-sm">{item}</span>
+                                </label>
+                              ))}
+                            </div>
+                            <div className="mt-3 text-sm text-muted-foreground">
+                              {d2Checked}/{d2Total} items checked (weighted 1.5x)
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Domain 3 */}
+                        {criteria.domain3 && (
+                          <div className="border rounded-lg p-4">
+                            <h4 className="font-semibold text-primary mb-3">{criteria.domain3.title}</h4>
+                            <div className="space-y-2">
+                              {criteria.domain3.items.map((item, i) => (
+                                <label key={i} className="flex items-start gap-3 cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={domain3Checks[i] || false}
+                                    onChange={(e) => {
+                                      const newChecks = [...domain3Checks]
+                                      newChecks[i] = e.target.checked
+                                      setDomain3Checks(newChecks)
+                                      setScoreCalculated(false)
+                                    }}
+                                    className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                                  />
+                                  <span className="text-sm">{item}</span>
+                                </label>
+                              ))}
+                            </div>
+                            <div className="mt-3 text-sm text-muted-foreground">
+                              {d3Checked}/{d3Total} items checked
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Calculate Score Button */}
+                        <Button onClick={() => setScoreCalculated(true)} className="w-full">
+                          Calculate My Score
+                        </Button>
+
+                        {/* Score Results */}
+                        {scoreCalculated && (
+                          <div className="space-y-4 border-t pt-4">
+                            <h4 className="font-semibold text-lg">Your Results</h4>
+                            
+                            {/* Domain Scores */}
+                            <div className="grid md:grid-cols-3 gap-3">
+                              <div className={`p-3 rounded-lg border ${getGradeInfo(d1Points).class}`}>
+                                <div className="text-xs font-medium opacity-80">Domain 1</div>
+                                <div className="font-bold">{getGradeInfo(d1Points).grade}</div>
+                                <div className="text-xs mt-1">{d1Points}/4 points</div>
+                              </div>
+                              <div className={`p-3 rounded-lg border ${getGradeInfo(d2Points).class}`}>
+                                <div className="text-xs font-medium opacity-80">Domain 2 (1.5x)</div>
+                                <div className="font-bold">{getGradeInfo(d2Points).grade}</div>
+                                <div className="text-xs mt-1">{d2Points}/4 → {(d2Points * 1.5).toFixed(1)} pts</div>
+                              </div>
+                              <div className={`p-3 rounded-lg border ${getGradeInfo(d3Points).class}`}>
+                                <div className="text-xs font-medium opacity-80">Domain 3</div>
+                                <div className="font-bold">{getGradeInfo(d3Points).grade}</div>
+                                <div className="text-xs mt-1">{d3Points}/4 points</div>
+                              </div>
+                            </div>
+
+                            {/* Overall Score */}
+                            <div className={`p-4 rounded-lg ${getOverallGrade().class}`}>
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <div className="text-sm opacity-80">Overall Case Score</div>
+                                  <div className="text-xl font-bold">{getOverallGrade().grade}</div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-2xl font-bold">{weightedTotal.toFixed(1)}/{maxWeighted}</div>
+                                  <div className="text-xs opacity-80">weighted points</div>
+                                </div>
+                              </div>
+                              <p className="text-sm mt-3 opacity-90">{getOverallGrade().feedback}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
-                )}
-              </div>
+                </>
+              )}
 
               <div className="flex justify-center pt-4">
                 <Button onClick={() => router.push('/sca')}>
