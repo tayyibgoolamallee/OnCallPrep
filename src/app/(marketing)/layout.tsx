@@ -20,10 +20,10 @@ export default function MarketingLayout({
 
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/resources"
+              href="/explore"
               className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
-              Resources
+              Explore
             </Link>
             <Link
               href="/pricing"
@@ -81,8 +81,8 @@ export default function MarketingLayout({
               <h3 className="text-sm font-semibold text-foreground">Resources</h3>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <Link href="/resources" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
-                    All Resources
+                  <Link href="/explore" className="text-sm text-foreground/70 transition-colors hover:text-foreground">
+                    Explore All
                   </Link>
                 </li>
                 <li>

@@ -88,7 +88,7 @@ export default function HomePage() {
                   Get Started Free
                 </Button>
               </Link>
-              <Link href="/resources">
+              <Link href="/explore">
                 <Button size="lg" variant="outline" className="h-12 px-8 text-base font-semibold border-2 hover:bg-primary/5">
                   Explore Resources
                 </Button>
