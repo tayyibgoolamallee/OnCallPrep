@@ -5,9 +5,8 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 const caseTypes = [
-  { id: 'diagnosis', name: '2-Min Diagnosis', time: '120s', description: 'Quick diagnosis and differential thinking' },
   { id: 'priming', name: '3-Min Priming', time: '180s', description: 'Prepare your consultation approach' },
-  { id: 'full', name: 'Full Cases', time: 'Varies', description: 'Complete consultation scenarios' },
+  { id: 'full', name: 'Full Cases', time: '12 min', description: 'Complete consultation scenarios with actor scripts' },
 ]
 
 export default async function SCAPage() {
@@ -66,6 +65,57 @@ export default async function SCAPage() {
             <CardTitle className="text-2xl">{isPro ? 'Pro' : 'Free'}</CardTitle>
           </CardHeader>
         </Card>
+      </div>
+
+      {/* Practice Tools */}
+      <div>
+        <h2 className="text-xl font-semibold mb-4">Practice Tools</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <Link href="/sca/diagnosis-practice">
+            <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary/50 bg-primary/5">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <span className="text-2xl">⏱️</span>
+                      2-Minute Diagnosis Practice
+                    </CardTitle>
+                    <CardDescription className="mt-2">
+                      Practice explaining 56 common diagnoses clearly and concisely – a key SCA skill
+                    </CardDescription>
+                  </div>
+                  <Badge>120s</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Name it → Link to patient → Explain → Plan → Safety net
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+          <Card className="h-full opacity-60">
+            <CardHeader>
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <span className="text-2xl">📋</span>
+                    3-Minute Priming Practice
+                  </CardTitle>
+                  <CardDescription className="mt-2">
+                    Read case notes and prepare your consultation approach
+                  </CardDescription>
+                </div>
+                <Badge variant="outline">Coming Soon</Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                Identify key issues, plan structure, think like the examiner
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Case Types */}

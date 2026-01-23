@@ -4,13 +4,6 @@ import { Badge } from '@/components/ui/badge'
 
 const resources = [
   {
-    title: '2-Minute Diagnosis Practice',
-    description: 'Practice explaining 56 common diagnoses clearly and concisely – a key SCA skill',
-    href: '/resources/diagnosis-practice',
-    icon: '⏱️',
-    category: 'SCA',
-  },
-  {
     title: 'Consultation Models',
     description: 'Calgary-Cambridge, Pendleton, Neighbour, and more frameworks for effective consultations',
     href: '/resources/consultation-models',

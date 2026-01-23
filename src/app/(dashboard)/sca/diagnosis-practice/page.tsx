@@ -430,8 +430,8 @@ export default function DiagnosisPracticePage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
-        <Link href="/resources">
-          <Button variant="ghost">← Back to Resources</Button>
+        <Link href="/sca">
+          <Button variant="ghost">← Back to SCA</Button>
         </Link>
       </div>
 
