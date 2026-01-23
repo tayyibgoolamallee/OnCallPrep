@@ -191,11 +191,10 @@ export default function SCAPreviewPage() {
           <h2 className="text-2xl font-bold text-center mb-8">Case Categories</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {caseTypes.map((type) => (
-              <Card key={type.name} className="text-center">
+              <Card key={type.name} className="text-center border-2 border-primary/10 hover:border-primary/30 transition-colors">
                 <CardContent className="pt-6">
-                  <div className="text-3xl mb-2">{type.icon}</div>
-                  <h3 className="font-semibold">{type.name}</h3>
-                  <p className="text-sm text-foreground/70">{type.count} cases</p>
+                  <h3 className="font-semibold text-primary">{type.name}</h3>
+                  <p className="text-sm text-foreground/70 mt-1">{type.count} cases</p>
                 </CardContent>
               </Card>
             ))}
