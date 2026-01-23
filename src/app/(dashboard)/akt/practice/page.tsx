@@ -9,6 +9,13 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import ReactMarkdown from 'react-markdown'
 
+// #region agent log
+const debugLog = (location: string, message: string, data: Record<string, unknown> = {}) => {
+  fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location,message,data,timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'I'})}).catch(()=>{});
+  console.log(`[DEBUG ${location}]`, message, data);
+};
+// #endregion
+
 interface Option {
   id: string
   text: string
@@ -65,12 +72,24 @@ export default function AKTPracticePage() {
       const { data } = await query.limit(10)
 
       if (data) {
+        // #region agent log
+        debugLog('practice/page.tsx:loadQuestions', 'Raw data from Supabase', { 
+          count: data.length, 
+          firstQ: data[0] ? { id: data[0].id, topic: data[0].topic, optionsType: typeof data[0].options, options: data[0].options } : null 
+        });
+        // #endregion
         const shuffled = data
           .map(q => ({
             ...q,
             options: q.options as unknown as Option[]
           }))
           .sort(() => Math.random() - 0.5)
+        // #region agent log
+        debugLog('practice/page.tsx:afterMap', 'After mapping options', { 
+          firstQOptions: shuffled[0]?.options,
+          optionsIsArray: Array.isArray(shuffled[0]?.options)
+        });
+        // #endregion
         setQuestions(shuffled)
       }
       setLoading(false)
@@ -176,6 +195,11 @@ export default function AKTPracticePage() {
 
             {/* Options */}
             <div className="space-y-3">
+              {/* #region agent log - visible debug */}
+              <div className="text-xs text-muted-foreground bg-yellow-100 dark:bg-yellow-900 p-2 rounded mb-2">
+                DEBUG: options type={typeof currentQuestion.options}, isArray={String(Array.isArray(currentQuestion.options))}, length={Array.isArray(currentQuestion.options) ? currentQuestion.options.length : 'N/A'}, raw={JSON.stringify(currentQuestion.options).substring(0, 200)}
+              </div>
+              {/* #endregion */}
               {currentQuestion.options?.filter(opt => opt && opt.id).map((option) => {
                 const isSelected = selectedOption === option.id
                 const isCorrect = option.id === currentQuestion.correct_option
