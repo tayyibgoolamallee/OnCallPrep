@@ -129,6 +129,7 @@ export default function SCACasePage({
   const [phase, setPhase] = useState<'info' | 'practice' | 'review'>('info')
   const [showActorScript, setShowActorScript] = useState(true)
   const [timeLeft, setTimeLeft] = useState(0)
+  const [notes, setNotes] = useState('')
   const [showAnswer, setShowAnswer] = useState(false)
   const [showAssessment, setShowAssessment] = useState(false)
   const [domain1Checks, setDomain1Checks] = useState<boolean[]>([])
@@ -646,6 +647,21 @@ export default function SCACasePage({
                   <span><strong>Gender:</strong> {caseData.patient_info.gender}</span>
                 </div>
               </div>
+
+              {/* Notes section for priming cases */}
+              {caseData.case_type === 'priming' && (
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium">
+                    Your Notes
+                  </label>
+                  <textarea
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    className="w-full h-48 p-3 border rounded-md bg-background resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="Use this space to plan your approach...&#10;&#10;• Key differentials&#10;• Questions to ask&#10;• Red flags to consider&#10;• Management plan ideas"
+                  />
+                </div>
+              )}
             </div>
           )}
 
@@ -657,6 +673,16 @@ export default function SCACasePage({
                 <p className="text-2xl font-bold">{formatTime(caseData.time_limit - timeLeft)}</p>
                 <p className="text-xs text-muted-foreground">of {formatTime(caseData.time_limit)} allowed</p>
               </div>
+
+              {/* Show notes from priming exercise */}
+              {caseData.case_type === 'priming' && notes && (
+                <div>
+                  <h3 className="font-semibold mb-2">Your Notes</h3>
+                  <div className="bg-muted p-4 rounded-lg text-sm whitespace-pre-wrap">
+                    {notes}
+                  </div>
+                </div>
+              )}
 
               <div>
                 <h3 className="font-semibold mb-2">Key Points to Cover</h3>

@@ -70,52 +70,29 @@ export default async function SCAPage() {
       {/* Practice Tools */}
       <div>
         <h2 className="text-xl font-semibold mb-4">Practice Tools</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <Link href="/sca/diagnosis-practice">
-            <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary/50 bg-primary/5">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <span className="text-2xl">⏱️</span>
-                      2-Minute Diagnosis Practice
-                    </CardTitle>
-                    <CardDescription className="mt-2">
-                      Practice explaining 56 common diagnoses clearly and concisely – a key SCA skill
-                    </CardDescription>
-                  </div>
-                  <Badge>120s</Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Name it → Explain it → Link it → Plan it → Safety net it
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-          <Card className="h-full opacity-60">
+        <Link href="/sca/diagnosis-practice">
+          <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary/50 bg-primary/5">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <span className="text-2xl">📋</span>
-                    3-Minute Priming Practice
+                    <span className="text-2xl">⏱️</span>
+                    2-Minute Diagnosis Practice
                   </CardTitle>
                   <CardDescription className="mt-2">
-                    Read case notes and prepare your consultation approach
+                    Practice explaining 56 common diagnoses clearly and concisely – a key SCA skill
                   </CardDescription>
                 </div>
-                <Badge variant="outline">Coming Soon</Badge>
+                <Badge>120s</Badge>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Identify key issues, plan structure, think like the examiner
+                Name it → Explain it → Link it → Plan it → Safety net it
               </p>
             </CardContent>
           </Card>
-        </div>
+        </Link>
       </div>
 
       {/* Case Types */}
