@@ -1,26 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
-// #region agent log
-const debugLog = (location: string, message: string, data: Record<string, unknown> = {}) => {
-  fetch('http://127.0.0.1:7242/ingest/fdb3cfd5-1bb9-49c6-b9fa-b082112af8d9',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location,message,data,timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
-  console.log(`[DEBUG ${location}]`, message, data);
-};
-// #endregion
-
 export function SCAExamOverview() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  // #region agent log
-  useEffect(() => {
-    debugLog('sca-exam-overview.tsx:mounted', 'Component mounted', { isExpanded });
-    setMounted(true);
-  }, []);
-  // #endregion
 
   return (
     <Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 border-blue-200 dark:border-blue-800">
@@ -33,12 +18,7 @@ export function SCAExamOverview() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => {
-              // #region agent log
-              debugLog('sca-exam-overview.tsx:toggle', 'Toggle clicked', { wasExpanded: isExpanded });
-              // #endregion
-              setIsExpanded(!isExpanded);
-            }}
+            onClick={() => setIsExpanded(!isExpanded)}
             className="text-blue-700 dark:text-blue-300"
           >
             {isExpanded ? 'Hide Details ▲' : 'Show Details ▼'}
