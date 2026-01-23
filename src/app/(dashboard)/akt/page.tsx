@@ -129,7 +129,7 @@ export default async function AKTPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    <Progress value={(stats.answered / stats.total) * 100} className="h-2" />
+                    <Progress value={stats.total > 0 ? (stats.answered / stats.total) * 100 : 0} className="h-2" />
                     <p className="text-xs text-muted-foreground">
                       {stats.accuracy}% accuracy
                     </p>
