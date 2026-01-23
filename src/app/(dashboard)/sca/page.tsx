@@ -89,7 +89,7 @@ export default async function SCAPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Name it → Link to patient → Explain → Plan → Safety net
+                  Name it → Explain it → Link it → Plan it → Safety net it
                 </p>
               </CardContent>
             </Card>

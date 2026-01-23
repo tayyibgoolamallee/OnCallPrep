@@ -527,19 +527,19 @@ then cover: what it is, why it matters, your immediate plan, and when to worry a
                 <p className="text-muted-foreground">State the diagnosis clearly</p>
               </div>
               <div className="bg-primary/5 p-3 rounded-lg">
-                <strong className="text-primary">2. Link to patient</strong>
-                <p className="text-muted-foreground">Connect to their symptoms/story</p>
-              </div>
-              <div className="bg-primary/5 p-3 rounded-lg">
-                <strong className="text-primary">3. Explain what it is</strong>
+                <strong className="text-primary">2. Explain it</strong>
                 <p className="text-muted-foreground">Simple lay terms, no jargon</p>
               </div>
               <div className="bg-primary/5 p-3 rounded-lg">
-                <strong className="text-primary">4. Plan</strong>
+                <strong className="text-primary">3. Link it</strong>
+                <p className="text-muted-foreground">Connect to their symptoms/story</p>
+              </div>
+              <div className="bg-primary/5 p-3 rounded-lg">
+                <strong className="text-primary">4. Plan it</strong>
                 <p className="text-muted-foreground">What happens next, treatment</p>
               </div>
               <div className="bg-amber-50 dark:bg-amber-950/20 p-3 rounded-lg md:col-span-2">
-                <strong className="text-amber-700 dark:text-amber-300">5. Safety net</strong>
+                <strong className="text-amber-700 dark:text-amber-300">5. Safety net it</strong>
                 <p className="text-muted-foreground">When to worry and seek help – never skip this!</p>
               </div>
             </div>
