@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import ReactMarkdown from 'react-markdown'
-
 
 interface Option {
   id?: string
@@ -31,17 +30,24 @@ interface Question {
   is_pro: boolean | null
 }
 
+const QUESTION_COUNT_OPTIONS = [10, 20, 30, 50, 100, 200]
+
 export default function AKTPracticePage() {
   const router = useRouter()
+  const [phase, setPhase] = useState<'setup' | 'practice' | 'complete'>('setup')
   const [questions, setQuestions] = useState<Question[]>([])
+  const [availableCount, setAvailableCount] = useState(0)
+  const [selectedCount, setSelectedCount] = useState(20)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [showAnswer, setShowAnswer] = useState(false)
   const [score, setScore] = useState({ correct: 0, total: 0 })
   const [loading, setLoading] = useState(true)
+  const [isPro, setIsPro] = useState(false)
 
+  // Load available question count on mount
   useEffect(() => {
-    async function loadQuestions() {
+    async function checkAvailability() {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
 
@@ -56,32 +62,60 @@ export default function AKTPracticePage() {
         .eq('id', user.id)
         .single()
 
-      const isPro = profile?.subscription_tier === 'pro'
+      const userIsPro = profile?.subscription_tier === 'pro'
+      setIsPro(userIsPro)
 
+      // Count available questions
       let query = supabase
         .from('akt_questions')
-        .select('*')
+        .select('id', { count: 'exact' })
         .eq('published', true)
 
-      if (!isPro) {
+      if (!userIsPro) {
         query = query.eq('is_pro', false)
       }
 
-      const { data } = await query.limit(10)
+      const { count } = await query
 
-      if (data) {
-        const shuffled = data
-          .map(q => ({
-            ...q,
-            options: q.options as unknown as Option[]
-          }))
-          .sort(() => Math.random() - 0.5)
-        setQuestions(shuffled)
-      }
+      setAvailableCount(count || 0)
       setLoading(false)
     }
-    loadQuestions()
+    checkAvailability()
   }, [router])
+
+  async function startPractice() {
+    setLoading(true)
+    const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      router.push('/login')
+      return
+    }
+
+    let query = supabase
+      .from('akt_questions')
+      .select('*')
+      .eq('published', true)
+
+    if (!isPro) {
+      query = query.eq('is_pro', false)
+    }
+
+    const { data } = await query.limit(selectedCount)
+
+    if (data) {
+      const shuffled = data
+        .map(q => ({
+          ...q,
+          options: q.options as unknown as Option[]
+        }))
+        .sort(() => Math.random() - 0.5)
+      setQuestions(shuffled)
+      setPhase('practice')
+    }
+    setLoading(false)
+  }
 
   const currentQuestion = questions[currentIndex]
 
@@ -118,60 +152,132 @@ export default function AKTPracticePage() {
       setCurrentIndex(prev => prev + 1)
       setSelectedOption(null)
       setShowAnswer(false)
+    } else {
+      setPhase('complete')
     }
   }
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <p className="text-muted-foreground">Loading questions...</p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     )
   }
 
-  if (questions.length === 0 || !currentQuestion) {
+  // Setup Phase - Choose number of questions
+  if (phase === 'setup') {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground mb-4">No questions available</p>
-        <Button onClick={() => router.push('/akt')}>Back to AKT</Button>
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Button variant="ghost" onClick={() => router.push('/akt')}>
+            ← Back to AKT
+          </Button>
+        </div>
+
+        <Card>
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">AKT Practice Session</CardTitle>
+            <CardDescription>
+              Choose how many questions you want to practice
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="text-center text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">{availableCount}</span> questions available
+              {!isPro && <span className="ml-2">(Upgrade to Pro for more)</span>}
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              {QUESTION_COUNT_OPTIONS.map((count) => {
+                const isDisabled = count > availableCount
+                const isSelected = selectedCount === count
+                return (
+                  <button
+                    key={count}
+                    onClick={() => !isDisabled && setSelectedCount(count)}
+                    disabled={isDisabled}
+                    className={`
+                      p-4 rounded-lg border-2 transition-all text-center
+                      ${isSelected 
+                        ? 'border-primary bg-primary/10 text-primary font-semibold' 
+                        : 'border-muted hover:border-primary/50'
+                      }
+                      ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
+                    `}
+                  >
+                    <div className="text-2xl font-bold">{count}</div>
+                    <div className="text-xs text-muted-foreground">questions</div>
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="pt-4">
+              <Button 
+                onClick={startPractice} 
+                className="w-full" 
+                size="lg"
+                disabled={selectedCount > availableCount}
+              >
+                Start Practice ({selectedCount} questions)
+              </Button>
+            </div>
+
+            <div className="text-center text-xs text-muted-foreground">
+              Questions will be randomly selected and shuffled
+            </div>
+          </CardContent>
+        </Card>
       </div>
     )
   }
 
-  const isComplete = currentIndex >= questions.length - 1 && showAnswer
-  const progressPercent = ((currentIndex + (showAnswer ? 1 : 0)) / questions.length) * 100
-
-  return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
-        <Button variant="ghost" onClick={() => router.push('/akt')}>
-          ← Back to AKT
-        </Button>
-        <div className="text-sm text-muted-foreground">
-          Question {currentIndex + 1} of {questions.length}
+  // Practice Phase
+  if (phase === 'practice') {
+    if (questions.length === 0 || !currentQuestion) {
+      return (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground mb-4">No questions available</p>
+          <Button onClick={() => router.push('/akt')}>Back to AKT</Button>
         </div>
-      </div>
+      )
+    }
 
-      {/* Progress */}
-      <div className="space-y-2">
-        <Progress value={progressPercent} className="h-2" />
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>Score: {score.correct}/{score.total}</span>
-          <span>{Math.round(progressPercent)}% complete</span>
+    const progressPercent = ((currentIndex + (showAnswer ? 1 : 0)) / questions.length) * 100
+
+    return (
+      <div className="max-w-3xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Button variant="ghost" onClick={() => setPhase('setup')}>
+            ← End Session
+          </Button>
+          <div className="text-sm text-muted-foreground">
+            Question {currentIndex + 1} of {questions.length}
+          </div>
         </div>
-      </div>
 
-      {!isComplete ? (
+        {/* Progress */}
+        <div className="space-y-2">
+          <Progress value={progressPercent} className="h-2" />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Score: {score.correct}/{score.total}</span>
+            <span>{Math.round(progressPercent)}% complete</span>
+          </div>
+        </div>
+
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
               <Badge variant="secondary">{currentQuestion.topic}</Badge>
-              <Badge variant={
-                currentQuestion.difficulty === 'easy' ? 'secondary' :
-                currentQuestion.difficulty === 'hard' ? 'destructive' : 'default'
-              }>
-                {currentQuestion.difficulty}
-              </Badge>
+              {currentQuestion.difficulty && (
+                <Badge variant={
+                  currentQuestion.difficulty === 'easy' ? 'secondary' :
+                  currentQuestion.difficulty === 'hard' ? 'destructive' : 'default'
+                }>
+                  {currentQuestion.difficulty}
+                </Badge>
+              )}
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -244,29 +350,58 @@ export default function AKTPracticePage() {
             )}
           </CardContent>
         </Card>
-      ) : (
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Practice Complete!</CardTitle>
-          </CardHeader>
-          <CardContent className="text-center space-y-6">
-            <div className="text-6xl font-bold text-primary">
-              {score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0}%
+      </div>
+    )
+  }
+
+  // Complete Phase
+  return (
+    <div className="max-w-2xl mx-auto">
+      <Card>
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Practice Complete!</CardTitle>
+        </CardHeader>
+        <CardContent className="text-center space-y-6">
+          <div className="text-6xl font-bold text-primary">
+            {score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0}%
+          </div>
+          <p className="text-muted-foreground">
+            You got {score.correct} out of {score.total} questions correct
+          </p>
+          
+          {/* Performance breakdown */}
+          <div className="grid grid-cols-3 gap-4 py-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-600">{score.correct}</div>
+              <div className="text-xs text-muted-foreground">Correct</div>
             </div>
-            <p className="text-muted-foreground">
-              You got {score.correct} out of {score.total} questions correct
-            </p>
-            <div className="flex justify-center gap-4">
-              <Button variant="outline" onClick={() => router.push('/akt')}>
-                Back to AKT
-              </Button>
-              <Button onClick={() => window.location.reload()}>
-                Practice Again
-              </Button>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-red-600">{score.total - score.correct}</div>
+              <div className="text-xs text-muted-foreground">Incorrect</div>
             </div>
-          </CardContent>
-        </Card>
-      )}
+            <div className="text-center">
+              <div className="text-2xl font-bold">{score.total}</div>
+              <div className="text-xs text-muted-foreground">Total</div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-4 pt-4">
+            <Button variant="outline" onClick={() => router.push('/akt')}>
+              Back to AKT
+            </Button>
+            <Button onClick={() => {
+              setPhase('setup')
+              setQuestions([])
+              setCurrentIndex(0)
+              setSelectedOption(null)
+              setShowAnswer(false)
+              setScore({ correct: 0, total: 0 })
+            }}>
+              Practice Again
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
