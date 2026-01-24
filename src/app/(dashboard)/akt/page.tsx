@@ -120,24 +120,29 @@ export default async function AKTPage() {
           {topics.map((topic) => {
             const stats = getTopicStats(topic)
             return (
-              <Card key={topic}>
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-base">{topic}</CardTitle>
-                    <Badge variant="secondary">
-                      {stats.answered}/{stats.total}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <Progress value={stats.total > 0 ? (stats.answered / stats.total) * 100 : 0} className="h-2" />
-                    <p className="text-xs text-muted-foreground">
-                      {stats.accuracy}% accuracy
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <Link key={topic} href={`/akt/practice?topic=${encodeURIComponent(topic)}`}>
+                <Card className="cursor-pointer hover:border-primary transition-colors">
+                  <CardHeader className="pb-2">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-base">{topic}</CardTitle>
+                      <Badge variant="secondary">
+                        {stats.answered}/{stats.total}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <Progress value={stats.total > 0 ? (stats.answered / stats.total) * 100 : 0} className="h-2" />
+                      <p className="text-xs text-muted-foreground">
+                        {stats.accuracy}% accuracy
+                      </p>
+                      <p className="text-xs text-primary mt-2 font-medium">
+                        Click to practice →
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             )
           })}
         </div>

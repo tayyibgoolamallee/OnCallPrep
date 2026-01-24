@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -34,10 +34,13 @@ const QUESTION_COUNT_OPTIONS = [10, 20, 30, 50, 100, 200]
 
 export default function AKTPracticePage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [phase, setPhase] = useState<'setup' | 'practice' | 'complete'>('setup')
   const [questions, setQuestions] = useState<Question[]>([])
   const [availableCount, setAvailableCount] = useState(0)
   const [selectedCount, setSelectedCount] = useState(20)
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null)
+  const [availableTopics, setAvailableTopics] = useState<string[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [showAnswer, setShowAnswer] = useState(false)
@@ -65,23 +68,34 @@ export default function AKTPracticePage() {
       const userIsPro = profile?.subscription_tier === 'pro'
       setIsPro(userIsPro)
 
-      // Count available questions
+      // Count available questions and get topics
       let query = supabase
         .from('akt_questions')
-        .select('id', { count: 'exact' })
+        .select('id, topic', { count: 'exact' })
         .eq('published', true)
 
       if (!userIsPro) {
         query = query.eq('is_pro', false)
       }
 
-      const { count } = await query
+      const { data, count } = await query
 
       setAvailableCount(count || 0)
+      
+      // Get unique topics
+      const topics = [...new Set(data?.map(q => q.topic).filter((t): t is string => !!t) || [])].sort()
+      setAvailableTopics(topics)
+      
+      // Check if topic is in URL params
+      const topicParam = searchParams.get('topic')
+      if (topicParam && topics.includes(topicParam)) {
+        setSelectedTopic(topicParam)
+      }
+      
       setLoading(false)
     }
     checkAvailability()
-  }, [router])
+  }, [router, searchParams])
 
   async function startPractice() {
     setLoading(true)
@@ -100,6 +114,11 @@ export default function AKTPracticePage() {
 
     if (!isPro) {
       query = query.eq('is_pro', false)
+    }
+
+    // Filter by topic if selected
+    if (selectedTopic) {
+      query = query.eq('topic', selectedTopic)
     }
 
     const { data } = await query.limit(selectedCount)
@@ -186,6 +205,26 @@ export default function AKTPracticePage() {
             <div className="text-center text-sm text-muted-foreground">
               <span className="font-semibold text-foreground">{availableCount}</span> questions available
               {!isPro && <span className="ml-2">(Upgrade to Pro for more)</span>}
+            </div>
+
+            {/* Topic Selection */}
+            <div>
+              <label className="text-sm font-medium mb-2 block">Filter by Topic (Optional)</label>
+              <select
+                value={selectedTopic || ''}
+                onChange={(e) => setSelectedTopic(e.target.value || null)}
+                className="w-full p-2 border rounded-lg bg-background"
+              >
+                <option value="">All Topics</option>
+                {availableTopics.map((topic) => (
+                  <option key={topic} value={topic}>{topic}</option>
+                ))}
+              </select>
+              {selectedTopic && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Questions will be filtered to: <strong>{selectedTopic}</strong>
+                </p>
+              )}
             </div>
 
             <div className="grid grid-cols-3 gap-3">
@@ -396,6 +435,7 @@ export default function AKTPracticePage() {
               setSelectedOption(null)
               setShowAnswer(false)
               setScore({ correct: 0, total: 0 })
+              setSelectedTopic(null)
             }}>
               Practice Again
             </Button>
