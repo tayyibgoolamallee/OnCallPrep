@@ -40,7 +40,7 @@ export default async function SCAPage() {
   const accessibleFull = fullCases.filter(c => !c.is_pro || isPro)
 
   // Get unique difficulties for filtering
-  const difficulties = [...new Set(fullCases.map(c => c.difficulty).filter(Boolean))]
+  const difficulties = [...new Set(fullCases.map(c => c.difficulty).filter((d): d is string => d !== null && d !== undefined))]
 
   return (
     <div className="space-y-8">
