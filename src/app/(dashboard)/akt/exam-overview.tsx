@@ -40,8 +40,8 @@ export function AKTExamOverview() {
             </div>
             <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 text-center border border-slate-200 dark:border-slate-700">
               <div className="text-2xl mb-1">⏱️</div>
-              <div className="font-semibold text-slate-900 dark:text-slate-100">3 hours</div>
-              <div className="text-xs text-slate-600 dark:text-slate-400">~1.1 min per question</div>
+              <div className="font-semibold text-slate-900 dark:text-slate-100">2h 40m</div>
+              <div className="text-xs text-slate-600 dark:text-slate-400">~1 min per question</div>
             </div>
             <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-3 text-center border border-slate-200 dark:border-slate-700">
               <div className="text-2xl mb-1">📅</div>
