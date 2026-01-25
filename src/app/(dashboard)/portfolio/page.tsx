@@ -3,11 +3,51 @@ import { createClient } from '@/lib/supabase/server'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import { stageInfo } from '@/lib/portfolio-requirements'
 
 const stages = [
-  { id: 'st1', name: 'ST1', description: 'First year of specialty training' },
-  { id: 'st2', name: 'ST2', description: 'Second year of specialty training' },
-  { id: 'st3', name: 'ST3', description: 'Final year of specialty training' },
+  { id: 'st1', name: 'ST1', description: stageInfo.st1.description },
+  { id: 'st2', name: 'ST2', description: stageInfo.st2.description },
+  { id: 'st3', name: 'ST3', description: stageInfo.st3.description },
+]
+
+const resources = [
+  {
+    title: 'Consultation Models',
+    description: 'Calgary-Cambridge, Pendleton, Neighbour, and more frameworks',
+    href: '/resources/consultation-models',
+    icon: '📋',
+  },
+  {
+    title: 'Reflection Guide',
+    description: 'How to write effective reflections using Gibbs, Rolfe, and other frameworks',
+    href: '/resources/reflection-guide',
+    icon: '✍️',
+  },
+  {
+    title: 'AI Reflection Assistant',
+    description: 'Guidance on using AI tools appropriately for portfolio reflections',
+    href: '/resources/ai-reflection',
+    icon: '🤖',
+  },
+  {
+    title: 'Hidden Curriculum',
+    description: 'GP setup, triage, finances, career paths, and essential knowledge',
+    href: '/resources/hidden-curriculum',
+    icon: '🎓',
+  },
+  {
+    title: 'WPBA Checklist',
+    description: 'Complete guide to workplace-based assessments',
+    href: '/resources/wpba-checklist',
+    icon: '✅',
+  },
+  {
+    title: 'Clinical Topics',
+    description: 'Quick reference guides for common GP presentations',
+    href: '/resources/clinical-topics',
+    icon: '🩺',
+  },
 ]
 
 export default async function PortfolioPage() {
@@ -83,6 +123,73 @@ export default async function PortfolioPage() {
             </Link>
           )
         })}
+      </div>
+
+      {/* Overview Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Portfolio Overview</CardTitle>
+          <CardDescription>
+            Understanding your training requirements across ST1, ST2, and ST3
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div>
+              <h3 className="font-semibold mb-2">ST1 - First Year</h3>
+              <p className="text-sm text-muted-foreground">
+                Foundation year focusing on core competencies and workplace-based assessments. 
+                Establish baseline assessments including Mini-CEX/COTs, CBDs, MSF, and learning logs.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">ST2 - Second Year</h3>
+              <p className="text-sm text-muted-foreground">
+                Building on ST1 foundations with increased responsibility. 
+                Continue assessments and begin leadership development activities.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">ST3 - Final Year</h3>
+              <p className="text-sm text-muted-foreground">
+                Final year preparing for CCT. Complete all intimate examinations, 
+                leadership activities, and comprehensive evidence requirements.
+              </p>
+            </div>
+          </div>
+          <div className="pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              <strong>Key Points:</strong> Assessments should be spread throughout each training year with roughly half 
+              completed in each 6-month review period. Less Than Full Time (LTFT) trainees complete the same total 
+              number pro-rata. CPR&AED and Safeguarding knowledge updates are required every 12 months (not pro-rata).
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Resources Section */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Learning Resources</h2>
+        <p className="text-muted-foreground mb-6">
+          Essential guides and tools to support your portfolio development
+        </p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {resources.map((resource) => (
+            <Link key={resource.href} href={resource.href}>
+              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary/50">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <span className="text-3xl">{resource.icon}</span>
+                  </div>
+                  <CardTitle className="mt-4 text-lg">{resource.title}</CardTitle>
+                  <CardDescription className="text-foreground/70">
+                    {resource.description}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {!isPro && (

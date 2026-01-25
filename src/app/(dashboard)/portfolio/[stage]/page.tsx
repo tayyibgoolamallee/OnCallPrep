@@ -5,11 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import ReactMarkdown from 'react-markdown'
+import WPBATracker from '@/components/WPBATracker'
+import { stageInfo } from '@/lib/portfolio-requirements'
 
 const stageNames: Record<string, string> = {
-  st1: 'ST1 - First Year',
-  st2: 'ST2 - Second Year',
-  st3: 'ST3 - Final Year',
+  st1: stageInfo.st1.fullName,
+  st2: stageInfo.st2.fullName,
+  st3: stageInfo.st3.fullName,
 }
 
 const categories = [
@@ -66,6 +68,9 @@ export default async function PortfolioStagePage({
           <p className="text-muted-foreground">Portfolio requirements and guides</p>
         </div>
       </div>
+
+      {/* WPBA Requirements Tracker */}
+      <WPBATracker stage={stage as 'st1' | 'st2' | 'st3'} />
 
       {categories.map((category) => {
         const categoryGuides = guides?.filter(g => g.category === category.id) || []
