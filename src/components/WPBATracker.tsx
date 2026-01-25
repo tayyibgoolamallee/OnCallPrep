@@ -58,7 +58,7 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
 
     const trackingId = `${category}-${req.id}`
     const tracked = tracking[trackingId]
-    const isCompleted = tracked?.date && tracked.date.trim() !== ''
+    const isCompleted = Boolean(tracked?.date && tracked.date.trim() !== '')
 
     return (
       <tr key={req.id} className={`border-b hover:bg-muted/50 ${isCompleted ? 'bg-green-50/50 dark:bg-green-950/20' : ''}`}>
