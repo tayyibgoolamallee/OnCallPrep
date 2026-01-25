@@ -45,6 +45,13 @@ const resources = [
     icon: '🩺',
     category: 'Clinical Skills',
   },
+  {
+    title: 'Trainee Support',
+    description: 'Access to support services, resources, and guidance during your GP training journey',
+    href: '/resources/support',
+    icon: '💙',
+    category: 'Support',
+  },
 ]
 
 export default function ResourcesPage() {
