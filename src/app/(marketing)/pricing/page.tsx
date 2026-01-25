@@ -181,19 +181,19 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="bg-muted/30 py-24 sm:py-32">
+      <section className="bg-slate-50 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
               Feature Comparison
             </h2>
-            <p className="mt-4 text-base text-muted-foreground">
+            <p className="mt-4 text-base text-slate-700">
               See exactly what's included in each plan
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-4xl">
-            <div className="overflow-hidden rounded-2xl border-2 shadow-lg">
-              <div className="grid grid-cols-3 bg-primary px-6 py-4 text-white">
+            <div className="overflow-hidden rounded-2xl border-2 border-slate-300 shadow-lg">
+              <div className="grid grid-cols-3 bg-teal-600 px-6 py-4 text-white">
                 <div className="font-semibold">Feature</div>
                 <div className="text-center font-semibold">Free</div>
                 <div className="text-center font-semibold">Pro</div>
@@ -202,30 +202,30 @@ export default function PricingPage() {
                 <div
                   key={row.feature}
                   className={`grid grid-cols-3 px-6 py-4 ${
-                    i % 2 === 0 ? 'bg-white' : 'bg-blue-50/30'
+                    i % 2 === 0 ? 'bg-white' : 'bg-slate-50'
                   }`}
                 >
-                  <div className="text-sm font-medium text-foreground">{row.feature}</div>
+                  <div className="text-sm font-medium text-slate-900">{row.feature}</div>
                   <div className="text-center">
                     {typeof row.free === 'boolean' ? (
                       row.free ? (
-                        <span className="text-green-600">✓</span>
+                        <span className="text-teal-600 font-bold text-lg">✓</span>
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <span className="text-slate-400 font-semibold">—</span>
                       )
                     ) : (
-                      <span className="text-sm">{row.free}</span>
+                      <span className="text-sm font-semibold text-slate-900">{row.free}</span>
                     )}
                   </div>
                   <div className="text-center">
                     {typeof row.pro === 'boolean' ? (
                       row.pro ? (
-                        <span className="text-green-600">✓</span>
+                        <span className="text-teal-600 font-bold text-lg">✓</span>
                       ) : (
-                        <span className="text-muted-foreground">—</span>
+                        <span className="text-slate-400 font-semibold">—</span>
                       )
                     ) : (
-                      <span className="text-sm font-semibold text-primary">{row.pro}</span>
+                      <span className="text-sm font-semibold text-teal-700">{row.pro}</span>
                     )}
                   </div>
                 </div>
