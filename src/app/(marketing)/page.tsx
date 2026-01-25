@@ -159,26 +159,26 @@ export default function HomePage() {
             {[
               {
                 step: '1',
-                title: 'Create Your Account',
-                desc: 'Sign up for free and explore our resources. No credit card required.',
-                color: 'bg-primary'
+                title: 'Create',
+                desc: 'Sign up in seconds. No credit card required. Start exploring immediately.',
+                color: 'bg-teal-600'
               },
               {
                 step: '2',
-                title: 'Choose Your Focus',
-                desc: 'Portfolio guidance, SCA prep, or AKT practice — or all three.',
+                title: 'Prepare',
+                desc: 'Master your portfolio with stage-by-stage guidance. Never miss a requirement.',
                 color: 'bg-teal-600'
               },
               {
                 step: '3',
-                title: 'Learn & Practice',
-                desc: 'Work through structured content and timed exercises.',
-                color: 'bg-primary'
+                title: 'Practice',
+                desc: 'Ace the AKT and SCA with timed exercises and realistic mock cases.',
+                color: 'bg-teal-600'
               },
               {
                 step: '4',
                 title: 'Succeed',
-                desc: 'Pass your exams with confidence and complete your portfolio.',
+                desc: 'Pass your exams, complete your portfolio, and secure your dream GP job.',
                 color: 'bg-teal-600'
               },
             ].map((item) => (
