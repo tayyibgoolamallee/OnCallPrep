@@ -44,6 +44,12 @@ CREATE INDEX IF NOT EXISTS idx_feedback_created_at ON akt_question_feedback(crea
 -- RLS Policies
 ALTER TABLE akt_question_feedback ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist (for idempotency)
+DROP POLICY IF EXISTS "Users can insert own feedback" ON akt_question_feedback;
+DROP POLICY IF EXISTS "Users can read own feedback" ON akt_question_feedback;
+DROP POLICY IF EXISTS "Admins can read all feedback" ON akt_question_feedback;
+DROP POLICY IF EXISTS "Admins can update feedback" ON akt_question_feedback;
+
 -- Users can insert their own feedback
 CREATE POLICY "Users can insert own feedback"
   ON akt_question_feedback FOR INSERT
@@ -74,7 +80,7 @@ CREATE POLICY "Admins can update feedback"
     )
   );
 
--- Function to update updated_at timestamp
+-- Function to update updated_at timestamp (idempotent - CREATE OR REPLACE)
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -82,6 +88,9 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Drop trigger if exists (for idempotency)
+DROP TRIGGER IF EXISTS update_feedback_updated_at ON akt_question_feedback;
 
 CREATE TRIGGER update_feedback_updated_at
   BEFORE UPDATE ON akt_question_feedback
