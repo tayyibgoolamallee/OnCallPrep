@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
-import { ResourcePageLayout, ResourceSection, InfoBox, Chunk } from '@/components/ResourcePageLayout'
+import ResourcePageLayout, { ResourceSection, InfoBox, Chunk } from '@/components/ResourcePageLayout'
 
 export default function SupportPage() {
   return (
