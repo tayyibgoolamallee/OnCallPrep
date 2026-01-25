@@ -270,6 +270,54 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'other'
+          selected_question: string | null
+          status: 'new' | 'in_progress' | 'resolved' | 'archived'
+          created_at: string | null
+          updated_at: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          admin_notes: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'other'
+          selected_question?: string | null
+          status?: 'new' | 'in_progress' | 'resolved' | 'archived'
+          created_at?: string | null
+          updated_at?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          admin_notes?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          subject?: string
+          message?: string
+          category?: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'other'
+          selected_question?: string | null
+          status?: 'new' | 'in_progress' | 'resolved' | 'archived'
+          created_at?: string | null
+          updated_at?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          admin_notes?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import ContactForm from '@/components/ContactForm'
 
 export default function AboutPage() {
   return (
@@ -77,31 +78,50 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <CardTitle>Contact Us</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-foreground/80">
+              <CardDescription>
                 We&apos;d love to hear from you! Whether you have feedback, suggestions, questions, or just want to say hello.
-              </p>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-semibold text-foreground">Email</h4>
-                  <a href="mailto:hello@oncallprep.com" className="text-primary hover:underline">
-                    hello@oncallprep.com
-                  </a>
-                </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-semibold text-foreground">Social Media</h4>
-                  <p className="text-sm text-foreground/70">Follow us for updates and tips</p>
-                </div>
-              </div>
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Contact Form */}
+              <ContactForm />
 
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <h4 className="font-semibold text-blue-700">Feedback & Suggestions</h4>
-                <p className="text-sm text-foreground/70 mt-1">
-                  Found an error? Have an idea for improvement? We&apos;re constantly working to make OnCallPrep better.
-                  Your feedback helps us serve trainees better.
-                </p>
+              {/* Contact Information */}
+              <div className="pt-6 border-t border-slate-200">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-2">Email</h4>
+                    <a href="mailto:hello@oncallprep.com" className="text-teal-600 hover:underline">
+                      hello@oncallprep.com
+                    </a>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-2">Social Media</h4>
+                    <p className="text-sm text-slate-600">Follow us for updates and tips</p>
+                  </div>
+                </div>
+
+                {/* Business Hours */}
+                <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                  <h4 className="font-semibold text-slate-900 mb-3">Business Hours</h4>
+                  <div className="space-y-1 text-sm text-slate-700">
+                    <div className="flex justify-between">
+                      <span>Monday - Friday:</span>
+                      <span>9:00 AM - 6:00 PM GMT</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Saturday:</span>
+                      <span>10:00 AM - 4:00 PM GMT</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Sunday:</span>
+                      <span>Closed</span>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-2 pt-2 border-t border-slate-200">
+                      We typically respond within 24-48 hours during business hours.
+                    </p>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
