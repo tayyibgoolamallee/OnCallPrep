@@ -125,38 +125,51 @@ export default function PricingPage() {
       {/* Pricing Cards */}
       <section className="py-24 sm:py-32 bg-secondary">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5 items-stretch">
             {plans.map((plan) => (
               <Card
                 key={plan.name}
-                className={`relative border-2 bg-white ${
+                className={`relative border-2 bg-white flex flex-col ${
                   plan.popular
                     ? 'border-primary shadow-lg'
                     : 'border-border hover:border-primary/50 hover:shadow-md'
                 }`}
               >
-                {plan.badge && (
-                  <div className="bg-primary text-white text-xs font-semibold text-center py-1.5">
-                    {plan.badge}
-                  </div>
-                )}
-                <CardHeader className={`text-center ${plan.badge ? 'pt-4' : 'pt-6'}`}>
-                  <CardTitle className="text-lg font-bold text-foreground">{plan.name}</CardTitle>
-                  <CardDescription className="mt-1 text-xs text-muted-foreground min-h-[2rem]">
+                {/* Badge - consistent height for all cards */}
+                <div className="h-8 flex items-center justify-center">
+                  {plan.badge ? (
+                    <div className="bg-primary text-white text-xs font-semibold text-center py-1.5 w-full">
+                      {plan.badge}
+                    </div>
+                  ) : (
+                    <div className="h-0"></div>
+                  )}
+                </div>
+
+                {/* Header - titles aligned */}
+                <CardHeader className="text-center pt-6 pb-4">
+                  <CardTitle className="text-lg font-bold text-foreground h-7 flex items-center justify-center">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="mt-2 text-xs text-muted-foreground min-h-[3rem] flex items-center justify-center">
                     {plan.description}
                   </CardDescription>
-                  <div className="mt-4">
-                    <span className="text-3xl font-bold text-foreground">£{plan.price}</span>
-                    {plan.period && (
-                      <span className="text-xs text-muted-foreground block mt-1">{plan.period}</span>
-                    )}
-                    {plan.pricePerMonth && (
-                      <span className="text-xs text-primary font-semibold mt-1 block">{plan.pricePerMonth}</span>
-                    )}
-                  </div>
                 </CardHeader>
-                <CardContent className="pt-2">
-                  <ul className="mb-6 space-y-2">
+
+                {/* Price - aligned across all cards */}
+                <div className="px-6 pb-4 text-center min-h-[5rem] flex flex-col justify-center">
+                  <span className="text-3xl font-bold text-foreground">£{plan.price}</span>
+                  {plan.period && (
+                    <span className="text-xs text-muted-foreground block mt-1">{plan.period}</span>
+                  )}
+                  {plan.pricePerMonth && (
+                    <span className="text-xs text-primary font-semibold mt-1 block">{plan.pricePerMonth}</span>
+                  )}
+                </div>
+
+                {/* Features - flexible space */}
+                <CardContent className="pt-0 pb-4 flex-1 flex flex-col">
+                  <ul className="mb-6 space-y-2 flex-1">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2 text-xs">
                         <span className="text-primary font-bold">✓</span>
@@ -164,7 +177,9 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={plan.href}>
+                  
+                  {/* Button - aligned at bottom */}
+                  <Link href={plan.href} className="mt-auto">
                     <Button
                       className="w-full border-2"
                       variant={plan.popular ? 'default' : 'outline'}
