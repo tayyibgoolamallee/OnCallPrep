@@ -200,42 +200,104 @@ export default function WPBAChecklistPage() {
 
       {/* Annual Requirements */}
       <ResourceSection title="Annual WPBA Requirements" variant="secondary">
-        <div className="space-y-4">
+        <div className="space-y-6">
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            Requirements may vary by deanery - always check with your training programme. Typical minimums:
+            Requirements may vary by deanery - always check with your training programme. This table shows the official RCGP requirements:
           </p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-300 dark:border-slate-700">
-                  <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">Assessment</th>
-                  <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST1</th>
-                  <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST2</th>
-                  <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST3</th>
-                </tr>
-              </thead>
-              <tbody className="text-slate-700 dark:text-slate-300">
-                {[
-                  { assessment: 'CBD', st1: '6', st2: '6', st3: '6' },
-                  { assessment: 'Mini-CEX', st1: '6', st2: '6', st3: '6' },
-                  { assessment: 'COT', st1: '-', st2: 'As required', st3: 'As required' },
-                  { assessment: 'PSQ', st1: '1', st2: '1', st3: '1' },
-                  { assessment: 'MSF', st1: '1', st2: '1', st3: '1' },
-                ].map((row, i) => (
-                  <tr key={i} className="border-b border-slate-200 dark:border-slate-700">
-                    <td className="p-3">{row.assessment}</td>
-                    <td className="p-3">{row.st1}</td>
-                    <td className="p-3">{row.st2}</td>
-                    <td className="p-3">{row.st3}</td>
+          
+          {/* WPBA Table */}
+          <div>
+            <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">WPBA Assessments</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-300 dark:border-slate-700">
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">Assessment</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST1</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST2</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST3</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="text-slate-700 dark:text-slate-300">
+                  {[
+                    { assessment: 'Mini-CEX/COTs (all 4 types)', st1: '4', st2: '4', st3: '7' },
+                    { assessment: 'CBDs / CATs', st1: '4 CBD', st2: '4 CBD', st3: '5 CAT' },
+                    { assessment: 'MSF', st1: '1 (min. 5 clinical, 5 non-clinical)', st2: '2 (1 MSF 5&5, 1 Leadership MSF)', st3: '1' },
+                    { assessment: 'CSR PSQ', st1: '1 per post', st2: '1 per post', st3: '1 per post' },
+                    { assessment: 'CEPS', st1: '0', st2: 'Ongoing: some appropriate to post', st3: 'For CCT: all intimate + range of others (including 7 system/other CEPS)' },
+                    { assessment: 'Learning logs (CCRs)', st1: '36', st2: '36', st3: '36' },
+                    { assessment: 'Placement planning', st1: '1 per post', st2: '1 per post (if in GP, if not done in ST1)', st3: '0 (unless not completed in ST1/2)' },
+                    { assessment: 'Quality improvement activity', st1: 'Required each year', st2: 'Required each year', st3: 'Required each year' },
+                    { assessment: 'Learning event analysis', st1: '1', st2: '1', st3: '1' },
+                    { assessment: 'Prescribing', st1: '0', st2: '0', st3: '1' },
+                    { assessment: 'Leadership activity', st1: '0', st2: '0', st3: '1' },
+                    { assessment: 'ESR', st1: '1', st2: '1', st3: '1' },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-slate-200 dark:border-slate-700">
+                      <td className="p-3 font-medium">{row.assessment}</td>
+                      <td className="p-3">{row.st1}</td>
+                      <td className="p-3">{row.st2}</td>
+                      <td className="p-3">{row.st3}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <InfoBox variant="warning">
-            <strong className="text-amber-700 dark:text-amber-400">Remember:</strong>{' '}
-            <span className="text-slate-700 dark:text-slate-300">These are minimums. Aim for regular assessments throughout the year, not a rush at ARCP time.</span>
-          </InfoBox>
+
+          {/* Other Evidence Table */}
+          <div>
+            <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">Other Evidence</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-300 dark:border-slate-700">
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">Evidence Type</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST1</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST2</th>
+                    <th className="text-left p-3 font-semibold text-slate-900 dark:text-slate-100">ST3</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700 dark:text-slate-300">
+                  {[
+                    { evidence: 'Safeguarding adults level 3', st1: 'Certificate and reflective log entry', st2: 'Certificate, knowledge update every 12 months, and reflective log entry', st3: 'Certificate, knowledge update every 12 months, and reflective log entry' },
+                    { evidence: 'Safeguarding children level 3', st1: 'Certificate, knowledge update every 12 months, and reflective log entry', st2: 'Certificate, knowledge update every 12 months, and reflective log entry', st3: 'Certificate, knowledge update every 12 months, and reflective log entry' },
+                    { evidence: 'CPR & AED (Adults & Children)', st1: 'Certificate and reflective log entry', st2: 'Annual evidence of competence', st3: 'Annual evidence of competence' },
+                    { evidence: 'Form R / SOAR (Scotland)', st1: '1 per ARCP', st2: '1 per ARCP', st3: '1 per ARCP' },
+                    { evidence: 'PDP', st1: 'Min. 2 PDPs per year, progress demonstrated in at least one', st2: 'Min. 2 PDPs per year, progress demonstrated in at least one', st3: 'Min. 2 PDPs per year, progress demonstrated in at least one' },
+                    { evidence: 'Any requirements of last ARCP', st1: 'Check (even if Outcome 1)', st2: 'Check (even if Outcome 1)', st3: 'Check (even if Outcome 1)' },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-slate-200 dark:border-slate-700">
+                      <td className="p-3 font-medium">{row.evidence}</td>
+                      <td className="p-3">{row.st1}</td>
+                      <td className="p-3">{row.st2}</td>
+                      <td className="p-3">{row.st3}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Important Notes */}
+          <div className="space-y-3">
+            <InfoBox variant="tip">
+              <strong className="text-teal-700 dark:text-teal-400">COT Types:</strong>{' '}
+              <span className="text-slate-700 dark:text-slate-300">COTs of all types to be completed over training time including audio, face-to-face/in-person, and virtual/remote. At least 1 Audio COT and 1 face-to-face/in-person COT should be completed.</span>
+            </InfoBox>
+            <InfoBox variant="tip">
+              <strong className="text-teal-700 dark:text-teal-400">MSF Requirements:</strong>{' '}
+              <span className="text-slate-700 dark:text-slate-300">In non-primary care posts where it's not possible to find 5 non-clinician respondents, it's acceptable to ask more clinicians, but the minimum of 10 total respondents still applies. In ST3, the MSF should be completed in the first 6 months, with the Leadership MSF in the second 6 months after the Leadership Activity.</span>
+            </InfoBox>
+            <InfoBox variant="tip">
+              <strong className="text-teal-700 dark:text-teal-400">CEPS:</strong>{' '}
+              <span className="text-slate-700 dark:text-slate-300">Throughout training, complete some CEPS relevant to post in each year. By end of ST3, evidence for all intimate examinations must be included, plus a range of additional CEPS. Being graded as "able to complete unsupervised" in all 7 "system" GP-focussed observed CEPS provides strong evidence of competency.</span>
+            </InfoBox>
+            <InfoBox variant="warning">
+              <strong className="text-amber-700 dark:text-amber-400">Important:</strong>{' '}
+              <span className="text-slate-700 dark:text-slate-300">Assessments should be spread throughout the training year with roughly half in each review period. LTFT registrars do the same total number pro-rata. CPR & AED and Safeguarding knowledge updates are required every 12 months (not pro-rata). ESR is required every 6 months (not pro-rata).</span>
+            </InfoBox>
+          </div>
         </div>
       </ResourceSection>
     </ResourcePageLayout>
