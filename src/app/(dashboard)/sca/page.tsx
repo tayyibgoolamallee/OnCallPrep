@@ -32,6 +32,7 @@ export default async function SCAPage() {
 
   const isPro = profile?.subscription_tier === 'pro'
   const attemptedIds = new Set(progress?.map(p => p.content_id))
+  const completedIds = new Set(progress?.filter(p => p.completed === true).map(p => p.content_id))
 
   const getCasesByType = (type: string) => cases?.filter(c => c.case_type === type) || []
   const primingCases = getCasesByType('priming')
@@ -39,8 +40,13 @@ export default async function SCAPage() {
   const accessiblePriming = primingCases.filter(c => !c.is_pro || isPro)
   const accessibleFull = fullCases.filter(c => !c.is_pro || isPro)
 
-  // Get unique difficulties for filtering
-  const difficulties = [...new Set(fullCases.map(c => c.difficulty).filter((d): d is string => d !== null && d !== undefined))]
+  // Get unique difficulties for filtering, normalize medium/intermediate
+  const normalizedDifficulties = fullCases.map(c => {
+    if (!c.difficulty) return null
+    const d = c.difficulty.toLowerCase()
+    return d === 'intermediate' ? 'medium' : d
+  })
+  const difficulties = [...new Set(normalizedDifficulties.filter((d): d is string => d !== null && d !== undefined))]
 
   return (
     <div className="space-y-8">
@@ -82,7 +88,7 @@ export default async function SCAPage() {
         
         {/* 2-Minute Diagnosis Practice */}
         <Link href="/sca/diagnosis-practice">
-          <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 border-teal-200 dark:border-teal-800 hover:border-teal-400 dark:hover:border-teal-600 bg-white dark:bg-slate-900 mb-4">
+          <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 border-teal-200 dark:border-teal-800 hover:border-teal-300 dark:hover:border-teal-700 bg-white dark:bg-slate-900 mb-4">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
@@ -94,7 +100,7 @@ export default async function SCAPage() {
                     Practice explaining 56 common diagnoses clearly and concisely – a key SCA skill
                   </CardDescription>
                 </div>
-                <Badge className="bg-teal-600 text-white">120s</Badge>
+                <Badge className="bg-teal-500 text-white">120s</Badge>
               </div>
             </CardHeader>
             <CardContent>
@@ -108,7 +114,7 @@ export default async function SCAPage() {
         {/* 3-Minute Priming - Similar to 2-minute practice */}
         {accessiblePriming.length > 0 && (
           <Link href={`/sca/${accessiblePriming[0].id}`}>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 border-teal-200 dark:border-teal-800 hover:border-teal-400 dark:hover:border-teal-600 bg-white dark:bg-slate-900">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 border-teal-200 dark:border-teal-800 hover:border-teal-300 dark:hover:border-teal-700 bg-white dark:bg-slate-900">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
@@ -120,7 +126,7 @@ export default async function SCAPage() {
                       Prepare your consultation approach with structured priming exercises
                     </CardDescription>
                   </div>
-                  <Badge className="bg-teal-600 text-white">180s</Badge>
+                  <Badge className="bg-teal-500 text-white">180s</Badge>
                 </div>
               </CardHeader>
               <CardContent>
@@ -138,6 +144,7 @@ export default async function SCAPage() {
         <FullCasesSection 
           cases={accessibleFull} 
           attemptedIds={attemptedIds}
+          completedIds={completedIds}
           difficulties={difficulties}
           lockedCount={fullCases.length - accessibleFull.length}
         />
@@ -153,7 +160,7 @@ export default async function SCAPage() {
               </p>
             </div>
             <Link href="/pricing">
-              <Button className="bg-teal-600 hover:bg-teal-700">Upgrade to Pro</Button>
+              <Button className="bg-teal-500 hover:bg-teal-600">Upgrade to Pro</Button>
             </Link>
           </CardContent>
         </Card>

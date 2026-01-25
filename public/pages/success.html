@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful | OnCallPrep</title>
+    <meta name="description" content="Your payment was successful. Welcome to OnCallPrep Pro!">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        .success-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        .success-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-success-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: var(--color-success-700);
+        }
+        .success-card h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary-600);
+        }
+        .success-card p {
+            color: var(--color-gray-600);
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .success-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .loading-message {
+            color: var(--color-gray-600);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="/index.html" class="logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">OnCallPrep</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/pages/portfolio.html">Portfolio</a></li>
+                <li><a href="/pages/sca.html">SCA</a></li>
+                <li><a href="/pages/akt.html">AKT</a></li>
+                <li><a href="/pages/hidden-curriculum.html">Hidden Curriculum</a></li>
+                <li><a href="/pages/trainers.html">Trainers</a></li>
+                <li><a href="/pages/pricing.html">Pricing</a></li>
+                <li><a href="/pages/contact.html">About & Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="/pages/login.html" class="btn btn-ghost">Log in</a>
+                <a href="/pages/signup.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Success Message -->
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1>Payment Successful!</h1>
+            <p>
+                Thank you for subscribing to OnCallPrep Pro! Your account is being upgraded and you'll have access to all Pro features shortly.
+            </p>
+            <p class="loading-message" id="statusMessage">
+                Processing your subscription... Please wait a moment.
+            </p>
+            <div class="success-actions">
+                <a href="/index.html" class="btn btn-primary btn-lg">Go to Dashboard</a>
+                <a href="/pages/akt.html" class="btn btn-outline btn-lg">Start Using Pro Features</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/index.html" class="logo">
+                        <span class="logo-icon"></span>
+                        <span class="logo-text">OnCallPrep</span>
+                    </a>
+                    <p>Making GP training simpler, one trainee at a time.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 OnCallPrep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/scripts/config.js"></script>
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script>
+        // Check subscription status after a delay (webhook may take a moment)
+        document.addEventListener('DOMContentLoaded', async function() {
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // Wait a few seconds for webhook to process
+            setTimeout(async () => {
+                try {
+                    const supabase = window.supabaseClient;
+                    if (supabase) {
+                        const { data: { user } } = await supabase.auth.getUser();
+                        if (user) {
+                            // Check subscription status
+                            const subscription = await window.getUserSubscription?.();
+                            if (subscription?.isPro) {
+                                statusMessage.textContent = 'Your Pro subscription is now active! Enjoy all Pro features.';
+                                statusMessage.style.color = 'var(--color-success-700)';
+                            } else {
+                                statusMessage.textContent = 'Your subscription is being processed. This may take a few minutes. If you don\'t see Pro access after 5 minutes, please contact support.';
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error checking subscription:', error);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+

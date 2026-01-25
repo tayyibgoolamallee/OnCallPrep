@@ -9,7 +9,7 @@ export function AKTExamOverview() {
 
   return (
     <Card className="border-2 border-teal-200 dark:border-teal-800 bg-white dark:bg-slate-900">
-      <CardHeader className="bg-teal-600 dark:bg-teal-800 text-white rounded-t-lg">
+      <CardHeader className="bg-teal-500 dark:bg-teal-700 text-white rounded-t-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">📚</span>
@@ -19,7 +19,7 @@ export function AKTExamOverview() {
             variant="ghost"
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-white hover:bg-teal-700 dark:hover:bg-teal-900"
+            className="text-white hover:bg-teal-600 dark:hover:bg-teal-800"
           >
             {isExpanded ? 'Hide Details ▲' : 'Show Details ▼'}
           </Button>
