@@ -58,9 +58,10 @@ export function ResourceSection({ title, description, children, variant = 'prima
 interface InfoBoxProps {
   children: ReactNode
   variant?: 'info' | 'warning' | 'tip'
+  className?: string
 }
 
-export function InfoBox({ children, variant = 'info' }: InfoBoxProps) {
+export function InfoBox({ children, variant = 'info', className = '' }: InfoBoxProps) {
   const variants = {
     info: 'bg-teal-50 dark:bg-teal-950/30 border-teal-200 dark:border-teal-800',
     warning: 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800',
@@ -68,7 +69,7 @@ export function InfoBox({ children, variant = 'info' }: InfoBoxProps) {
   }
 
   return (
-    <div className={`p-4 rounded-lg border-l-4 ${variants[variant]}`}>
+    <div className={`p-4 rounded-lg border-l-4 ${variants[variant]} ${className}`}>
       {children}
     </div>
   )
