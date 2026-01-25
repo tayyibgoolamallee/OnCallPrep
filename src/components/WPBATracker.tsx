@@ -58,12 +58,25 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
 
     const trackingId = `${category}-${req.id}`
     const tracked = tracking[trackingId]
+    const isCompleted = tracked?.date && tracked.date.trim() !== ''
 
     return (
-      <tr key={req.id} className="border-b hover:bg-muted/50">
+      <tr key={req.id} className={`border-b hover:bg-muted/50 ${isCompleted ? 'bg-green-50/50 dark:bg-green-950/20' : ''}`}>
         <td className="p-3">
           <div className="flex items-center gap-2">
-            <span className="font-medium">{req.name}</span>
+            <input
+              type="checkbox"
+              checked={isCompleted}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  updateTracking(trackingId, 'date', new Date().toLocaleDateString())
+                } else {
+                  updateTracking(trackingId, 'date', '')
+                }
+              }}
+              className="h-4 w-4 rounded border-gray-300"
+            />
+            <span className={`font-medium ${isCompleted ? 'line-through text-muted-foreground' : ''}`}>{req.name}</span>
             {req.rcgpLink && (
               <a
                 href={req.rcgpLink}
@@ -82,7 +95,7 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
             )}
           </div>
           {detail.notes && (
-            <div className="mt-1">
+            <div className="mt-1 ml-6">
               <div className="flex items-start gap-1 text-xs text-muted-foreground">
                 <Info className="h-3 w-3 mt-0.5 flex-shrink-0" />
                 <span>{detail.notes}</span>
@@ -96,10 +109,11 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
         <td className="p-3">
           <Input
             type="text"
-            placeholder="Date/Number"
+            placeholder="Date completed or number"
             value={tracked?.date || ''}
             onChange={(e) => updateTracking(trackingId, 'date', e.target.value)}
-            className="w-full max-w-[150px]"
+            className="w-full max-w-[180px]"
+            onClick={(e) => e.stopPropagation()}
           />
         </td>
       </tr>

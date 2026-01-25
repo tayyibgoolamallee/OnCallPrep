@@ -54,8 +54,8 @@ export const wpbaRequirements: Requirement[] = [
       notes: 'In non-primary care posts where it is not possible to find 5 non-clinician respondents it is acceptable to ask more clinicians, but the minimum of 10 total respondents still applies.'
     },
     st2: {
-      requirement: '2 (1 MSF 5&5 responses, 1 Leadership MSF)',
-      notes: 'In ST3, the MSF should be completed in the first 6 months of the training year, with the Leadership MSF being completed in the second 6 months and after the Leadership Activity has been completed.'
+      requirement: '1',
+      notes: 'In non-primary care posts where it is not possible to find 5 non-clinician respondents it is acceptable to ask more clinicians, but the minimum of 10 total respondents still applies.'
     },
     st3: {
       requirement: '2 (1 MSF 5&5 responses, 1 Leadership MSF)',

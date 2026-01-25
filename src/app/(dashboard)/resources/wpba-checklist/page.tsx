@@ -222,7 +222,7 @@ export default function WPBAChecklistPage() {
                   {[
                     { assessment: 'Mini-CEX/COTs (all 4 types)', st1: '4', st2: '4', st3: '7' },
                     { assessment: 'CBDs / CATs', st1: '4 CBD', st2: '4 CBD', st3: '5 CAT' },
-                    { assessment: 'MSF', st1: '1 (min. 5 clinical, 5 non-clinical)', st2: '2 (1 MSF 5&5, 1 Leadership MSF)', st3: '1' },
+                    { assessment: 'MSF', st1: '1 (min. 5 clinical, 5 non-clinical)', st2: '1', st3: '2 (1 MSF 5&5, 1 Leadership MSF)' },
                     { assessment: 'CSR PSQ', st1: '1 per post', st2: '1 per post', st3: '1 per post' },
                     { assessment: 'CEPS', st1: '0', st2: 'Ongoing: some appropriate to post', st3: 'For CCT: all intimate + range of others (including 7 system/other CEPS)' },
                     { assessment: 'Learning logs (CCRs)', st1: '36', st2: '36', st3: '36' },
