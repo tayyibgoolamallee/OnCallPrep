@@ -54,13 +54,13 @@ export default function HiddenCurriculumPage() {
             <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">Urgency Categories</h4>
             <div className="space-y-2">
               {[
-                { level: 'Emergency', color: 'red', desc: '999 / Immediate - Life threatening' },
-                { level: 'Urgent', color: 'orange', desc: 'Same day - Could deteriorate without prompt attention' },
-                { level: 'Soon', color: 'amber', desc: '24-48 hours - Needs attention but stable' },
-                { level: 'Routine', color: 'green', desc: 'Scheduled appointment - Non-urgent' },
+                { level: 'Emergency', desc: '999 / Immediate - Life threatening', bgClass: 'bg-red-500' },
+                { level: 'Urgent', desc: 'Same day - Could deteriorate without prompt attention', bgClass: 'bg-orange-500' },
+                { level: 'Soon', desc: '24-48 hours - Needs attention but stable', bgClass: 'bg-amber-500' },
+                { level: 'Routine', desc: 'Scheduled appointment - Non-urgent', bgClass: 'bg-green-500' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                  <Badge className={`bg-${item.color}-500 text-white`}>{item.level}</Badge>
+                  <Badge className={`${item.bgClass} text-white`}>{item.level}</Badge>
                   <span className="text-sm text-slate-700 dark:text-slate-300">{item.desc}</span>
                 </div>
               ))}
