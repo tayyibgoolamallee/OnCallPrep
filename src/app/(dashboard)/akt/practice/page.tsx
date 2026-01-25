@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import ReactMarkdown from 'react-markdown'
-// import QuestionFeedback from '@/components/QuestionFeedback' // Temporarily disabled for debugging
+import QuestionFeedback from '@/components/QuestionFeedback'
 
 interface Option {
   id?: string
@@ -381,14 +381,14 @@ export default function AKTPracticePage() {
                   </div>
                 )}
 
-                {/* Feedback Component - Temporarily disabled for debugging */}
-                {/* <div className="pt-4">
+                {/* Feedback Component */}
+                <div className="pt-4">
                   <QuestionFeedback
                     questionId={currentQuestion.id}
                     topic={currentQuestion.topic}
                     difficulty={currentQuestion.difficulty}
                   />
-                </div> */}
+                </div>
 
                 <div className="flex justify-end pt-4">
                   <Button onClick={handleNext}>

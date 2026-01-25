@@ -63,7 +63,7 @@ Free text:
 ${feedback.free_text}
 ` : ''}
 
-Timestamp: ${new Date(feedback.created_at).toLocaleString()}
+Timestamp: ${feedback.created_at ? new Date(feedback.created_at).toLocaleString() : 'N/A'}
 
 ---
 View in Supabase: https://supabase.com/dashboard/project/YOUR_PROJECT_ID/editor/akt_question_feedback
