@@ -1,9 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardDescription as CardDesc } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { wpbaRequirements, otherEvidence, type Requirement } from '@/lib/portfolio-requirements'
 import { ExternalLink, Info } from 'lucide-react'
@@ -15,7 +13,34 @@ interface WPBATrackerProps {
 }
 
 export default function WPBATracker({ stage, userName, trainingYear }: WPBATrackerProps) {
+  const storageKey = `wpba-tracker-${stage}`
   const [tracking, setTracking] = useState<Record<string, { date?: string; number?: string }>>({})
+  const [localUserName, setLocalUserName] = useState(userName || '')
+  const [localTrainingYear, setLocalTrainingYear] = useState(trainingYear || '')
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(storageKey)
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved)
+        setTracking(parsed.tracking || {})
+        setLocalUserName(parsed.userName || '')
+        setLocalTrainingYear(parsed.trainingYear || '')
+      } catch (e) {
+        console.error('Error loading saved data:', e)
+      }
+    }
+  }, [storageKey])
+
+  // Save to localStorage whenever tracking changes
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify({
+      tracking,
+      userName: localUserName,
+      trainingYear: localTrainingYear
+    }))
+  }, [tracking, localUserName, localTrainingYear, storageKey])
 
   const updateTracking = (id: string, field: 'date' | 'number', value: string) => {
     setTracking(prev => ({
@@ -99,8 +124,8 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
               <Input
                 type="text"
                 placeholder="Enter your name"
-                value={userName || ''}
-                onChange={(e) => {/* Store in state or localStorage */}}
+                value={localUserName}
+                onChange={(e) => setLocalUserName(e.target.value)}
                 className="mt-1"
               />
             </div>
@@ -108,8 +133,8 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
               <label className="text-sm font-medium">Date:</label>
               <Input
                 type="date"
-                value={trainingYear || ''}
-                onChange={(e) => {/* Store in state or localStorage */}}
+                value={localTrainingYear}
+                onChange={(e) => setLocalTrainingYear(e.target.value)}
                 className="mt-1"
               />
             </div>
