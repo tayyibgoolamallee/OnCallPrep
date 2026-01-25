@@ -166,7 +166,7 @@ export default function PricingPage() {
                   </ul>
                   <Link href={plan.href}>
                     <Button
-                      className={`w-full ${plan.popular ? '' : 'border-2'}`}
+                      className="w-full border-2"
                       variant={plan.popular ? 'default' : 'outline'}
                       size="sm"
                     >

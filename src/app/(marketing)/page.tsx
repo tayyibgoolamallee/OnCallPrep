@@ -173,13 +173,13 @@ export default function HomePage() {
                 step: '3',
                 title: 'Learn & Practice',
                 desc: 'Work through structured content and timed exercises.',
-                color: 'bg-accent'
+                color: 'bg-primary'
               },
               {
                 step: '4',
                 title: 'Succeed',
                 desc: 'Pass your exams with confidence and complete your portfolio.',
-                color: 'bg-emerald-600'
+                color: 'bg-teal-600'
               },
             ].map((item) => (
               <div key={item.step} className="text-center">
@@ -235,12 +235,12 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link href="/signup">
-                <Button size="lg" className="h-12 bg-white px-8 text-base font-semibold text-primary hover:bg-blue-50">
+                <Button size="lg" className="h-12 bg-white px-8 text-base font-semibold text-primary hover:bg-blue-50 border-2 border-white">
                   Get Started Free
                 </Button>
               </Link>
               <Link href="/pricing">
-                <Button size="lg" variant="outline" className="h-12 border-2 border-white px-8 text-base font-semibold text-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="h-12 border-2 border-white px-8 text-base font-semibold text-white hover:bg-white/10 bg-transparent">
                   View Pricing
                 </Button>
               </Link>
