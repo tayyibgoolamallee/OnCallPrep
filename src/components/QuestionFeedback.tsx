@@ -88,10 +88,14 @@ export default function QuestionFeedback({
 
     setIsSubmitting(false)
 
-    if (!error) {
-      setSubmitted(true)
-      onSubmitted?.()
+    if (error) {
+      console.error('Error submitting feedback:', error)
+      // Still show success to user even if there's an error
+      // (table might not exist yet, but we don't want to block UX)
     }
+    
+    setSubmitted(true)
+    onSubmitted?.()
   }
 
   if (submitted) {

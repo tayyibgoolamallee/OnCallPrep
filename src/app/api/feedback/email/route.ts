@@ -22,14 +22,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Get feedback details
-    const { data: feedback } = await supabase
+    const { data: feedback, error: feedbackError } = await supabase
       .from('akt_question_feedback')
       .select('*')
       .eq('id', feedback_id)
       .single()
 
-    if (!feedback) {
-      return NextResponse.json({ error: 'Feedback not found' }, { status: 404 })
+    if (feedbackError || !feedback) {
+      // Table might not exist yet - return a helpful message
+      return NextResponse.json({ 
+        error: 'Feedback table not found. Please run migration 034 first.',
+        details: feedbackError?.message 
+      }, { status: 404 })
     }
 
     // Generate email subject
