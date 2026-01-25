@@ -9,7 +9,7 @@ export function SCAExamOverview() {
 
   return (
     <Card className="border-2 border-teal-200 dark:border-teal-800 bg-white dark:bg-slate-900">
-      <CardHeader className="bg-teal-500 dark:bg-teal-700 text-white rounded-t-lg">
+      <CardHeader className="bg-teal-700 dark:bg-teal-900 text-white rounded-t-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🎯</span>
@@ -19,7 +19,7 @@ export function SCAExamOverview() {
             variant="ghost"
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-white hover:bg-teal-600 dark:hover:bg-teal-800"
+            className="text-white hover:bg-teal-800 dark:hover:bg-teal-950"
           >
             {isExpanded ? 'Hide Details ▲' : 'Show Details ▼'}
           </Button>
@@ -59,8 +59,8 @@ export function SCAExamOverview() {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">The 12-Minute Consultation Framework</h4>
             <div className="grid md:grid-cols-4 gap-3">
-              <div className="bg-teal-50 dark:bg-teal-950/30 rounded-lg p-3 border-l-4 border-teal-600">
-                <div className="font-bold text-teal-700 dark:text-teal-400 text-lg">0-1 min</div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-500">
+                <div className="font-bold text-slate-700 dark:text-slate-300 text-lg">0-1 min</div>
                 <div className="font-medium text-sm text-slate-900 dark:text-slate-100">Opening & Verification</div>
                 <ul className="text-xs text-slate-700 dark:text-slate-300 mt-1 space-y-0.5">
                   <li>• Introductions</li>
@@ -77,8 +77,8 @@ export function SCAExamOverview() {
                   <li>• Relevant past history</li>
                 </ul>
               </div>
-              <div className="bg-teal-50 dark:bg-teal-950/30 rounded-lg p-3 border-l-4 border-teal-600">
-                <div className="font-bold text-teal-700 dark:text-teal-400 text-lg">7-11 min</div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-500">
+                <div className="font-bold text-slate-700 dark:text-slate-300 text-lg">7-11 min</div>
                 <div className="font-medium text-sm text-slate-900 dark:text-slate-100">Explanation & Options</div>
                 <ul className="text-xs text-slate-700 dark:text-slate-300 mt-1 space-y-0.5">
                   <li>• Explain diagnosis</li>
@@ -105,8 +105,8 @@ export function SCAExamOverview() {
               Each domain is scored 0-4 points. <strong>Domain 2 is weighted 1.5x</strong> (total possible: 10.5 points).
             </p>
             <div className="grid md:grid-cols-3 gap-3">
-              <div className="bg-teal-50 dark:bg-teal-950/30 rounded-lg p-3 border-l-4 border-teal-600">
-                <div className="font-semibold text-teal-700 dark:text-teal-400 mb-1">Domain 1: Data Gathering</div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-500">
+                <div className="font-semibold text-slate-700 dark:text-slate-300 mb-1">Domain 1: Data Gathering</div>
                 <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-0.5">
                   <li>• History taking</li>
                   <li>• Physical examination</li>
@@ -116,7 +116,7 @@ export function SCAExamOverview() {
               </div>
               <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-400">
                 <div className="font-semibold text-slate-700 dark:text-slate-300 mb-1">Domain 2: Clinical Management</div>
-                <div className="text-xs font-medium text-teal-600 dark:text-teal-500 mb-1">⚡ Weighted 1.5x</div>
+                <div className="text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">⚡ Weighted 1.5x</div>
                 <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-0.5">
                   <li>• Diagnosis and differentials</li>
                   <li>• Management plan</li>
@@ -124,8 +124,8 @@ export function SCAExamOverview() {
                   <li>• Follow-up</li>
                 </ul>
               </div>
-              <div className="bg-teal-50 dark:bg-teal-950/30 rounded-lg p-3 border-l-4 border-teal-600">
-                <div className="font-semibold text-teal-700 dark:text-teal-400 mb-1">Domain 3: Interpersonal Skills</div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 border-l-4 border-slate-500">
+                <div className="font-semibold text-slate-700 dark:text-slate-300 mb-1">Domain 3: Interpersonal Skills</div>
                 <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-0.5">
                   <li>• Communication</li>
                   <li>• Empathy</li>
@@ -140,8 +140,8 @@ export function SCAExamOverview() {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">Grading System</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="bg-teal-50 dark:bg-teal-950/30 rounded-lg p-3 text-center border-l-4 border-teal-600">
-                <div className="text-2xl font-bold text-teal-700 dark:text-teal-400">4</div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-3 text-center border-l-4 border-slate-500">
+                <div className="text-2xl font-bold text-slate-700 dark:text-slate-300">4</div>
                 <div className="font-medium text-sm text-slate-900 dark:text-slate-100">Clear Pass</div>
                 <div className="text-xs text-slate-600 dark:text-slate-400">&gt;9/10.5</div>
               </div>
