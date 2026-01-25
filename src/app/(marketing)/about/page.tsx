@@ -79,12 +79,26 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle>Contact Us</CardTitle>
               <CardDescription>
-                We&apos;d love to hear from you! Whether you have feedback, suggestions, questions, or just want to say hello.
+                Got a question? Found a bug? Have an idea? We're real people who actually read every message. Drop us a line!
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Contact Form */}
               <ContactForm />
+
+              {/* Helpful Info Box */}
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <h4 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                  <span>💡</span>
+                  <span>Quick Tips</span>
+                </h4>
+                <ul className="text-sm text-slate-700 space-y-1.5 ml-6 list-disc">
+                  <li>Be as specific as possible - it helps us help you faster</li>
+                  <li>For bugs, include what you were doing when it happened</li>
+                  <li>Feature requests? Tell us why it would help your training</li>
+                  <li>We're always looking for ways to improve, so don't hold back!</li>
+                </ul>
+              </div>
 
               {/* Contact Information */}
               <div className="pt-6 border-t border-slate-200">
@@ -102,23 +116,19 @@ export default function AboutPage() {
                 </div>
 
                 {/* Business Hours */}
-                <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                  <h4 className="font-semibold text-slate-900 mb-3">Business Hours</h4>
+                <div className="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-200">
+                  <h4 className="font-semibold text-teal-900 mb-3">When We're Available</h4>
                   <div className="space-y-1 text-sm text-slate-700">
                     <div className="flex justify-between">
-                      <span>Monday - Friday:</span>
-                      <span>9:00 AM - 6:00 PM GMT</span>
+                      <span className="font-medium">Monday - Friday:</span>
+                      <span>9:00 AM - 5:00 PM GMT</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Saturday:</span>
-                      <span>10:00 AM - 4:00 PM GMT</span>
+                      <span className="font-medium">Weekends:</span>
+                      <span className="text-slate-500">Closed</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Sunday:</span>
-                      <span>Closed</span>
-                    </div>
-                    <p className="text-xs text-slate-500 mt-2 pt-2 border-t border-slate-200">
-                      We typically respond within 24-48 hours during business hours.
+                    <p className="text-xs text-slate-600 mt-3 pt-3 border-t border-teal-200">
+                      We're a small team, but we read every message. You'll usually hear back from us within 24-48 hours during the week.
                     </p>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
   email TEXT NOT NULL,
   subject TEXT NOT NULL,
   message TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('feedback', 'bug', 'feature', 'question', 'technical', 'billing', 'other')),
+  category TEXT NOT NULL CHECK (category IN ('feedback', 'bug', 'feature', 'question', 'technical', 'billing', 'partnership', 'other')),
   selected_question TEXT,
   status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'in_progress', 'resolved', 'archived')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

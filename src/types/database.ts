@@ -277,7 +277,7 @@ export type Database = {
           email: string
           subject: string
           message: string
-          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'other'
+          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'partnership' | 'other'
           selected_question: string | null
           status: 'new' | 'in_progress' | 'resolved' | 'archived'
           created_at: string | null
@@ -292,7 +292,7 @@ export type Database = {
           email: string
           subject: string
           message: string
-          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'other'
+          category: 'feedback' | 'bug' | 'feature' | 'question' | 'technical' | 'billing' | 'partnership' | 'other'
           selected_question?: string | null
           status?: 'new' | 'in_progress' | 'resolved' | 'archived'
           created_at?: string | null
