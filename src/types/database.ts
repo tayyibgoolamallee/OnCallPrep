@@ -213,6 +213,63 @@ export type Database = {
         }
         Relationships: []
       }
+      akt_question_feedback: {
+        Row: {
+          id: string
+          question_id: string
+          user_id: string
+          sentiment: 'helpful' | 'needs_improvement'
+          positive_feedback: Json | null
+          negative_feedback: Json | null
+          free_text: string | null
+          topic: string | null
+          difficulty: string | null
+          time_spent_seconds: number | null
+          reviewed: boolean | null
+          action_taken: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          question_id: string
+          user_id: string
+          sentiment: 'helpful' | 'needs_improvement'
+          positive_feedback?: Json | null
+          negative_feedback?: Json | null
+          free_text?: string | null
+          topic?: string | null
+          difficulty?: string | null
+          time_spent_seconds?: number | null
+          reviewed?: boolean | null
+          action_taken?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          question_id?: string
+          user_id?: string
+          sentiment?: 'helpful' | 'needs_improvement'
+          positive_feedback?: Json | null
+          negative_feedback?: Json | null
+          free_text?: string | null
+          topic?: string | null
+          difficulty?: string | null
+          time_spent_seconds?: number | null
+          reviewed?: boolean | null
+          action_taken?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
