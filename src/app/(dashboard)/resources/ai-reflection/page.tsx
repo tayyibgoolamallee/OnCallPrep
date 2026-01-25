@@ -6,6 +6,17 @@ export default function AIReflectionPage() {
       title="AI Reflection Assistant"
       description="Guidance on using AI tools appropriately for portfolio reflections"
     >
+      {/* Coming Soon Notice */}
+      <InfoBox variant="info">
+        <div className="text-center py-4">
+          <span className="text-4xl mb-3 block">🚧</span>
+          <h3 className="font-bold text-teal-800 dark:text-teal-300 text-xl mb-2">Coming Soon</h3>
+          <p className="text-slate-700 dark:text-slate-300">
+            The AI Reflection Assistant tool is currently under development. Check back soon for interactive features to help with your portfolio reflections.
+          </p>
+        </div>
+      </InfoBox>
+
       {/* Critical Warning */}
       <InfoBox variant="warning">
         <div className="flex items-start gap-4">
