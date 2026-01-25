@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const { feedback_id, question_id, sentiment, topic, difficulty } = body
 
     // Get question details
-    const supabase = createClient()
+    const supabase = await createClient()
     const { data: question } = await supabase
       .from('akt_questions')
       .select('question, topic')
