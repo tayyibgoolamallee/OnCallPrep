@@ -46,7 +46,23 @@ export default async function SCAPage() {
     const d = c.difficulty.toLowerCase()
     return d === 'intermediate' ? 'medium' : d
   })
-  const difficulties = [...new Set(normalizedDifficulties.filter((d): d is string => d !== null && d !== undefined))]
+  // Ensure a consistent ordering of difficulty filters: easy → medium → hard → advanced → others
+  const difficultyOrder = ['easy', 'medium', 'hard', 'advanced']
+  const difficulties = [...new Set(normalizedDifficulties.filter((d): d is string => d !== null && d !== undefined))].sort(
+    (a, b) => {
+      const indexA = difficultyOrder.indexOf(a)
+      const indexB = difficultyOrder.indexOf(b)
+
+      // Both in predefined order
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB
+      // Only A known
+      if (indexA !== -1) return -1
+      // Only B known
+      if (indexB !== -1) return 1
+      // Neither known – fall back to alpha
+      return a.localeCompare(b)
+    }
+  )
 
   return (
     <div className="space-y-8">

@@ -104,7 +104,14 @@ export function FullCasesSection({
                   <Card className="h-full hover:shadow-md transition-shadow cursor-pointer border-2 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700">
                     <CardHeader>
                       <div className="flex items-start justify-between">
-                        <CardTitle className="text-base text-slate-900 dark:text-slate-100">{c.title}</CardTitle>
+                        <CardTitle className="text-base text-slate-900 dark:text-slate-100 flex flex-col">
+                          <span>{c.category || 'Case'}</span>
+                          {c.category_code && (
+                            <span className="text-xs font-normal text-slate-500 dark:text-slate-400">
+                              {c.category_code}
+                            </span>
+                          )}
+                        </CardTitle>
                         <div className="flex gap-1 flex-wrap">
                           <Badge variant={
                             normalizeDifficulty(c.difficulty) === 'easy' ? 'secondary' :
