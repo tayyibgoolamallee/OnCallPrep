@@ -453,7 +453,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Acute Abdominal Pain',
   'Gastroenterology',
-  'GI-003',
+  'GI-004',
   'You are a GP. A 45-year-old woman, Ms. Lisa Parker, has booked an urgent telephone consultation. The receptionist notes she called this morning with severe abdominal pain.',
   '{"name": "Ms. Lisa Parker", "age": 45, "gender": "Female"}',
   '{"patient": "Ms. Lisa Parker", "age": 45, "gender": "Female", "pmh": "Irritable bowel syndrome, previous appendicectomy age 20", "medications": "Mebeverine 135mg TDS PRN", "allergies": "No known allergies", "social_summary": "Works as office manager, lives with partner", "family_summary": "No significant family history"}',
@@ -665,7 +665,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Urgent Mental Health Concern',
   'Mental Health',
-  'MH-002',
+  'MH-003',
   'You are a GP. A 34-year-old man, Mr. James Wilson, has booked an urgent telephone consultation. The receptionist notes he called this morning and sounded distressed.',
   '{"name": "Mr. James Wilson", "age": 34, "gender": "Male"}',
   '{"patient": "Mr. James Wilson", "age": 34, "gender": "Male", "pmh": "Depression, anxiety, previous self-harm 2 years ago", "medications": "Sertraline 100mg OD, Propranolol 40mg BD PRN", "allergies": "No known allergies", "social_summary": "Lives alone, works as software developer, recently made redundant", "family_summary": "Parents live nearby, supportive"}',
@@ -1012,7 +1012,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Sick Child - Parent Call',
   'Paediatrics',
-  'PAED-002',
+  'PAED-005',
   'You are a GP. A father, Mr. Tom Reeves, has booked a telephone consultation about his 3-year-old daughter, Molly. The receptionist notes he called this morning concerned about fever and rash.',
   '{"name": "Molly Reeves", "age": 3, "gender": "Female", "caller": "Mr. Tom Reeves (father)"}',
   '{"patient": "Molly Reeves", "age": 3, "gender": "Female", "caller": "Mr. Tom Reeves", "pmh": "Generally healthy, no known allergies", "medications": "None", "allergies": "No known allergies", "social_summary": "Lives with both parents, attends nursery", "family_summary": "No significant family history"}',
@@ -1138,7 +1138,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Health Visitor - Infant Feeding',
   'Paediatrics',
-  'PAED-003',
+  'PAED-006',
   'You are a GP. A health visitor, Ms. Rachel Green, has booked a telephone consultation. She is calling about a 6-week-old baby, Leo Patel, whose mother is struggling with breastfeeding and low mood. The health visitor is concerned about both infant feeding and maternal wellbeing.',
   '{"name": "Leo Patel", "age": 0, "gender": "Male", "caller": "Ms. Rachel Green (Health Visitor)"}',
   '{"patient": "Leo Patel", "age": 6, "gender": "Male", "caller": "Ms. Rachel Green", "parent": "Mrs. Priya Patel", "pmh": "Full-term delivery, no neonatal concerns", "medications": "None", "allergies": "None", "social_summary": "First baby, mother struggling", "family_summary": "Father supportive, mother tearful at visits"}',
@@ -1201,7 +1201,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Breathlessness',
   'Respiratory',
-  'RESP-002',
+  'RESP-005',
   'You are a GP. A 68-year-old man, Mr. Frank Norris, has booked a telephone consultation. He has had increasing breathlessness over the past week and wants advice. He has a history of COPD.',
   '{"name": "Mr. Frank Norris", "age": 68, "gender": "Male"}',
   '{"patient": "Mr. Frank Norris", "age": 68, "gender": "Male", "pmh": "COPD (moderate), IHD", "medications": "Tiotropium 18mcg OD, Salbutamol PRN, Aspirin 75mg OD", "allergies": "No known allergies", "social_summary": "Ex-smoker (stopped 2 years ago), lives with wife", "family_summary": "No significant family history"}',
@@ -1471,7 +1471,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'School Nurse - Asthma Concern',
   'Paediatrics',
-  'PAED-004',
+  'PAED-007',
   'You are a GP. A school nurse, Mrs. Anita Kumar, has booked a telephone consultation. She is calling about a 10-year-old pupil, Jake Morrison, who has had two episodes of wheezing at school in the past month. She is concerned his asthma may not be well controlled and that the school does not have an up-to-date care plan.',
   '{"name": "Jake Morrison", "age": 10, "gender": "Male", "caller": "Mrs. Anita Kumar (School Nurse)"}',
   '{"patient": "Jake Morrison", "age": 10, "gender": "Male", "caller": "Mrs. Anita Kumar", "pmh": "Asthma", "medications": "Salbutamol PRN, possibly preventer (unclear)", "allergies": "No known allergies", "social_summary": "Lives with mother, attends primary school", "family_summary": "Mother single parent"}',
@@ -1520,7 +1520,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Urinary Symptoms',
   'Urology',
-  'URO-001',
+  'URO-003',
   'You are a GP. A 55-year-old man, Mr. Ray Cooper, has booked a telephone consultation. He has had pain when passing urine and increased frequency for 3 days. He has had a fever since yesterday.',
   '{"name": "Mr. Ray Cooper", "age": 55, "gender": "Male"}',
   '{"patient": "Mr. Ray Cooper", "age": 55, "gender": "Male", "pmh": "Recurrent UTIs (as per patient), BPH", "medications": "Tamsulosin 400mcg OD", "allergies": "No known allergies", "social_summary": "Lives with wife", "family_summary": "No significant family history"}',
@@ -1619,7 +1619,7 @@ INSERT INTO sca_cases (
 ) VALUES (
   'Skin Rash - Child',
   'Dermatology',
-  'DERM-002',
+  'DERM-003',
   'You are a GP. A mother, Mrs. Lucy Hart, has booked a telephone consultation about her 4-year-old son, Noah, who has developed a rash. It started on his chest and has spread. He has no fever and is otherwise well.',
   '{"name": "Noah Hart", "age": 4, "gender": "Male", "caller": "Mrs. Lucy Hart (mother)"}',
   '{"patient": "Noah Hart", "age": 4, "gender": "Male", "caller": "Mrs. Lucy Hart", "pmh": "Eczema (mild)", "medications": "Eczema cream when needed", "allergies": "No known allergies", "social_summary": "Lives with parents, attends nursery", "family_summary": "No significant family history"}',
