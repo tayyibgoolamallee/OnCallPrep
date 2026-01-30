@@ -76,7 +76,7 @@ export default async function SCAPage() {
       {/* Exam Overview */}
       <SCAExamOverview />
 
-      {/* Stats */}
+      {/* Stats: full cases (what you see in the list) and priming are separate */}
       <div className="grid md:grid-cols-3 gap-4">
         <Card className="border-2 border-slate-200 dark:border-slate-700">
           <CardHeader className="pb-2">
@@ -86,8 +86,11 @@ export default async function SCAPage() {
         </Card>
         <Card className="border-2 border-slate-200 dark:border-slate-700">
           <CardHeader className="pb-2">
-            <CardDescription>Available Cases</CardDescription>
-            <CardTitle className="text-2xl">{cases?.filter(c => !c.is_pro || isPro).length || 0}</CardTitle>
+            <CardDescription>Full Cases Available</CardDescription>
+            <CardTitle className="text-2xl">{accessibleFull.length}</CardTitle>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              + {accessiblePriming.length} priming {accessiblePriming.length === 1 ? 'exercise' : 'exercises'}
+            </p>
           </CardHeader>
         </Card>
         <Card className="border-2 border-slate-200 dark:border-slate-700">
