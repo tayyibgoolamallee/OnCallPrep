@@ -25,10 +25,10 @@ export function FullCasesSection({
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all')
 
-  // Normalize difficulty for filtering (merge medium/intermediate)
+  // Normalize difficulty for filtering (merge medium/intermediate); display fallback for missing
   const normalizeDifficulty = (diff: string | null) => {
-    if (!diff) return null
-    const d = diff.toLowerCase()
+    if (!diff) return 'medium'
+    const d = diff.toLowerCase().trim()
     return d === 'intermediate' ? 'medium' : d
   }
 
@@ -36,7 +36,22 @@ export function FullCasesSection({
     ? cases 
     : cases.filter(c => normalizeDifficulty(c.difficulty) === selectedDifficulty)
 
+  const difficultyOrder = ['easy', 'medium', 'hard', 'advanced']
+  const difficultiesFromCases = [...new Set(cases.map(c => normalizeDifficulty(c.difficulty)))].sort(
+    (a, b) => {
+      const i = difficultyOrder.indexOf(a)
+      const j = difficultyOrder.indexOf(b)
+      if (i !== -1 && j !== -1) return i - j
+      if (i !== -1) return -1
+      if (j !== -1) return 1
+      return a.localeCompare(b)
+    }
+  )
+  const filterDifficulties = difficulties.length > 0 ? difficulties : difficultiesFromCases
+
   return (
+    <Card className="border-2 border-teal-200 dark:border-teal-800 bg-white dark:bg-slate-900">
+      <CardContent className="pt-6">
     <div>
       <div className="flex items-center justify-between mb-4">
         <div>
@@ -44,7 +59,7 @@ export function FullCasesSection({
           <p className="text-sm text-slate-600 dark:text-slate-400">Complete consultation scenarios with actor scripts</p>
         </div>
         <div className="flex items-center gap-3">
-          <Badge variant="outline" className="border-slate-300 dark:border-slate-600">12 min</Badge>
+          <Badge className="bg-teal-500 text-white border-0">12 min</Badge>
           <Button
             variant="ghost"
             size="sm"
@@ -69,7 +84,7 @@ export function FullCasesSection({
       {isOpen && (
         <div className="space-y-4">
           {/* Filter by Difficulty */}
-          {difficulties.length > 0 && (
+          {filterDifficulties.length > 0 && (
             <div className="flex flex-wrap gap-2">
               <Button
                 variant={selectedDifficulty === 'all' ? 'default' : 'outline'}
@@ -79,7 +94,7 @@ export function FullCasesSection({
               >
                 All ({cases.length})
               </Button>
-              {difficulties.map((diff) => {
+              {filterDifficulties.map((diff) => {
                 const count = cases.filter(c => normalizeDifficulty(c.difficulty) === diff).length
                 return (
                   <Button
@@ -115,9 +130,9 @@ export function FullCasesSection({
                         <div className="flex gap-1 flex-wrap">
                           <Badge variant={
                             normalizeDifficulty(c.difficulty) === 'easy' ? 'secondary' :
-                            normalizeDifficulty(c.difficulty) === 'hard' ? 'destructive' : 'default'
+                            normalizeDifficulty(c.difficulty) === 'hard' || normalizeDifficulty(c.difficulty) === 'advanced' ? 'destructive' : 'default'
                           }>
-                            {normalizeDifficulty(c.difficulty) || c.difficulty}
+                            {normalizeDifficulty(c.difficulty)}
                           </Badge>
                           {completedIds.has(c.id) ? (
                             <Badge variant="outline" className="border-green-500 text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-950/30">Completed</Badge>
@@ -159,5 +174,7 @@ export function FullCasesSection({
         </div>
       )}
     </div>
+      </CardContent>
+    </Card>
   )
 }

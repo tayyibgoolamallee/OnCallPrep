@@ -547,17 +547,17 @@ export default function SCACasePage({
 
           {phase === 'practice' && (
             <div className="space-y-6">
-              {/* Timer - Fixed at top */}
-              <div className="sticky top-0 z-10 bg-background/95 backdrop-blur py-3 border-b space-y-2">
+              {/* Timer - Fixed at top (green/teal like diagnosis section) */}
+              <div className="sticky top-0 z-10 py-4 px-4 rounded-lg border-2 border-teal-200 dark:border-teal-800 bg-teal-50/50 dark:bg-teal-950/20 space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">Time Remaining</span>
-                  <span className={`text-2xl font-bold font-mono ${timeLeft < 60 ? 'text-destructive' : timeLeft < 120 ? 'text-amber-600' : 'text-primary'}`}>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">Time Remaining</span>
+                  <span className={`text-2xl font-bold font-mono ${timeLeft < 60 ? 'text-destructive' : timeLeft < 120 ? 'text-amber-600' : 'text-teal-600 dark:text-teal-400'}`}>
                     {formatTime(timeLeft)}
                   </span>
                 </div>
                 <Progress
                   value={timeProgress}
-                  className={`h-3 ${timeProgress < 25 ? '[&>div]:bg-destructive' : timeProgress < 50 ? '[&>div]:bg-amber-500' : ''}`}
+                  className={`h-3 ${timeProgress < 25 ? '[&>div]:bg-destructive' : timeProgress < 50 ? '[&>div]:bg-amber-500' : '[&>div]:bg-teal-500'}`}
                 />
               </div>
 
