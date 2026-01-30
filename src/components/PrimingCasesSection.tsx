@@ -14,10 +14,11 @@ interface PrimingCasesSectionProps {
   lockedCount: number
 }
 
-function normalizeDifficulty(diff: string | null) {
-  if (!diff) return 'medium'
-  const d = diff.toLowerCase().trim()
-  return d === 'intermediate' ? 'medium' : d
+const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'advanced'] as const
+function normalizeDifficulty(diff: string | null | undefined): string {
+  const d = (diff == null || typeof diff !== 'string') ? '' : diff.trim().toLowerCase()
+  if (!d || d === 'intermediate') return 'medium'
+  return VALID_DIFFICULTIES.includes(d as typeof VALID_DIFFICULTIES[number]) ? d : 'medium'
 }
 
 const DIFFICULTY_ORDER = ['easy', 'medium', 'hard', 'advanced']

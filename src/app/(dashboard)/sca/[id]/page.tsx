@@ -71,6 +71,13 @@ interface SCACase {
   actor_behaviour?: string
 }
 
+const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'advanced'] as const
+function normalizeDifficulty(diff: string | null | undefined): string {
+  const d = (diff == null || typeof diff !== 'string') ? '' : String(diff).trim().toLowerCase()
+  if (!d || d === 'intermediate') return 'medium'
+  return VALID_DIFFICULTIES.includes(d as typeof VALID_DIFFICULTIES[number]) ? d : 'medium'
+}
+
 // Default marking criteria if not provided in case data
 const defaultMarkingCriteria: MarkingCriteria = {
   domain1: {
@@ -335,10 +342,10 @@ export default function SCACasePage({
             <Badge className="bg-primary">{caseData.category}</Badge>
           )}
           <Badge variant={
-            caseData.difficulty === 'easy' ? 'secondary' :
-            caseData.difficulty === 'advanced' || caseData.difficulty === 'hard' ? 'destructive' : 'default'
+            normalizeDifficulty(caseData.difficulty) === 'easy' ? 'secondary' :
+            normalizeDifficulty(caseData.difficulty) === 'advanced' || normalizeDifficulty(caseData.difficulty) === 'hard' ? 'destructive' : 'default'
           }>
-            {caseData.difficulty}
+            {normalizeDifficulty(caseData.difficulty)}
           </Badge>
         </div>
       </div>

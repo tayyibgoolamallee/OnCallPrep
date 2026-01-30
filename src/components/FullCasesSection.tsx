@@ -25,11 +25,12 @@ export function FullCasesSection({
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all')
 
-  // Normalize difficulty for filtering (merge medium/intermediate); display fallback for missing
-  const normalizeDifficulty = (diff: string | null) => {
-    if (!diff) return 'medium'
-    const d = diff.toLowerCase().trim()
-    return d === 'intermediate' ? 'medium' : d
+  // Normalize difficulty: always return one of easy/medium/hard/advanced for display
+  const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'advanced'] as const
+  const normalizeDifficulty = (diff: string | null | undefined): string => {
+    const d = (diff == null || typeof diff !== 'string') ? '' : diff.trim().toLowerCase()
+    if (!d || d === 'intermediate') return 'medium'
+    return VALID_DIFFICULTIES.includes(d as typeof VALID_DIFFICULTIES[number]) ? d : 'medium'
   }
 
   const filteredCases = selectedDifficulty === 'all' 

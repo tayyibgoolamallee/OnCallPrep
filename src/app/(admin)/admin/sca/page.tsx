@@ -44,6 +44,13 @@ interface SCACase {
   published: boolean | null
 }
 
+const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'advanced'] as const
+function normalizeDifficulty(diff: string | null | undefined): string {
+  const d = (diff == null || typeof diff !== 'string') ? '' : String(diff).trim().toLowerCase()
+  if (!d || d === 'intermediate') return 'medium'
+  return VALID_DIFFICULTIES.includes(d as typeof VALID_DIFFICULTIES[number]) ? d : 'medium'
+}
+
 export default function AdminSCAPage() {
   const [cases, setCases] = useState<SCACase[]>([])
   const [loading, setLoading] = useState(true)
@@ -324,10 +331,10 @@ export default function AdminSCAPage() {
                   <TableCell className="capitalize">{c.case_type}</TableCell>
                   <TableCell>
                     <Badge variant={
-                      c.difficulty === 'easy' ? 'secondary' :
-                      c.difficulty === 'hard' ? 'destructive' : 'default'
+                      normalizeDifficulty(c.difficulty) === 'easy' ? 'secondary' :
+                      normalizeDifficulty(c.difficulty) === 'hard' || normalizeDifficulty(c.difficulty) === 'advanced' ? 'destructive' : 'default'
                     }>
-                      {c.difficulty}
+                      {normalizeDifficulty(c.difficulty)}
                     </Badge>
                   </TableCell>
                   <TableCell>

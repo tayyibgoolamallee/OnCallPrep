@@ -41,15 +41,17 @@ export default async function SCAPage() {
   const accessiblePriming = primingCases.filter(c => !c.is_pro || isPro)
   const accessibleFull = fullCases.filter(c => !c.is_pro || isPro)
 
-  // Get unique difficulties for filtering, normalize medium/intermediate
-  const normalizedDifficulties = fullCases.map(c => {
-    if (!c.difficulty) return null
-    const d = c.difficulty.toLowerCase()
-    return d === 'intermediate' ? 'medium' : d
-  })
-  // Ensure a consistent ordering of difficulty filters: easy → medium → hard → advanced → others
+  // Normalize difficulty so null/empty/unknown always count as 'medium' for display and filters
+  const VALID_DIFFICULTIES = ['easy', 'medium', 'hard', 'advanced'] as const
+  const normalizeDifficulty = (diff: string | null | undefined): string => {
+    const d = (diff == null || typeof diff !== 'string') ? '' : String(diff).trim().toLowerCase()
+    if (!d || d === 'intermediate') return 'medium'
+    return VALID_DIFFICULTIES.includes(d as typeof VALID_DIFFICULTIES[number]) ? d : 'medium'
+  }
+  // Get unique difficulties for filtering (all cases contribute; uncategorised → medium)
+  const normalizedDifficulties = fullCases.map(c => normalizeDifficulty(c.difficulty))
   const difficultyOrder = ['easy', 'medium', 'hard', 'advanced']
-  const difficulties = [...new Set(normalizedDifficulties.filter((d): d is string => d !== null && d !== undefined))].sort(
+  const difficulties = [...new Set(normalizedDifficulties)].sort(
     (a, b) => {
       const indexA = difficultyOrder.indexOf(a)
       const indexB = difficultyOrder.indexOf(b)
