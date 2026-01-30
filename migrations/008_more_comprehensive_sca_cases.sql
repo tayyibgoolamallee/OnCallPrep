@@ -13,7 +13,7 @@ INSERT INTO sca_cases (
   'GI-001',
   'You are a GP trainee. Mr. George Wilson, a 62-year-old man, has come about persistent heartburn and indigestion that is not improving with over-the-counter remedies.
 
-Your task is to take a history, consider the differential diagnosis, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. George Wilson", "age": 62, "gender": "Male"}',
   '{"patient": "Mr. George Wilson", "age": 62, "gender": "Male", "pmh": "Osteoarthritis", "medications": "Ibuprofen 400mg TDS, Paracetamol PRN", "allergies": "None", "social_summary": "Retired, lives with wife, drinks moderately", "family_summary": "Father had stomach ulcer"}',
   '{
@@ -116,7 +116,7 @@ INSERT INTO sca_cases (
   'ENDO-001',
   'You are a GP trainee. Mrs. Priya Sharma, a 48-year-old woman with Type 2 diabetes, has come for her annual review. Her recent HbA1c has come back at 72 mmol/mol (target <53).
 
-Your task is to discuss her diabetes control, explore barriers, and agree a management plan.',
+',
   '{"name": "Mrs. Priya Sharma", "age": 48, "gender": "Female"}',
   '{"patient": "Mrs. Priya Sharma", "age": 48, "gender": "Female", "pmh": "T2DM (5 years), Hypertension, Obesity (BMI 34)", "medications": "Metformin 1g BD, Gliclazide 80mg BD, Ramipril 5mg OD, Atorvastatin 20mg OD", "allergies": "None", "social_summary": "Works in catering, married, 3 children", "family_summary": "Both parents have T2DM"}',
   '{
@@ -220,7 +220,7 @@ INSERT INTO sca_cases (
   'DERM-001',
   'You are a GP trainee. Mr. Robert Taylor, a 58-year-old man, has come about a mole on his back that his wife noticed has changed.
 
-Your task is to take a history, assess the lesion, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. Robert Taylor", "age": 58, "gender": "Male"}',
   '{"patient": "Mr. Robert Taylor", "age": 58, "gender": "Male", "pmh": "None significant", "medications": "None regular", "allergies": "None", "social_summary": "Builder, outdoor work, sun exposure", "family_summary": "Nothing significant"}',
   '{
@@ -326,7 +326,7 @@ INSERT INTO sca_cases (
   'NEURO-001',
   'You are a GP trainee. Miss Emma Collins, a 32-year-old marketing executive, has come about headaches that have been affecting her work.
 
-Your task is to take a history, make an assessment, and formulate an appropriate management plan.',
+',
   '{"name": "Miss Emma Collins", "age": 32, "gender": "Female"}',
   '{"patient": "Miss Emma Collins", "age": 32, "gender": "Female", "pmh": "None", "medications": "Ibuprofen PRN, Combined oral contraceptive", "allergies": "None", "social_summary": "High-stress job, poor sleep, skips meals", "family_summary": "Mother has migraines"}',
   '{
@@ -452,7 +452,7 @@ INSERT INTO sca_cases (
   'ADDICTION-001',
   'You are a GP trainee. Mr. Kevin O''Brien, a 47-year-old man, has come because his wife is concerned about his drinking. He has reluctantly agreed to see you.
 
-Your task is to explore his alcohol use, assess risk, and discuss management options.',
+',
   '{"name": "Mr. Kevin O''Brien", "age": 47, "gender": "Male"}',
   '{"patient": "Mr. Kevin O''Brien", "age": 47, "gender": "Male", "pmh": "Hypertension", "medications": "Lisinopril 10mg OD", "allergies": "None", "social_summary": "Sales manager, married, stressful job", "family_summary": "Father was alcoholic"}',
   '{
@@ -566,7 +566,7 @@ INSERT INTO sca_cases (
   'PALLIATIVE-001',
   'You are a GP trainee. Mrs. Dorothy Evans, a 72-year-old woman with metastatic lung cancer, has come to discuss her care. She was recently told by oncology that further treatment is not possible.
 
-Your task is to explore her understanding, address her concerns, and discuss ongoing care.',
+',
   '{"name": "Mrs. Dorothy Evans", "age": 72, "gender": "Female"}',
   '{"patient": "Mrs. Dorothy Evans", "age": 72, "gender": "Female", "pmh": "Metastatic lung cancer (diagnosed 8 months ago), COPD, Hypertension", "medications": "MST 30mg BD, Oramorph PRN, Prednisolone, Omeprazole", "allergies": "Codeine (nausea)", "social_summary": "Widowed, lives alone, daughter nearby", "family_summary": "Husband died 5 years ago from heart disease"}',
   '{
@@ -675,7 +675,7 @@ INSERT INTO sca_cases (
   'URG-001',
   'You are a GP trainee. Mrs. Janet Wright, a 52-year-old woman, has telephoned the surgery urgently. The receptionist has put her through to you.
 
-This is a telephone consultation. Your task is to assess the situation and make appropriate decisions.',
+This is a telephone consultation.',
   '{"name": "Mrs. Janet Wright", "age": 52, "gender": "Female"}',
   '{"patient": "Mrs. Janet Wright", "age": 52, "gender": "Female", "pmh": "Hypertension", "medications": "Amlodipine 5mg OD", "allergies": "None known", "social_summary": "Teacher, lives with husband", "family_summary": "Mother had stroke at 70"}',
   '{
@@ -776,7 +776,7 @@ INSERT INTO sca_cases (
   'ETHICS-001',
   'You are a GP trainee. Mr. James Chen, a 35-year-old man, has come to discuss recent blood results. During the consultation, he makes a request about confidentiality.
 
-Your task is to manage this consultation appropriately.',
+',
   '{"name": "Mr. James Chen", "age": 35, "gender": "Male"}',
   '{"patient": "Mr. James Chen", "age": 35, "gender": "Male", "pmh": "None significant", "medications": "None", "allergies": "None", "social_summary": "IT consultant, married, one child aged 2", "family_summary": "Nothing significant"}',
   '{
@@ -869,7 +869,7 @@ INSERT INTO sca_cases (
   'PREG-001',
   'You are a GP trainee. Mrs. Lisa Thompson, a 32-year-old woman, has come because she has just found out she is pregnant. She takes regular medication and is worried about whether she should continue.
 
-Your task is to review her medications, address her concerns, and provide appropriate advice.',
+',
   '{"name": "Mrs. Lisa Thompson", "age": 32, "gender": "Female"}',
   '{"patient": "Mrs. Lisa Thompson", "age": 32, "gender": "Female", "pmh": "Epilepsy (well-controlled), Depression", "medications": "Sodium valproate 500mg BD, Sertraline 100mg OD, Folic acid 400mcg OD", "allergies": "None", "social_summary": "Teacher, married, planned pregnancy", "family_summary": "Nothing significant"}',
   '{
@@ -966,7 +966,7 @@ INSERT INTO sca_cases (
   'SAFEGUARD-001',
   'You are a GP trainee. Mrs. Angela Price, a 68-year-old woman, has come to see you about "aches and pains." As the consultation progresses, you notice some concerning features.
 
-Your task is to explore the situation sensitively and manage appropriately.',
+',
   '{"name": "Mrs. Angela Price", "age": 68, "gender": "Female"}',
   '{"patient": "Mrs. Angela Price", "age": 68, "gender": "Female", "pmh": "Osteoarthritis, Type 2 diabetes, Anxiety", "medications": "Paracetamol, Metformin, Sertraline", "allergies": "None", "social_summary": "Widowed, lives with adult son who is her carer", "family_summary": "N/A"}',
   '{
@@ -1078,7 +1078,7 @@ INSERT INTO sca_cases (
   'ENT-001',
   'You are a GP trainee. Mr. Peter Shaw, a 70-year-old man, has come because his wife says he can''t hear properly. He is reluctant to be here.
 
-Your task is to assess his hearing concerns and manage appropriately.',
+',
   '{"name": "Mr. Peter Shaw", "age": 70, "gender": "Male"}',
   '{"patient": "Mr. Peter Shaw", "age": 70, "gender": "Male", "pmh": "Hypertension, Type 2 diabetes", "medications": "Amlodipine 5mg OD, Metformin 500mg BD", "allergies": "None", "social_summary": "Retired engineer, married", "family_summary": "Father was deaf in old age"}',
   '{
@@ -1183,7 +1183,7 @@ INSERT INTO sca_cases (
   'RENAL-001',
   'You are a GP trainee. Mr. David Burton, a 65-year-old man, has been called in to discuss blood test results. His eGFR has come back at 38.
 
-Your task is to explain the results, explore causes, and plan management.',
+',
   '{"name": "Mr. David Burton", "age": 65, "gender": "Male"}',
   '{"patient": "Mr. David Burton", "age": 65, "gender": "Male", "pmh": "Type 2 diabetes (15 years), Hypertension", "medications": "Metformin 1g BD, Ramipril 10mg OD, Amlodipine 10mg OD, Atorvastatin 40mg OD, Aspirin 75mg OD", "allergies": "None", "social_summary": "Retired accountant, married", "family_summary": "Mother had kidney failure requiring dialysis"}',
   '{

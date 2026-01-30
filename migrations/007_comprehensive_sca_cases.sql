@@ -23,7 +23,7 @@ INSERT INTO sca_cases (
   'CVS-001',
   'You are a GP trainee in a busy practice. A 45-year-old man, Mr. James Mitchell, has been booked in for an urgent appointment. The receptionist notes he called this morning complaining of chest discomfort.
 
-Your task is to take a focused history, address his concerns, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. James Mitchell", "age": 45, "gender": "Male"}',
   '{"patient": "Mr. James Mitchell", "age": 45, "gender": "Male", "pmh": "Hypertension (2 years), High cholesterol", "medications": "Ramipril 5mg OD, Atorvastatin 20mg OD", "allergies": "None known", "social_summary": "Office manager, smoker, moderate alcohol", "family_summary": "Father MI at 55, Mother T2DM"}',
   '{
@@ -121,7 +121,7 @@ INSERT INTO sca_cases (
   'RESP-001',
   'You are a GP trainee. A 58-year-old man, Mr. Brian Thompson, has come to see you about a cough that has been troubling him for several weeks.
 
-Your task is to take a history, explore the possible causes, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. Brian Thompson", "age": 58, "gender": "Male"}',
   '{"patient": "Mr. Brian Thompson", "age": 58, "gender": "Male", "pmh": "Hypertension, Type 2 diabetes", "medications": "Ramipril 10mg OD, Metformin 1g BD", "allergies": "None known", "social_summary": "Non-smoker, retired builder", "family_summary": "Nothing significant"}',
   '{
@@ -214,7 +214,7 @@ INSERT INTO sca_cases (
   'WH-001',
   'You are a GP trainee. Mrs. Claire Davies, a 38-year-old woman, has come to request a repeat prescription for her contraceptive pill.
 
-Your task is to review her contraception, assess suitability, and manage appropriately.',
+',
   '{"name": "Mrs. Claire Davies", "age": 38, "gender": "Female"}',
   '{"patient": "Mrs. Claire Davies", "age": 38, "gender": "Female", "pmh": "None significant", "medications": "Microgynon 30 (15 years)", "allergies": "None", "social_summary": "Smokes 10-15/day, married", "family_summary": "Mother had DVT"}',
   '{
@@ -308,7 +308,7 @@ INSERT INTO sca_cases (
   'MH-001',
   'You are a GP trainee. Mr. David Roberts, a 55-year-old man, has come to see you. The appointment was booked as "feeling tired."
 
-Your task is to explore his symptoms, assess his mental state, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. David Roberts", "age": 55, "gender": "Male"}',
   '{"patient": "Mr. David Roberts", "age": 55, "gender": "Male", "pmh": "Type 2 diabetes, Hypertension", "medications": "Metformin 1g BD, Ramipril 10mg OD", "allergies": "None", "social_summary": "Divorced, lives alone, factory supervisor", "family_summary": "Father had depression"}',
   '{
@@ -411,7 +411,7 @@ INSERT INTO sca_cases (
   'OLDER-001',
   'You are a GP trainee. Mrs. Patricia Evans, a 78-year-old retired nurse, has come with her daughter who is concerned about her memory. The appointment was booked by the daughter.
 
-Your task is to assess the situation, explore the concerns, and formulate an appropriate management plan.',
+',
   '{"name": "Mrs. Patricia Evans", "age": 78, "gender": "Female"}',
   '{"patient": "Mrs. Patricia Evans", "age": 78, "gender": "Female", "pmh": "Hypertension, Osteoarthritis", "medications": "Amlodipine 5mg OD, Paracetamol PRN", "allergies": "Penicillin", "social_summary": "Widowed, lives alone, daughter nearby", "family_summary": "Mother had dementia"}',
   '{
@@ -521,7 +521,7 @@ INSERT INTO sca_cases (
   'SH-001',
   'You are a GP trainee. A 24-year-old woman, Miss Jade Williams, has booked an appointment. The booking note says "personal problem."
 
-Your task is to explore her concerns, take an appropriate history, and formulate a management plan.',
+',
   '{"name": "Miss Jade Williams", "age": 24, "gender": "Female"}',
   '{"patient": "Miss Jade Williams", "age": 24, "gender": "Female", "pmh": "None", "medications": "None regular", "allergies": "None", "social_summary": "Works as hairdresser, single", "family_summary": "Nothing significant"}',
   '{
@@ -621,7 +621,7 @@ INSERT INTO sca_cases (
   'PEDS-001',
   'You are a GP trainee. Mrs. Sarah Ahmed has brought her 2-year-old son, Zain, who has been unwell for 2 days with a fever.
 
-Your task is to take a history from the mother, assess the severity, and formulate an appropriate management plan.',
+',
   '{"name": "Zain Ahmed", "age": 2, "gender": "Male", "accompanied_by": "Mother - Sarah Ahmed"}',
   '{"patient": "Zain Ahmed", "age": "2 years", "gender": "Male", "pmh": "None - previously well child", "medications": "Calpol given at home", "allergies": "None known", "immunisations": "Up to date", "birth_history": "Normal delivery, no neonatal problems"}',
   '{
@@ -735,7 +735,7 @@ INSERT INTO sca_cases (
   'MSK-001',
   'You are a GP trainee. Mr. John Harrison, a 52-year-old man, has come about pain and stiffness in his hands that has been bothering him for several weeks.
 
-Your task is to take a history, consider the differential diagnosis, and formulate an appropriate management plan.',
+',
   '{"name": "Mr. John Harrison", "age": 52, "gender": "Male"}',
   '{"patient": "Mr. John Harrison", "age": 52, "gender": "Male", "pmh": "Psoriasis (20 years)", "medications": "Topical betamethasone for psoriasis flares", "allergies": "None", "social_summary": "Plumber, active lifestyle", "family_summary": "Mother has rheumatoid arthritis"}',
   '{

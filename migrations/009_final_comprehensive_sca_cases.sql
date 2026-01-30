@@ -13,7 +13,7 @@ INSERT INTO sca_cases (
   'RHEUM-001',
   'You are a GP trainee. Mr. William Foster, a 55-year-old man, has telephoned urgently about a painful swollen knee that developed overnight.
 
-Your task is to assess the situation and make appropriate decisions.',
+',
   '{"name": "Mr. William Foster", "age": 55, "gender": "Male"}',
   '{"patient": "Mr. William Foster", "age": 55, "gender": "Male", "pmh": "Gout (one previous episode), Type 2 diabetes, Hypertension", "medications": "Bendroflumethiazide 2.5mg OD, Lisinopril 20mg OD, Metformin 1g BD", "allergies": "Penicillin", "social_summary": "Pub landlord, heavy alcohol", "family_history": "Father had gout"}',
   '{
@@ -129,7 +129,7 @@ INSERT INTO sca_cases (
   'IMG-001',
   'You are a GP trainee. Mrs. Patricia Moore, a 58-year-old woman, has come to discuss results of investigations for weight loss and fatigue. The CT scan has shown a pancreatic mass with liver metastases, highly suggestive of cancer.
 
-Your task is to discuss these results with her.',
+',
   '{"name": "Mrs. Patricia Moore", "age": 58, "gender": "Female"}',
   '{"patient": "Mrs. Patricia Moore", "age": 58, "gender": "Female", "pmh": "No significant past history", "medications": "None regular", "allergies": "None", "social_summary": "Retired nurse, married, 2 adult children", "family_summary": "Mother died of breast cancer"}',
   '{
@@ -235,7 +235,7 @@ INSERT INTO sca_cases (
   'OCCUPATIONAL-001',
   'You are a GP trainee. Mr. Simon Blake, a 38-year-old man, has come requesting a sick note. He says he cannot work due to "stress."
 
-Your task is to assess his situation and make appropriate decisions about fitness for work.',
+',
   '{"name": "Mr. Simon Blake", "age": 38, "gender": "Male"}',
   '{"patient": "Mr. Simon Blake", "age": 38, "gender": "Male", "pmh": "No significant history", "medications": "None", "allergies": "None", "social_summary": "Team leader at call centre, married with one child", "family_summary": "Nothing significant"}',
   '{
@@ -460,7 +460,7 @@ INSERT INTO sca_cases (
   'LEARNING-001',
   'You are a GP trainee. Mr. Michael Thomas, a 35-year-old man with moderate learning disability, has come for his annual health check. He is accompanied by his support worker, Jane.
 
-Your task is to conduct an appropriate health check.',
+',
   '{"name": "Mr. Michael Thomas", "age": 35, "gender": "Male", "accompanied_by": "Support worker Jane"}',
   '{"patient": "Mr. Michael Thomas", "age": 35, "gender": "Male", "pmh": "Moderate learning disability, Epilepsy, Obesity (BMI 35)", "medications": "Sodium valproate 500mg BD", "allergies": "None known", "social_summary": "Lives in supported accommodation, attends day centre", "family_summary": "N/A"}',
   '{
@@ -576,7 +576,7 @@ INSERT INTO sca_cases (
   'DOMESTIC-001',
   'You are a GP trainee. Mrs. Rachel Green, a 34-year-old woman, has come requesting sleeping tablets. As the consultation progresses, you become concerned about her home situation.
 
-Your task is to explore sensitively and manage appropriately.',
+',
   '{"name": "Mrs. Rachel Green", "age": 34, "gender": "Female"}',
   '{"patient": "Mrs. Rachel Green", "age": 34, "gender": "Female", "pmh": "Anxiety (5 years), Previous depression", "medications": "Sertraline 100mg OD", "allergies": "None", "social_summary": "Married, 2 children (ages 5 and 7), part-time admin job", "family_summary": "N/A"}',
   '{
@@ -700,7 +700,7 @@ INSERT INTO sca_cases (
   'MUS-001',
   'You are a GP trainee. Mrs. Karen White, a 45-year-old woman, has come with multiple symptoms. Looking at her records, you see she has had numerous investigations over the past 2 years, all normal.
 
-Your task is to manage this consultation appropriately.',
+',
   '{"name": "Mrs. Karen White", "age": 45, "gender": "Female"}',
   '{"patient": "Mrs. Karen White", "age": 45, "gender": "Female", "pmh": "IBS, Fibromyalgia, Chronic fatigue, Multiple GP consultations", "medications": "Amitriptyline 10mg nocte, Paracetamol", "allergies": "Codeine (nausea)", "social_summary": "Divorced, works part-time, lives alone", "family_summary": "Mother had similar issues"}',
   '{
@@ -815,7 +815,7 @@ INSERT INTO sca_cases (
   'TRAVEL-001',
   'You are a GP trainee. Mr. James Lewis, a 55-year-old man, has come for travel advice before a trip to Kenya and Tanzania.
 
-Your task is to provide appropriate travel health advice.',
+',
   '{"name": "Mr. James Lewis", "age": 55, "gender": "Male"}',
   '{"patient": "Mr. James Lewis", "age": 55, "gender": "Male", "pmh": "Type 2 diabetes, Hypertension, Previous DVT 3 years ago", "medications": "Metformin 1g BD, Ramipril 5mg OD, Rivaroxaban 20mg OD", "allergies": "Penicillin", "social_summary": "Company director, frequent traveller", "family_summary": "N/A"}',
   '{
