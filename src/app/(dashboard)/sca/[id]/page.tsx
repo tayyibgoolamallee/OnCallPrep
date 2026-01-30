@@ -341,10 +341,16 @@ export default function SCACasePage({
           {caseData.category && (
             <Badge className="bg-primary">{caseData.category}</Badge>
           )}
-          <Badge variant={
-            normalizeDifficulty(caseData.difficulty) === 'easy' ? 'secondary' :
-            normalizeDifficulty(caseData.difficulty) === 'advanced' || normalizeDifficulty(caseData.difficulty) === 'hard' ? 'destructive' : 'default'
-          }>
+          <Badge
+            variant={
+              normalizeDifficulty(caseData.difficulty) === 'easy' ? 'secondary' :
+              normalizeDifficulty(caseData.difficulty) === 'advanced' || normalizeDifficulty(caseData.difficulty) === 'hard' ? 'destructive' : 'default'
+            }
+            className={
+              (normalizeDifficulty(caseData.difficulty) === 'hard' || normalizeDifficulty(caseData.difficulty) === 'advanced')
+                ? 'bg-red-600 text-white border-red-600 dark:bg-red-700 dark:text-white dark:border-red-700' : undefined
+            }
+          >
             {normalizeDifficulty(caseData.difficulty)}
           </Badge>
         </div>

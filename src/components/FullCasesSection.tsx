@@ -129,10 +129,16 @@ export function FullCasesSection({
                           )}
                         </CardTitle>
                         <div className="flex gap-1 flex-wrap">
-                          <Badge variant={
-                            normalizeDifficulty(c.difficulty) === 'easy' ? 'secondary' :
-                            normalizeDifficulty(c.difficulty) === 'hard' || normalizeDifficulty(c.difficulty) === 'advanced' ? 'destructive' : 'default'
-                          }>
+                          <Badge
+                            variant={
+                              normalizeDifficulty(c.difficulty) === 'easy' ? 'secondary' :
+                              normalizeDifficulty(c.difficulty) === 'hard' || normalizeDifficulty(c.difficulty) === 'advanced' ? 'destructive' : 'default'
+                            }
+                            className={
+                              (normalizeDifficulty(c.difficulty) === 'hard' || normalizeDifficulty(c.difficulty) === 'advanced')
+                                ? 'bg-red-600 text-white border-red-600 dark:bg-red-700 dark:text-white dark:border-red-700' : undefined
+                            }
+                          >
                             {normalizeDifficulty(c.difficulty)}
                           </Badge>
                           {completedIds.has(c.id) ? (
