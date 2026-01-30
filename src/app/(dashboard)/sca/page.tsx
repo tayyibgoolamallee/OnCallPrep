@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { SCAExamOverview } from './exam-overview'
 import { FullCasesSection } from '@/components/FullCasesSection'
+import { PrimingCasesSection } from '@/components/PrimingCasesSection'
 
 export default async function SCAPage() {
   const supabase = await createClient()
@@ -130,33 +131,17 @@ export default async function SCAPage() {
           </Card>
         </Link>
 
-        {/* 3-Minute Priming - Similar to 2-minute practice */}
-        {accessiblePriming.length > 0 && (
-          <Link href={`/sca/${accessiblePriming[0].id}`}>
-            <Card className="hover:shadow-lg transition-shadow cursor-pointer border-2 border-teal-200 dark:border-teal-800 hover:border-teal-300 dark:hover:border-teal-700 bg-white dark:bg-slate-900">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div>
-                    <CardTitle className="text-lg flex items-center gap-2 text-slate-900 dark:text-slate-100">
-                      <span className="text-2xl">🧠</span>
-                      3-Minute Priming Practice
-                    </CardTitle>
-                    <CardDescription className="mt-2 text-slate-600 dark:text-slate-400">
-                      Prepare your consultation approach with structured priming exercises
-                    </CardDescription>
-                  </div>
-                  <Badge className="bg-teal-500 text-white">180s</Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  {accessiblePriming.length} {accessiblePriming.length === 1 ? 'case' : 'cases'} available
-                </p>
-              </CardContent>
-            </Card>
-          </Link>
-        )}
       </div>
+
+      {/* Priming Exercises - Collapsible list (like full cases) */}
+      {accessiblePriming.length > 0 && (
+        <PrimingCasesSection
+          cases={accessiblePriming}
+          attemptedIds={attemptedIds}
+          completedIds={completedIds}
+          lockedCount={primingCases.length - accessiblePriming.length}
+        />
+      )}
 
       {/* Full Cases - Collapsible with filters */}
       {accessibleFull.length > 0 && (

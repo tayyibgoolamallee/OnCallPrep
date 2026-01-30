@@ -131,6 +131,7 @@ export default function SCACasePage({
   const [timeLeft, setTimeLeft] = useState(0)
   const [isTimerPaused, setIsTimerPaused] = useState(false)
   const [notes, setNotes] = useState('')
+  const [loadingAnotherPriming, setLoadingAnotherPriming] = useState(false)
   const [showAnswer, setShowAnswer] = useState(false)
   const [showAssessment, setShowAssessment] = useState(false)
   const [domain1Checks, setDomain1Checks] = useState<boolean[]>([])
@@ -218,6 +219,37 @@ export default function SCACasePage({
     }
 
     setPhase('review')
+  }
+
+  async function handleTryAnotherPriming() {
+    if (!caseData || caseData.case_type !== 'priming') return
+    setLoadingAnotherPriming(true)
+    try {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      const isPro = user
+        ? (await supabase.from('user_profiles').select('subscription_tier').eq('id', user.id).single()).data?.subscription_tier === 'pro'
+        : false
+      const { data: primingCases } = await supabase
+        .from('sca_cases')
+        .select('id, is_pro')
+        .eq('case_type', 'priming')
+        .eq('published', true)
+      const accessible = (primingCases || []).filter(
+        (c: { id: string; is_pro?: boolean | null }) => !c.is_pro || isPro
+      ) as { id: string }[]
+      const otherIds = accessible
+        .map((c) => c.id)
+        .filter((id) => id !== caseData.id)
+      if (otherIds.length > 0) {
+        const randomId = otherIds[Math.floor(Math.random() * otherIds.length)]
+        router.push(`/sca/${randomId}`)
+        return
+      }
+      router.push('/sca')
+    } finally {
+      setLoadingAnotherPriming(false)
+    }
   }
 
   if (loading) {
@@ -911,8 +943,8 @@ export default function SCACasePage({
                   Back to Cases
                 </Button>
                 {caseData.case_type === 'priming' && (
-                  <Button onClick={() => router.push('/sca')}>
-                    Try another priming case
+                  <Button onClick={handleTryAnotherPriming} disabled={loadingAnotherPriming}>
+                    {loadingAnotherPriming ? 'Loading…' : 'Try another priming case'}
                   </Button>
                 )}
               </div>
