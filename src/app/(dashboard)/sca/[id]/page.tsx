@@ -129,6 +129,7 @@ export default function SCACasePage({
   const [phase, setPhase] = useState<'info' | 'practice' | 'review'>('info')
   const [showActorScript, setShowActorScript] = useState(false)
   const [timeLeft, setTimeLeft] = useState(0)
+  const [isTimerPaused, setIsTimerPaused] = useState(false)
   const [notes, setNotes] = useState('')
   const [showAnswer, setShowAnswer] = useState(false)
   const [showAssessment, setShowAssessment] = useState(false)
@@ -182,7 +183,7 @@ export default function SCACasePage({
   }, [params])
 
   useEffect(() => {
-    if (phase !== 'practice' || timeLeft <= 0) return
+    if (phase !== 'practice' || timeLeft <= 0 || isTimerPaused) return
 
     const timer = setInterval(() => {
       setTimeLeft((t) => {
@@ -196,7 +197,7 @@ export default function SCACasePage({
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [phase, timeLeft])
+  }, [phase, timeLeft, isTimerPaused])
 
   async function handleComplete() {
     if (!caseData) return
@@ -485,7 +486,7 @@ export default function SCACasePage({
 
               {/* Start Practice Button */}
               <div className="flex justify-center pt-4">
-                <Button size="lg" onClick={() => setPhase('practice')}>
+                <Button size="lg" onClick={() => { setIsTimerPaused(false); setPhase('practice') }}>
                   Start Timed Practice
                 </Button>
               </div>
@@ -528,20 +529,29 @@ export default function SCACasePage({
                 />
               </div>
 
-              {/* Toggle Actor Script */}
-              <div className="flex justify-between items-center">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setShowActorScript(!showActorScript)}
-                >
-                  {showActorScript ? 'Hide' : 'Show'} Actor Script
-                </Button>
-                <div className="flex gap-2">
-                  <Button variant="outline" onClick={() => setPhase('review')}>
-                    End Consultation
+              {/* Timer controls + Actor Script (full cases) */}
+              <div className="flex flex-wrap gap-2 justify-between items-center">
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setIsTimerPaused(!isTimerPaused)}
+                  >
+                    {isTimerPaused ? 'Resume' : 'Pause'} timer
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => setPhase('review')}>
+                    End timer early
                   </Button>
                 </div>
+                {caseData.actor_info && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowActorScript(!showActorScript)}
+                  >
+                    {showActorScript ? 'Hide' : 'Show'} Actor Script
+                  </Button>
+                )}
               </div>
 
               {/* Actor Script visible during practice */}
@@ -896,10 +906,15 @@ export default function SCACasePage({
                 </>
               )}
 
-              <div className="flex justify-center pt-4">
-                <Button onClick={() => router.push('/sca')}>
+              <div className="flex flex-wrap gap-3 justify-center pt-4">
+                <Button onClick={() => router.push('/sca')} variant="outline">
                   Back to Cases
                 </Button>
+                {caseData.case_type === 'priming' && (
+                  <Button onClick={() => router.push('/sca')}>
+                    Try another priming case
+                  </Button>
+                )}
               </div>
             </div>
           )}
