@@ -127,7 +127,7 @@ export default function SCACasePage({
   const [caseData, setCaseData] = useState<SCACase | null>(null)
   const [loading, setLoading] = useState(true)
   const [phase, setPhase] = useState<'info' | 'practice' | 'review'>('info')
-  const [showActorScript, setShowActorScript] = useState(true)
+  const [showActorScript, setShowActorScript] = useState(false)
   const [timeLeft, setTimeLeft] = useState(0)
   const [notes, setNotes] = useState('')
   const [showAnswer, setShowAnswer] = useState(false)
@@ -392,90 +392,95 @@ export default function SCACasePage({
                 </div>
               )}
 
-              {/* Actor Information - For Roleplay */}
+              {/* Actor Script - Collapsible so candidate doesn't see revealing info by default */}
               {caseData.actor_info && (
-                <div className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 rounded-lg p-4">
-                  <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-3">
-                    🎭 Actor Script (For Roleplay Partner)
-                  </h3>
-                  
-                  {/* Opening Statement */}
-                  {caseData.actor_info.opening_statement && (
-                    <div className="mb-4">
-                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Opening Statement:</h4>
-                      <p className="bg-white dark:bg-gray-900 p-3 rounded border italic">
-                        &quot;{caseData.actor_info.opening_statement}&quot;
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Freely Given History */}
-                  {caseData.actor_info.freely_given_history && (
-                    <div className="mb-4">
-                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">Freely Given History:</h4>
-                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm space-y-2">
-                        {caseData.actor_info.freely_given_history.presenting_complaint && (
-                          <p><strong>Presenting Complaint:</strong> {caseData.actor_info.freely_given_history.presenting_complaint}</p>
-                        )}
-                        {caseData.actor_info.freely_given_history.psychosocial_impact && (
-                          <p><strong>Psychosocial Impact:</strong> {caseData.actor_info.freely_given_history.psychosocial_impact}</p>
-                        )}
-                        {caseData.actor_info.freely_given_history.ice && (
-                          <div className="pt-2 border-t">
-                            <strong>ICE:</strong>
-                            <ul className="list-disc list-inside ml-2 mt-1">
-                              {caseData.actor_info.freely_given_history.ice.ideas && (
-                                <li><span className="text-muted-foreground">Ideas:</span> {caseData.actor_info.freely_given_history.ice.ideas}</li>
-                              )}
-                              {caseData.actor_info.freely_given_history.ice.concerns && (
-                                <li><span className="text-muted-foreground">Concerns:</span> {caseData.actor_info.freely_given_history.ice.concerns}</li>
-                              )}
-                              {caseData.actor_info.freely_given_history.ice.expectations && (
-                                <li><span className="text-muted-foreground">Expectations:</span> {caseData.actor_info.freely_given_history.ice.expectations}</li>
-                              )}
-                            </ul>
-                          </div>
-                        )}
+                <details className="border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 rounded-lg overflow-hidden group">
+                  <summary className="cursor-pointer p-4 font-semibold text-amber-800 dark:text-amber-200 list-none flex items-center justify-between gap-2 [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-center gap-2">
+                      <span className="text-lg" aria-hidden>🎭</span>
+                      Actor script (for roleplay partner only – may reveal case details)
+                    </span>
+                    <span className="text-sm font-normal text-amber-600 dark:text-amber-300 group-open:rotate-180 transition-transform inline-block">▼</span>
+                  </summary>
+                  <div className="px-4 pb-4 pt-0 border-t border-amber-200 dark:border-amber-800">
+                    {/* Opening Statement */}
+                    {caseData.actor_info.opening_statement && (
+                      <div className="mb-4 mt-4">
+                        <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Opening Statement:</h4>
+                        <p className="bg-white dark:bg-gray-900 p-3 rounded border italic">
+                          &quot;{caseData.actor_info.opening_statement}&quot;
+                        </p>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* History on Direct Questioning */}
-                  {caseData.actor_info.history_on_direct_questioning && (
-                    <div className="mb-4">
-                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">History on Direct Questioning:</h4>
-                      <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm max-h-64 overflow-y-auto">
-                        {Object.entries(caseData.actor_info.history_on_direct_questioning).map(([key, value]) => (
-                          <div key={key} className="mb-3">
-                            <h5 className="font-medium text-primary capitalize">{key.replace(/_/g, ' ')}</h5>
-                            {typeof value === 'object' && value !== null ? (
-                              <ul className="list-disc list-inside ml-2 text-muted-foreground">
-                                {Object.entries(value as Record<string, unknown>).map(([subKey, subValue]) => (
-                                  <li key={subKey}>
-                                    <span className="font-medium capitalize">{subKey.replace(/_/g, ' ')}:</span>{' '}
-                                    {typeof subValue === 'string' ? subValue : JSON.stringify(subValue)}
-                                  </li>
-                                ))}
+                    {/* Freely Given History */}
+                    {caseData.actor_info.freely_given_history && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">Freely Given History:</h4>
+                        <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm space-y-2">
+                          {caseData.actor_info.freely_given_history.presenting_complaint && (
+                            <p><strong>Presenting Complaint:</strong> {caseData.actor_info.freely_given_history.presenting_complaint}</p>
+                          )}
+                          {caseData.actor_info.freely_given_history.psychosocial_impact && (
+                            <p><strong>Psychosocial Impact:</strong> {caseData.actor_info.freely_given_history.psychosocial_impact}</p>
+                          )}
+                          {caseData.actor_info.freely_given_history.ice && (
+                            <div className="pt-2 border-t">
+                              <strong>ICE:</strong>
+                              <ul className="list-disc list-inside ml-2 mt-1">
+                                {caseData.actor_info.freely_given_history.ice.ideas && (
+                                  <li><span className="text-muted-foreground">Ideas:</span> {caseData.actor_info.freely_given_history.ice.ideas}</li>
+                                )}
+                                {caseData.actor_info.freely_given_history.ice.concerns && (
+                                  <li><span className="text-muted-foreground">Concerns:</span> {caseData.actor_info.freely_given_history.ice.concerns}</li>
+                                )}
+                                {caseData.actor_info.freely_given_history.ice.expectations && (
+                                  <li><span className="text-muted-foreground">Expectations:</span> {caseData.actor_info.freely_given_history.ice.expectations}</li>
+                                )}
                               </ul>
-                            ) : (
-                              <p className="text-muted-foreground ml-2">{String(value)}</p>
-                            )}
-                          </div>
-                        ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Actor Behaviour Prompts */}
-                  {caseData.actor_behaviour && (
-                    <div>
-                      <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Actor Behaviour:</h4>
-                      <p className="bg-amber-100 dark:bg-amber-900/30 p-3 rounded text-sm font-medium">
-                        {caseData.actor_behaviour}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                    {/* History on Direct Questioning */}
+                    {caseData.actor_info.history_on_direct_questioning && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">History on Direct Questioning:</h4>
+                        <div className="bg-white dark:bg-gray-900 p-3 rounded border text-sm max-h-64 overflow-y-auto">
+                          {Object.entries(caseData.actor_info.history_on_direct_questioning).map(([key, value]) => (
+                            <div key={key} className="mb-3">
+                              <h5 className="font-medium text-primary capitalize">{key.replace(/_/g, ' ')}</h5>
+                              {typeof value === 'object' && value !== null ? (
+                                <ul className="list-disc list-inside ml-2 text-muted-foreground">
+                                  {Object.entries(value as Record<string, unknown>).map(([subKey, subValue]) => (
+                                    <li key={subKey}>
+                                      <span className="font-medium capitalize">{subKey.replace(/_/g, ' ')}:</span>{' '}
+                                      {typeof subValue === 'string' ? subValue : JSON.stringify(subValue)}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-muted-foreground ml-2">{String(value)}</p>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Actor Behaviour Prompts */}
+                    {caseData.actor_behaviour && (
+                      <div>
+                        <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-1">Actor Behaviour:</h4>
+                        <p className="bg-amber-100 dark:bg-amber-900/30 p-3 rounded text-sm font-medium">
+                          {caseData.actor_behaviour}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </details>
               )}
 
               {/* Start Practice Button */}

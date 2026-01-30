@@ -1126,7 +1126,7 @@ INSERT INTO sca_cases (
 **Management:** Issue prescription (electronically or paper) for collection at pharmacy near daughter; or advise emergency supply from local pharmacy while arranging prescription. Ensure follow-up and repeat arrangements when back home.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Verified patient identity", "Confirmed current medications and doses", "Established location and duration away", "Explored how to get prescription (pharmacy access)", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Recognised urgency of anticoagulant continuity", "Arranged prescription (EPS/paper/away pharmacy) appropriately", "Considered emergency supply if needed", "Advised on not missing doses", "Arranged follow-up/repeats"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear communication", "Listened to patient needs", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Verified patient identity", "Confirmed current medications and doses", "Established location and duration away", "Explored how to get prescription (pharmacy access)", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Recognised urgency of anticoagulant continuity", "Arranged prescription (EPS/paper/away pharmacy) appropriately", "Considered emergency supply if needed", "Advised on not missing doses", "Arranged follow-up/repeats"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear communication", "Listened to patient needs", "Professional manner", "Addressed concerns about missing doses", "Maintained helpful approach"]}}'
 );
 
 -- =====================================================
@@ -1189,7 +1189,7 @@ INSERT INTO sca_cases (
 **Management:** Arrange face-to-face with mother and baby; feeding support (e.g. lactation referral or formula if indicated); assess maternal mood and refer/support as needed; regular weight checks; document and share plan with health visitor.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took feeding and weight history from HV", "Assessed maternal mood and support", "Explored baby health and examination findings", "Explored HV concerns and ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned face-to-face assessment", "Considered feeding support and formula", "Considered maternal mental health assessment", "Coordinated with health visitor", "Arranged follow-up"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected HV role", "Clear communication", "Collaborative approach"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took feeding and weight history from HV", "Assessed maternal mood and support", "Explored baby health and examination findings", "Explored HV concerns and ICE", "Assessed weight centiles and growth trajectory", "Explored bonding and parental support needs"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned face-to-face assessment", "Considered feeding support and formula", "Considered maternal mental health assessment", "Coordinated with health visitor", "Arranged follow-up"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected HV role", "Clear communication", "Collaborative approach", "Listened to HV concerns", "Maintained professional manner"]}}'
 );
 
 -- =====================================================
@@ -1245,7 +1245,7 @@ INSERT INTO sca_cases (
 **Management:** Treat as moderate exacerbation (steroids ± antibiotics per guidelines); ensure rescue pack and clear safety-netting; follow-up.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed breathlessness and exacerbation features", "Explored sputum, fever, inhaler use", "Assessed severity and red flags", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Considered COPD exacerbation management", "Considered steroids and antibiotics", "Safety-netting and escalation", "Follow-up and rescue pack"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed breathlessness and exacerbation features", "Explored sputum, fever, inhaler use", "Assessed severity and red flags", "Explored ICE", "Obtained relevant respiratory history"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Considered COPD exacerbation management", "Considered steroids and antibiotics", "Safety-netting and escalation", "Follow-up and rescue pack", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner", "Listened to concerns", "Maintained calm approach"]}}'
 );
 
 -- =====================================================
@@ -1300,7 +1300,7 @@ INSERT INTO sca_cases (
 **Management:** Confirm monitoring plan; ensure patient has been counselled (or arrange); document; consider DMARD monitoring scheme.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Clarified prescription and monitoring from pharmacist", "Explored what patient has been told", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Confirmed/arranged baseline and ongoing monitoring", "Confirmed counselling points", "Documented and coordinated with pharmacist"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected pharmacist role", "Clear communication", "Collaborative"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Clarified prescription and monitoring from pharmacist", "Explored what patient has been told", "Explored ICE", "Confirmed medication and dose", "Explored pharmacist concerns"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Confirmed/arranged baseline and ongoing monitoring", "Confirmed counselling points", "Documented and coordinated with pharmacist", "Arranged follow-up if needed", "Ensured patient safety"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected pharmacist role", "Clear communication", "Collaborative", "Listened to concerns", "Professional manner"]}}'
 );
 
 -- =====================================================
@@ -1354,7 +1354,7 @@ INSERT INTO sca_cases (
 **Management:** Arrange face-to-face; examine; treat as migraine if no red flags; consider imaging if indicated.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took headache history", "Screened for red flags", "Explored difference from usual migraines", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned face-to-face examination", "Considered imaging/referral if red flags", "Safety-netting", "Treatment plan"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Empathy", "Clear explanation", "Reassurance"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took headache history", "Screened for red flags", "Explored difference from usual migraines", "Explored ICE", "Obtained relevant medical history"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned face-to-face examination", "Considered imaging/referral if red flags", "Safety-netting", "Treatment plan", "Arranged appropriate follow-up"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Empathy", "Clear explanation", "Reassurance", "Listened to concerns", "Professional manner"]}}'
 );
 
 -- =====================================================
@@ -1409,7 +1409,7 @@ INSERT INTO sca_cases (
 **Management:** Urgent assessment (visit or paramedic) to assess injury and capacity; if high-risk head injury and lack of capacity, consider best-interest decision for hospital assessment.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed fall and head injury", "Explored current mental state", "Explored wife''s wishes and understanding", "Explored husband''s concerns and ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Considered capacity assessment", "Considered head injury guidance and referral", "Balanced autonomy and best interests", "Coordinated urgent assessment"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Empathy for husband", "Clear explanation of capacity", "Supportive"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed fall and head injury", "Explored current mental state", "Explored wife''s wishes and understanding", "Explored husband''s concerns and ICE", "Obtained mechanism and timing of fall"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Considered capacity assessment", "Considered head injury guidance and referral", "Balanced autonomy and best interests", "Coordinated urgent assessment", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Empathy for husband", "Clear explanation of capacity", "Supportive", "Listened to concerns", "Maintained professional manner"]}}'
 );
 
 -- =====================================================
@@ -1459,7 +1459,7 @@ INSERT INTO sca_cases (
 **Management:** Explain duration and driving; safety-netting; arrange follow-up as per hospital plan.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Confirmed discharge diagnosis and medication", "Assessed current symptoms", "Explored understanding and ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Explained anticoagulation duration", "Gave driving advice", "Safety-netting", "Follow-up plan"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Confirmed discharge diagnosis and medication", "Assessed current symptoms", "Explored understanding and ICE", "Reviewed medication compliance", "Explored any bleeding or side effects"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Explained anticoagulation duration", "Gave driving advice", "Safety-netting", "Follow-up plan", "Documented discussion"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner", "Listened to concerns", "Addressed questions appropriately"]}}'
 );
 
 -- =====================================================
@@ -1508,7 +1508,7 @@ INSERT INTO sca_cases (
 **Management:** Review asthma; arrange appointment; issue/update school asthma plan; communicate with school nurse.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took history from school nurse", "Clarified episodes and current treatment", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned asthma review", "Planned school care plan", "Coordinated with school nurse"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected school nurse role", "Clear communication", "Collaborative"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took history from school nurse", "Clarified episodes and current treatment", "Explored ICE", "Assessed severity of episodes", "Explored current preventer use"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned asthma review", "Planned school care plan", "Coordinated with school nurse", "Arranged appropriate follow-up", "Documented plan"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected school nurse role", "Clear communication", "Collaborative", "Listened to concerns", "Professional manner"]}}'
 );
 
 -- =====================================================
@@ -1558,7 +1558,7 @@ INSERT INTO sca_cases (
 **Management:** Prescribe antibiotic; advise fluids; safety-netting; send urine if culture indicated.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed urinary and systemic symptoms", "Differentiated lower vs upper UTI", "Explored previous episodes and ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Appropriate antibiotic choice", "Considered urine culture", "Safety-netting"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear advice", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed urinary and systemic symptoms", "Differentiated lower vs upper UTI", "Explored previous episodes and ICE", "Obtained relevant medical history (BPH, medications)", "Explored understanding and concerns"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Appropriate antibiotic choice", "Considered urine culture", "Safety-netting", "Arranged appropriate follow-up", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear advice", "Professional manner", "Listened actively to concerns", "Used clear language", "Maintained empathetic approach"]}}'
 );
 
 -- =====================================================
@@ -1607,7 +1607,7 @@ INSERT INTO sca_cases (
 **Management:** Document; arrange follow-up; consider frailty/falls review and referral.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Accepted handover details", "Clarified OOH assessment and treatment", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned follow-up", "Considered frailty/falls review", "Coordinated with OOH"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Professional handover", "Clear communication", "Collaborative"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Accepted handover details", "Clarified OOH assessment and treatment", "Explored ICE", "Confirmed patient details and context", "Explored OOH concerns"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Planned follow-up", "Considered frailty/falls review", "Coordinated with OOH", "Arranged appropriate review", "Documented handover"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Professional handover", "Clear communication", "Collaborative", "Respected OOH role", "Maintained professional manner"]}}'
 );
 
 -- =====================================================
@@ -1659,7 +1659,7 @@ INSERT INTO sca_cases (
 **Management:** Reassure if viral/eczema; safety-netting; face-to-face or photo if diagnosis unclear.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took rash history", "Assessed fever and wellbeing", "Explored contacts and eczema", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Differentiated rash type", "Safety-netting", "Advice on nursery"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took rash history", "Assessed fever and wellbeing", "Explored contacts and eczema", "Explored ICE", "Assessed distribution and appearance of rash"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Differentiated rash type", "Safety-netting", "Advice on nursery", "Arranged face-to-face if needed", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Clear explanation", "Reassurance", "Professional manner", "Listened to parental concerns", "Maintained calm approach"]}}'
 );
 
 -- =====================================================
@@ -1709,7 +1709,7 @@ INSERT INTO sca_cases (
 **Management:** Issue fit note; discuss support and review.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed current mental health", "Explored work context and ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Decided on fit note and duration", "Considered phased return", "Offered support and review"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Non-judgmental", "Supportive", "Clear explanation"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed current mental health", "Explored work context and ICE", "Explored impact on function", "Obtained relevant history", "Explored support and coping"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Decided on fit note and duration", "Considered phased return", "Offered support and review", "Considered IAPT or counselling", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Non-judgmental", "Supportive", "Clear explanation", "Listened to concerns", "Maintained professional manner"]}}'
 );
 
 -- =====================================================
@@ -1759,7 +1759,7 @@ INSERT INTO sca_cases (
 **Management:** Adjust syringe driver (morphine ± midazolam); add PRN or dexamethasone if indicated; document; communicate with nurse.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took history from hospice nurse", "Clarified current driver and symptoms", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Reviewed syringe driver", "Adjusted analgesia/ sedation appropriately", "Documented and coordinated with nurse"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected nurse expertise", "Clear communication", "Collaborative"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Took history from hospice nurse", "Clarified current driver and symptoms", "Explored ICE", "Assessed pain and agitation", "Explored family distress"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Reviewed syringe driver", "Adjusted analgesia/ sedation appropriately", "Documented and coordinated with nurse", "Provided clear prescribing instructions", "Arranged review if needed"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Respected nurse expertise", "Clear communication", "Collaborative", "Listened to concerns", "Professional manner"]}}'
 );
 
 -- =====================================================
@@ -1807,7 +1807,7 @@ INSERT INTO sca_cases (
 **Management:** If mild – antihistamine and safety-netting; consider allergy referral; document.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed reaction severity", "Excluded anaphylaxis", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Appropriate advice (antihistamine vs 999)", "Safety-netting", "Allergy follow-up"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Calm explanation", "Reassurance", "Professional manner"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Assessed reaction severity", "Excluded anaphylaxis", "Explored ICE", "Identified trigger (nuts)", "Assessed airway and breathing"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Appropriate advice (antihistamine vs 999)", "Safety-netting", "Allergy follow-up", "Advised avoidance of trigger", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Calm explanation", "Reassurance", "Professional manner", "Listened to concerns", "Clear instructions"]}}'
 );
 
 -- =====================================================
@@ -1857,7 +1857,7 @@ INSERT INTO sca_cases (
 **Management:** Agree to support referral; provide medical information as appropriate; document; consider capacity assessment and review.',
   false,
   true,
-  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Clarified safeguarding concerns", "Explored capacity and patient view", "Explored ICE"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Addressed confidentiality and consent", "Supported safeguarding referral", "Considered capacity assessment", "Documented appropriately"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Professional collaboration", "Clear communication", "Sensitive to safeguarding"]}}'
+  '{"domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Clarified safeguarding concerns", "Explored capacity and patient view", "Explored ICE", "Assessed risk and self-neglect", "Explored financial concerns"]}, "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Addressed confidentiality and consent", "Supported safeguarding referral", "Considered capacity assessment", "Documented appropriately", "Arranged follow-up or review"]}, "domain3": {"title": "Domain 3: Interpersonal Skills", "items": ["Professional collaboration", "Clear communication", "Sensitive to safeguarding", "Respected social worker role", "Maintained professional boundaries"]}}'
 );
 
 -- End of telephone and third-party consultation cases (59 cases total; 25 new telephone/third-party cases 35-59)
