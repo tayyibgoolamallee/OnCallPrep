@@ -17,7 +17,6 @@ const navItems = [
   { name: 'Portfolio', href: '/portfolio', icon: '📁' },
   { name: 'AKT Bank', href: '/akt', icon: '📝' },
   { name: 'SCA Prep', href: '/sca', icon: '🩺' },
-  { name: 'Study buddy', href: '/dashboard/study-buddy', icon: '👥' },
   { name: 'Resources', href: '/resources', icon: '📚' },
 ]
 
@@ -69,6 +68,25 @@ export default async function DashboardLayout({
                 </Link>
               </li>
             ))}
+            <li>
+              <details className="group">
+                <summary className="flex items-center gap-3 px-3 py-2 rounded-md text-sm hover:bg-sidebar-accent transition-colors cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span>👥</span>
+                  <span>Community</span>
+                  <span className="ml-auto text-muted-foreground group-open:rotate-180 transition-transform">▾</span>
+                </summary>
+                <ul className="mt-1 ml-4 pl-2 border-l border-sidebar-border space-y-1">
+                  <li>
+                    <Link
+                      href="/study-buddy"
+                      className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm hover:bg-sidebar-accent transition-colors"
+                    >
+                      Study buddy
+                    </Link>
+                  </li>
+                </ul>
+              </details>
+            </li>
           </ul>
         </nav>
         <div className="p-4 border-t">
