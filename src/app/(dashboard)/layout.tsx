@@ -17,6 +17,7 @@ const navItems = [
   { name: 'Portfolio', href: '/portfolio', icon: '📁' },
   { name: 'AKT Bank', href: '/akt', icon: '📝' },
   { name: 'SCA Prep', href: '/sca', icon: '🩺' },
+  { name: 'Study buddy', href: '/dashboard/study-buddy', icon: '👥' },
   { name: 'Resources', href: '/resources', icon: '📚' },
 ]
 
@@ -38,6 +39,7 @@ export default async function DashboardLayout({
     .eq('id', user.id)
     .single()
 
+  const isPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
   const initials = profile?.full_name
     ? profile.full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase()
     : user.email?.charAt(0).toUpperCase() || 'U'
@@ -70,7 +72,7 @@ export default async function DashboardLayout({
           </ul>
         </nav>
         <div className="p-4 border-t">
-          {profile?.subscription_tier === 'free' && (
+          {!isPro && (
             <Link href="/pricing">
               <Button className="w-full" size="sm">
                 Upgrade to Pro

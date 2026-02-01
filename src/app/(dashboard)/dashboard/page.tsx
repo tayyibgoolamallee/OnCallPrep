@@ -64,7 +64,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Subscription Status */}
-      {profile?.subscription_tier === 'free' && (
+      {!(profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())) && (
         <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
           <CardContent className="flex items-center justify-between py-4">
             <div>

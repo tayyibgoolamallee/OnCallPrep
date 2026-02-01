@@ -26,11 +26,11 @@ export default async function AKTPage() {
 
   const { data: profile } = userId ? await supabase
     .from('user_profiles')
-    .select('subscription_tier')
+    .select('subscription_tier, pro_until')
     .eq('id', userId)
     .single() : { data: null }
 
-  const isPro = profile?.subscription_tier === 'pro'
+  const isPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
 
   // Ensure all questions have valid id and filter by access
   const accessibleQuestions = questions?.filter(q => q && q.id && (!q.is_pro || isPro)) || []

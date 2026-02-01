@@ -234,9 +234,10 @@ export default function SCACasePage({
     try {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
-      const isPro = user
-        ? (await supabase.from('user_profiles').select('subscription_tier').eq('id', user.id).single()).data?.subscription_tier === 'pro'
-        : false
+      const { data: profile } = user
+        ? await supabase.from('user_profiles').select('subscription_tier, pro_until').eq('id', user.id).single()
+        : { data: null }
+      const isPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
       const { data: primingCases } = await supabase
         .from('sca_cases')
         .select('id, is_pro')

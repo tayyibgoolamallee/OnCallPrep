@@ -68,11 +68,11 @@ export default async function PortfolioPage() {
 
   const { data: profile } = await supabase
     .from('user_profiles')
-    .select('subscription_tier')
+    .select('subscription_tier, pro_until')
     .eq('id', user!.id)
     .single()
 
-  const isPro = profile?.subscription_tier === 'pro'
+  const isPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
 
   const getStageStats = (stageId: string) => {
     const stageGuides = guides?.filter(g => g.stage === stageId) || []

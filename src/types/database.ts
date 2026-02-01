@@ -148,6 +148,7 @@ export type Database = {
           full_name: string | null
           id: string
           is_admin: boolean | null
+          pro_until: string | null
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
           subscription_tier: string | null
@@ -159,6 +160,7 @@ export type Database = {
           full_name?: string | null
           id: string
           is_admin?: boolean | null
+          pro_until?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           subscription_tier?: string | null
@@ -170,6 +172,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           is_admin?: boolean | null
+          pro_until?: string | null
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           subscription_tier?: string | null
@@ -210,6 +213,47 @@ export type Database = {
           time_taken?: number | null
           user_id?: string
           user_response?: string | null
+        }
+        Relationships: []
+      }
+      study_profiles: {
+        Row: {
+          user_id: string
+          display_name: string | null
+          exam_date: string | null
+          looking_for_study_buddy: boolean | null
+          vts_or_area: string | null
+          show_exam_date: boolean | null
+          show_looking_for_study_buddy: boolean | null
+          show_vts_or_area: boolean | null
+          share_email_with_study_buddies: boolean | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          user_id: string
+          display_name?: string | null
+          exam_date?: string | null
+          looking_for_study_buddy?: boolean | null
+          vts_or_area?: string | null
+          show_exam_date?: boolean | null
+          show_looking_for_study_buddy?: boolean | null
+          show_vts_or_area?: boolean | null
+          share_email_with_study_buddies?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          user_id?: string
+          display_name?: string | null
+          exam_date?: string | null
+          looking_for_study_buddy?: boolean | null
+          vts_or_area?: string | null
+          show_exam_date?: boolean | null
+          show_looking_for_study_buddy?: boolean | null
+          share_email_with_study_buddies?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }

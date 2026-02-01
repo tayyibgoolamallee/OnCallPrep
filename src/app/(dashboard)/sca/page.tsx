@@ -27,11 +27,11 @@ export default async function SCAPage() {
 
   const { data: profile } = userId ? await supabase
     .from('user_profiles')
-    .select('subscription_tier')
+    .select('subscription_tier, pro_until')
     .eq('id', userId)
     .single() : { data: null }
 
-  const isPro = profile?.subscription_tier === 'pro'
+  const isPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
   const attemptedIds = new Set(progress?.map(p => p.content_id))
   const completedIds = new Set(progress?.filter(p => p.completed === true).map(p => p.content_id))
 

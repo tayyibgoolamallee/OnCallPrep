@@ -62,11 +62,11 @@ export default function AKTPracticePage() {
 
       const { data: profile } = await supabase
         .from('user_profiles')
-        .select('subscription_tier')
+        .select('subscription_tier, pro_until')
         .eq('id', user.id)
         .single()
 
-      const userIsPro = profile?.subscription_tier === 'pro'
+      const userIsPro = profile?.subscription_tier === 'pro' || (profile?.pro_until != null && new Date(profile.pro_until) > new Date())
       setIsPro(userIsPro)
 
       // Count available questions and get topics
