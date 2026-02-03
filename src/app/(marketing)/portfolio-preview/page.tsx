@@ -53,8 +53,8 @@ const stages = [
 ]
 
 const guides = [
-  { title: 'Gibbs\' Reflective Cycle', description: 'The most widely used reflection framework', free: true },
-  { title: 'The Three-Link Rule', description: 'How to link reflections to competencies', free: true },
+  { title: 'Reflection Guide', description: 'Step-by-step help to structure learning log entries', free: true },
+  { title: 'The Three-Link Rule', description: 'Simple checklist for linking to curriculum capabilities', free: true },
   { title: 'ARCP Preparation', description: 'Complete guide to your annual review', free: false },
   { title: 'WPBA Checklist', description: 'CBD, Mini-CEX, COT, PSQ requirements', free: true },
   { title: 'Trainee Wellbeing', description: 'Looking after yourself during training', free: true },
@@ -140,7 +140,7 @@ export default function PortfolioPreviewPage() {
         </div>
       </section>
 
-      {/* Sample Content - Reflection Guide */}
+      {/* Sample Content - Reflection Guide / Three-Link Rule */}
       <section className="py-16 bg-muted/30">
         <div className="container max-w-4xl">
           <h2 className="text-2xl font-bold text-center mb-8">Sample Guide: Writing Reflections</h2>
@@ -149,41 +149,46 @@ export default function PortfolioPreviewPage() {
             <CardHeader className="bg-blue-50 border-b">
               <CardTitle>The Three-Link Rule</CardTitle>
               <CardDescription className="text-base">
-                A key principle for high-quality portfolio reflections
+                A quick way to check that each reflection is doing enough work for your portfolio
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <p className="text-foreground/80">
-                  Every reflection should link to <strong>at least three competencies</strong> from the GP curriculum. This demonstrates:
+                  Aim for <strong>around three clear curriculum links</strong> in each learning log entry. Think in three simple steps:
                 </p>
-                
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-blue-700">Holistic Thinking</h4>
-                    <p className="text-sm text-foreground/70">Seeing the whole patient, not just the problem</p>
+                {/* Simple flow chart style */}
+                <div className="space-y-3">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <div className="flex-1 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                      <h4 className="font-semibold text-blue-700 mb-1">1. Choose the case</h4>
+                      <p className="text-sm text-foreground/80">Pick one encounter where you genuinely learned or were challenged.</p>
+                    </div>
+                    <div className="hidden md:block text-2xl text-blue-400">→</div>
                   </div>
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-blue-700">Skill Integration</h4>
-                    <p className="text-sm text-foreground/70">How different competencies work together</p>
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <div className="flex-1 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                      <h4 className="font-semibold text-blue-700 mb-1">2. Pick ~3 capabilities</h4>
+                      <p className="text-sm text-foreground/80">From the curriculum list, choose the <strong>3 most relevant</strong> (e.g. data gathering, decision making, communication).</p>
+                    </div>
+                    <div className="hidden md:block text-2xl text-blue-400">→</div>
                   </div>
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-semibold text-blue-700">Higher-Level Reflection</h4>
-                    <p className="text-sm text-foreground/70">Moving beyond description to analysis</p>
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <div className="flex-1 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                      <h4 className="font-semibold text-blue-700 mb-1">3. Write 1–2 lines per link</h4>
+                      <p className="text-sm text-foreground/80">
+                        For each capability, add a short sentence: <em>&ldquo;This case shows <strong>communication</strong> because…&rdquo;</em>
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-4 bg-green-50 rounded-lg border border-green-200 mt-6">
-                  <h4 className="font-semibold text-green-700 mb-2">Example</h4>
-                  <p className="text-sm text-foreground/80">
-                    <strong>Case:</strong> Managing a 45-year-old man with chest pain
-                  </p>
-                  <ul className="text-sm text-foreground/70 mt-2 space-y-1">
-                    <li><strong>1. Data gathering:</strong> Systematic history, ECG interpretation</li>
-                    <li><strong>2. Making decisions:</strong> Differential diagnosis, when to refer</li>
-                    <li><strong>3. Communication:</strong> Explaining risk, managing anxiety</li>
-                  </ul>
-                </div>
+                <p className="text-sm text-foreground/70 mt-4">
+                  For full examples and wording, see the{' '}
+                  <Link href="/resources/reflection-guide" className="underline text-blue-700">
+                    Reflection Guide
+                  </Link>.
+                </p>
               </div>
             </CardContent>
           </Card>

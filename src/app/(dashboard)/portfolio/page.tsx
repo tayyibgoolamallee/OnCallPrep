@@ -103,7 +103,7 @@ export default async function PortfolioPage() {
           const stats = getStageStats(stage.id)
           return (
             <Link key={stage.id} href={`/portfolio/${stage.id}`}>
-              <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+              <Card className="h-full border-2 border-teal-200 dark:border-teal-800 hover:border-teal-500 dark:hover:border-teal-400 hover:shadow-md transition-shadow cursor-pointer">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>{stage.name}</CardTitle>
@@ -125,43 +125,24 @@ export default async function PortfolioPage() {
         })}
       </div>
 
-      {/* Overview Section */}
-      <Card>
+      {/* Overview / key points */}
+      <Card className="border-2 border-slate-200 dark:border-slate-700">
         <CardHeader>
-          <CardTitle>Portfolio Overview</CardTitle>
+          <CardTitle>Portfolio overview & key points</CardTitle>
           <CardDescription>
-            Understanding your training requirements across ST1, ST2, and ST3
+            High‑level expectations across ST1, ST2, and ST3 – full detail sits in each stage page.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <h3 className="font-semibold mb-2">ST1 - First Year</h3>
-              <p className="text-sm text-muted-foreground">
-                Foundation year focusing on core competencies and workplace-based assessments. 
-                Establish baseline assessments including Mini-CEX/COTs, CBDs, MSF, and learning logs.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">ST2 - Second Year</h3>
-              <p className="text-sm text-muted-foreground">
-                Building on ST1 foundations with increased responsibility. 
-                Continue assessments and begin leadership development activities.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">ST3 - Final Year</h3>
-              <p className="text-sm text-muted-foreground">
-                Final year preparing for CCT. Complete all intimate examinations, 
-                leadership activities, and comprehensive evidence requirements.
-              </p>
-            </div>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            Use the cards above to jump into the specific guidance for ST1, ST2, or ST3. Each stage page contains
+            its own detailed requirements and WPBA checklist.
+          </p>
           <div className="pt-4 border-t">
             <p className="text-sm text-muted-foreground">
-              <strong>Key Points:</strong> Assessments should be spread throughout each training year with roughly half 
-              completed in each 6-month review period. Less Than Full Time (LTFT) trainees complete the same total 
-              number pro-rata. CPR&AED and Safeguarding knowledge updates are required every 12 months (not pro-rata).
+              <strong>Key points for all years:</strong> Assessments should be spread throughout each training year with roughly half
+              completed in each 6‑month review period. Less Than Full Time (LTFT) trainees complete the same total
+              number pro‑rata. CPR&AED and Safeguarding knowledge updates are required every 12 months (not pro‑rata).
             </p>
           </div>
         </CardContent>

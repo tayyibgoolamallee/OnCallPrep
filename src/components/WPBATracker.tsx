@@ -12,9 +12,11 @@ interface WPBATrackerProps {
   trainingYear?: string
 }
 
+type TrackingState = Record<string, { completed?: boolean }>
+
 export default function WPBATracker({ stage, userName, trainingYear }: WPBATrackerProps) {
   const storageKey = `wpba-tracker-${stage}`
-  const [tracking, setTracking] = useState<Record<string, { date?: string; number?: string }>>({})
+  const [tracking, setTracking] = useState<TrackingState>({})
   const [localUserName, setLocalUserName] = useState(userName || '')
   const [localTrainingYear, setLocalTrainingYear] = useState(trainingYear || '')
 
@@ -24,7 +26,16 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
-        setTracking(parsed.tracking || {})
+        const raw = (parsed.tracking || {}) as Record<string, { date?: string; completed?: boolean }>
+        const migrated: TrackingState = {}
+        for (const [key, value] of Object.entries(raw)) {
+          // Support old shape that stored a free-text date; treat any non-empty date as completed.
+          const completed = typeof value.completed === 'boolean'
+            ? value.completed
+            : Boolean(value.date && value.date.trim() !== '')
+          migrated[key] = { completed }
+        }
+        setTracking(migrated)
         setLocalUserName(parsed.userName || '')
         setLocalTrainingYear(parsed.trainingYear || '')
       } catch (e) {
@@ -42,12 +53,11 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
     }))
   }, [tracking, localUserName, localTrainingYear, storageKey])
 
-  const updateTracking = (id: string, field: 'date' | 'number', value: string) => {
+  const updateCompleted = (id: string, value: boolean) => {
     setTracking(prev => ({
       ...prev,
       [id]: {
-        ...prev[id],
-        [field]: value
+        completed: value
       }
     }))
   }
@@ -58,7 +68,7 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
 
     const trackingId = `${category}-${req.id}`
     const tracked = tracking[trackingId]
-    const isCompleted = Boolean(tracked?.date && tracked.date.trim() !== '')
+    const isCompleted = Boolean(tracked?.completed)
 
     return (
       <tr key={req.id} className={`border-b hover:bg-muted/50 ${isCompleted ? 'bg-green-50/50 dark:bg-green-950/20' : ''}`}>
@@ -68,11 +78,7 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
               type="checkbox"
               checked={isCompleted}
               onChange={(e) => {
-                if (e.target.checked) {
-                  updateTracking(trackingId, 'date', new Date().toLocaleDateString())
-                } else {
-                  updateTracking(trackingId, 'date', '')
-                }
+                updateCompleted(trackingId, e.target.checked)
               }}
               className="h-4 w-4 rounded border-gray-300"
             />
@@ -105,16 +111,6 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
         </td>
         <td className="p-3">
           <div className="text-sm">{detail.requirement}</div>
-        </td>
-        <td className="p-3">
-          <Input
-            type="text"
-            placeholder="Date completed or number"
-            value={tracked?.date || ''}
-            onChange={(e) => updateTracking(trackingId, 'date', e.target.value)}
-            className="w-full max-w-[180px]"
-            onClick={(e) => e.stopPropagation()}
-          />
         </td>
       </tr>
     )
@@ -179,9 +175,8 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b bg-muted/50">
+                  <th className="p-3 text-left font-semibold">Checklist item</th>
                   <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Date/Number</th>
                 </tr>
               </thead>
               <tbody>
@@ -205,9 +200,8 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b bg-muted/50">
+                  <th className="p-3 text-left font-semibold">Checklist item</th>
                   <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Date/Number</th>
                 </tr>
               </thead>
               <tbody>
@@ -233,9 +227,8 @@ export default function WPBATracker({ stage, userName, trainingYear }: WPBATrack
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b bg-muted/50">
+                  <th className="p-3 text-left font-semibold">Checklist item</th>
                   <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Requirement</th>
-                  <th className="p-3 text-left font-semibold">Date/Number</th>
                 </tr>
               </thead>
               <tbody>
