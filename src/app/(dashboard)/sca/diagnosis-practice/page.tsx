@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 
 // All 103 diagnoses
@@ -36,6 +37,24 @@ const diagnoses = [
   "Bronchiolitis", "Childhood Eczema", "Constipation in Children", "Febrile Illness in Children", "Croup", "Hand Foot and Mouth Disease", "Viral Wheeze", "Colic", "Teething",
   // Other
   "Iron Deficiency Anaemia", "B12 Deficiency", "Vitamin D Deficiency", "Sleep Apnoea", "CFS/ME", "Obesity", "Anaphylaxis", "Lyme Disease"
+]
+
+// Categorized for browsing/selection
+const diagnosisCategories: { category: string; diagnoses: string[] }[] = [
+  { category: "Respiratory", diagnoses: ["Asthma", "COPD", "Pneumonia", "Pulmonary Embolism", "Bronchiectasis", "Common Cold", "Sinusitis", "Pleurisy", "Pneumothorax"] },
+  { category: "Cardiovascular", diagnoses: ["Hypertension", "Heart Failure", "Atrial Fibrillation", "Angina", "Deep Vein Thrombosis", "High Cholesterol", "Palpitations (Benign)", "Varicose Veins", "Stroke"] },
+  { category: "Gastroenterology", diagnoses: ["GORD (Acid Reflux)", "Irritable Bowel Syndrome", "Coeliac Disease", "Inflammatory Bowel Disease", "Gallstones", "Gastroenteritis", "Diverticular Disease", "Haemorrhoids", "Hiatus Hernia", "Fatty Liver (NAFLD)"] },
+  { category: "MSK", diagnoses: ["Osteoarthritis", "Rheumatoid Arthritis", "Gout", "Low Back Pain", "Tennis Elbow", "Osteoporosis", "Fibromyalgia", "Frozen Shoulder", "Carpal Tunnel Syndrome", "Plantar Fasciitis", "Rotator Cuff Tendinopathy", "Ankle Sprain", "Polymyalgia Rheumatica", "Giant Cell Arteritis"] },
+  { category: "Endocrine", diagnoses: ["Type 2 Diabetes", "Hypothyroidism", "Hyperthyroidism", "Polycystic Ovary Syndrome"] },
+  { category: "Dermatology", diagnoses: ["Eczema", "Psoriasis", "Acne", "Rosacea", "Shingles", "Cellulitis", "Urticaria (Hives)", "Fungal Skin Infection", "Contact Dermatitis", "Scabies", "Impetigo"] },
+  { category: "Mental Health", diagnoses: ["Depression", "Generalised Anxiety Disorder", "Panic Disorder", "Insomnia", "PTSD (Post-Traumatic Stress Disorder)", "OCD", "Eating Disorder", "Bipolar Disorder", "Substance Misuse"] },
+  { category: "Neurology", diagnoses: ["Migraine", "Tension Headache", "Epilepsy", "BPPV (Vertigo)", "Bell's Palsy", "TIA (Transient Ischaemic Attack)", "Parkinson's Disease", "Dementia", "Multiple Sclerosis"] },
+  { category: "Urology/Renal", diagnoses: ["Urinary Tract Infection", "Kidney Stones", "Benign Prostatic Hyperplasia", "Chronic Kidney Disease"] },
+  { category: "Women's Health", diagnoses: ["Menopause", "Endometriosis", "Heavy Periods", "Vaginal Thrush", "Contraception", "Cervical Smear Abnormality", "Pelvic Organ Prolapse", "Mastitis"] },
+  { category: "Men's Health", diagnoses: ["Erectile Dysfunction", "Epididymitis"] },
+  { category: "ENT & Eyes", diagnoses: ["Otitis Media (Ear Infection)", "Allergic Rhinitis (Hay Fever)", "Tonsillitis", "Conjunctivitis", "Otitis Externa (Swimmer's Ear)", "Glue Ear", "Nasal Polyps"] },
+  { category: "Paediatrics", diagnoses: ["Bronchiolitis", "Childhood Eczema", "Constipation in Children", "Febrile Illness in Children", "Croup", "Hand Foot and Mouth Disease", "Viral Wheeze", "Colic", "Teething"] },
+  { category: "Other", diagnoses: ["Iron Deficiency Anaemia", "B12 Deficiency", "Vitamin D Deficiency", "Sleep Apnoea", "CFS/ME", "Obesity", "Anaphylaxis", "Lyme Disease"] },
 ]
 
 // Model explanations for each diagnosis (written for reading age 11, fully formed sentences)
@@ -966,6 +985,8 @@ export default function DiagnosisPracticePage() {
   const [timeLeft, setTimeLeft] = useState(TIMER_DURATION)
   const [isRunning, setIsRunning] = useState(false)
   const [showAnswer, setShowAnswer] = useState(false)
+  const [showDiagnosisPicker, setShowDiagnosisPicker] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -985,12 +1006,35 @@ export default function DiagnosisPracticePage() {
     setShowAnswer(false)
   }
 
+  const handleSelectDiagnosis = (diagnosis: string) => {
+    setCurrentDiagnosis(diagnosis)
+    setTimeLeft(TIMER_DURATION)
+    setIsRunning(false)
+    setShowAnswer(false)
+    setShowDiagnosisPicker(false)
+  }
+
+  const searchLower = searchQuery.trim().toLowerCase()
+  const filteredCategories = searchQuery.trim()
+    ? diagnosisCategories
+        .map(({ category, diagnoses }) => ({
+          category,
+          diagnoses: diagnoses.filter((d) => d.toLowerCase().includes(searchLower)),
+        }))
+        .filter((c) => c.diagnoses.length > 0)
+    : diagnosisCategories
+
   const handleStartTimer = () => {
     if (isRunning) {
       setIsRunning(false)
     } else {
       setIsRunning(true)
     }
+  }
+
+  const handleReset = () => {
+    setTimeLeft(TIMER_DURATION)
+    setIsRunning(false)
   }
 
   useEffect(() => {
@@ -1036,10 +1080,56 @@ export default function DiagnosisPracticePage() {
           <div className="bg-muted p-4 rounded-lg">
             <h4 className="font-medium mb-2">How to use this</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
-              <li>• Click <strong>New Diagnosis</strong>, take 5–10 seconds to plan your structure.</li>
-              <li>• Start the timer and explain out loud for 2 minutes.</li>
+              <li>• Click <strong>New Diagnosis</strong> for a random one, or <strong>choose a specific diagnosis</strong> below.</li>
+              <li>• Take 5–10 seconds to plan your structure, then start the timer and explain out loud for 2 minutes.</li>
               <li>• Click <strong>View Answer</strong> to compare with a model structure.</li>
             </ul>
+          </div>
+
+          {/* Browse & choose specific diagnosis */}
+          <div className="border rounded-lg overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setShowDiagnosisPicker(!showDiagnosisPicker)}
+              className="w-full px-4 py-3 text-left font-medium hover:bg-muted/50 transition-colors flex items-center justify-between"
+            >
+              {showDiagnosisPicker ? 'Hide' : 'Browse'} all 103 diagnoses by category
+              <span className="text-muted-foreground text-sm font-normal">
+                {showDiagnosisPicker ? '▲' : '▼'}
+              </span>
+            </button>
+            {showDiagnosisPicker && (
+              <div className="border-t p-4 bg-muted/30 max-h-80 overflow-y-auto">
+                <Input
+                  placeholder="Search diagnoses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="mb-4"
+                />
+                <div className="space-y-4">
+                  {filteredCategories.map(({ category, diagnoses }) => (
+                    <div key={category}>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
+                        {category}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {diagnoses.map((d) => (
+                          <Button
+                            key={d}
+                            variant={currentDiagnosis === d ? 'default' : 'outline'}
+                            size="sm"
+                            className="text-xs"
+                            onClick={() => handleSelectDiagnosis(d)}
+                          >
+                            {d}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Diagnosis Display */}
@@ -1089,6 +1179,9 @@ export default function DiagnosisPracticePage() {
               disabled={!currentDiagnosis}
             >
               {isRunning ? 'Pause' : 'Start Timer'}
+            </Button>
+            <Button variant="ghost" onClick={handleReset} disabled={!currentDiagnosis}>
+              Reset
             </Button>
           </div>
 
