@@ -10,11 +10,13 @@ export default async function AdminPage() {
     { count: scaCount },
     { count: aktCount },
     { count: userCount },
+    { count: studyProfileCount },
   ] = await Promise.all([
     supabase.from('portfolio_guides').select('*', { count: 'exact', head: true }),
     supabase.from('sca_cases').select('*', { count: 'exact', head: true }),
     supabase.from('akt_questions').select('*', { count: 'exact', head: true }),
     supabase.from('user_profiles').select('*', { count: 'exact', head: true }),
+    supabase.from('study_profiles').select('*', { count: 'exact', head: true }),
   ])
 
   const stats = [
@@ -22,6 +24,7 @@ export default async function AdminPage() {
     { name: 'SCA Cases', count: scaCount || 0, href: '/admin/sca' },
     { name: 'AKT Questions', count: aktCount || 0, href: '/admin/akt' },
     { name: 'Users', count: userCount || 0, href: '#' },
+    { name: 'Study Profiles', count: studyProfileCount || 0, href: '/admin/study-buddy' },
   ]
 
   return (
@@ -33,7 +36,7 @@ export default async function AdminPage() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-4 gap-4">
+      <div className="grid md:grid-cols-5 gap-4">
         {stats.map((stat) => (
           <Link key={stat.name} href={stat.href}>
             <Card className="hover:shadow-md transition-shadow cursor-pointer">
@@ -46,7 +49,7 @@ export default async function AdminPage() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 gap-6">
         <Link href="/admin/portfolio">
           <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
             <CardHeader>
@@ -73,6 +76,16 @@ export default async function AdminPage() {
               <CardTitle>Manage AKT Questions</CardTitle>
               <CardDescription>
                 Create MCQ questions with explanations and guideline references
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link href="/admin/study-buddy">
+          <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader>
+              <CardTitle>Moderate Study Buddy</CardTitle>
+              <CardDescription>
+                Review and delete study buddy profiles for moderation
               </CardDescription>
             </CardHeader>
           </Card>

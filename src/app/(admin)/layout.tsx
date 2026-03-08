@@ -8,6 +8,7 @@ const navItems = [
   { name: 'Portfolio', href: '/admin/portfolio' },
   { name: 'SCA Cases', href: '/admin/sca' },
   { name: 'AKT Questions', href: '/admin/akt' },
+  { name: 'Study Buddy', href: '/admin/study-buddy' },
 ]
 
 export default async function AdminLayout({
