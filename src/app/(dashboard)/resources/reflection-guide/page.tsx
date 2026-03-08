@@ -26,86 +26,22 @@ export default function ReflectionGuidePage() {
         </div>
       </ResourceSection>
 
-      {/* Gibbs Reflective Cycle */}
-      <ResourceSection title="Gibbs' Reflective Cycle" description="The most widely used reflection framework" variant="secondary">
-        <div className="space-y-4">
-          {[
-            { stage: 'Description', question: 'What happened?', tip: 'Keep it brief and factual. Set the scene without analysis.' },
-            { stage: 'Feelings', question: 'What were you thinking and feeling?', tip: 'Be honest. Include uncertainty, anxiety, confidence.' },
-            { stage: 'Evaluation', question: 'What was good and bad about the experience?', tip: 'Consider multiple perspectives - yours, the patient\'s, colleagues\'.' },
-            { stage: 'Analysis', question: 'What sense can you make of the situation?', tip: 'Link to evidence, guidelines, theory. This is the crucial step.' },
-            { stage: 'Conclusion', question: 'What else could you have done?', tip: 'Be specific about alternatives you could have tried.' },
-            { stage: 'Action Plan', question: 'What will you do differently next time?', tip: 'Make it concrete and achievable. What learning needs arise?' },
-          ].map((item, i) => (
-            <div key={i} className="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-              <div className="flex items-start gap-3">
-                <span className="w-10 h-10 bg-teal-600 dark:bg-teal-700 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                  {i + 1}
-                </span>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-teal-700 dark:text-teal-400 mb-1">{item.stage}</h4>
-                  <p className="text-slate-700 dark:text-slate-300 italic mb-2">&ldquo;{item.question}&rdquo;</p>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">💡 {item.tip}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </ResourceSection>
-
-      {/* Rolfe's Framework */}
-      <ResourceSection title="Rolfe's What? So What? Now What?" description="A simpler, three-stage approach" variant="secondary">
-        <div className="grid md:grid-cols-3 gap-4">
-          <Chunk title="What?">
-            <p className="mb-2 font-medium">Describe the situation</p>
-            <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
-              <li>• What happened?</li>
-              <li>• What did I do?</li>
-              <li>• What did others do?</li>
-            </ul>
-          </Chunk>
-          <Chunk title="So What?">
-            <p className="mb-2 font-medium">Analyse the meaning</p>
-            <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
-              <li>• Why does it matter?</li>
-              <li>• What have I learned?</li>
-              <li>• What does it mean?</li>
-            </ul>
-          </Chunk>
-          <Chunk title="Now What?">
-            <p className="mb-2 font-medium">Plan for the future</p>
-            <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
-              <li>• What will I do differently?</li>
-              <li>• What do I need to learn?</li>
-              <li>• How will I apply this?</li>
-            </ul>
-          </Chunk>
-        </div>
-        <InfoBox variant="tip" className="mt-4">
-          <strong className="text-teal-700 dark:text-teal-400">Best for:</strong>{' '}
-          <span className="text-slate-700 dark:text-slate-300">Quick reflections, learning log entries, when you need a simple structure.</span>
-        </InfoBox>
-      </ResourceSection>
-
-      {/* Common Pitfalls */}
-      <ResourceSection title="Common Pitfalls to Avoid" variant="secondary">
-        <div className="space-y-3">
-          {[
-            { pitfall: 'Too descriptive', fix: 'Spend less time on "what happened" and more on analysis and learning.' },
-            { pitfall: 'Too brief', fix: 'Explore the learning in depth. One paragraph isn\'t enough for meaningful reflection.' },
-            { pitfall: 'Missing the "so what"', fix: 'Always explain why this matters for your future practice.' },
-            { pitfall: 'Forgetting patient perspective', fix: 'Consider how the patient experienced the encounter.' },
-            { pitfall: 'No evidence base', fix: 'Link your reflections to guidelines, research, or established frameworks.' },
-            { pitfall: 'Vague action plans', fix: 'Be specific: "I will read NICE guidance on X" not "I will learn more".' },
-          ].map((item, i) => (
-            <div key={i} className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-              <span className="text-red-500 font-bold text-xl">✗</span>
-              <div>
-                <strong className="text-slate-900 dark:text-slate-100">{item.pitfall}</strong>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">→ {item.fix}</p>
-              </div>
-            </div>
-          ))}
+      {/* Choosing a structure */}
+      <ResourceSection
+        title="Choosing a simple structure"
+        description="You don't need a complex framework – use something that helps you tell the story and show learning."
+        variant="secondary"
+      >
+        <div className="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+          <p>
+            Most trainees do well with a <strong>simple framework</strong> such as{' '}
+            <strong>Rolfe&apos;s What? So What? Now What?</strong> plus a short checklist like the{' '}
+            <strong>three‑link rule</strong> (linking to ~3 curriculum capabilities).
+          </p>
+          <p>
+            You do <strong>not</strong> have to use Gibbs&apos; reflective cycle. Pick one structure that feels natural,
+            and use it consistently so your reflections are clear and easy to write.
+          </p>
         </div>
       </ResourceSection>
 
@@ -125,6 +61,58 @@ export default function ReflectionGuidePage() {
                 <p className="italic text-slate-600 dark:text-slate-400 mt-2">{item.example}</p>
               )}
             </Chunk>
+          ))}
+        </div>
+      </ResourceSection>
+
+      {/* Common Pitfalls vs Better Alternatives */}
+      <ResourceSection title="Common Pitfalls vs Better Alternatives" variant="secondary">
+        <div className="space-y-3 text-sm">
+          {[
+            {
+              pitfall: 'Too descriptive',
+              better: 'Keep the description brief; spend more words on analysis, learning, and what you will do differently.',
+            },
+            {
+              pitfall: 'Too brief',
+              better: 'Write enough to show your thinking – usually several short paragraphs, not just a couple of sentences.',
+            },
+            {
+              pitfall: 'Missing the \"so what\"',
+              better: 'Explicitly answer: Why does this matter for my future practice? What have I learned?',
+            },
+            {
+              pitfall: 'Forgetting patient perspective',
+              better: 'Add a line on how the patient (or their family) might have experienced the encounter.',
+            },
+            {
+              pitfall: 'No evidence base',
+              better: 'Mention key guidelines, research, or teaching that supports your decisions or highlights gaps.',
+            },
+            {
+              pitfall: 'Vague action plans',
+              better: 'Make actions SMART: specific, realistic next steps with when/how you will do them.',
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="grid md:grid-cols-2 gap-3 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700"
+            >
+              <div className="flex items-start gap-2">
+                <span className="text-red-500 font-bold text-xl mt-0.5">✗</span>
+                <div>
+                  <p className="font-semibold text-slate-900 dark:text-slate-100">Pitfall</p>
+                  <p className="mt-1 text-slate-700 dark:text-slate-300">{item.pitfall}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-green-500 font-bold text-xl mt-0.5">✓</span>
+                <div>
+                  <p className="font-semibold text-slate-900 dark:text-slate-100">Try instead</p>
+                  <p className="mt-1 text-slate-700 dark:text-slate-300">{item.better}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </ResourceSection>
@@ -158,6 +146,90 @@ export default function ReflectionGuidePage() {
         <InfoBox variant="tip" className="mt-4">
           <strong className="text-teal-700 dark:text-teal-400">Tip:</strong>{' '}
           <span className="text-slate-700 dark:text-slate-300">Don't force curriculum links - choose the 2-3 most relevant capabilities for each reflection.</span>
+        </InfoBox>
+      </ResourceSection>
+
+      {/* Reflection models – overview and links */}
+      <ResourceSection
+        title="Reflection models – overview and links"
+        description="Different frameworks that can help you move from description to analysis and learning."
+        variant="secondary"
+      >
+        <div className="grid md:grid-cols-2 gap-3 text-sm text-slate-700 dark:text-slate-300">
+          <Chunk title="Gibbs' Reflective Cycle (6 stages)">
+            <p className="mb-1">Description, Feelings, Evaluation, Analysis, Conclusion, Action plan – detailed look at a single experience.</p>
+            <p className="text-xs mt-1">
+              More:{' '}
+              <a
+                href="https://www.brookes.ac.uk/students/upgrade/study-skills/reflective-writing-gibbs"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                Oxford Brookes guide
+              </a>
+            </p>
+          </Chunk>
+          <Chunk title="Kolb's Learning Cycle (4 stages)">
+            <p className="mb-1">Concrete experience → Reflective observation → Abstract conceptualisation → Active experimentation.</p>
+            <p className="text-xs mt-1">
+              More:{' '}
+              <a
+                href="https://www.learning-theories.com/experiential-learning-kolb.html"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                Learning-theories.com
+              </a>
+            </p>
+          </Chunk>
+          <Chunk title="Schön – reflection-in / on-action">
+            <p className="mb-1">
+              Distinguishes thinking <em>during</em> practice (in-action) and <em>after</em> practice (on-action) – helpful for complex consultations.
+            </p>
+            <p className="text-xs mt-1">
+              More:{' '}
+              <a
+                href="https://infed.org/mobi/donald-schon-learning-reflection-change/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                Infed overview
+              </a>
+            </p>
+          </Chunk>
+          <Chunk title="Driscoll / Rolfe / Borton (What? So what? Now what?)">
+            <p className="mb-1">Simple three-question frameworks for rapid reflections – ideal for learning log entries.</p>
+            <p className="text-xs mt-1">
+              More:{' '}
+              <a
+                href="https://libguides.hull.ac.uk/reflective-practice/models"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                Hull reflective models
+              </a>
+            </p>
+          </Chunk>
+          <Chunk title="Johns' Model of Structured Reflection">
+            <p className="mb-1">Encourages &quot;looking in&quot; (thoughts/feelings) and &quot;looking out&quot; (context and factors) before drawing learning.</p>
+          </Chunk>
+          <Chunk title="Atkins & Murphy">
+            <p className="mb-1">Focuses on the trigger for reflection, analysis of feelings, and critical evaluation of assumptions.</p>
+          </Chunk>
+          <Chunk title="Brookfield’s Four Lenses">
+            <p className="mb-1">Look at practice through autobiography, learners, colleagues, and theory to gain richer insight.</p>
+          </Chunk>
+          <Chunk title="CARL (Context, Action, Result, Learning)">
+            <p className="mb-1">Useful for short, structured reflections or interview-style examples.</p>
+          </Chunk>
+        </div>
+        <InfoBox variant="tip" className="mt-4">
+          <strong className="text-teal-700 dark:text-teal-400">Tip:</strong>{' '}
+          <span>Choose one or two models that suit you, and use them consistently rather than trying to use every framework.</span>
         </InfoBox>
       </ResourceSection>
     </ResourcePageLayout>

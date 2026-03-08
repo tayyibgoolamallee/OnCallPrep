@@ -96,6 +96,9 @@ export default async function PortfolioPage() {
         <p className="text-muted-foreground mt-1">
           Structured guidance through your GP training requirements
         </p>
+        <p className="text-muted-foreground mt-3 text-sm">
+          Use the cards below to jump into the specific guidance for ST1, ST2, or ST3. Each stage page contains its own detailed requirements and WPBA checklist.
+        </p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -103,7 +106,7 @@ export default async function PortfolioPage() {
           const stats = getStageStats(stage.id)
           return (
             <Link key={stage.id} href={`/portfolio/${stage.id}`}>
-              <Card className="h-full border-2 border-teal-200 dark:border-teal-800 hover:border-teal-500 dark:hover:border-teal-400 hover:shadow-md transition-shadow cursor-pointer">
+              <Card className="h-full border-2 border-teal-200 dark:border-teal-800 hover:border-teal-500 dark:hover:border-teal-600 hover:shadow-xl transition-all duration-200 cursor-pointer">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>{stage.name}</CardTitle>
@@ -124,29 +127,6 @@ export default async function PortfolioPage() {
           )
         })}
       </div>
-
-      {/* Overview / key points */}
-      <Card className="border-2 border-slate-200 dark:border-slate-700">
-        <CardHeader>
-          <CardTitle>Portfolio overview & key points</CardTitle>
-          <CardDescription>
-            High‑level expectations across ST1, ST2, and ST3 – full detail sits in each stage page.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground">
-            Use the cards above to jump into the specific guidance for ST1, ST2, or ST3. Each stage page contains
-            its own detailed requirements and WPBA checklist.
-          </p>
-          <div className="pt-4 border-t">
-            <p className="text-sm text-muted-foreground">
-              <strong>Key points for all years:</strong> Assessments should be spread throughout each training year with roughly half
-              completed in each 6‑month review period. Less Than Full Time (LTFT) trainees complete the same total
-              number pro‑rata. CPR&AED and Safeguarding knowledge updates are required every 12 months (not pro‑rata).
-            </p>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Resources Section */}
       <div>

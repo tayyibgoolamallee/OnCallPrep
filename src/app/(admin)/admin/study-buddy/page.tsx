@@ -16,6 +16,10 @@ type StudyProfile = {
   show_exam_date: boolean | null
   show_looking_for_study_buddy: boolean | null
   show_vts_or_area: boolean | null
+  available_days: string[] | null
+  available_times: string[] | null
+  study_frequency: string | null
+  study_duration: string | null
   created_at: string | null
   updated_at: string | null
 }
@@ -103,6 +107,10 @@ export default function AdminStudyBuddyPage() {
                       {p.contact_email && <p>Email: {p.contact_email}</p>}
                       {p.vts_or_area && <p>Area: {p.vts_or_area}</p>}
                       {p.exam_date && <p>Exam: {new Date(p.exam_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>}
+                      {p.available_days?.length ? <p>Days: {p.available_days.map((d) => d.slice(0, 3)).join(', ')}</p> : null}
+                      {p.available_times?.length ? <p>Times: {p.available_times.join(' / ')}</p> : null}
+                      {p.study_frequency && <p>Frequency: {p.study_frequency}</p>}
+                      {p.study_duration && <p>Duration: {p.study_duration}</p>}
                       <p className="text-xs">
                         ID: {p.user_id.slice(0, 8)}...
                         {p.created_at && <> &middot; Joined: {new Date(p.created_at).toLocaleDateString('en-GB')}</>}

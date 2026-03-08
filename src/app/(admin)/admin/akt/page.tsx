@@ -28,7 +28,7 @@ interface Question {
   id: string
   topic: string
   question: string
-  options: { id: string; text: string }[]
+  options: { id?: string; label?: string; text: string }[]
   correct_option: string
   explanation: string
   guideline_refs: string[] | null
@@ -37,10 +37,25 @@ interface Question {
   published: boolean | null
 }
 
+/** Build markdown for one question in PROMPT B audit format (docs/akt/PROMPT_B_audit.md) */
+function questionToAuditBlock(q: Question, index: number): string {
+  const opts = (q.options || []).map((o, i) => {
+    const letter = (o.label || o.id || String.fromCharCode(65 + i)).toString().toUpperCase()
+    return `${letter}. ${o.text}`
+  })
+  const refs = (q.guideline_refs && q.guideline_refs.length) ? q.guideline_refs.join('\n• ') : 'None'
+  return `---\n## Question ${index + 1} (id: ${q.id}) | ${q.topic} | ${q.difficulty ?? 'medium'}\n\n**Question:**\n${q.question}\n\n**Options:**\n${opts.join('\n')}\n\n**Correct answer:** ${q.correct_option.toUpperCase()}\n\n**Explanation:**\n${q.explanation}\n\n**References:**\n• ${refs}\n`
+}
+
 export default function AdminAKTPage() {
   const [questions, setQuestions] = useState<Question[]>([])
   const [loading, setLoading] = useState(true)
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [auditOffset, setAuditOffset] = useState(0)
+  const [auditCopyStatus, setAuditCopyStatus] = useState<string | null>(null)
+  const [auditFallbackText, setAuditFallbackText] = useState<string | null>(null)
+  const [auditFallbackOpen, setAuditFallbackOpen] = useState(false)
+  const AUDIT_BATCH_SIZE = 10
   const [editing, setEditing] = useState<Question | null>(null)
   const [form, setForm] = useState({
     topic: '',
@@ -137,14 +152,15 @@ export default function AdminAKTPage() {
 
   function openEdit(q: Question) {
     setEditing(q)
+    const opt = (key: string) => q.options?.find(o => (o.id || o.label || '').toString().toLowerCase() === key)?.text || ''
     setForm({
       topic: q.topic,
       question: q.question,
-      option_a: q.options.find(o => o.id === 'a')?.text || '',
-      option_b: q.options.find(o => o.id === 'b')?.text || '',
-      option_c: q.options.find(o => o.id === 'c')?.text || '',
-      option_d: q.options.find(o => o.id === 'd')?.text || '',
-      correct_option: q.correct_option,
+      option_a: opt('a'),
+      option_b: opt('b'),
+      option_c: opt('c'),
+      option_d: opt('d'),
+      correct_option: q.correct_option.toLowerCase().slice(0, 1),
       explanation: q.explanation,
       guideline_refs: q.guideline_refs?.join('\n') || '',
       difficulty: q.difficulty ?? 'medium',
@@ -154,15 +170,150 @@ export default function AdminAKTPage() {
     setDialogOpen(true)
   }
 
+  function exportForAudit() {
+    const header = `# AKT questions export for audit\nUsed with docs/akt/PROMPT_B_audit.md — paste one or more question blocks below the prompt.\nExported: ${new Date().toISOString().slice(0, 19)}Z\n`
+    const body = questions.map((q, i) => questionToAuditBlock(q, i)).join('\n')
+    const blob = new Blob([header + body], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `akt-questions-for-audit-${new Date().toISOString().slice(0, 10)}.md`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  async function fetchAuditBatch(): Promise<string> {
+    const res = await fetch(`/api/admin/akt-audit-batch?limit=${AUDIT_BATCH_SIZE}&offset=${auditOffset}`)
+    if (!res.ok) throw new Error(res.status === 403 ? 'Not authorised' : 'Fetch failed')
+    return res.text()
+  }
+
+  async function copyNextBatchForAudit() {
+    setAuditCopyStatus('Loading…')
+    try {
+      const text = await fetchAuditBatch()
+      try {
+        await navigator.clipboard.writeText(text)
+        const start = auditOffset + 1
+        setAuditCopyStatus(`Copied batch starting at question ${start}. Paste in Cursor with Prompt B.`)
+        setAuditOffset(prev => prev + AUDIT_BATCH_SIZE)
+      } catch {
+        setAuditFallbackText(text)
+        setAuditFallbackOpen(true)
+        setAuditCopyStatus('Clipboard denied — use the box below to copy or download.')
+      }
+    } catch (e) {
+      setAuditCopyStatus(e instanceof Error ? e.message : 'Fetch failed')
+    }
+    setTimeout(() => setAuditCopyStatus(null), 6000)
+  }
+
+  async function downloadFullExport(format: 'md' | 'csv' = 'md') {
+    setAuditCopyStatus(`Exporting all questions as ${format.toUpperCase()}…`)
+    try {
+      const res = await fetch(`/api/admin/akt-full-export?format=${format}`)
+      if (!res.ok) throw new Error('Fetch failed')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `akt-full-export-${new Date().toISOString().slice(0, 10)}.${format}`
+      a.click()
+      URL.revokeObjectURL(url)
+      setAuditCopyStatus(
+        format === 'csv'
+          ? `Exported all questions as CSV.`
+          : `Exported all questions as Markdown. Paste 5-10 blocks at a time into Cursor with Prompt B.`
+      )
+    } catch (e) {
+      setAuditCopyStatus(e instanceof Error ? e.message : 'Export failed')
+    }
+    setTimeout(() => setAuditCopyStatus(null), 8000)
+  }
+
+  async function downloadShortQuestionsCsv() {
+    setAuditCopyStatus('Downloading short questions CSV…')
+    try {
+      const res = await fetch('/api/admin/akt-short-questions')
+      if (!res.ok) throw new Error('Fetch failed')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `akt-short-questions-${new Date().toISOString().slice(0, 10)}.csv`
+      a.click()
+      URL.revokeObjectURL(url)
+      setAuditCopyStatus('Downloaded. Save the CSV and share the path in Cursor for migration 056.')
+    } catch (e) {
+      setAuditCopyStatus(e instanceof Error ? e.message : 'Download failed')
+    }
+    setTimeout(() => setAuditCopyStatus(null), 8000)
+  }
+
+  async function downloadNextBatchForAudit() {
+    setAuditCopyStatus('Loading…')
+    try {
+      const text = await fetchAuditBatch()
+      const start = auditOffset + 1
+      const blob = new Blob([text], { type: 'text/markdown' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `akt-audit-batch-${start}.md`
+      a.click()
+      URL.revokeObjectURL(url)
+      setAuditCopyStatus(`Downloaded batch starting at question ${start}. Open the file and paste in Cursor with Prompt B.`)
+      setAuditOffset(prev => prev + AUDIT_BATCH_SIZE)
+    } catch (e) {
+      setAuditCopyStatus(e instanceof Error ? e.message : 'Download failed')
+    }
+    setTimeout(() => setAuditCopyStatus(null), 6000)
+  }
+
   if (loading) return <p className="text-muted-foreground">Loading...</p>
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold">AKT Questions</h1>
           <p className="text-muted-foreground">Manage question bank</p>
         </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <Button variant="outline" onClick={downloadNextBatchForAudit} title="Download the next 10 questions as .md (no clipboard needed)">
+            Download next 10 for audit
+          </Button>
+          <Button variant="outline" onClick={copyNextBatchForAudit} title="Copy the next 10 questions to clipboard (may be blocked by browser)">
+            Copy next 10 for audit
+          </Button>
+          <Button variant="outline" onClick={downloadShortQuestionsCsv} title="Download CSV of questions with short stems or short explanations for migration 056">
+            Download short Qs (CSV)
+          </Button>
+          <Button variant="outline" onClick={() => downloadFullExport('md')} title="Download a .md file with every question for AI audit via Prompt B">
+            Export all (.md)
+          </Button>
+          <Button variant="outline" onClick={() => downloadFullExport('csv')} title="Download a CSV with every question for spreadsheet review">
+            Export all (.csv)
+          </Button>
+          {auditCopyStatus && (
+            <span className="text-sm text-muted-foreground max-w-[320px]">{auditCopyStatus}</span>
+          )}
+          <span className="text-xs text-muted-foreground max-w-[200px]">Batch starts at question {auditOffset + 1}. Use &quot;Download next 10&quot; if clipboard is blocked.</span>
+        <Dialog open={auditFallbackOpen} onOpenChange={(open) => { setAuditFallbackOpen(open); if (!open) setAuditFallbackText(null); }}>
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+            <DialogHeader>
+              <DialogTitle>Copy batch for audit (clipboard was denied)</DialogTitle>
+            </DialogHeader>
+            <p className="text-sm text-muted-foreground">Select all (Ctrl+A / Cmd+A) and copy (Ctrl+C / Cmd+C), or download as .md below.</p>
+            <Textarea readOnly value={auditFallbackText ?? ''} className="flex-1 min-h-[300px] font-mono text-sm" onFocus={(e) => e.target.select()} />
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => { if (auditFallbackText) { const blob = new Blob([auditFallbackText], { type: 'text/markdown' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `akt-audit-batch-${auditOffset + 1}.md`; a.click(); URL.revokeObjectURL(a.href); setAuditOffset(prev => prev + AUDIT_BATCH_SIZE); setAuditFallbackOpen(false); setAuditFallbackText(null); } }}>
+                Download as .md and close
+              </Button>
+              <Button variant="outline" onClick={() => setAuditFallbackOpen(false)}>Close</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => { setEditing(null); resetForm(); }}>Add Question</Button>
@@ -274,6 +425,7 @@ export default function AdminAKTPage() {
             </form>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       <Card>
