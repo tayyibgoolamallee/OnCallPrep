@@ -276,7 +276,7 @@ INSERT INTO sca_cases (
 
 ## Data Gathering
 
-- Confirm the blood results: eGFR 48 ml/min on two occasions (CKD stage 3b)
+- Confirm the blood results: eGFR 48 ml/min on two occasions (CKD stage 3a)
 - Check urine ACR: if not done, this is needed to complete the CKD staging
 - Ask about urinary symptoms, oedema, fatigue, itch, breathlessness (symptoms of advancing CKD)
 - Review current blood pressure control (145/85 — above target for CKD with diabetes)
@@ -288,7 +288,7 @@ INSERT INTO sca_cases (
 
 ## Clinical Management
 
-- **Explain CKD stage 3b:** Kidneys are working at roughly half their normal capacity. Use an analogy: ''If you think of normal kidney function as 100 percent, your kidneys are currently working at about 48 percent''
+- **Explain CKD stage 3a:** Kidneys are working at roughly half their normal capacity. Use an analogy: ''If you think of normal kidney function as 100 percent, your kidneys are currently working at about 48 percent''
 - **Address dialysis fear:** At this stage, dialysis is very unlikely. Most people with stage 3 CKD never progress to needing dialysis, especially if BP and diabetes are well controlled
 - **Blood pressure target:** Tighten to below 130/80 in CKD with diabetes (NICE NG203). May need additional antihypertensive or dose adjustment
 - **Diabetes optimisation:** Aim for good glycaemic control. Check current HbA1c. Metformin is safe but should be reviewed if eGFR drops below 30. Consider SGLT2 inhibitor (dapagliflozin) which has renal protective benefits (NICE NG203, DAPA-CKD trial)
@@ -307,7 +307,7 @@ INSERT INTO sca_cases (
   true,
   '{
     "domain1": {"title": "Domain 1: Data Gathering & Interpretation", "items": ["Confirmed the blood test results and explained eGFR meaning", "Asked about symptoms of CKD (oedema, fatigue, itch, breathlessness, urinary changes)", "Reviewed current blood pressure control and identified it is above target", "Reviewed diabetes control and current HbA1c", "Performed a medication review for renal safety (NSAIDs, metformin, allopurinol)", "Explored the patient''s understanding, fears, and family experience of kidney disease", "Asked about over-the-counter medications or supplements", "Assessed cardiovascular risk factors comprehensively"]},
-    "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Explained CKD stage 3b in understandable terms using appropriate analogy", "Addressed dialysis fear proportionately and honestly", "Identified need to tighten blood pressure control to below 130/80 (NICE NG203)", "Reviewed and optimised diabetes management", "Considered SGLT2 inhibitor for renal protection if appropriate", "Planned appropriate monitoring (eGFR and urine ACR every 6 months)", "Gave lifestyle advice (salt, hydration, exercise, weight)", "Provided clear safety-netting for new symptoms"]},
+    "domain2": {"title": "Domain 2: Clinical Management (Weighted 1.5x)", "items": ["Explained CKD stage 3a in understandable terms using appropriate analogy", "Addressed dialysis fear proportionately and honestly", "Identified need to tighten blood pressure control to below 130/80 (NICE NG203)", "Reviewed and optimised diabetes management", "Considered SGLT2 inhibitor for renal protection if appropriate", "Planned appropriate monitoring (eGFR and urine ACR every 6 months)", "Gave lifestyle advice (salt, hydration, exercise, weight)", "Provided clear safety-netting for new symptoms"]},
     "domain3": {"title": "Domain 3: Relating to Others", "items": ["Broke unexpected news sensitively and allowed time to react", "Explored and acknowledged the patient''s fear about dialysis", "Used patient-friendly language, avoiding excessive jargon", "Checked understanding throughout the conversation", "Was honest about the diagnosis while providing proportionate reassurance", "Showed empathy for the emotional impact of the diagnosis"]}
   }'::jsonb
 );
@@ -525,7 +525,7 @@ INSERT INTO sca_cases (
   'DERM-005',
   'Video consultation. A 35-year-old man with known plaque psoriasis has requested an appointment because his skin has worsened significantly and it is affecting his confidence, relationships, and work. He feels his current treatment is not working and wants something different.',
   '{"name": "Mr. Liam Fogarty", "age": 35, "gender": "Male"}',
-  '{"patient": "Mr. Liam Fogarty", "age": 35, "gender": "Female", "pmh": "Plaque psoriasis (diagnosed age 19), anxiety disorder", "medications": "Betamethasone valerate 0.1% ointment (body), Calcipotriol/betamethasone dipropionate gel (scalp), Sertraline 50mg OD", "allergies": "No known allergies"}',
+  '{"patient": "Mr. Liam Fogarty", "age": 35, "gender": "Male", "pmh": "Plaque psoriasis (diagnosed age 19), anxiety disorder", "medications": "Betamethasone valerate 0.1% ointment (body), Calcipotriol/betamethasone dipropionate gel (scalp), Sertraline 50mg OD", "allergies": "No known allergies"}',
   '{
     "opening_statement": "Hiya doctor. Thanks for seeing me. I am at my wit''s end with this psoriasis. It has got so much worse over the past couple of months and honestly it is ruining my life. I need something better than what I have got because the creams are just not cutting it any more.",
     "freely_given_history": {
@@ -735,7 +735,7 @@ INSERT INTO sca_cases (
   'MSK-003',
   'Video consultation. A 39-year-old man has booked an appointment because he has had pain on the outside of his right elbow for about eight weeks. He is right-handed and works as a plumber, and the pain is making it difficult to grip tools and lift things.',
   '{"name": "Mr. Craig Benson", "age": 39, "gender": "Male"}',
-  '{"patient": "Mr. Craig Benson", "age": 39, "gender": "Female", "pmh": "No significant past medical history", "medications": "None regular. Occasional ibuprofen for the elbow", "allergies": "No known allergies"}',
+  '{"patient": "Mr. Craig Benson", "age": 39, "gender": "Male", "pmh": "No significant past medical history", "medications": "None regular. Occasional ibuprofen for the elbow", "allergies": "No known allergies"}',
   '{
     "opening_statement": "Alright doctor. I have got this pain in my elbow that will not go away. It is on the outside of my right elbow and it has been there for about two months now. I am a plumber and it is really affecting my work. I cannot grip a wrench properly because the pain shoots down my forearm.",
     "freely_given_history": {
@@ -839,7 +839,7 @@ INSERT INTO sca_cases (
   'CARD-005',
   'Telephone consultation. A 52-year-old man had a routine ECG performed at his NHS health check last week. The ECG report shows left bundle branch block (LBBB), which is a new finding. He has been asked to call for his results and has no idea there is an abnormality.',
   '{"name": "Mr. Philip Ashworth", "age": 52, "gender": "Male"}',
-  '{"patient": "Mr. Philip Ashworth", "age": 52, "gender": "Female", "pmh": "Hypertension (well controlled), hyperlipidaemia", "medications": "Amlodipine 5mg OD, Atorvastatin 20mg ON", "allergies": "No known allergies"}',
+  '{"patient": "Mr. Philip Ashworth", "age": 52, "gender": "Male", "pmh": "Hypertension (well controlled), hyperlipidaemia", "medications": "Amlodipine 5mg OD, Atorvastatin 20mg ON", "allergies": "No known allergies"}',
   '{
     "opening_statement": "Hello doctor. I had my NHS health check last week and the nurse did a heart tracing thing. She said I needed to phone for the results. Is everything alright? I assumed it was all fine because nobody contacted me urgently.",
     "freely_given_history": {

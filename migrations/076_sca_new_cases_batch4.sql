@@ -116,7 +116,7 @@ INSERT INTO sca_cases (
   'ETH-004',
   'Telephone consultation. A patient has called to request that certain information be removed from their medical record. The receptionist has passed the call to you.',
   '{"name": "Mr. Daniel Osei", "age": 41, "gender": "Male"}',
-  '{"patient": "Mr. Daniel Osei", "age": 41, "gender": "Female", "pmh": "Depression (2019-2021, now resolved), alcohol misuse (documented 2020, patient disputes this), hypertension", "medications": "Amlodipine 5mg OD", "allergies": "No known allergies"}',
+  '{"patient": "Mr. Daniel Osei", "age": 41, "gender": "Male", "pmh": "Depression (2019-2021, now resolved), alcohol misuse (documented 2020, patient disputes this), hypertension", "medications": "Amlodipine 5mg OD", "allergies": "No known allergies"}',
   '{
     "opening_statement": "Hello doctor, thank you for taking my call. I need to talk to you about something on my medical records. I have been trying to sort this out for a while and nobody seems to be helping me. I need something removed from my notes.",
     "freely_given_history": {
@@ -314,8 +314,8 @@ INSERT INTO sca_cases (
   'General Practice',
   'GP-008',
   'Video consultation. A 56-year-old woman attending for a medication review. She has been on long-term opioids for chronic lower back pain and is requesting a repeat prescription. The practice has flagged her for a structured opioid review.',
-  '{"name": "Mrs. Karen Whitfield", "age": 56, "gender": "Female"}',
-  '{"patient": "Mrs. Karen Whitfield", "age": 56, "gender": "Female", "pmh": "Chronic lower back pain (lumbar disc degeneration), obesity (BMI 34), type 2 diabetes, depression, fibromyalgia", "medications": "Co-codamol 30/500 QDS, Morphine sulphate MR 30mg BD, Oramorph 10mg/5ml PRN (using 20-30ml daily), Amitriptyline 25mg ON, Metformin 1g BD, Sertraline 100mg OD", "allergies": "Ibuprofen (gastric upset)"}',
+  '{"name": "Mrs. Deborah Haynes", "age": 56, "gender": "Female"}',
+  '{"patient": "Mrs. Deborah Haynes", "age": 56, "gender": "Female", "pmh": "Chronic lower back pain (lumbar disc degeneration), obesity (BMI 34), type 2 diabetes, depression, fibromyalgia", "medications": "Co-codamol 30/500 QDS, Morphine sulphate MR 30mg BD, Oramorph 10mg/5ml PRN (using 20-30ml daily), Amitriptyline 25mg ON, Metformin 1g BD, Sertraline 100mg OD", "allergies": "Ibuprofen (gastric upset)"}',
   '{
     "opening_statement": "Hello doctor. I have come for my medication review. I just need my repeat prescriptions sorting out really. I have been on the same painkillers for years and they keep me going.",
     "freely_given_history": {
@@ -943,7 +943,7 @@ INSERT INTO sca_cases (
 **References:**
 - BSR/BHPR guidelines for DMARD monitoring - https://academic.oup.com/rheumatology/article/56/6/865/3053478
 - NICE CKS: Methotrexate - https://cks.nice.org.uk/topics/dmards/methotrexate/
-- NICE CG79: Rheumatoid arthritis in adults - https://www.nice.org.uk/guidance/ng100
+- NICE NG100: Rheumatoid arthritis in adults - https://www.nice.org.uk/guidance/ng100
 - Cruse Bereavement Support - https://www.cruse.org.uk/',
   false,
   true,

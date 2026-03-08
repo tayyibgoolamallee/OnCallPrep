@@ -410,7 +410,7 @@ INSERT INTO sca_cases (
   '{
     "opening_statement": "My flatmate made me come. She is being dramatic. I am fine, honestly. I just wanted to lose a bit of weight.",
     "freely_given_history": {
-      "presenting_complaint": "If the doctor creates a safe and non-confrontational space, you gradually open up. You started dieting about a year ago after a comment from a relative about you putting on weight at Christmas. It started with cutting out snacks, then meals, and now you eat very little. You count every calorie. You also exercise excessively, running every day even when you feel unwell.",
+      "presenting_complaint": "I started watching what I eat about a year ago. A relative made a comment about me putting on weight at Christmas and it just stuck with me. It started with cutting out snacks, then I started skipping meals, and now I eat very little. I count every calorie. I also run every day, even if I am not feeling well. My friends have said I have lost a lot of weight but I still feel like I need to lose more.",
       "psychosocial_impact": "You are in your second year at university studying English Literature. Your grades have dropped because you cannot concentrate. You have pulled away from your friends. Your flatmate found you passed out in the kitchen two weeks ago and that is what triggered her to make you come.",
       "ice": {
         "ideas": "You do not think you have an eating disorder. You think you are in control of your eating. You can see that you have lost weight but you still feel fat when you look in the mirror.",
@@ -611,7 +611,7 @@ INSERT INTO sca_cases (
   '{
     "opening_statement": "Hi doctor, I have booked in because I am not coping very well. I have been really stressed and I am not sleeping. I just feel like everything is falling apart.",
     "freely_given_history": {
-      "presenting_complaint": "If the doctor explores the stress with open questions, you reveal that the stress is financial. You are in serious debt. If they explore the debt further, you admit that the debt is from gambling. You have been betting online for about three years. It started as a bit of fun during lockdown but it has got completely out of control.",
+      "presenting_complaint": "Things have been really stressful. The main problem is money. I am in serious debt. If I am being honest, the debt is from gambling. I have been betting online for about three years now. It started as a bit of fun during lockdown but it has got completely out of control. I have tried to stop but I just cannot seem to.",
       "psychosocial_impact": "You owe about thirty-five thousand pounds on credit cards and loans. Your wife does not know the full extent of it. She found a credit card statement last month and you told her it was only five thousand. She was furious even at that. You are terrified she will leave you and take the kids. You have two children aged five and three.",
       "ice": {
         "ideas": "You know gambling is a problem but you keep telling yourself you can win it back. Every time you try to stop, you last a few days and then go back to it.",
@@ -918,7 +918,7 @@ INSERT INTO sca_cases (
   '{
     "opening_statement": "Look, my wife made me call. I do not really think I need to speak to a doctor. She is just worrying about nothing.",
     "freely_given_history": {
-      "presenting_complaint": "If the doctor is patient and does not push too hard, you gradually reveal that you have not been sleeping properly for years. You have nightmares about things that happened when you were deployed. You wake up shouting and drenched in sweat. Your wife says you thrash about in your sleep. During the day you feel on edge all the time. Loud noises make you jump. You cannot go to crowded places because you feel panicky.",
+      "presenting_complaint": "I have not been sleeping properly for years. I get nightmares about things that happened when I was deployed. I wake up shouting and drenched in sweat. My wife says I thrash about in my sleep. During the day I feel on edge all the time. Loud noises make me jump. I cannot go to crowded places because I feel panicky. It has been getting worse recently and I do not know how much longer I can carry on like this.",
       "psychosocial_impact": "You left the army three years ago after twelve years of service. You did two tours in Afghanistan. You have not been able to hold down a job since leaving. You have had four jobs in three years. You either walk out or get fired for losing your temper. Your wife is at breaking point. She says she does not recognise you anymore. You have two children aged four and six.",
       "ice": {
         "ideas": "You think you should just man up and get on with it. Your mates from the regiment would think you were weak for talking to a doctor about this.",
