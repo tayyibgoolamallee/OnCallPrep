@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as const
-const TIMES = ['AM', 'PM'] as const
+const TIMES = ['Morning', 'Afternoon', 'Evening'] as const
 const FREQUENCY_OPTIONS = ['1-2 times a week', '3-4 times a week', '5+ times a week'] as const
 const DURATION_OPTIONS = ['1-2 weeks', '1-2 months', '3-6 months', '6+ months', 'Ongoing'] as const
 
