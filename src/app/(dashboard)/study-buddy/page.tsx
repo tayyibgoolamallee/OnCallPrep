@@ -19,6 +19,7 @@ type StudyProfile = {
   show_looking_for_study_buddy: boolean | null
   show_vts_or_area: boolean | null
   share_email_with_study_buddies: boolean | null
+  contact_email: string | null
 }
 
 const defaultProfile: StudyProfile = {
@@ -31,49 +32,7 @@ const defaultProfile: StudyProfile = {
   show_looking_for_study_buddy: false,
   show_vts_or_area: false,
   share_email_with_study_buddies: false,
-}
-
-function ContactButton({ userId }: { userId: string }) {
-  const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  async function handleContact() {
-    setLoading(true)
-    setError(null)
-    setEmail(null)
-    try {
-      const res = await fetch(`/api/study-buddy/contact/${userId}`)
-      const data = await res.json()
-      if (!res.ok) {
-        setError(data.error || 'Could not get contact')
-        return
-      }
-      setEmail(data.email)
-    } catch {
-      setError('Network error')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  if (email) {
-    return (
-      <a href={`mailto:${email}`}>
-        <Button size="sm" variant="outline" className="border-teal-500 text-teal-700 hover:bg-teal-50">
-          Email {email}
-        </Button>
-      </a>
-    )
-  }
-  return (
-    <div className="flex flex-col gap-1">
-      <Button size="sm" variant="outline" onClick={handleContact} disabled={loading}>
-        {loading ? 'Loading...' : 'Contact'}
-      </Button>
-      {error && <span className="text-xs text-destructive">{error}</span>}
-    </div>
-  )
+  contact_email: null,
 }
 
 export default function StudyBuddyPage() {
@@ -121,6 +80,7 @@ export default function StudyBuddyPage() {
           show_looking_for_study_buddy: myProfile.show_looking_for_study_buddy ?? false,
           show_vts_or_area: myProfile.show_vts_or_area ?? false,
           share_email_with_study_buddies: myProfile.share_email_with_study_buddies ?? false,
+          contact_email: myProfile.contact_email ?? null,
         })
       } else {
         setForm({ ...defaultProfile, user_id: user.id })
@@ -154,6 +114,7 @@ export default function StudyBuddyPage() {
         show_looking_for_study_buddy: form.show_looking_for_study_buddy ?? false,
         show_vts_or_area: form.show_vts_or_area ?? false,
         share_email_with_study_buddies: form.share_email_with_study_buddies ?? false,
+        contact_email: form.contact_email?.trim() || null,
       }
 
       const { error } = await supabase
@@ -168,7 +129,6 @@ export default function StudyBuddyPage() {
 
       setSaveSuccess(true)
       await loadDirectory(supabase, userId)
-
       setTimeout(() => setSaveSuccess(false), 4000)
     } catch (err) {
       setSaveError(err instanceof Error ? err.message : 'Save failed')
@@ -234,14 +194,27 @@ export default function StudyBuddyPage() {
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="vts_or_area">VTS / area of UK</Label>
-              <Input
-                id="vts_or_area"
-                placeholder="e.g. London VTS, North West"
-                value={form.vts_or_area ?? ''}
-                onChange={(e) => setForm((f) => ({ ...f, vts_or_area: e.target.value || null }))}
-              />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="vts_or_area">VTS / area of UK</Label>
+                <Input
+                  id="vts_or_area"
+                  placeholder="e.g. London VTS, North West"
+                  value={form.vts_or_area ?? ''}
+                  onChange={(e) => setForm((f) => ({ ...f, vts_or_area: e.target.value || null }))}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="contact_email">Contact email</Label>
+                <Input
+                  id="contact_email"
+                  type="email"
+                  placeholder="e.g. you@email.com"
+                  value={form.contact_email ?? ''}
+                  onChange={(e) => setForm((f) => ({ ...f, contact_email: e.target.value || null }))}
+                />
+                <p className="text-xs text-muted-foreground">Only shown if you tick &quot;Let others contact me&quot; below.</p>
+              </div>
             </div>
 
             <div className="flex items-center space-x-2">
@@ -290,7 +263,7 @@ export default function StudyBuddyPage() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground">
-                If you enable contact, other logged-in users can see your email when they click Contact.
+                Your contact email will only be visible to other logged-in users if you tick the box above.
                 We don&apos;t store any messages &ndash; they email you directly.
               </p>
             </div>
@@ -319,7 +292,7 @@ export default function StudyBuddyPage() {
         <CardHeader>
           <CardTitle>Find study buddies</CardTitle>
           <CardDescription>
-            Others who are looking for a study buddy. Contact opens email &ndash; we don&apos;t store messages.
+            Others who are looking for a study buddy. Contact is direct via email &ndash; we don&apos;t store messages.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -343,8 +316,12 @@ export default function StudyBuddyPage() {
                       <span className="text-sm text-muted-foreground">{p.vts_or_area}</span>
                     )}
                   </div>
-                  {p.share_email_with_study_buddies ? (
-                    <ContactButton userId={p.user_id} />
+                  {p.share_email_with_study_buddies && p.contact_email ? (
+                    <a href={`mailto:${p.contact_email}`}>
+                      <Button size="sm" variant="outline" className="border-teal-500 text-teal-700 hover:bg-teal-50">
+                        Email {p.contact_email}
+                      </Button>
+                    </a>
                   ) : (
                     <span className="text-sm text-muted-foreground">Contact not shared</span>
                   )}

@@ -227,6 +227,7 @@ export type Database = {
           show_looking_for_study_buddy: boolean | null
           show_vts_or_area: boolean | null
           share_email_with_study_buddies: boolean | null
+          contact_email: string | null
           created_at: string | null
           updated_at: string | null
         }
@@ -240,6 +241,7 @@ export type Database = {
           show_looking_for_study_buddy?: boolean | null
           show_vts_or_area?: boolean | null
           share_email_with_study_buddies?: boolean | null
+          contact_email?: string | null
           created_at?: string | null
           updated_at?: string | null
         }
@@ -252,6 +254,7 @@ export type Database = {
           show_exam_date?: boolean | null
           show_looking_for_study_buddy?: boolean | null
           share_email_with_study_buddies?: boolean | null
+          contact_email?: string | null
           created_at?: string | null
           updated_at?: string | null
         }
