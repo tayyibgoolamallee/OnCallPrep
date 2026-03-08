@@ -108,6 +108,12 @@ export type Database = {
           time_limit: number
           title: string
           updated_at: string | null
+          category: string | null
+          category_code: string | null
+          marking_criteria: Json | null
+          actor_info: Json | null
+          actor_behaviour: string | null
+          case_notes: Json | null
         }
         Insert: {
           case_type: string
@@ -123,6 +129,12 @@ export type Database = {
           time_limit: number
           title: string
           updated_at?: string | null
+          category?: string | null
+          category_code?: string | null
+          marking_criteria?: Json | null
+          actor_info?: Json | null
+          actor_behaviour?: string | null
+          case_notes?: Json | null
         }
         Update: {
           case_type?: string
@@ -138,6 +150,12 @@ export type Database = {
           time_limit?: number
           title?: string
           updated_at?: string | null
+          category?: string | null
+          category_code?: string | null
+          marking_criteria?: Json | null
+          actor_info?: Json | null
+          actor_behaviour?: string | null
+          case_notes?: Json | null
         }
         Relationships: []
       }
